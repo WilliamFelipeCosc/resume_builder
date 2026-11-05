@@ -31,7 +31,7 @@ M3 remains the first usable delivery: URL/text/image job import → requirements
 
 ## Risk tracking bootstrap
 
-Risk definitions and mitigations remain in `roadmap/risk-register.md`. Status is initially OPEN / NOT_TESTED for all risks. Accountable bootstrap owner: project owner (William Felipe Coscodai); implementation/validation assignees remain unassigned until an approved slice or agent run. Ownership here does not authorize execution.
+Risk definitions and mitigations remain in `roadmap/risk-register.md`. Status is initially OPEN / NOT_TESTED for all risks. Accountable bootstrap owner: project owner (GitHub account `WilliamFelipeCosc`); implementation/validation assignees remain unassigned until an approved slice or agent run. Ownership here does not authorize execution.
 
 | Risk | Status | Validation assignee |
 | --- | --- | --- |
