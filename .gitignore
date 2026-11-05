@@ -1,0 +1,38 @@
+# Dependencies and generated output
+node_modules/
+.pnpm-store/
+.turbo/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Private runtime data, uploads, exports and backups
+.local/
+data/
+uploads/
+exports/
+backups/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.log
+
+# Editor and operating-system state
+.idea/
+.vscode/
+.DS_Store
+*~
