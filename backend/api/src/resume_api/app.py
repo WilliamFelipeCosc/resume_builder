@@ -4,13 +4,15 @@ import asyncio
 import re
 from contextlib import asynccontextmanager
 from http.cookies import CookieError, SimpleCookie
+from pathlib import Path
 from typing import Literal
 from uuid import UUID, uuid4
 
 import structlog
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from resume_core.contracts import DiagnosticCreate, DiagnosticResponse
 from resume_core.repository import ActiveDiagnosticConflict
@@ -195,6 +197,7 @@ def create_app(
     environment="development",
     origin="http://127.0.0.1:8000",
     reconciler=None,
+    web_root=None,
 ):
     if (
         not re.fullmatch(r"http://127\.0\.0\.1:[1-9][0-9]{0,4}", origin)
@@ -324,5 +327,13 @@ def create_app(
     )
     async def latest_diagnostic(request: Request):
         return await asyncio.to_thread(app.state.service.latest, request.state.principal)
+
+    if web_root is not None:
+        directory = Path(web_root).resolve(strict=True)
+        app.mount("/assets", StaticFiles(directory=directory / "assets"), name="assets")
+
+        @app.get("/", include_in_schema=False, response_class=FileResponse)
+        async def web_index():
+            return FileResponse(directory / "index.html")
 
     return app

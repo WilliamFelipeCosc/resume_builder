@@ -7,7 +7,7 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T19 concluídas com gates registrados; T20–T22 pendentes.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T20 concluídas com gates registrados; T21–T22 pendentes.
 
 ## Test Coverage Matrix
 
@@ -630,13 +630,27 @@ Adequação: critérios cobertos por asserts de resultado e compilação; cada c
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 10 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full Web passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 10 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full Web passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário + E2E
 **Gate**: Full Web
 **Commit**: `feat(m0): deliver diagnostic web flow`
+
+**Evidence:** 243 Pytest, 17 Vitest (14 novos + 3 smoke preservados), build/typecheck/Ruff e Chromium definitivo passaram. Harness externo inicia somente sua stack temporária: API mesma origem, SQLite, Redis fixado por digest e Worker subprocesso. O E2E detectou abertura por hash em aba existente; implementação corrigida sem alterar asserts. Launcher usa xdg-open com stdout/stderr descartados, testado com opener injetado; nenhum navegador desktop real foi aberto.
+
+| Critério / FND | Evidência e assertion | Reverse mapping / manter |
+|---|---|---|
+| Botão desabilitado em ativos/POST | apps/web/tests/diagnostic.test.tsx:52 `html contains disabled`; :136 submitting true; apps/web/tests/diagnostic-app.spec.ts:33 `button.toBeDisabled()` | FND-03 |
+| Polling sem sobreposição | apps/web/tests/diagnostic.test.tsx:97 duas chamadas enquanto GET pendente; :100 estado final succeeded | T20 polling |
+| Retry usa mesma chave | apps/web/tests/diagnostic.test.tsx:121 `keys == [KEY, KEY]`; :123 mesmo id | idempotência transporte |
+| Aviso/falha de rede/terminal | apps/web/tests/diagnostic.test.tsx:150 execution preservada; :152 warning; :64 conteúdo terminal | FND-07 e UX de falha |
+| Sessão/bootstrap/401 | apps/web/tests/diagnostic.test.tsx:71 limpeza antes do fetch; :164 execution null; apps/web/tests/diagnostic-app.spec.ts:24 hash vazio; :28 cookie HttpOnly/Strict | FND-13/15 |
+| Reabertura e resultado real | apps/web/tests/diagnostic-app.spec.ts:42 mesmo id; :45 payload fixo, tentativa1 e sem erro/aviso | FND-04 e fluxo real |
+| Launcher seguro | tests/integration/test_launcher.py:17 origem exata; :20 ticket válido; :22 streams vazios; negativos de UID/path; opener descarta ambos streams | FND-13/18 |
+
+Adequação: todos os testes correspondem a comportamentos de T20, assertions de estado/payload e gate real. Nenhum teste removido/ignorado; somente sincronização do harness aguarda preparação async do SDK, mantendo a expectativa de chamada.
 
 ### T21: Harness de resiliência real
 

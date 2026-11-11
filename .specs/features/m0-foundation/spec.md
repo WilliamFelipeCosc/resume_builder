@@ -1,6 +1,6 @@
 # M0 — Foundation mínima
 
-**Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T19 concluídas; workspaces, bootstrap isolado, paths e contratos verificados, fluxo integrado pendente.
+**Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T20 concluídas; workspaces, bootstrap isolado, paths e contratos verificados, fluxo integrado pendente.
 **Gathered:** 2026-11-11.
 **Context:** [context.md](context.md).
 **Fontes:** [PROJECT_SOURCE.md](../../../PROJECT_SOURCE.md), [roadmap](../../../docs/roadmap/milestones.md), [ACs](../../../docs/roadmap/acceptance-criteria.md).
@@ -156,19 +156,19 @@ Uma nova intenção após estado terminal cria outro ID e outra chave. Repetir a
 |---|---|---|---|---|
 | FND-01 | Intenção persistida antes da fila | AC-M0-001 | Tasks: T8, T11, T15, T17 | Partial: T8/T11, T15, T17 |
 | FND-02 | Conclusão persistida | AC-M0-001 | Tasks: T6, T9, T18 | Partial: T6/T9, T18 |
-| FND-03 | Botão e execução ativa | AC-M0-001; entrevista | Tasks: T20 | Pending |
-| FND-04 | Reabertura | AC-M0-001; entrevista | Tasks: T8, T11, T16, T20 | Partial: T8/T11, T16 |
+| FND-03 | Botão e execução ativa | AC-M0-001; entrevista | Tasks: T20 | Implemented: T20; verifier pending |
+| FND-04 | Reabertura | AC-M0-001; entrevista | Tasks: T8, T11, T16, T20 | Partial: T8/T11, T16, T20 |
 | FND-05 | Idempotência | AC-M0-001; entrevista | Tasks: T8, T11, T15 | Partial: T8/T11, T15 |
 | FND-06 | Concorrência | AC-M0-001; entrevista | Tasks: T7, T8, T11, T15 | Partial: T7/T8/T11, T15 |
-| FND-07 | Redis indisponível | AC-M0-001; entrevista | Tasks: T17, T20, T21 | Partial: T17 |
+| FND-07 | Redis indisponível | AC-M0-001; entrevista | Tasks: T17, T20, T21 | Partial: T17, T20 |
 | FND-08 | Retomada da entrega | AC-M0-001; entrevista | Tasks: T10, T17, T21 | Partial: T10, T17 |
 | FND-09 | Worker interrompido | AC-M0-001; entrevista | Tasks: T9, T10, T18, T21 | Partial: T9/T10, T18 |
 | FND-10 | Timeout da tentativa | AC-M0-001; entrevista | Tasks: T9, T10, T18, T21 | Partial: T9/T10, T18 |
 | FND-11 | Falha terminal | AC-M0-001; entrevista | Tasks: T10, T16, T17, T18, T21 | Partial: T10, T16, T17, T18 |
 | FND-12 | Proteção terminal | AC-M0-001; entrevista | Tasks: T9, T10, T17, T18, T21 | Partial: T9/T10, T17, T18 |
-| FND-13 | Abertura autorizada | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T20 | Partial: T4, T13, T14 |
+| FND-13 | Abertura autorizada | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T20 | Partial: T4, T13, T14, T20 |
 | FND-14 | Bloqueio sem sessão | REQ-SEC-001/002; AC-M0-002 | Tasks: T11, T14, T15, T16 | Partial: T11, T14, T15, T16 |
-| FND-15 | Reinício de sessão | REQ-SEC-002; entrevista | Tasks: T4, T13, T14, T20 | Partial: T4, T13, T14 |
+| FND-15 | Reinício de sessão | REQ-SEC-002; entrevista | Tasks: T4, T13, T14, T20 | Partial: T4, T13, T14, T20 |
 | FND-16 | Loopback e Host/Origin | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T15, T16 | Partial: T4, T13, T14, T15, T16 |
 | FND-17 | Limites de contrato | REQ-SEC-002; AC-M0-001/002 | Tasks: T6, T14, T15 | Partial: T6, T14, T15, T16 |
 | FND-18 | Logs sanitizados | REQ-OPS-001; AC-M0-002 | Tasks: T4, T12, T14, T15, T16, T18 | Partial: T4/T12, T14, T15, T16, T18 |
@@ -178,7 +178,7 @@ Uma nova intenção após estado terminal cria outro ID e outra chave. Repetir a
 | FND-22 | Isolamento | REQ-SEC-001/002; entrevista | Tasks: T2, T5, T7, T21, T22 | Partial: T2/T5/T7 |
 | FND-23 | Operação manual | REQ-LIN-001; ADR-002/012 | Tasks: T1, T5, T22 | Partial: T1/T5 |
 
-**Coverage:** 23 requisitos mapeados às 22 tarefas; T1–T19 implementadas e verificadas localmente. Desenho e execução aprovados; AC-M0-001/002 integrados pendentes.
+**Coverage:** 23 requisitos mapeados às 22 tarefas; T1–T20 implementadas e verificadas localmente. Desenho e execução aprovados; AC-M0-001/002 integrados pendentes.
 
 ## Success Criteria
 
