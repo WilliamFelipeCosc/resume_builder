@@ -1,6 +1,6 @@
 # Resume Builder — foundation local M0
 
-**Estado:** foundation M0 concluída e validada localmente para AC-M0-001/002: 254 testes Python, 17 Vitest e 3 Chromium aprovados; 8 mutações detectadas pelo [Verifier independente](.specs/features/m0-foundation/validation.md). Abertura do navegador desktop permanece sem validação manual. `PROJECT_SOURCE.md` continua a autoridade das decisões aprovadas.
+**Estado:** foundation M0 concluída e validada localmente para AC-M0-001/002: 254 testes Python, 17 Vitest e 3 Chromium aprovados; 8 mutações detectadas pelo [Verifier independente](.specs/features/m0-foundation/validation.md). Abertura autorizada no navegador desktop e diagnóstico concluído com sucesso confirmados pelo proprietário em 2026-11-11 às 16:53 (America/Sao_Paulo). `PROJECT_SOURCE.md` continua a autoridade das decisões aprovadas.
 
 Para executar e verificar o diagnóstico sintético, siga [operação local do M0](docs/engineering/m0-local-operation.md): `just setup`, `just build`, Redis manual, migração explícita, API/Worker e abertura autorizada. Os comandos e testes não usam currículos ou seeds privados.
 

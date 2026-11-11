@@ -783,4 +783,8 @@ Aprovação das tarefas confirma matriz/gates propostos e autoriza implementaç�
 
 ## Validação independente final
 
-PASS em [validation.md](validation.md), diff `c7d3497..f35b4e0`: 23/23 FNDs e 22 tarefas conferidos. Gate independente: 254 Pytest, 17 Vitest, 3 Chromium, tipos/build/geração/Ruff verdes; zero falhas ou skips. Oito mutações de autorização, prazo, posse e integridade detectadas em cópia isolada; árvore real preservada. `validate_state.py m0-foundation`: zero erros. Sem lacunas bloqueantes ou lições de falha. Desktop padrão sem validação manual; M0.5 continua separado.
+PASS em [validation.md](validation.md), diff `c7d3497..f35b4e0`: 23/23 FNDs e 22 tarefas conferidos. Gate independente: 254 Pytest, 17 Vitest, 3 Chromium, tipos/build/geração/Ruff verdes; zero falhas ou skips. Oito mutações de autorização, prazo, posse e integridade detectadas em cópia isolada; árvore real preservada. `validate_state.py m0-foundation`: zero erros. Sem lacunas bloqueantes ou lições de falha. Abertura autorizada no navegador desktop e diagnóstico concluído com sucesso confirmados pelo proprietário em 2026-11-11 às 16:53 (America/Sao_Paulo). M0.5 continua separado.
+
+## Aceite manual posterior
+
+Abertura autorizada no navegador desktop e diagnóstico concluído com sucesso confirmados pelo proprietário em 2026-11-11 às 16:53 (America/Sao_Paulo). Evidência: resposta explícita "1" à opção "Sim, ambos funcionaram" nesta conversa. Relato humano separado dos testes automatizados; nenhum novo teste de falha ou reinício foi alegado.

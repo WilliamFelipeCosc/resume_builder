@@ -13,7 +13,7 @@ Sem novas decisões globais. ADRs 001–015 existentes continuam vigentes; escol
 - **Sensor**: oito mutações de auth/prazo/posse/idempotência/integridade detectadas em scratch; nenhuma sobreviveu; nenhuma mudança real de código/testes pelo Verifier
 - **In-progress**: nenhum
 - **Next step**: tarefa M0 concluída; aguardar escolha do próximo marco. M0.5 tem gate próprio e ainda não começou
-- **Blockers**: nenhum para os testes automatizados M0. Navegador desktop padrão não aberto manualmente; Chromium headless validado. Warnings Starlette/HTTPX e cores documentados
+- **Blockers**: nenhum para os testes automatizados M0. Abertura autorizada no navegador desktop e diagnóstico concluído com sucesso confirmados pelo proprietário em 2026-11-11 às 16:53 (America/Sao_Paulo). Chromium headless validado separadamente. Warnings Starlette/HTTPX e cores documentados
 - **Uncommitted files**: fechamento documental/manifesto neste commit; .serena/ preexistente permanece fora do escopo
 - **Branch**: main
 

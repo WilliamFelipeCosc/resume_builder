@@ -89,7 +89,7 @@ uv run --all-packages --locked pytest tests/integration/test_real_recovery.py -q
 
 ## Evidência desta execução
 
-T22 verificou comandos CLI reais no harness definitivo: migrate explícito, API e Worker em processos separados, Redis real, build estático, ticket Unix e cookie no Chromium, diagnóstico persistido, reabertura e reinício real da API invalidando o cookie anterior e preservando o resultado no banco. O teste anterior de opener não substitui o teste manual do desktop.
+T22 verificou comandos CLI reais no harness definitivo: migrate explícito, API e Worker em processos separados, Redis real, build estático, ticket Unix e cookie no Chromium, diagnóstico persistido, reabertura e reinício real da API invalidando o cookie anterior e preservando o resultado no banco. Teste manual posterior: Abertura autorizada no navegador desktop e diagnóstico concluído com sucesso confirmados pelo proprietário em 2026-11-11 às 16:53 (America/Sao_Paulo).
 
 Os seis cenários de T21 cobrem Redis offline/online, perda da fila confirmada, Worker morto/reiniciado após claim, Worker antigo que tenta concluir após nova posse, prazo total e terceira falha. O relógio controlado e os sinais ficam exclusivamente no harness externo de testes. API e payload públicos não têm comandos de fault injection.
 

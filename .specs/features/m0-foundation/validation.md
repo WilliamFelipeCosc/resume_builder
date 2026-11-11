@@ -159,3 +159,10 @@ python3 /home/williamf/.agents/skills/tlc-spec-driven/scripts/validate_state.py 
 ```
 
 **Result:** PASS;0 errors. Ranked gaps: none.
+
+
+## Confirmação manual posterior do proprietário
+
+Em 2026-11-11 às 16:53 (America/Sao_Paulo), o proprietário confirmou a opção "Sim, ambos funcionaram" para a pergunta sobre abertura autorizada no navegador e conclusão do diagnóstico com sucesso, após seguir as instruções de operação. Isso encerra a pendência de validação manual da abertura desktop e do caminho feliz do diagnóstico.
+
+Proveniência: relato explícito do proprietário nesta conversa; não é observação direta do Verifier. Não foram informados nome/versão do navegador nem novos testes manuais de reinício ou falhas. Os limites históricos da revisão automatizada acima permanecem documentados; esta confirmação não amplia o escopo para M0.5.
