@@ -7,7 +7,7 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T22 concluídas com gates registrados; Verifier independente pendente.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T22 concluídas com gates registrados; Verifier independente PASS em [validation.md](validation.md).
 
 ## Test Coverage Matrix
 
@@ -715,7 +715,7 @@ Adequação: seis resultados exigidos, mesmos budgets e identidade conferidos; n
 
 Adequação: os cinco smoke novos verificam comandos/estado/isolamento e os dois E2E usam o CLI real, não um app substituto. Logs dos subprocessos do harness são JSON e stdout vazio. Encerramento SIGTERM do Uvicorn é permitido explicitamente pelo harness após conferir o comportamento da versão instalada; os asserts funcionais de autorização e persistência foram mantidos.
 
-Operação/limpeza/limitações: docs/engineering/m0-local-operation.md. Desktop padrão não aberto nesta sessão; integração em Chromium headless. Warning Starlette/HTTPX e warning de cores permanecem. M0.5/CI/providers/privados não executados. O manifesto público é atualizado com os arquivos de fonte atuais; a validação independente posterior acrescentará seu relatório e exigirá novo hash desses artefatos de estado. **Tarefas concluídas; marco aguarda Verifier independente.**
+Operação/limpeza/limitações: docs/engineering/m0-local-operation.md. Desktop padrão não aberto nesta sessão; integração em Chromium headless. Warning Starlette/HTTPX e warning de cores permanecem. M0.5/CI/providers/privados não executados. O manifesto público é atualizado com os arquivos de fonte atuais; a validação independente posterior acrescentará seu relatório e exigirá novo hash desses artefatos de estado. **Tarefas concluídas; Verifier independente PASS, conforme validation.md.**
 
 ## Task Granularity Check
 
@@ -780,3 +780,7 @@ Cada tarefa entrega um componente/endpoint ou uma prova/nota operacional coesa. 
 Plano: 22 tarefas em quatro fases (6 + 6 + 6 + 4). Oferecer execução pelo agente principal ou por quatro workers sequenciais, um por fase, antes de iniciar; nenhum worker é iniciado sem aceite. Verifier independente obrigatório após última tarefa, incluindo sensor de discriminação em scratch e validation.md com evidência por AC. Verifier não é aprovação de release.
 
 Aprovação das tarefas confirma matriz/gates propostos e autoriza implementação/commits locais. Ferramentas e opção de workers serão confirmadas antes da execução, conforme skill. Prova no navegador e downloads que exigirem permissões seguem a autorização do ambiente; não alegar execução antes dela. Não pedir autorização repetida para o que já foi aprovado.
+
+## Validação independente final
+
+PASS em [validation.md](validation.md), diff `c7d3497..f35b4e0`: 23/23 FNDs e 22 tarefas conferidos. Gate independente: 254 Pytest, 17 Vitest, 3 Chromium, tipos/build/geração/Ruff verdes; zero falhas ou skips. Oito mutações de autorização, prazo, posse e integridade detectadas em cópia isolada; árvore real preservada. `validate_state.py m0-foundation`: zero erros. Sem lacunas bloqueantes ou lições de falha. Desktop padrão sem validação manual; M0.5 continua separado.

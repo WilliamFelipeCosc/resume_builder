@@ -8,6 +8,8 @@
 
 **Saída verificável:** API health, web responde, migração Alembic aplicou corretamente, Worker Dramatiq processa job de teste, política impede uma requisição não autorizada.
 
+**Resultado local (2026-11-11):** concluído para AC-M0-001/002; [Verifier independente PASS](../../.specs/features/m0-foundation/validation.md), 23/23 FNDs, 254 Pytest, 17 Vitest, 3 Chromium e 8/8 mutações detectadas. Navegador desktop padrão sem validação manual; M0.5 continua separado.
+
 **Detalhamento do kickoff (2026-11-11):** proprietário escolheu diagnóstico sintético completo, recuperação controlada e checks somente locais. [Contexto da entrevista](../../.specs/features/m0-foundation/context.md) e [spec proposta](../../.specs/features/m0-foundation/spec.md) registram o comportamento; a execução local e seus gates estão em [tasks.md](../../.specs/features/m0-foundation/tasks.md), com validação independente ao final. Análise adicional de Reactive Resume é opcional posterior, fora do gate M0.
 
 ## M0.5 — MCP feasibility spike

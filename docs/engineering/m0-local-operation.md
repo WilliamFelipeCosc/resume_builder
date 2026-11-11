@@ -1,6 +1,6 @@
 # M0 — operação e evidências locais
 
-M0 entrega um diagnóstico sintético Web → FastAPI → SQLite → Redis/Dramatiq → Worker → Web. As tarefas T1–T22 têm evidências em [tasks.md](../../.specs/features/m0-foundation/tasks.md); a validação independente da feature ocorre depois do último commit. Isso não entrega currículo, providers, MCP ou M0.5.
+M0 entrega um diagnóstico sintético Web → FastAPI → SQLite → Redis/Dramatiq → Worker → Web. As tarefas T1–T22 têm evidências em [tasks.md](../../.specs/features/m0-foundation/tasks.md); a [validação independente](../../.specs/features/m0-foundation/validation.md) passou para os 23 FNDs e AC-M0-001/002, com 254 Pytest, 17 Vitest, 3 Chromium e oito mutações detectadas. Isso não entrega currículo, providers, MCP ou M0.5.
 
 ## Preparar
 
