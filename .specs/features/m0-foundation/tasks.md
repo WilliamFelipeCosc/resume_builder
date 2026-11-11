@@ -476,13 +476,25 @@ Adequacy:16 cases map to listed criteria, actual resulting cookie/status/ticket 
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 10 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 10 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): create diagnostic endpoint`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration -q --basetemp=/tmp/rb-b3`:199 passed,17 new create-route cases. Ruff/format green; no tests removed/weakened. SQLite work uses asyncio.to_thread, no broker yet.
+
+| Criterion / FND | Assertion evidence / expected value | Reverse mapping |
+|---|---|---|
+| Durable202 complete payload, FND-01 | tests/integration/test_diagnostic_http_create.py:50 status202; :52 execution equals persisted; :53 key; :54 pending; :55 count0; :56/57 UTC timestamps; :58 nullable fields; :59/60 server UUID | keep: persist before delivery |
+| Same-key200/active409, FND-05/06 | :72/73 same response200; :74 fresh transport ID; :78–84 terminal sameID/count1/fixed result; :92/93 conflict409 and original row | keep: idempotent intent |
+| Auth first, FND-14/16 | :123 exact401/403 before Poison service; :124 no row | keep: authorization/Host/Origin |
+| Contract/size, FND-17 | :142/143 invalid422 no row; :159/160 body413 no row incl chunks | keep: negative effects |
+| Safe responses/logs, FND-18 | :144/161 sentinel absent; :174–178 internal_error500, no persisted row or exception/trace | keep: sanitation |
+
+Adequacy: every emitted field and listed negative has resulting-state evidence,17 scenarios anchored to spec. API uses generated transport UUID, never caller X-Request-ID.
 
 ### T16: Rota de última execução
 

@@ -1,15 +1,18 @@
 """Same-origin FastAPI boundary. Authorization precedes bounded body parsing."""
 
+import asyncio
 import re
 from contextlib import asynccontextmanager
 from http.cookies import CookieError, SimpleCookie
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import structlog
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
+from resume_core.contracts import DiagnosticCreate, DiagnosticResponse
+from resume_core.repository import ActiveDiagnosticConflict
 from resume_core.service import Principal
 
 from resume_api.session import SessionChannel, SessionStore
@@ -206,5 +209,33 @@ def create_app(
         response.set_cookie(COOKIE_NAME, session, httponly=True, samesite="strict", path="/")
         structlog.get_logger().info("session_started")
         return response
+
+    @app.post(
+        "/api/diagnostics",
+        response_model=DiagnosticResponse,
+        status_code=202,
+        responses={200: {"model": DiagnosticResponse}},
+    )
+    async def create_diagnostic(body: DiagnosticCreate, request: Request):
+        try:
+            outcome = await asyncio.to_thread(
+                app.state.service.create,
+                body.idempotency_key,
+                request.state.principal,
+                request_id=UUID(request.state.request_id),
+            )
+        except ActiveDiagnosticConflict:
+            return error_response(409)
+        structlog.get_logger().info(
+            "diagnostic_created",
+            request_id=request.state.request_id,
+            execution_id=outcome.execution.id,
+            status=outcome.execution.status,
+            attempt_count=outcome.execution.attempt_count,
+        )
+        return JSONResponse(
+            DiagnosticResponse(execution=outcome.execution).model_dump(mode="json"),
+            status_code=202 if outcome.created else 200,
+        )
 
     return app
