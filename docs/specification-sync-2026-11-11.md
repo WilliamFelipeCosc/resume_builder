@@ -1,5 +1,7 @@
 # Sincronização da especificação — 2026-11-11
 
+> Registro histórico da importação inicial. As seções até “Verificações executadas” descrevem o estado anterior à implementação. A sincronização posterior à conclusão do M0 está registrada no final deste documento; o pacote original permanece preservado.
+
 ## Decisões do proprietário
 
 - Adotar o pacote aprovado em `/home/williamf/Documentos/Projects/resume_builder_spec/`, reconciliado com o Obsidian, e atualizar este repositório.
@@ -47,3 +49,22 @@ As decisões funcionais estão em [context.md](../.specs/features/m0-foundation/
 - `validate_spec.py .specs/features/m0-foundation/spec.md --strict`: PASS estrutural, sem erros ou warnings; não valida implementação nem substitui revisão das propostas.
 - Busca limitada por padrões de chave privada, tokens GitHub/OpenAI e valores de e-mail: nenhum resultado no conteúdo público examinado. Não equivale a auditoria completa.
 - Materiais `private/` ausentes deste checkout; pacotes e serviços de aplicação não foram instalados/iniciados/testados.
+
+## Sincronização posterior — M0 concluído e aceito
+
+Atualização do Obsidian solicitada pelo proprietário em 2026-11-11, após confirmar às 16:53 (America/Sao_Paulo) abertura autorizada no navegador e diagnóstico concluído com sucesso. O estado publicado no vault deriva do repositório até `a151610`: implementação `f35b4e0`, validação independente `a9c25a9` e aceite manual `a151610`. Esses commits são locais; esta sincronização não fez push.
+
+Seis notas existentes foram atualizadas em `10 Projects/Personal/Resume Builder/`:
+
+- `Resume Builder.md`: painel ativo, M0 concluído, próximo passo M0.5, critérios e log.
+- `Planning Summary.md`: stack atual, roadmap, evidências e decisões OPEN atuais.
+- `Specification Refresh 2026-11-11.md`: distinção entre pacote histórico preservado e execução atual; M0 concluído.
+- `Vertical Slices and Milestone Roadmap.md`: M0/VS-M0-01/02 concluídos, evidências, checklist e clientes-alvo do spike.
+- `Vertical Slices/M0.md`: status `done`, planejamento `APPROVED`, execução `DONE`, contratos, testes, aceite e comandos de operação.
+- `Vertical Slices/Vertical Slices.md`: índice ativo e progresso por marco.
+
+Evidências reproduzidas: T1–T22 concluídas; 23/23 FNDs e AC-M0-001/002 verificados; 254 Pytest, 17 Vitest e 3 Chromium aprovados; oito mutações detectadas pelo Verifier. São resultados da execução já registrada em [validation.md](../.specs/features/m0-foundation/validation.md), e não novos testes rodados durante esta atualização documental. O relato manual do proprietário permanece separado da evidência automatizada.
+
+M0.5 mantém gate/autorização próprios e execução NOT_RUN, com Hermes e Codex como alvos. M1–M7 permanecem não executados; prioridade M3, CI em M1 e ADRs aprovados preservados. O texto legado dos marcos futuros continua subordinado às especificações atuais; não foi convertido em aprovação de implementação. Nenhum material privado foi copiado ao vault nem ao Git.
+
+Verificação desta sincronização: seis notas relidas pelo conector Obsidian, sem links internos não resolvidos e sem afirmações globais obsoletas de M0 NOT_RUN. Status, contagens e commits comparados às evidências do repositório. `git diff --check` e manifesto SHA-256 verificados após a atualização. Não houve mudança de runtime ou de requisitos aprovados.
