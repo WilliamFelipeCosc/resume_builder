@@ -113,29 +113,28 @@ class Boundary:
                     "local-user", frozenset({"diagnostic:read", "diagnostic:write"})
                 )
             body = bytearray()
-            if method not in {"GET", "HEAD", "OPTIONS"}:
-                try:
-                    length = int(headers.get(b"content-length", "0"))
-                except ValueError:
-                    return await reject(422)
-                if length < 0:
-                    return await reject(422)
-                if length > 1024:
+            try:
+                length = int(headers.get(b"content-length", "0"))
+            except ValueError:
+                return await reject(422)
+            if length < 0:
+                return await reject(422)
+            if length > 1024:
+                return await reject(413)
+            while True:
+                message = await receive()
+                if message["type"] == "http.disconnect":
+                    return
+                body.extend(message.get("body", b""))
+                if len(body) > 1024:
                     return await reject(413)
-                while True:
-                    message = await receive()
-                    if message["type"] == "http.disconnect":
-                        return
-                    body.extend(message.get("body", b""))
-                    if len(body) > 1024:
-                        return await reject(413)
-                    if not message.get("more_body", False):
-                        break
-                if (
-                    headers.get(b"content-type", "").split(";", 1)[0].strip().lower()
-                    != "application/json"
-                ):
-                    return await reject(422)
+                if not message.get("more_body", False):
+                    break
+            if method not in {"GET", "HEAD", "OPTIONS"} and (
+                headers.get(b"content-type", "").split(";", 1)[0].strip().lower()
+                != "application/json"
+            ):
+                return await reject(422)
             consumed = False
 
             async def buffered_receive():
@@ -237,5 +236,9 @@ def create_app(
             DiagnosticResponse(execution=outcome.execution).model_dump(mode="json"),
             status_code=202 if outcome.created else 200,
         )
+
+    @app.get("/api/diagnostics/latest", response_model=DiagnosticResponse)
+    async def latest_diagnostic(request: Request):
+        return await asyncio.to_thread(app.state.service.latest, request.state.principal)
 
     return app

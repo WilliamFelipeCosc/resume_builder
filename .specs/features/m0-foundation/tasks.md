@@ -506,13 +506,25 @@ Adequacy: every emitted field and listed negative has resulting-state evidence,1
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): read latest diagnostic`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration -q --basetemp=/tmp/rb-b3`:208 passed,9 new latest-route cases. Ruff/format green. Shared body limit now covers reads as well as writes; authorization remains first. No tests removed/weakened.
+
+| Criterion / FND | Assertion evidence / expected value | Reverse mapping |
+|---|---|---|
+| Nullable/latest complete DTO, FND-04 | tests/integration/test_diagnostic_http_latest.py:21/22 empty200; :35 persisted full DTO equals response; :38–41 fixed result | keep: persisted restoration |
+| Deadline before read, FND-11 | :54 sameID; :55 failed; :56 exact deadline_exceeded payload; :60 SQLite failed | keep: reconcile expired state |
+| Transport ID/sanitation, FND-18 | :42 transport differs; :43 original creation preserved; :44 no sentinel; :70 polling does not mutate DTO | keep: correlation/state semantics |
+| Auth/Host/Origin, FND-14/16 | :94 exact401/403 before Poison; :95 no row | keep: no unauthorized access |
+| Bounded reads, FND-17 | :102 body413; :103 no row | keep: global1KiB limit |
+
+Adequacy:9 cases cover every T16 criterion, state and payload values explicit; no dependency behavior tested.
 
 ### T17: Entrega Redis e reconciliador da API
 
