@@ -236,13 +236,24 @@ Adequação: critérios locais T6 cobertos por valores definidos, sem assertions
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): migrate diagnostic persistence`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration/test_diagnostic_migration.py -q`: 83 passed (66 unit +17 migration). Ruff check/format + diff check green. Integer Unix microseconds normalize UTC storage; WAL and 250 ms busy timeout. No schema operation on requests; explicit Alembic only.
+
+| Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
+|---|---|---|
+| Migration roundtrip, FND-19/22 | tests/integration/test_diagnostic_migration.py:49 pending; :51 unrelated table retained; :53 table recreated | keep: approved migration |
+| Key/active exclusion, FND-06 | tests/integration/test_diagnostic_migration.py:69/76 raises IntegrityError | keep: uniqueness |
+| Consistency and safe payloads | tests/integration/test_diagnostic_migration.py:95 and final parametrized test raises IntegrityError for invalid states/payloads | keep: approved CHECKs |
+| WAL / bounded wait | tests/integration/test_diagnostic_migration.py:101/102 wal and250 | keep: ADR-003 concurrency |
+
+Adequacy: all local T7 criteria covered with real SQLite; no removed/skipped tests. Concurrency at service boundary is T8; integrated migration acceptance is T22.
 
 ### T8: Repositório de criação e leitura
 
