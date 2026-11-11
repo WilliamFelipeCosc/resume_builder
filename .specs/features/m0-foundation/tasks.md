@@ -7,11 +7,11 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1 concluída; demais tarefas pendentes.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T6 concluídas com gates registrados; T7–T22 pendentes.
 
 ## Test Coverage Matrix
 
-Proveniência: AGENTS.md, docs/engineering/testing.md, docs/engineering/development.md, docs/roadmap/acceptance-criteria.md e spec aprovada. Não há testes/manifests de runtime existentes. Tipos de teste já decididos nesses documentos; comandos abaixo são PROPOSTOS para criação, não comandos existentes ou executados.
+Proveniência: AGENTS.md, docs/engineering/testing.md, docs/engineering/development.md, docs/roadmap/acceptance-criteria.md e spec aprovada. Workspaces/manifests e testes de T2–T6 existem; fases seguintes pendentes. Tipos de teste já decididos nesses documentos; comandos abaixo são PROPOSTOS para criação, não comandos existentes ou executados.
 
 | Code Layer | Required Test Type | Coverage Expectation | Location Pattern | Run Command |
 |---|---|---|---|---|
@@ -26,7 +26,7 @@ Proveniência: AGENTS.md, docs/engineering/testing.md, docs/engineering/developm
 
 ## Gate Check Commands
 
-Todos os comandos de aplicação são futuros: estabelecer e documentar em T1–T3, sem inventar sucesso. Até existir runtime, gate inicial usa verificações documentais e os validadores da skill. Não executar suíte inexistente/vazia como evidência.
+Comandos Python/Web de T2–T6 executados conforme evidências; comandos do fluxo integrado permanecem futuros. Até existir runtime, gate inicial usa verificações documentais e os validadores da skill. Não executar suíte inexistente/vazia como evidência.
 
 | Gate Level | When to Use | Command |
 |---|---|---|
@@ -201,13 +201,28 @@ Adequação: 19 casos necessários aos critérios de configuração/isolamento, 
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Quick Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Quick Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário
 **Gate**: Quick Python
 **Commit**: `feat(m0): define diagnostic contracts`
+
+**Evidence:** `.venv/bin/pytest tests/unit -q`: 66 passed (47 contratos + 19 paths). Gate da fase: `.venv/bin/pytest tests/unit tests/integration tests/smoke -q` 81 passed; Vitest3, typecheck/build, uv locked e Ruff check/format verdes. Nenhum teste removido/ignorado.
+
+| Critério / FND | Assertion / resultado definido | Reverse mapping |
+|---|---|---|
+| Request UUID/alias/extra, FND-17/20 | tests/unit/test_diagnostic_contracts.py:38 dump exato; :52 inválidos rejeitados; :65 UUIDs inválidos | manter: contrato aprovado |
+| Campos resposta, FND-20 | :59/60 dump completo igual payload e chaves exatas | manter: todos os 11 campos/valores |
+| Contador estrito 0…3, FND-02 | :71 inválidos; :77 válidos | manter: orçamento definido |
+| Estados/resultados, FND-02 | :83 ativos sem final; :97 resultado exato m0-v1; :99/101 recusa sucesso inválido; :110 falha com code; :112/114 recusa falha inválida; :122 estado desconhecido; :183/190/201 combinações erro/warning inválidas | manter: integridade DTO |
+| UTC, FND-20 | :128 instante UTC; :129 Z normalizado; :130/132 naïve/número recusados | manter: timestamps RFC3339 |
+| Aviso separado, FND-17 | :138 objeto queue_unavailable exato; :142 error nulo | manter: warning transitório |
+| Allowlist e extras, FND-17 | :156/161/163 rejeição payload/lease; :220 mensagens constantes por código; :224 incompatibilidade código/mensagem recusada | manter: sem texto arbitrário |
+| Schema nullable/tipado, FND-20 | :168 execution:null; :173/174 aliases/additionalProperties; :176…178 limites/uuid | manter: fonte OpenAPI futura |
+
+Adequação: critérios locais T6 cobertos por valores definidos, sem assertions rasas ou testes fora do contrato. Limite HTTP 1KiB é T14/T15; geração TS é T19. Não confundir contratos validados com fluxo integrado concluído.
 
 ### Phase 2: Persistência e serviços
 

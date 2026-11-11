@@ -1,7 +1,7 @@
 # M0 — Contexto de kickoff
 
 **Gathered:** 2026-11-11
-**Status:** Decisões funcionais, contrato e abordagem de recuperação aprovados; desenho técnico aprovado em 2026-11-11. Implementação não iniciada.
+**Status:** Decisões funcionais, contrato e abordagem de recuperação aprovados; desenho técnico aprovado em 2026-11-11. Execução autorizada em lotes sequenciais; T1–T6 verificadas, fluxo integrado pendente.
 **Spec:** [spec.md](spec.md).
 **Autoridade:** PROJECT_SOURCE.md e docs/specification-sync-2026-11-11.md.
 
