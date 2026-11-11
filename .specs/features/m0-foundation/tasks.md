@@ -446,13 +446,25 @@ Adequacy: all14 cases map to T13/FND-13/15/16; outcome and negative side effects
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): redeem bootstrap tickets`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration -q --basetemp=/tmp/rb-b3`:182 passed,16 new HTTP/bootstrap cases; one Starlette deprecation warning for installed HTTPX TestClient, no test skipped. Ruff/format green. Logging configured in harness; process entrypoint wiring later.
+
+| Criterion / FND | Assertion evidence / expected value | Reverse mapping |
+|---|---|---|
+| Cookie/security headers, FND-13/16 | tests/integration/test_session_http.py:40 status200; :41 authorized true; :43 attributes; :44 no persistent cookie; :45 recognized session; :46 no-store; :47 no-referrer; :48 self script policy | keep: approved bootstrap |
+| Origin/Host/order, FND-14/16 | :62 status403; :63 ticket remains valid; NoDiagnosticAccess raises on any diagnostic access | keep: denied before effects |
+| Contract/limits/sanitation, FND-17/18 | :72 status422; :73 invalid_request; :74 sentinel absent; :133 exact413/422 for length/chunked/type/JSON; :134 no echo | keep: bounded input |
+| Ticket lifecycle/restart, FND-13/15 | :83/89/98 status401 expired/repeated; :114 exactly one200; :148 old session false; :149–155 old ticket401 | keep: single-use memory |
+| JSON correlation, FND-18 | :169 server header equals log UUID; :170 code401; :171 sentinel absent | keep: safe logs |
+
+Adequacy:16 cases map to listed criteria, actual resulting cookie/status/ticket state asserted; no tests removed or weakened. Diagnostics and desktop browser still pending.
 
 ### T15: Rota de criação de diagnóstico
 

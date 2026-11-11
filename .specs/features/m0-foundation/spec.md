@@ -166,12 +166,12 @@ Uma nova intenção após estado terminal cria outro ID e outra chave. Repetir a
 | FND-10 | Timeout da tentativa | AC-M0-001; entrevista | Tasks: T9, T10, T18, T21 | Partial: T9/T10 |
 | FND-11 | Falha terminal | AC-M0-001; entrevista | Tasks: T10, T16, T17, T18, T21 | Partial: T10 |
 | FND-12 | Proteção terminal | AC-M0-001; entrevista | Tasks: T9, T10, T17, T18, T21 | Partial: T9/T10 |
-| FND-13 | Abertura autorizada | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T20 | Partial: T4, T13 |
-| FND-14 | Bloqueio sem sessão | REQ-SEC-001/002; AC-M0-002 | Tasks: T11, T14, T15, T16 | Partial: T11 |
-| FND-15 | Reinício de sessão | REQ-SEC-002; entrevista | Tasks: T4, T13, T14, T20 | Partial: T4, T13 |
-| FND-16 | Loopback e Host/Origin | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T15, T16 | Partial: T4, T13 |
-| FND-17 | Limites de contrato | REQ-SEC-002; AC-M0-001/002 | Tasks: T6, T14, T15 | Partial: T6 |
-| FND-18 | Logs sanitizados | REQ-OPS-001; AC-M0-002 | Tasks: T4, T12, T14, T15, T16, T18 | Partial: T4/T12 |
+| FND-13 | Abertura autorizada | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T20 | Partial: T4, T13, T14 |
+| FND-14 | Bloqueio sem sessão | REQ-SEC-001/002; AC-M0-002 | Tasks: T11, T14, T15, T16 | Partial: T11, T14 |
+| FND-15 | Reinício de sessão | REQ-SEC-002; entrevista | Tasks: T4, T13, T14, T20 | Partial: T4, T13, T14 |
+| FND-16 | Loopback e Host/Origin | REQ-SEC-002; AC-M0-002 | Tasks: T4, T13, T14, T15, T16 | Partial: T4, T13, T14 |
+| FND-17 | Limites de contrato | REQ-SEC-002; AC-M0-001/002 | Tasks: T6, T14, T15 | Partial: T6, T14 |
+| FND-18 | Logs sanitizados | REQ-OPS-001; AC-M0-002 | Tasks: T4, T12, T14, T15, T16, T18 | Partial: T4/T12, T14 |
 | FND-19 | Migração | AC-M0-001 | Tasks: T7, T22 | Partial: T7 |
 | FND-20 | OpenAPI e cliente TS | AC-M0-001 | Tasks: T1, T3, T6, T19, T22 | Partial: T1/T3/T6 |
 | FND-21 | Checks locais | REQ-QA-001; AC-M0-001/002 | Tasks: T1, T2, T3, T21, T22 | Partial: T1/T2/T3 |
