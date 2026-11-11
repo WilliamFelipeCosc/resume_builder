@@ -139,13 +139,28 @@ Adequação: smoke mínimo 3 casos e checks de compilação/build cobertos; sem 
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração + navegador
 **Gate**: Full focal
 **Commit**: `feat(m0): prove local session bootstrap`
+
+**Evidence:** `tools/bootstrap_probe/README.md`: prova PASS, 10 casos Python + 1 navegador Chromium158 headless, smoke5 preservados. Typecheck/Ruff verdes. Navegador desktop padrão não validado; launcher definitivo permanece T20.
+
+| Critério / FND | Assertion / resultado definido | Reverse mapping |
+|---|---|---|
+| UID/path, FND-13/16 | tests/integration/test_bootstrap_probe.py:43 `assert probe.peer_uids == [os.getuid()]`; :44/45 modos 0700/0600; :50 recusa unauthorized | manter: UID real, esperado divergente |
+| TTL e uso único, FND-13 | mesmo arquivo :59 `redeem(value) is None` aos 30s; :67 sucesso antes; :75 exatamente um resgate | manter: limites/concorrência |
+| Cookie/replay, FND-13 | :82 status200; :83 atributos; :85 status401; :87 leitura200 | manter: sessão real HTTP |
+| Restart, FND-15 | :95 cookie antigo401 | manter: sessão por instância |
+| Host/Origin, FND-16 | :100/102 status403 | manter: fronteira loopback |
+| Logs, FND-18 | :115…120 sentinela/ticket/cookie ausentes, campos exatos JSON | manter: conteúdo sanitizado |
+| Path preexistente/symlink | :126/130 `pytest.raises(FileExistsError)` | manter: não sobrescrever canal |
+| Navegador, FND-13/15/18 | apps/web/tests/bootstrap-probe.spec.ts:57 autorizado, :58 hash vazio, :59 cookie JS vazio, :62 atributos/expires=-1, :64 URL sem ticket, :65 replay401, :69/70 logs, :75 unauthorized após restart | manter: prova real exigida T4 |
+
+Adequação: todos critérios da prova cobertos, sem testes removidos/ignorados; nenhuma alegação de autenticação definitiva ou desktop padrão. Segurança/lifecycle completos ficam T13–T16.
 
 ### T5: Paths e isolamento por ambiente
 
