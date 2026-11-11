@@ -47,3 +47,11 @@ Redis será iniciado manualmente pelo operador em T22. Nenhum comando desta nota
 ## Evidências de T1
 
 Três checks documentais concluídos: (1) versões das nove ferramentas verificadas; (2) mínimos Python/engines Node comparados aos metadados oficiais; (3) escolha de gerador e comandos conferidos contra contrato, desenho e documentação oficial. `validate_spec.py m0-foundation`, `validate_tasks.py m0-foundation` e `git diff --check` passam. Nenhum teste de runtime é alegado por T1; locks, execução integrada e compatibilidade real permanecem pendentes.
+
+## Compatibilidade comprovada em T19
+
+A geração real com Hey API 0.99.0 falhou com TypeScript 7.0.2: `ts.SyntaxKind` não está mais na exportação principal. O peer range publicado aceita 7, mas o gerador usa a API clássica do compilador. Fixado TypeScript **6.0.3 somente no pacote api-client**, consultado no registry oficial (`pnpm view typescript@6 version --json`). O frontend conserva TypeScript 7.0.2. Esta é uma correção de compatibilidade de tooling, sem mudar contratos ou OPENs.
+
+Comandos executados: `.venv/bin/python -m resume_api.export_openapi --output packages/api-client/openapi.json`; `pnpm --filter @resume-builder/api-client generate`; geração repetida com hashes dos 16 arquivos idênticos; `pnpm --filter web typecheck` compila consumidor e request negativo em `apps/web/tests/client-contract.ts`. Entrada/saída são arquivos locais, sem upload do schema. Docs HTML locais sem CDN e OpenAPI HTTP exigem cookie; health retorna somente status.
+
+T19: 237 Pytest (5 novos), 3 Vitest e 1 Chromium probe passaram; Ruff/format e build/typecheck verdes. O executável pnpm no sandbox reporta Node embutido 26, enquanto seus scripts usam Node 24.18; a instalação frozen foi validada no ambiente autorizado, sem esse aviso. O warning Starlette/HTTPX existente e o warning de cores Playwright permanecem registrados, sem testes ignorados.

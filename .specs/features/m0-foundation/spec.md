@@ -1,6 +1,6 @@
 # M0 — Foundation mínima
 
-**Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T12 concluídas; workspaces, bootstrap isolado, paths e contratos verificados, fluxo integrado pendente.
+**Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T19 concluídas; workspaces, bootstrap isolado, paths e contratos verificados, fluxo integrado pendente.
 **Gathered:** 2026-11-11.
 **Context:** [context.md](context.md).
 **Fontes:** [PROJECT_SOURCE.md](../../../PROJECT_SOURCE.md), [roadmap](../../../docs/roadmap/milestones.md), [ACs](../../../docs/roadmap/acceptance-criteria.md).
@@ -173,12 +173,12 @@ Uma nova intenção após estado terminal cria outro ID e outra chave. Repetir a
 | FND-17 | Limites de contrato | REQ-SEC-002; AC-M0-001/002 | Tasks: T6, T14, T15 | Partial: T6, T14, T15, T16 |
 | FND-18 | Logs sanitizados | REQ-OPS-001; AC-M0-002 | Tasks: T4, T12, T14, T15, T16, T18 | Partial: T4/T12, T14, T15, T16, T18 |
 | FND-19 | Migração | AC-M0-001 | Tasks: T7, T22 | Partial: T7 |
-| FND-20 | OpenAPI e cliente TS | AC-M0-001 | Tasks: T1, T3, T6, T19, T22 | Partial: T1/T3/T6 |
+| FND-20 | OpenAPI e cliente TS | AC-M0-001 | Tasks: T1, T3, T6, T19, T22 | Partial: T1/T3/T6/T19 |
 | FND-21 | Checks locais | REQ-QA-001; AC-M0-001/002 | Tasks: T1, T2, T3, T21, T22 | Partial: T1/T2/T3 |
 | FND-22 | Isolamento | REQ-SEC-001/002; entrevista | Tasks: T2, T5, T7, T21, T22 | Partial: T2/T5/T7 |
 | FND-23 | Operação manual | REQ-LIN-001; ADR-002/012 | Tasks: T1, T5, T22 | Partial: T1/T5 |
 
-**Coverage:** 23 requisitos mapeados às 22 tarefas; T1–T12 implementadas e verificadas localmente. Desenho e execução aprovados; AC-M0-001/002 integrados pendentes.
+**Coverage:** 23 requisitos mapeados às 22 tarefas; T1–T19 implementadas e verificadas localmente. Desenho e execução aprovados; AC-M0-001/002 integrados pendentes.
 
 ## Success Criteria
 

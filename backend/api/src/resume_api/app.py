@@ -4,12 +4,13 @@ import asyncio
 import re
 from contextlib import asynccontextmanager
 from http.cookies import CookieError, SimpleCookie
+from typing import Literal
 from uuid import UUID, uuid4
 
 import structlog
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 from resume_core.contracts import DiagnosticCreate, DiagnosticResponse
 from resume_core.repository import ActiveDiagnosticConflict
@@ -26,6 +27,32 @@ ERRORS = {
     422: ("invalid_request", "Request does not match the contract."),
     500: ("internal_error", "Request could not be completed."),
 }
+
+
+class HttpError(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    code: Literal[
+        "unauthorized",
+        "forbidden_origin",
+        "active_diagnostic",
+        "body_too_large",
+        "invalid_request",
+        "internal_error",
+    ]
+    message: str
+
+
+class HttpErrorResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    error: HttpError
+
+
+class HealthResponse(BaseModel):
+    status: Literal["ok"]
+
+
+ERROR_RESPONSES = {code: {"model": HttpErrorResponse} for code in ERRORS}
+SESSION_SECURITY = {"security": [{"LocalSession": []}]}
 
 
 def error_response(status):
@@ -202,6 +229,7 @@ def create_app(
         redoc_url=None,
         openapi_url=None,
         lifespan=lifespan,
+        responses=ERROR_RESPONSES,
     )
     app.state.sessions, app.state.service = sessions, service
     app.state.reconciler = reconciler
@@ -215,7 +243,40 @@ def create_app(
     async def unexpected_error(request, error):
         return error_response(500)
 
-    @app.post("/api/session/bootstrap", response_model=BootstrapResponse)
+    @app.get("/api/health", response_model=HealthResponse, operation_id="get_health")
+    async def health():
+        return HealthResponse(status="ok")
+
+    @app.get("/openapi.json", include_in_schema=False)
+    async def schema_document():
+        return JSONResponse(app.openapi())
+
+    @app.get("/docs", include_in_schema=False, response_class=HTMLResponse)
+    async def docs():
+        return HTMLResponse(
+            '<!doctype html><html lang="en"><meta charset="utf-8">'
+            "<title>Resume Builder API</title><h1>Resume Builder API</h1>"
+            '<p><a href="/openapi.json">OpenAPI contract</a></p>'
+            "<ul><li>GET /api/health</li><li>POST /api/session/bootstrap</li>"
+            "<li>POST /api/diagnostics</li><li>GET /api/diagnostics/latest</li></ul></html>"
+        )
+
+    original_openapi = app.openapi
+
+    def session_openapi():
+        document = original_openapi()
+        document.setdefault("components", {}).setdefault("securitySchemes", {})["LocalSession"] = {
+            "type": "apiKey",
+            "in": "cookie",
+            "name": COOKIE_NAME,
+        }
+        return document
+
+    app.openapi = session_openapi
+
+    @app.post(
+        "/api/session/bootstrap", response_model=BootstrapResponse, operation_id="bootstrap_session"
+    )
     async def bootstrap(body: BootstrapRequest):
         session = sessions.redeem(body.ticket)
         if session is None:
@@ -230,6 +291,8 @@ def create_app(
         response_model=DiagnosticResponse,
         status_code=202,
         responses={200: {"model": DiagnosticResponse}},
+        operation_id="create_diagnostic",
+        openapi_extra=SESSION_SECURITY,
     )
     async def create_diagnostic(body: DiagnosticCreate, request: Request):
         try:
@@ -253,7 +316,12 @@ def create_app(
             status_code=202 if outcome.created else 200,
         )
 
-    @app.get("/api/diagnostics/latest", response_model=DiagnosticResponse)
+    @app.get(
+        "/api/diagnostics/latest",
+        response_model=DiagnosticResponse,
+        operation_id="get_latest_diagnostic",
+        openapi_extra=SESSION_SECURITY,
+    )
     async def latest_diagnostic(request: Request):
         return await asyncio.to_thread(app.state.service.latest, request.state.principal)
 

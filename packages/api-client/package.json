@@ -2,5 +2,8 @@
   "name": "@resume-builder/api-client",
   "version": "0.1.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "exports": {".": "./src/generated/index.ts"},
+  "scripts": {"generate": "openapi-ts"},
+  "devDependencies": {"@hey-api/openapi-ts": "0.99.0", "typescript": "6.0.3"}
 }

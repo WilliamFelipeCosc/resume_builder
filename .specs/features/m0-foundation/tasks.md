@@ -7,7 +7,7 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T18 concluídas com gates registrados; T19–T22 pendentes.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T19 concluídas com gates registrados; T20–T22 pendentes.
 
 ## Test Coverage Matrix
 
@@ -600,13 +600,25 @@ Adequacy:10 scenarios anchored to T18/FNDs, resulting state/payload verified. Ac
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 4 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Build integrado passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 4 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Build integrado passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: contrato + typecheck
 **Gate**: Build integrado
 **Commit**: `feat(m0): generate openapi client`
+
+**Evidence:** 237 Pytest (5 casos novos de contrato), 3 Vitest e 1 Chromium probe passaram; locks/build/typecheck/Ruff/format verdes. Export offline repetido e SDK regenerado com os mesmos hashes em 16 arquivos. Hey API exige TypeScript clássico: compilador local 6.0.3 no gerador, frontend 7.0.2 preservado; nota m0-toolchain registra a falha e solução. Nenhum teste removido/ignorado.
+
+| Critério / FND-20 | Evidência e assertion | Reverse mapping / manter |
+|---|---|---|
+| Health mínimo público | tests/integration/test_openapi_contract.py:29 `response.json() == {"status": "ok"}` | health de T19 |
+| Docs/schema protegidos | tests/integration/test_openapi_contract.py:36 `status_code == 401`; :43 `status_code == 200` após resgate | docs/schema de T19 |
+| DTOs e erros reais | tests/integration/test_openapi_contract.py:56 `required == ["idempotencyKey"]`; :77 ref HttpErrorResponse; :74 cookie security | contrato e auth |
+| Export determinístico sem runtime | tests/integration/test_openapi_contract.py:95 bytes iguais; :97 streams vazios; :98 somente arquivo de saída | export offline |
+| TS gerado compilável | apps/web/tests/client-contract.ts:7 chamada SDK; :9 acesso erro tipado; :15 erro de campo manual esperado pelo compilador | consumidor FND-20 |
+
+Adequação: critérios cobertos por asserts de resultado e compilação; cada caso corresponde a T19/FND-20. Geração repetida preserva bytes, sem DTO manual e sem desvio funcional.
 
 ### T20: Tela do diagnóstico e abertura local
 
