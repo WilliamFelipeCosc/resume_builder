@@ -3,13 +3,35 @@ import { readFileSync } from 'node:fs';
 import { connect } from 'node:net';
 
 const ORIGIN = 'http://127.0.0.1:8031';
-const info = () => JSON.parse(readFileSync('/tmp/rb-web-harness.json', 'utf8')) as { socket: string; workerPid: number };
+const info = () => JSON.parse(readFileSync('/tmp/rb-web-harness.json', 'utf8')) as { socket: string; workerPid: number; apiPid: number; harnessPid: number };
 const ticket = () => new Promise<string>((resolve, reject) => {
   const socket = connect(info().socket);
   let payload = '';
   socket.on('data', (chunk) => { payload += chunk; });
   socket.on('end', () => { resolve(JSON.parse(payload).ticket); });
   socket.on('error', reject);
+});
+
+test('FND-15 real API process restart invalidates browser cookie and permits new local opening', async ({ page }) => {
+  await page.goto(ORIGIN + '/#bootstrap=' + await ticket());
+  await expect(page.getByRole('button', { name: 'Executar diagnóstico de teste' })).toBeEnabled();
+  await page.getByRole('button', { name: 'Executar diagnóstico de teste' }).click();
+  await expect(page.getByRole('status')).toHaveText('succeeded', { timeout: 10000 });
+  const persistedId = await page.getByTestId('execution-id').textContent();
+  const oldPid = info().apiPid;
+  process.kill(info().harnessPid, 'SIGHUP');
+  await expect.poll(() => info().apiPid).not.toBe(oldPid);
+  await expect.poll(async () => {
+    try { return (await page.request.get(ORIGIN + '/api/health')).status(); }
+    catch { return 0; }
+  }).toBe(200);
+  await page.reload();
+  await expect(page.getByRole('button')).toHaveCount(0);
+  expect((await page.request.get(ORIGIN + '/api/diagnostics/latest')).status()).toBe(401);
+  await page.goto(ORIGIN + '/#bootstrap=' + await ticket());
+  await expect(page.getByRole('button', { name: 'Executar diagnóstico de teste' })).toBeEnabled();
+  await expect(page.getByRole('status')).toHaveText('succeeded');
+  await expect(page.getByTestId('execution-id')).toHaveText(persistedId!);
 });
 
 test('FND-03/04/13/14 definitive same-origin Web/API/Redis/Worker fixture', async ({ page }) => {

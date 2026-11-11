@@ -1,6 +1,8 @@
-# Resume Builder — pacote de documentação (2026-11-11)
+# Resume Builder — foundation local M0
 
-**Estado:** documentação e artefatos de referência. **Nenhum software foi implementado ou migrado** por este pacote; `PROJECT_SOURCE.md` é a autoridade final das decisões aprovadas.
+**Estado:** foundation M0 implementada em tarefas locais; validação independente pendente antes de declarar o marco concluído. `PROJECT_SOURCE.md` continua a autoridade das decisões aprovadas.
+
+Para executar e verificar o diagnóstico sintético, siga [operação local do M0](docs/engineering/m0-local-operation.md): `just setup`, `just build`, Redis manual, migração explícita, API/Worker e abertura autorizada. Os comandos e testes não usam currículos ou seeds privados.
 
 ## Onde começar
 
@@ -23,6 +25,6 @@ Documentação da stack aprovada (FastAPI + SQLAlchemy 2 + Alembic, Dramatiq/Red
 
 ## Estado deste repositório
 
-Sincronizado com o pacote de 11/11 por decisão do proprietário. O kickoff de M0 está em entrevista; prioridade: chegar rapidamente à construção e exportação do currículo em M3. Veja [decisões e proveniência da sincronização](docs/specification-sync-2026-11-11.md) e [contexto de M0](.specs/features/m0-foundation/context.md). O manifesto público atual é verificável com `sha256sum --check MANIFEST.sha256`; o manifesto de origem de 04/11 está preservado em `docs/history/`.
+Sincronizado com o pacote de 11/11 por decisão do proprietário. A execução de M0 está registrada em [.specs](.specs/features/m0-foundation/tasks.md); prioridade: chegar rapidamente à construção e exportação do currículo em M3. Veja [decisões e proveniência da sincronização](docs/specification-sync-2026-11-11.md) e [contexto de M0](.specs/features/m0-foundation/context.md). O manifesto público atual é verificável com `sha256sum --check MANIFEST.sha256`; o manifesto de origem de 04/11 está preservado em `docs/history/`.
 
 Os arquivos de documentação modular não disponíveis no contexto anterior foram **redigidos a partir do PROJECT_SOURCE.md**, não recuperados de um repositório implementado. As assinaturas de contratos são conceituais e demandam versionamento e testes antes de implementação.

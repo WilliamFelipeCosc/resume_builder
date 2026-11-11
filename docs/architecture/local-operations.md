@@ -3,7 +3,7 @@
 ## Stack aprovada
 
 - Linux local-first; React/Vite TypeScript por pnpm; FastAPI Python por uv.
-- Monólito modular + worker Dramatiq/Redis; `justfile` previsto para orquestração. RabbitMQ é perfil experimental opcional, jamais requisito.
+- Monólito modular + worker Dramatiq/Redis; `justfile` para orquestração. RabbitMQ é perfil experimental opcional, jamais requisito.
 - SQLite/SQLAlchemy 2/Alembic; banco em WAL; um escritor por vez, migrações controladas.
 - MCP `stdio` primeiro, HTTP seguro em loopback até V1; Tauri/RPM em M7.
 
@@ -15,6 +15,8 @@
 - State: `${XDG_STATE_HOME:-~/.local/state}/resume-builder/` (logs sanitizados, auditoria permanece no banco).
 
 Não colocar arquivos do usuário em `data/seeds/` versionado nem empacotar `private/` em releases.
+
+Operação implementada e comandos verificados: [guia local do M0](../engineering/m0-local-operation.md). O guia distingue evidência real, estado das tarefas e validação independente.
 
 ## M0: requisitos operacionais mínimos
 

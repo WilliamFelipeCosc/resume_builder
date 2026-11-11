@@ -2,7 +2,7 @@
 
 ## Monorepo
 
-Usar pnpm Workspaces para React/TypeScript, uv workspaces para Python e justfile para comandos comuns (DECIDED). Comandos, versões, lockfiles e geração do cliente TypeScript serão definidos e verificados em M0; não existem scripts de aplicação executáveis ainda. Redis via Compose é iniciado manualmente. Referências: [operação local](../architecture/local-operations.md) e [contrato REST/OpenAPI](../contracts/rest-openapi.md).
+Usar pnpm Workspaces para React/TypeScript, uv workspaces para Python e justfile para comandos comuns (DECIDED). Comandos, versões, lockfiles e geração do cliente TypeScript foram implementados em M0. Consulte [operação e evidências locais](m0-local-operation.md), `just --list` e `just check`. Redis via Compose é iniciado manualmente. Referências: [operação local](../architecture/local-operations.md) e [contrato REST/OpenAPI](../contracts/rest-openapi.md).
 
 **Ambiente verificado em 2026-11-11:** pnpm instalado pelo proprietário e disponível no PATH; `pnpm --version` retorna `11.28.9`. A seleção/pin da versão do projeto e a geração do lockfile continuam previstas para M0; nenhuma dependência do projeto foi instalada nesta atualização documental.
 

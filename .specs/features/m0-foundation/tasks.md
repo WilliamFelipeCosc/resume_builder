@@ -7,11 +7,11 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T21 concluídas com gates registrados; T22 pendente.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T22 concluídas com gates registrados; Verifier independente pendente.
 
 ## Test Coverage Matrix
 
-Proveniência: AGENTS.md, docs/engineering/testing.md, docs/engineering/development.md, docs/roadmap/acceptance-criteria.md e spec aprovada. Workspaces/manifests e testes de T2–T6 existem; fases seguintes pendentes. Tipos de teste já decididos nesses documentos; comandos abaixo são PROPOSTOS para criação, não comandos existentes ou executados.
+Proveniência: AGENTS.md, docs/engineering/testing.md, docs/engineering/development.md, docs/roadmap/acceptance-criteria.md e spec aprovada. Workspaces, contratos e testes das quatro fases existem. Comandos atuais abaixo foram executados; evidências e contagens por tarefa permanecem registradas.
 
 | Code Layer | Required Test Type | Coverage Expectation | Location Pattern | Run Command |
 |---|---|---|---|---|
@@ -26,20 +26,20 @@ Proveniência: AGENTS.md, docs/engineering/testing.md, docs/engineering/developm
 
 ## Gate Check Commands
 
-Comandos Python/Web de T2–T6 executados conforme evidências; comandos do fluxo integrado permanecem futuros. Até existir runtime, gate inicial usa verificações documentais e os validadores da skill. Não executar suíte inexistente/vazia como evidência.
+Comandos Python/Web e gates integrados executados conforme evidências. `just check` agrega os checks atuais; o gate documental inicial permanece como histórico de T1.
 
 | Gate Level | When to Use | Command |
 |---|---|---|
 | Build inicial | T1 | Verificar ferramentas disponíveis, fontes e nota de compatibilidade; validate_spec.py e validate_tasks.py da skill + git diff --check |
-| Quick Python | Unitários | Proposto: uv run pytest tests/unit -q; seleção focal indicada por tarefa |
-| Build Python | Workspace Python | Proposto: uv sync --locked; uv run pytest tests/smoke -q; imports dos membros |
-| Build Web | Workspace frontend | Proposto: pnpm install --frozen-lockfile; pnpm --filter web test; pnpm --filter web typecheck; pnpm --filter web build |
-| Full focal | Integração do componente | Proposto: uv run pytest tests/unit tests/integration -q com seleção explícita do componente e dependências; broker real quando aplicável |
-| Full Web | Tela/abertura | Proposto: Vitest, typecheck/build e Playwright Test externo via scripts do workspace web |
-| Full integrado | Resiliência real | Proposto: uv run pytest tests/unit tests/integration tests/smoke -q com SQLite/Redis/Worker reais isolados |
-| Build integrado | Fim de fase/runtime integrado | Full integrado + Full Web + regeneração OpenAPI/TS sem diff + lint/format a definir em T1 + git diff --check |
+| Quick Python | Unitários | uv run --all-packages --locked pytest tests/unit -q; seleção focal indicada por tarefa |
+| Build Python | Workspace Python | uv sync --all-packages --locked; uv run --all-packages --locked pytest tests/smoke -q |
+| Build Web | Workspace frontend | pnpm install --frozen-lockfile; just check-web |
+| Full focal | Integração do componente | uv run --all-packages --locked pytest tests/unit tests/integration -q --basetemp=/tmp/rb-tests com seleção explícita do componente |
+| Full Web | Tela/abertura | just check-web; just check-browser (PLAYWRIGHT_BROWSERS_PATH configurado) |
+| Full integrado | Resiliência real | just check-python com SQLite/Redis/Worker reais isolados |
+| Build integrado | Fim de fase/runtime integrado | PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check |
 
-Gates de fase rodam apenas checks aplicáveis ao runtime já entregue; a fase final exige todos. Comandos exatos e versões serão preenchidos ao criá-los. Seleção focal deve citar casos e contagem, nunca esconder falhas preexistentes. Nenhuma instalação de ferramentas do sistema/CI/provider.
+Gates de fase rodam apenas checks aplicáveis ao runtime já entregue; a fase final exige todos. Comandos e versões exatos estão no justfile e na nota de toolchain. Seleção focal deve citar casos e contagem, nunca esconder falhas preexistentes. Nenhuma instalação de ferramentas do sistema/CI/provider.
 
 ## Execution Plan
 
@@ -642,12 +642,12 @@ Adequação: critérios cobertos por asserts de resultado e compilação; cada c
 
 | Critério / FND | Evidência e assertion | Reverse mapping / manter |
 |---|---|---|
-| Botão desabilitado em ativos/POST | apps/web/tests/diagnostic.test.tsx:52 `html contains disabled`; :136 submitting true; apps/web/tests/diagnostic-app.spec.ts:33 `button.toBeDisabled()` | FND-03 |
+| Botão desabilitado em ativos/POST | apps/web/tests/diagnostic.test.tsx:52 `html contains disabled`; :136 submitting true; apps/web/tests/diagnostic-app.spec.ts:55 `button.toBeDisabled()` | FND-03 |
 | Polling sem sobreposição | apps/web/tests/diagnostic.test.tsx:97 duas chamadas enquanto GET pendente; :100 estado final succeeded | T20 polling |
 | Retry usa mesma chave | apps/web/tests/diagnostic.test.tsx:121 `keys == [KEY, KEY]`; :123 mesmo id | idempotência transporte |
 | Aviso/falha de rede/terminal | apps/web/tests/diagnostic.test.tsx:150 execution preservada; :152 warning; :64 conteúdo terminal | FND-07 e UX de falha |
-| Sessão/bootstrap/401 | apps/web/tests/diagnostic.test.tsx:71 limpeza antes do fetch; :164 execution null; apps/web/tests/diagnostic-app.spec.ts:24 hash vazio; :28 cookie HttpOnly/Strict | FND-13/15 |
-| Reabertura e resultado real | apps/web/tests/diagnostic-app.spec.ts:42 mesmo id; :45 payload fixo, tentativa1 e sem erro/aviso | FND-04 e fluxo real |
+| Sessão/bootstrap/401 | apps/web/tests/diagnostic.test.tsx:71 limpeza antes do fetch; :164 execution null; apps/web/tests/diagnostic-app.spec.ts:46 hash vazio; :50 cookie HttpOnly/Strict | FND-13/15 |
+| Reabertura e resultado real | apps/web/tests/diagnostic-app.spec.ts:64 mesmo id; :67 payload fixo, tentativa1 e sem erro/aviso | FND-04 e fluxo real |
 | Launcher seguro | tests/integration/test_launcher.py:17 origem exata; :20 ticket válido; :22 streams vazios; negativos de UID/path; opener descarta ambos streams | FND-13/18 |
 
 Adequação: todos os testes correspondem a comportamentos de T20, assertions de estado/payload e gate real. Nenhum teste removido/ignorado; somente sincronização do harness aguarda preparação async do SDK, mantendo a expectativa de chamada.
@@ -694,13 +694,28 @@ Adequação: seis resultados exigidos, mesmos budgets e identidade conferidos; n
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 4 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Build integrado passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 4 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Build integrado passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: smoke + E2E
 **Gate**: Build integrado
 **Commit**: `feat(m0): document reproducible local checks`
+
+**Evidence:** `just setup` passou com ambos os lockfiles; `docker compose config --quiet` passou sem iniciar Redis de desenvolvimento. `PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check` passou: **254 Pytest, 17 Vitest, 1 Chromium probe + 2 Chromium definitivos**, TypeScript, Vite, duas gerações temporárias do SDK, Ruff/format e whitespace. `just --list` e comandos CLI reais foram usados. Runtime, serviços, dados e controles de falha do harness são isolados. Nenhum teste removido/ignorado.
+
+| Critério / FND | Evidência e assertion | Reverse mapping / manter |
+|---|---|---|
+| Comandos/migração/isolamento | tests/smoke/test_operations.py:32 returncode0; :37 banco vazio; :38 revisão Alembic; :41 somente paths isolados; :50 serve não cria DB | FND-19/21/22 |
+| Host fixo e erros sanitizados | tests/smoke/test_operations.py:55 código1; :56 sentinela ausente; caso CLI recusa --host externo sem dados | FND-16/18/22 |
+| Redis somente manual | tests/smoke/test_operations.py:70 receitas; :75 comando api sem docker; compose.yaml validado, produção não inicia containers | FND-23 |
+| Operação real e resultado | apps/web/tests/diagnostic-app.spec.ts:55 botão ativo bloqueado; :58 succeeded; :64 reabertura mesmoID; :67 payload fixo e tentativa1 | FND-02/03/04/21 |
+| Reinício real da API | apps/web/tests/diagnostic-app.spec.ts:30 cookie anterior401; :32 nova abertura autorizada; :34 mesmoID persistido | FND-13/15/21 |
+| Contrato/build sem drift | tools/check_contract.py compara schema e os bytes de todo o SDK em duas gerações temporárias; typecheck/build passaram no just check | FND-20 |
+
+Adequação: os cinco smoke novos verificam comandos/estado/isolamento e os dois E2E usam o CLI real, não um app substituto. Logs dos subprocessos do harness são JSON e stdout vazio. Encerramento SIGTERM do Uvicorn é permitido explicitamente pelo harness após conferir o comportamento da versão instalada; os asserts funcionais de autorização e persistência foram mantidos.
+
+Operação/limpeza/limitações: docs/engineering/m0-local-operation.md. Desktop padrão não aberto nesta sessão; integração em Chromium headless. Warning Starlette/HTTPX e warning de cores permanecem. M0.5/CI/providers/privados não executados. O manifesto público é atualizado com os arquivos de fonte atuais; a validação independente posterior acrescentará seu relatório e exigirá novo hash desses artefatos de estado. **Tarefas concluídas; marco aguarda Verifier independente.**
 
 ## Task Granularity Check
 

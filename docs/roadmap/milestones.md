@@ -8,7 +8,7 @@
 
 **Saída verificável:** API health, web responde, migração Alembic aplicou corretamente, Worker Dramatiq processa job de teste, política impede uma requisição não autorizada.
 
-**Detalhamento do kickoff (2026-11-11):** proprietário escolheu diagnóstico sintético completo, recuperação controlada e checks somente locais. [Contexto da entrevista](../../.specs/features/m0-foundation/context.md) e [spec proposta](../../.specs/features/m0-foundation/spec.md) registram o comportamento; implementação ainda não iniciada. Análise adicional de Reactive Resume é opcional posterior, fora do gate M0.
+**Detalhamento do kickoff (2026-11-11):** proprietário escolheu diagnóstico sintético completo, recuperação controlada e checks somente locais. [Contexto da entrevista](../../.specs/features/m0-foundation/context.md) e [spec proposta](../../.specs/features/m0-foundation/spec.md) registram o comportamento; a execução local e seus gates estão em [tasks.md](../../.specs/features/m0-foundation/tasks.md), com validação independente ao final. Análise adicional de Reactive Resume é opcional posterior, fora do gate M0.
 
 ## M0.5 — MCP feasibility spike
 

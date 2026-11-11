@@ -1,8 +1,8 @@
 # M0 — Desenho da foundation
 
-**Status:** Approved pelo proprietário em 2026-11-11, incluindo schema, bootstrap e limite de validade da tentativa de 30 s. Prova técnica do bootstrap ainda obrigatória.
+**Status:** Approved pelo proprietário em 2026-11-11, incluindo schema, bootstrap e limite de validade da tentativa de 30 s. Prova técnica obrigatória aprovada em T4; evidências atuais em tasks.md.
 **Spec:** [spec.md](spec.md). **Contexto:** [context.md](context.md).
-**Data:** 2026-11-11. Implementação, instalação e testes de aplicação: NOT_RUN.
+**Data:** 2026-11-11. Este desenho foi registrado antes da implementação; afirmações de não execução no texto abaixo descrevem aquele momento. Status e evidências posteriores estão em [tasks.md](tasks.md).
 
 ## Architecture Overview
 
