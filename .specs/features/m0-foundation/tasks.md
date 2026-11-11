@@ -7,7 +7,7 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T20 concluídas com gates registrados; T21–T22 pendentes.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T21 concluídas com gates registrados; T22 pendente.
 
 ## Test Coverage Matrix
 
@@ -662,13 +662,27 @@ Adequação: todos os testes correspondem a comportamentos de T20, assertions de
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full integrado passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full integrado passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração real
 **Gate**: Full integrado
 **Commit**: `feat(m0): verify recovery scenarios`
+
+**Evidence:** 249 Pytest passaram, incluindo seis cenários novos com Redis real e processos Worker reais; Ruff/format e diff verdes. Clock injetado por arquivo atômico acelera 30/120s sem alterar budgets da aplicação. Falhas existem somente em `tests/integration/controlled_worker.py`; API/actor de produção não receberam switches de teste.
+
+| Critério / FND | Evidência e assertion em tests/integration/test_real_recovery.py | Reverse mapping / manter |
+|---|---|---|
+| Worker morto/reiniciado, mesmo efeito | :97 running; :101 processo morto; :79–83 mesmo id/key/requestId, resultado fixo e attempts2; :110 terminal igual após duplicata | FND-09/12 |
+| Worker antigo após nova posse | :132 outcome false do processo antigo; :133 terminal inalterado | FND-10/12 |
+| Redis offline/recovery até resultado | :145 pending/0; :146 queue_unavailable; :79–83 success mesmo id/attempt1 | FND-07/08 |
+| Perda da fila confirmada | :162 queued; :164 fila vazia; assert_success confirma resultado da mesma execução após reentrega | FND-08/12 |
+| Prazo vence com Worker real bloqueado | :186 failed/deadline_exceeded; :190 efeito antigo recusado; :193 terminal preservado | FND-10/11/12 |
+| Três falhas reais | :214 pending/pending/failed; :217 attempts_exhausted; :221 terminal imutável | FND-11/12 |
+| Isolamento e logs | :56 stdout vazio; :57/58 ausência de sentinela/stack; fixtures SQLite temporário e namespace Redis único | FND-21/22 |
+
+Adequação: seis resultados exigidos, mesmos budgets e identidade conferidos; nenhum teste removido/ignorado. O primeiro teste de Worker antigo expôs prefetch no harness; a coreografia agora pausa seu processo inteiro até a nova conclusão, preservando todas as expectativas.
 
 ### T22: Operação reproduzível e aceite M0
 
