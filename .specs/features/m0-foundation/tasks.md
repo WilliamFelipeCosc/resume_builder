@@ -7,7 +7,7 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T6 concluídas com gates registrados; T7–T22 pendentes.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T12 concluídas com gates registrados; T13–T22 pendentes.
 
 ## Test Coverage Matrix
 
@@ -277,10 +277,10 @@ Adequacy: all local T7 criteria covered with real SQLite; no removed/skipped tes
 
 | Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
 |---|---|---|
-| Persist full pending, FND-01 | tests/integration/test_diagnostic_repository.py:28–40 values pending/0/UUID/UTC/null and durable row | keep: intention contract |
-| latest/reopen, FND-04 | same file empty/latest/timestamp-tie tests: None, same DTO, deterministic max UUID | keep: latest query |
-| same key incl terminal, FND-05 | same file replay/terminal tests: created=False and equal prior execution while another active | keep: idempotency |
-| concurrent distinct/same keys, FND-06 | same file concurrent tests: one created and one ID; distinct keys one winner | keep: SQLite concurrency |
+| Persist full pending, FND-01 | tests/integration/test_diagnostic_repository.py:23 UUID; :24 request; :25 key; :26 pending; :27 count0; :28 UTC; :29 null outcomes; :32 count1 | keep: intention contract |
+| latest/reopen, FND-04 | tests/integration/test_diagnostic_repository.py:14 `repo.latest() is None`; :30 equal DTO; :110 deterministic max UUID | keep: latest query |
+| same key incl terminal, FND-05 | tests/integration/test_diagnostic_repository.py:43 `replay.created is False`; :44 equal original; :72 equal terminal while second active | keep: idempotency |
+| concurrent distinct/same keys, FND-06 | tests/integration/test_diagnostic_repository.py:81 one ID; :82 one created; :96 distinct keys one winner | keep: SQLite concurrency |
 
 Adequacy: eight cases map to T8, no speculative tests. Full HTTP409 and queue ordering remain T15/T17. No tests removed/skipped.
 
@@ -306,11 +306,11 @@ Adequacy: eight cases map to T8, no speculative tests. Full HTTP409 and queue or
 
 | Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
 |---|---|---|
-| claim/count, FND-09 | tests/integration/test_diagnostic_leases.py: claim test asserts running/1/30s; concurrent test one owner/1 | keep: actual attempts only |
-| fixture result, FND-02 | same file complete test asserts succeeded, exact message/version, timestamps/correlation/count and null error/warning | keep: complete contract |
-| time fences, FND-10 | same file elapsed30/30.000001/120 returns False,29.999999 True; lease capped at total120 | keep: exact deadline |
-| stale/terminal, FND-12 | same file wrong token False; terminal equality; old token False after new claim | keep: no late effects |
-| budget | same file exhausted budget claim None/count3 | keep: approved cap |
+| claim/count, FND-09 | tests/integration/test_diagnostic_leases.py:19 running; :20 count1; :21 expiry30; :22 duplicate None; :31 one owner; :32 count1 | keep: actual attempts only |
+| fixture result, FND-02 | tests/integration/test_diagnostic_leases.py:42 succeeded; :43 exact fixture; :47 null error/warning; :48/49 timestamps; :50 request; :51 count1 | keep: complete contract |
+| time fences, FND-10 | tests/integration/test_diagnostic_leases.py:60 completion False at30/30.000001/120; :69 True before30; :86 capped10s; :88/89 late complete/claim rejected | keep: exact deadline |
+| stale/terminal, FND-12 | tests/integration/test_diagnostic_leases.py:76/77 wrong token/missing ID False; :100 terminal equal; :117 old token False; :118 current True | keep: no late effects |
+| budget | tests/integration/test_diagnostic_leases.py:127 claim None; :128 count3 | keep: approved cap |
 
 Adequacy:12 cases cover all T9 local outcomes; no assertions weakened/removed/skipped. Recovery itself remains T10.
 
@@ -367,10 +367,10 @@ Adequacy: all11 cases map to approved time/recovery criteria; no removed/weakene
 
 | Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
 |---|---|---|
-| Deny before repo, FND-14 | tests/unit/test_diagnostic_service.py: PermissionDenied + `spy.calls == []` for None/empty subject/no capabilities and cross-capability access | keep: zero read/write/reconcile |
-| DTO/latest, FND-01/04 | tests/integration/test_diagnostic_service_sqlite.py: empty execution None, key/request equality, latest equals created | keep: approved contract |
-| Reconcile before read/create | tests/integration/test_diagnostic_service_sqlite.py: expired latest failed/deadline_exceeded, old run failed before new pending | keep: approved observation |
-| Same key/conflict, FND-05/06 | tests/integration/test_diagnostic_service_sqlite.py: replay.created False, equal execution; raises ActiveDiagnosticConflict; original unchanged | keep: stable service behavior |
+| Deny before repo, FND-14 | tests/unit/test_diagnostic_service.py:35 PermissionDenied + :40/:48/:56 `spy.calls == []` for None/empty subject/no capabilities and cross-capability access | keep: zero read/write/reconcile |
+| DTO/latest, FND-01/04 | tests/integration/test_diagnostic_service_sqlite.py:13 execution None; :17 key; :18 request; :19 latest equals created | keep: approved contract |
+| Reconcile before read/create | tests/integration/test_diagnostic_service_sqlite.py:28 same ID; :29 failed; :30 deadline_exceeded; :40 new pending; :41 old failed | keep: approved observation |
+| Same key/conflict, FND-05/06 | tests/integration/test_diagnostic_service_sqlite.py:50 replay.created False; :51 equal execution; :52 raises ActiveDiagnosticConflict; :54 unchanged | keep: stable service behavior |
 
 Adequacy:12 cases map to T11, no removed/skipped/weakened assertions. HTTP401/409 are later adapter responsibilities.
 
@@ -384,13 +384,27 @@ Adequacy:12 cases map to T11, no removed/skipped/weakened assertions. HTTP401/40
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Quick Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Quick Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário
 **Gate**: Quick Python
 **Commit**: `feat(m0): sanitize structured logs`
+
+**Evidence:** `.venv/bin/pytest tests/unit -q`:90 passed (16 logging cases); accumulated `.venv/bin/pytest tests/unit tests/integration tests/smoke -q`:157 passed. `pnpm --filter web test`3 passed, typecheck/build green; Chromium probe1 passed. Ruff/validators/diff green. No Redis/HTTP domain flow yet.
+
+| Criterion / FND-18 | Assertion evidence / expected outcome | Reverse mapping |
+|---|---|---|
+| JSON correlation and allowlist | tests/unit/test_logging_policy.py:48 event diagnostic_created; :49/50 exact UUIDs; :51 pending; :52 count0; :53 info; :54 UTC; :56 exact field set | keep: structured diagnostic metadata |
+| Invalid value and credential removal | tests/unit/test_logging_policy.py:83 `field not in event`; :84 `SENTINEL not in output.getvalue()` for8 allowed-field injections | keep: before log output |
+| Raw event/third-party exceptions | tests/unit/test_logging_policy.py:89 dependency_event; :103 sentinel absent; :104 Traceback absent | keep: dependency sanitation |
+| Unexpected app errors/docs | tests/unit/test_logging_policy.py:113/114 internal_error; :115 sentinel absent; :116 no traceback | keep: unexpected failures |
+| Bound context / request metadata | tests/unit/test_logging_policy.py:126 request UUID; :127 POST; :128 route; :129 HTTP202; :130 credentials absent | keep: correlation |
+| Existing dependency handlers / interpolation | tests/unit/test_logging_policy.py:140 unsafe stream empty; :141/147 dependency_event; :142/148 no sentinel | keep: third-party logs |
+| Terminal stream | tests/unit/test_logging_policy.py:157 JSON event in stderr; :158 stdout empty | keep: approved process logging |
+
+Adequacy: all16 cases derive from FND-18; no tests removed/ignored or assertions weakened. Configure once at startup; API/Worker must not replace handlers afterward (Uvicorn log_config=None, Dramatiq skip_logging when integrated). Raw messages intentionally unavailable; explicit event/code constants carry diagnostics.
 
 ### Phase 3: Fronteiras autorizadas e fila
 
