@@ -111,13 +111,23 @@ Adequação: critérios T2 cobertos; sem assertions rasas ou casos fora do escop
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 3 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Build Web passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 3 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Build Web passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: smoke
 **Gate**: Build Web
 **Commit**: `feat(m0): bootstrap web workspace`
+
+**Evidence:** `pnpm install --frozen-lockfile`; `pnpm --filter web test` (3 passed), `typecheck` e `build` passaram fora do sandbox, sem warnings de runtime. Sandbox usa Node embutido 26.12.1 do executável pnpm e bloqueia store; gate oficial usou ambiente autorizado Node24.18. Nenhum DTO manual.
+
+| Critério / FND | Assertion / evidência | Reverse mapping |
+|---|---|---|
+| Web renderiza, FND-21 | apps/web/tests/smoke.test.tsx:7 `toContain('<h1>Resume Builder</h1>')` | manter: smoke T3 |
+| Instrução sem sessão, FND-21 | apps/web/tests/smoke.test.tsx:10 `toContain('Abra pelo comando local para iniciar uma sessão autorizada.')` | manter: placeholder autorizado pelo desenho |
+| Sem ações antecipadas, FND-20 | apps/web/tests/smoke.test.tsx:13 `not.toContain('<button')` | manter: workspace sem DTO/API manual |
+
+Adequação: smoke mínimo 3 casos e checks de compilação/build cobertos; sem teste removido/ignorado. Contrato consumido somente após T19.
 
 ### T4: Prova isolada do bootstrap Linux
 
