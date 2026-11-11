@@ -1,23 +1,5 @@
-# ADR-008 — Recuperação híbrida V1, RAG avançado V2
+# ADR-008 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-008](ADR-008.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Contextos grandes são caros e podem conter evidências irrelevantes; recuperação por só palavras-chave pode perder sinônimos.
-
-## Decisão
-
-Começar SQL relacional e FTS5/BM25; completar embeddings + fusão na V1. Final V2: RAG avançado para aprendizado/benchmarks. Preferir embeddings locais se viáveis.
-
-## Consequências
-
-Devem existir adapters/versões de índice, avaliação de relevância e limites de tokens; busca semântica não prova fato.
-
-## Alternativas consideradas
-
-RAG avançado como requisito de M3 foi rejeitado por impacto no roadmap.
-
-## Verificação
-
-Baseline FTS vs híbrido em dataset, sem vazamento de fontes privadas.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

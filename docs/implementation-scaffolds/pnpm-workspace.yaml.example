@@ -1,0 +1,4 @@
+# Exemplo para M0; não há apps implementados neste pacote
+packages:
+  - "apps/web"
+  - "packages/api-client"

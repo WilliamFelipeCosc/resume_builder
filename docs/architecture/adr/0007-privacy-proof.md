@@ -1,23 +1,5 @@
-# ADR-007 — Fatos auditáveis e privacidade por padrão
+# ADR-007 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-007](ADR-007.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Arquivos, dados profissionais e evidências podem conter conteúdo confidencial; IA pode produzir texto persuasivo não fundamentado.
-
-## Decisão
-
-Entidades com proveniência e status de confirmação; staging e aprovação para alterar fatos; importados privados por padrão; filtro de autorização antes de recuperar/enviar contexto.
-
-## Consequências
-
-Mais implementação de policy e revisão, porém reduz alucinação factual e vazamento.
-
-## Alternativas consideradas
-
-Atualização automática da KB por inferência foi rejeitada.
-
-## Verificação
-
-Testes negativos de acesso e conflitos; nenhuma mudança de fato confirmed sem aprovação.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

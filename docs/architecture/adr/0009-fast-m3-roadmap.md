@@ -1,23 +1,5 @@
-# ADR-009 — Vertical Slices com M3 acelerado
+# ADR-009 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-009](ADR-009.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-O usuário prioriza obter logo um currículo adaptado a uma vaga sem esperar toda a V1.
-
-## Decisão
-
-M0 mínimo, spike MCP M0.5, KB Core M1, Resume Core M2, e M3 obrigatório: import URL/texto/imagem, requirements, matching, AI ChangeSet/review e PDF. Funcionalidades restantes até M7.
-
-## Consequências
-
-Primeira entrega útil mais cedo; necessidade de evoluir contratos/infra sem comprometer o fluxo.
-
-## Alternativas consideradas
-
-Foundation-first completo ou browser agent-first foram descartados.
-
-## Verificação
-
-AC-M3-* devem passar antes de declarar M3 concluído; M1/M2 continuam expandindo na V1.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

@@ -1,33 +1,37 @@
 # Resume Studio
 
-**REQ-RES-001..005 — DECIDED.** Currículo é documento estruturado, nunca HTML editado livremente como fonte de verdade.
+**Marcos:** M2 core, M3 tailoring, M6 editor completo; ADR-015.
 
-## Separação
+## Fonte semântica
 
-`ResumeDocument` contém seções e referências a Career KB; `Template` define layout; `Presentation` define tokens de estilo, densidade, fontes, seções visíveis e paginação. A renderização React deriva do modelo e não o inverso.
+`ResumeDocument` identifica o perfil, fatos/Statements selecionados, ordem de seções, layout/template e estilo. Conteúdo, layout e CSS são separados; nenhuma edição de currículo altera silenciosamente `CareerFact` na KB. Uma adaptação gera `ChangeSet` → revisão humana → `ResumeRevision` imutável (com parentRevisionId e opcional jobSnapshotId).
 
-## Entrega M2 mínima
+## Templates aprovados
 
-Selecionar informações aprovadas da KB; template ATS de uma coluna; editor por formulário com preview; gerar um PDF e verificar que o texto é extraível, ordenado e referenciado pela revisão exata. Vincular revisão a JobSnapshot quando houver. Não aguardar drag/drop para liberar M3.
+1. **Padrão:** `resume-reference-slate-sidebar-v1`, reproduz composição do `Curriculo.pdf` (595,92 × 924 pt, sidebar à direita `#99A2B3`, linha do tempo, títulos caixa alta, corpo Roboto e nome serifado com fallback legal). Referências em `assets/resume-templates/resume-reference-slate-sidebar-v1/`.
+2. **Alternativo:** `ats-linear-v1`, leitura em uma coluna, sem tabelas/ícones essenciais para significado. Não prometer compatibilidade ATS universal.
 
-## M3
+Ambos usam a **mesma** fonte semântica; a ordem de leitura deve ser validada em PDF extraído, inclusive quando o layout visual tem duas colunas. Ao crescer conteúdo, paginação sem cortes/overlap; não reduzir fonte indefinidamente.
 
-IA propõe alteração textual/estrutural baseada em requisitos e fatos, sem inventar habilidades. Mostrar diff, fontes, impacto de paginação, aprovar/rejeitar, persistir nova `ResumeRevision`, exportar PDF após revisão. O fluxo end-to-end define conclusão de M3.
+## M2 mínimo utilizável
 
-## V1 completa (M6)
+Formulário para seleção/ordem de Profile, Experience, Statement, Skill, Education, Language, com preview React e exportação Playwright **Python**/Chromium, validando PDF, tamanho, texto extraível e revisões básicas. `private/imports/resume_document_seed.json` é exemplo inicial **pendente de revisão**, não fato confirmado. MVP não exige drag-and-drop nem chat completo.
 
-Inline edit controlado, drag-and-drop de seções/experiências/bullets, propriedades visuais, zoom, preview de páginas, templates ATS e visual, CSS override delimitado, undo/redo, ChangeSets parciais, rollback; exportar PDF ATS/visual, DOCX e HTML. Sem executar JS arbitrário de templates na V1.
+## M3 adapting to vacancy
 
-## IA contextual
+- Selecionar template e `JobSnapshot`; recuperar apenas fatos confirmados ou autorizados explicitamente.
+- IA sugere operações tipadas em `ChangeSet` (ex.: `reorder`, `replace_text`, `include_fact`, `remove_fact`), com `evidenceIds` por alteração. Nada de métricas inventadas.
+- UI mostra texto anterior/novo, justificativa, fonte e lacunas. Aprovar ou rejeitar por operação; aplicar só a operações aprovadas e gerar nova `ResumeRevision`.
+- Exportar PDF e vincular a `JobSnapshot` e relatório de validação. Reedições não mudam revisão já exportada.
 
-Ações inline (reescrever, reduzir, destacar, adaptar à vaga) → chat sobre seleção, revisão e job → sugestões por evento (importação de vaga, gaps, paginação). Toda mutação é `ChangeSet` tipado + diff; o histórico de conversa vincula prompts a propostas sem alterar automaticamente fatos da KB.
+## M6 — recursos restantes da V1
 
-## Validações
+Editor híbrido de painéis/inline, drag-and-drop de seções/bullets, preview/zoom/paginação, CSS override controlado, undo/redo/rollback, templates adicionais (decisão aberta), DOCX via lib Python validada e HTML estático, chat contextual e sugestões em eventos.
 
-- Textos em PDF/DOCX extraíveis e ordem coerente com modelo.
-- Paginação e quebra de seções inspecionadas; overflow sinalizado.
-- Reportar adequação ATS por checks rastreáveis, sem nota universal.
-- Export vinculado exatamente a `resumeRevisionId` e `jobSnapshotId` quando aplicável.
-- Modificações visuais não mudam a semântica dos dados canônicos.
+## Ferramenta de referência vs implementação definitiva
 
-**Nota:** Playwright é permitido para renderizar/validar documentos e E2E UI, mas proibido no app como executor de preenchimento de vagas.
+`generate_resume.py` foi preparado para reproduzir **um documento específico** lendo `career_kb_seed.json`; não conhece todas as revisões, templates ou paginação dinâmica. Serve apenas para comparar o estilo, sem passar por serviços ou autorização. Na implementação definitiva, o serviço de rendering consome `ResumeDocument` e tokens do template, não a base privada crua.
+
+## Qualidade
+
+AC-M2-001/002/003 e AC-M3-004/005; regressão visual da referência, screenshots sem PII no CI, extração de texto, ordem de leitura, PDF com múltiplas páginas e proteção contra overflow. Se a saída não couber, paginar e registrar warnings.

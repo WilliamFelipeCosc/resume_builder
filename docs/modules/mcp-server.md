@@ -1,26 +1,23 @@
-# Servidor MCP para agentes CLI externos
+# MCP Server e agentes externos
 
-**REQ-MCP-001..003 — DECIDED.** O aplicativo fornece informações e serviços; não inicia nem controla browsers. Seus consumidores são agentes CLI externos, sujeitos à interoperabilidade real de cada cliente.
+**M0.5 spike, M4 full.** SDK **Python** oficial, versão a validar e pin após testes com clientes.
+
+## Princípios inegociáveis
+
+MCP-first **sem** navegador integrado. O agente externo controla browser, sessões e envio, com permissões próprias; aplicação não garante impedir ações fora do MCP. MCP oferece dados/contexto mínimo, sugestões opcionais e reportes; não expõe shell, SQL genérico, arquivos arbitrários nem `submit_application`.
 
 ## Transportes
 
-`stdio` implementado primeiro (spike M0.5), Streamable HTTP adicionado até M4; ambos expõem a mesma superfície de ferramentas, schema e regras. O MCP TypeScript SDK v2 atual publica pacote servidor `@modelcontextprotocol/server` e docs de ambos os transportes; verificar release/compatibilidade no desenvolvimento. `stdio` reserva stdout exclusivamente ao JSON-RPC; logs em stderr.
+`stdio` no M0.5: stdout exclusivamente JSON-RPC/MCP; logs stderr, processo com capabilities limitadas. Streamable HTTP em M4, só loopback com auth/Host/Origin/CSRF quando aplicável e proteção de rebinding. O catálogo de ferramentas deve comportar ambos; contratos versionados e compatibilidade em pelo menos dois clientes CLI.
 
-## Ferramentas V1
+## Ferramentas
 
-Ver [contratos MCP](../contracts/mcp-tools.md). Consulta autorizada de contexto, evidências, job snapshot, currículo e respostas; sugestão de resposta via IA opcional; reportes de progresso, impedimentos e resultados de candidatura **relatados pelo agente**. Registrar clientId/executionId/correlationId, hash/versão e idempotência.
+Ler `docs/contracts/mcp-tools.md` para catálogo completo. Em M0.5 basta fake `get_application_context` e `report_application_progress`; em M4 entram context, evidências, currículo, requisitos, respostas aprovadas, suggestions e reportes. Inputs restritos a applicationId/jobSnapshotId e capacidades autorizadas; carregamento progressivo.
 
-## Limites de autoridade
+## Estado reportado
 
-- MCP **não** fornece `submit_application`, shell arbitrário, SQL, credenciais do Chrome, cookies, paths arbitrários ou alteração irrestrita de fatos.
-- `report_application_result` cria um evento `reported_by_agent`; não muda silenciosamente `Application.recruitmentStatus` para submetido confirmado.
-- Aplicativo não garante impedir envio por agente com browser independente. Instruções de envio manual/aprovação devem ser fornecidas também ao agente/usuário, mas são um contrato operacional, não um sandbox.
-- V2: workflow formal de aprovação na interface, com pause/resume quando clientes permitirem, sem promessas de bloquear atos externos.
+`reported_submitted` ≠ `confirmed_by_user` ≠ `verified_by_evidence`; replay com idempotencyKey não duplica evento. Reportes são gravação de progresso, sem workflow formal de aprovação/retomada via MCP (V2).
 
-## Segurança
+## Validação
 
-Escopo por candidatura e tipo de dado, autenticação/capability por cliente, requisições limitadas, reautorização da ação sensível. Para HTTP: loopback, host/origin check, proteção DNS rebinding e autenticação. Para stdio: processo invocado localmente, credenciais de menor privilégio, sem token em args/logs e endpoints restritos. Nunca expor documentos privados por padrão, inclusive por Resources.
-
-## Compatibilidade
-
-M0.5: teste com Hermes e um segundo cliente CLI em formulário fictício (leitura + relatório). M4: matrix stdio/HTTP, Resources/Prompts, schemas, erros, autenticação, dados truncados, cliente desatualizado, duplicação de reporte. Não afirmar suporte prático do Kimi/Claude/etc. sem testes.
+Contrato dos tools/resources/prompts, errors tipados, versions, limite payload/tokens, PII leakage, tratamento de prompt injection, falhas de provider e cross-client tests. Formulário fake conduzido apenas pelo agente externo em M0.5.

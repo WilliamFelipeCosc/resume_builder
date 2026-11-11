@@ -6,17 +6,21 @@
 
 | ID | Marco | Critério verificável |
 |---|---|---|
-| AC-M0-001 | M0 | Web/API/Worker iniciam, migration SQLite e job BullMQ passam em teste |
+| AC-M0-001 | M0 | Web/FastAPI/Worker Python iniciam, migration Alembic SQLite e job Dramatiq passam em teste; contrato OpenAPI válido |
 | AC-M0-002 | M0 | Proteção mínima bloqueia consulta não autorizada e logs não incluem secrets |
 | AC-M05-001 | M0.5 | `stdio` lista/usa tools em Hermes e outra CLI com dados sintéticos, evidências de execução |
 | AC-M05-002 | M0.5 | Cliente externo preenche formulário fake sem browser integrado no app |
-| AC-M1-001 | M1 | CRUD/vínculos KB preservam provenance, privacy e fact revisions |
-| AC-M2-001 | M2 | Currículo gerado com template ATS, texto extraível, revisão e PDF |
+| AC-M1-001 | M1 | CRUD/vínculos de Profile, Experience, Statement, Project, Skill, Education e Language preservam provenance, privacy e fact revisions |
+| AC-M1-002 | M1 | Importação `career_kb_seed.json` cria staging `pending_review` privado, sem confirmar fatos, com deduplicação por documento e indicação de ambiguidades históricas |
+| AC-M1-003 | M1 | Aprovação/rejeição individual e em lote da Staging Area audita fonte, responsável, ação e reversão sem alterar o PDF de origem |
+| AC-M2-002 | M2 | `ResumeDocument` separa conteúdo de estilo; `resume-reference-slate-sidebar-v1` preserva identidade visual da referência e oferece `ats-linear-v1` |
+| AC-M2-003 | M2 | Exportação com Playwright Python + Chromium tem ordem textual válida e não corta/sobrepõe conteúdo; resultado versionado |
+| AC-M2-001 | M2 | Currículo gerado nos templates visual padrão e ATS alternativo, com texto extraível, revisão e PDF sem cortes |
 | AC-M3-001 | M3 | URL acessível, texto manual e imagem legível são importados e geram JobSnapshot |
 | AC-M3-002 | M3 | URL bloqueada e screenshot incompleto são tratados com fallback e lacunas explícitas |
 | AC-M3-003 | M3 | Parser extrai requisitos em fixture versionada; matching cita evidências existentes |
 | AC-M3-004 | M3 | IA propõe ChangeSet fundamentado, usuário pode aceitar/rejeitar e comparar diff |
-| AC-M3-005 | M3 | PDF exportado liga JobSnapshot, ResumeRevision e validation report corretos |
+| AC-M3-005 | M3 | PDF exportado (visual ou ATS) liga JobSnapshot, ResumeRevision e validation report corretos; preview e paginação testados |
 | AC-M3-006 | M3 | Informação privada não aparece em contexto não autorizado; afirmação inventada conhecida é barrada |
 | AC-M4-001 | M4 | Contratos MCP funcionam em stdio e HTTP com schemas e errors estáveis |
 | AC-M4-002 | M4 | Reports são idempotentes, identidade/capability verificadas, result `reported` não `confirmed` |
@@ -30,6 +34,16 @@
 | AC-M7-004 | M7 | Observabilidade, Sentry opt-in, retenção/redaction e auditoria demonstrados |
 | AC-M7-005 | M7 | Web local e Tauri/RPM executam em Linux suportado, `doctor` diagnostica dependências |
 
+## Matriz de testes por runtime
+
+| Runtime | Testes obrigatórios ao longo da V1 | Ferramenta |
+|---|---|---|
+| Python API/domínio | unitários, integração SQLite/Alembic, escopos e políticas | Pytest |
+| Python Worker | filas, retries, idempotência, timeouts | Pytest com broker de teste/isolado |
+| MCP Python | contratos `stdio` e HTTP, clientes diferentes, erros, auth | Pytest e testes de compatibilidade |
+| Frontend | componentes, edições, revisão de ChangeSet | Vitest |
+| UX/export | E2E, paginação, regressão visual, texto PDF | Playwright Test e checks Python |
+
 ## Quality Gates globais
 
 1. **Security hard gate:** sem vulnerabilidade conhecida nos cenários testados que exponha confidencial/secret ou conceda capability não autorizada; sem creds em log/test artefact; reviews de segurança antes de ativar HTTP/telemetria.
@@ -40,3 +54,14 @@
 6. **Evidence gates:** resultados de testes reais e simulados identificados separadamente, com versões, comandos, registros e limitações.
 
 A V1 não exige cobertura percentual de código arbitrária; medir cobertura como indicador, priorizando fluxo/riscos. Nenhum teste envia candidatura real automaticamente.
+
+## Rastreabilidade rápida de M0–M3
+
+| Requisito | Aceites | Módulo |
+|---|---|---|
+| FastAPI/SQLAlchemy/Dramatiq | AC-M0-001/002 | architecture/overview |
+| Career KB e currículo importado | AC-M1-001/002/003 | career-kb |
+| Layout PDF de referência e ATS | AC-M2-001/002/003 | resume-studio |
+| URL/texto/imagem; tailoring revisável | AC-M3-001…006 | job-intelligence; resume-studio |
+
+**Nota:** metas numéricas de IA/latência ainda são decisões abertas, não inventar thresholds para declarar release.

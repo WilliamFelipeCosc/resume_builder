@@ -1,0 +1,10 @@
+# Exemplo não resolvido; não é um pyproject.toml do app
+[project]
+name = "resume-builder-backend"
+version = "0.0.0"
+description = "Future FastAPI/SQLAlchemy/Dramatiq backend; NOT IMPLEMENTED"
+requires-python = ">=3.11"
+dependencies = [] # Resolve packages/versions explicitly during M0
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]

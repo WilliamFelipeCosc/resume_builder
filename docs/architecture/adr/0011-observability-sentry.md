@@ -1,23 +1,5 @@
-# ADR-011 — Pino, OpenTelemetry e Sentry opt-in
+# ADR-011 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-011](ADR-011.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Problemas de extração, tokens, filas e reportes MCP exigem logs e diagnósticos, sem expor CVs.
-
-## Decisão
-
-Pino JSON + auditoria SQLite; OTel tracing/métricas com Jaeger opcional; Sentry SDK opt-in e sanitizado.
-
-## Consequências
-
-Instrumentação deve evitar spans duplicados e PII em telemetria; self-hosted Sentry não é exigido.
-
-## Alternativas consideradas
-
-Logs simples somente ou stack Grafana completa obrigatória foram descartados.
-
-## Verificação
-
-Traces correlacionados, reportes auditáveis, Sentry desabilitado por padrão e teste de redaction.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

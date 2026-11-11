@@ -1,28 +1,46 @@
-# Career Knowledge Base
+# Career Knowledge Base (KB)
 
-**REQ-KB-001..004 — DECIDED.** O objetivo é um perfil profissional factual, consultável e rastreável, independente de documentos de currículo.
+**Marcos:** M1 Core, M6 importadores completos. **Fonte:** `PROJECT_SOURCE.md` §4.1; ADR-003/007/014.
 
-## Entidades
+## Domínio
 
-Experiences (cargos/períodos/responsabilidades); Projects (artefatos, contexto, papel); Achievements (resultados e impactos, métricas quando comprovadas); Skills (competência e evidência de uso); Evidence (trechos, links, documentação e proveniência); SourceDocuments e relações. Evidência pode estar ausente, mas fatos sem comprovação devem ter status explícito.
+`Profile`, `Experience`, `Statement`, `Project`, `Achievement`, `Skill`, `Education`, `Language`, `Evidence`, `SourceDocument`. Entidades com IDs, versões, proveniência e classificação de privacidade; relação de muitos-para-muitos onde útil (skill↔experiência/projeto, evidência↔fato). Não copiar descrições para objetos diferentes sem manter referência à fonte.
 
-## Fluxo MVP→V1
+`Statement` representa cada bullet/declaração e pode ser responsabilidade, atuação, resultado ou texto editorial; versões editadas preservam original. `Skill` separa termo explicitamente listado, menção e competência confirmada. `Education.ongoingAsOfSourceDocument` não implica `currentlyOngoing=true`.
 
-**M1 core:** CRUD, links, fontes fornecidas manualmente, privacy e `confirmed/unverified`, atualizações com histórico simples.
+## Fluxo M1 obrigatório
 
-**V1 expandida (M6):** importar PDF, DOCX, MD, TXT, JSON, diretórios selecionados, vault Obsidian local, GitHub (repos/docs) e exportação do LinkedIn fornecida pelo usuário. Não fazer scraping não autorizado. Adapter extrai texto; IA propõe fatos e links; dedup/merge e conflito são revisados na Staging Area antes de qualquer commit canônico.
+1. Criar `SourceDocument` privado para `Curriculo.pdf`, hash e página/versão.
+2. Validar arquivo `private/imports/career_kb_seed.json` como **importação sugerida**, nunca estado final do banco.
+3. Normalizar entidades, identificar duplicações por hash e correspondências por IDs/nome/período; preservar texto original.
+4. Exibir Staging Area: `pending_review`, decisão `create`, `update`, `link` ou `ignore`, fonte, diff, classificação e evidência.
+5. Aplicar revisão individual/lote; registrar quem/como/quando confirmou; commit idempotente, trilha de auditoria e undo.
+6. Expor consultas autorizadas para Resume Studio e Job Intelligence; ocultar contatos privados em contextos não autorizados.
 
-## Regras
+Os JSONs extraídos registram 1 perfil, 4 experiências, 12 statements, 2 formações, 3 idiomas, 27 skills/termos (10 explicitamente listados), 1 projeto com rótulo editorial e 2 realizações. Contagens são do seed, não significam fatos confirmados.
 
-- `Extraction confidence` não representa veracidade factual; usar fontes, estados e revisão humana.
-- Não substituir fatos confirmados sem aprovação explícita; preservar versão anterior e log.
-- Data de experiência não pode ser inferida silenciosamente a partir de texto ambíguo; sinalizar falta.
-- Ingestão sensível recebe classificação `private`/`confidential` por padrão até revisão; autorização para sharing não é implícita.
-- Documentos originais armazenados em filesystem com hash; relações apontam para versões estáveis.
-- Alterações em fatos invalidam/atualizam projeções de documentos e índices, sem reescrever currículos já exportados.
+## Ambiguidades que não podem ser corrigidas automaticamente
 
-## Acceptance examples
+- Experiências com períodos simultâneos; preservar intervalo original.
+- Universidade indicada como em andamento na data do PDF; atualidade requer revisão.
+- Proficiência em idiomas deve permanecer como declarada até validação.
+- `Microsoft Azure` na referência está em contexto de gestão de projetos, não como prova de cloud.
+- Website de empresa em quatro dias é descrição textual sem outras métricas; não acrescentar números.
+- Título do projeto derivado é **editorial**, não identificador oficial.
 
-- Importação repetida propõe `link/update/ignore` e não duplica fatos confirmados.
-- Conflitos de datas bloqueiam commit sem revisão; associação de Achievement ao Project preserva evidência.
-- MCP não lê fonte confidencial sem política que autorize aquela candidatura e task.
+## Recursos V1 posteriores (M6)
+
+Adapters para PDF/DOCX/MD/TXT/JSON; diretórios locais selecionados, Obsidian vault local, GitHub repositories/docs e dados exportados do LinkedIn pelo usuário, sem scraping não autorizado. Dedup/merge com Staging Area, import history, rollbacks e policy de origem.
+
+## APIs funcionais (conceituais)
+
+- `POST /api/imports` → lote privado e candidates;
+- `GET /api/imports/{id}/candidates`, `POST /api/imports/{id}/decisions` → review/commit;
+- `GET/POST/PATCH /api/career/{entity}` → CRUD com versões/escopos;
+- `GET /api/evidence/{id}` → dados mínimos autorizados.
+
+Paths não são contratos finais: formalização em `docs/contracts/` e OpenAPI após implementação.
+
+## Testes / aceite
+
+AC-M1-001/002/003; importação repetida não duplica dados; sem PII em CI; `pending_review` não se torna `confirmed` sem ação explícita; proveniência é recuperável no diff.

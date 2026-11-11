@@ -11,7 +11,7 @@ M1 precisa fornecer fatos/IDs/proveniência e M2 o documento/export; **não** es
 - Career KB → ResumeDocument e AnswerEngine.
 - JobSnapshot → matching → retrieval autorizado → ChangeSet → ResumeRevision → export.
 - ApplicationContextService → MCP tools; MCP não deve conter lógica de domínio duplicada.
-- SQLite WorkItems → BullMQ; Redis pode ser reconstruído após restore.
+- SQLite WorkItems → Dramatiq; Redis pode ser reconstruído após restore.
 - Privacidade/autorização → toda leitura/IA/MCP/indexação.
 - M6 Retrieval híbrido → métricas de qualidade baseadas em M3 SQL+FTS.
 

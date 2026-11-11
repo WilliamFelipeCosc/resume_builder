@@ -1,23 +1,5 @@
-# ADR-005 — MCP stdio + Streamable HTTP; reportes V1
+# ADR-005 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-005](ADR-005.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Diferentes CLIs podem usar transporte e ciclo de vida distintos; o aplicativo precisa auditar resultados relatados.
-
-## Decisão
-
-Implementar stdio primeiro, adicionar HTTP seguro até M4, com Tools/Resources/Prompts compartilhados. V1 permite leitura autorizada e reportes; workflow de aprovação remota só na V2.
-
-## Consequências
-
-Dois adapters e matriz de compatibilidade; reportes não constituem verificação de envio.
-
-## Alternativas consideradas
-
-Stdio exclusivo ou HTTP-only foram rejeitados para V1.
-
-## Verificação
-
-Testes em dois clientes CLI, contratos equivalentes, autenticação HTTP/stdio, dedup reportes.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

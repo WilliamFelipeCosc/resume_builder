@@ -1,30 +1,28 @@
-# Resume Builder — Especificação do projeto
+# Resume Builder — pacote de documentação (2026-11-11)
 
-> Pacote documental de planejamento. **Não é uma implementação funcional.**
+**Estado:** documentação e artefatos de referência. **Nenhum software foi implementado ou migrado** por este pacote; `PROJECT_SOURCE.md` é a autoridade final das decisões aprovadas.
 
-## Por onde começar
+## Onde começar
 
-1. **[PROJECT_SOURCE.md](PROJECT_SOURCE.md)** — documento autocontido para ChatGPT Project, com decisões aprovadas e contexto essencial.
-2. **[docs/roadmap/milestones.md](docs/roadmap/milestones.md)** — roadmap em Vertical Slices, acelerado até o **M3**.
-3. **[docs/roadmap/acceptance-criteria.md](docs/roadmap/acceptance-criteria.md)** — critérios de aceite e Quality Gates.
-4. **[AGENTS.md](AGENTS.md)** — instruções independentes de harness para agentes de programação.
-5. **[docs/architecture/overview.md](docs/architecture/overview.md)** e **[docs/contracts/mcp-tools.md](docs/contracts/mcp-tools.md)** — arquitetura e contratos.
+1. [PROJECT_SOURCE.md](PROJECT_SOURCE.md) — escopo V1/V2, ADRs, roadmap consolidado.
+2. [AGENTS.md](AGENTS.md) — regras para agentes de programação.
+3. [docs/roadmap/milestones.md](docs/roadmap/milestones.md) e [acceptance-criteria.md](docs/roadmap/acceptance-criteria.md).
+4. [docs/architecture/overview.md](docs/architecture/overview.md) e [ADRs](docs/architecture/adr/).
+5. [docs/modules](docs/modules/) e [docs/contracts](docs/contracts/).
+6. [docs/decisions/open-decisions.md](docs/decisions/open-decisions.md) e [docs/references.md](docs/references.md).
 
-## Convenções da documentação
+## Privacidade — leia antes de copiar o pacote
 
-- `DECIDED`: aprovado durante a entrevista; obrigatório no escopo da versão indicada.
-- `PROPOSED`: detalhe sugerido, ainda sujeito a validação de implementação.
-- `OPEN`: decisão não tomada ou viabilidade ainda não demonstrada.
-- `DEFERRED`: explicitamente adiado para V2 ou etapa futura.
-- `SPIKE`: experimento de viabilidade; não é garantia de compatibilidade.
-- `REQ-...`: requisito rastreável; `AC-...`: critério de aceite; `ADR-...`: decisão arquitetural.
+No pacote de origem, `private/` contém PDF original, JSONs com contato e amostras de currículo. Esse diretório não foi importado para este repositório. **Não envie esse diretório ao Git, CI, issues ou provedores externos por padrão**. O `.gitignore` incluído exclui `private/`. Se desejar compartilhar a documentação, distribua apenas os arquivos públicos após inspecionar metadados e nomes. O ZIP completo é destinado a uso pessoal.
 
-A documentação modular detalha os assuntos; `PROJECT_SOURCE.md` é um **snapshot editorial autocontido** para uso em ChatGPT Project. Ao alterar requisitos, atualize a fonte modular e sincronize o resumo principal na mesma mudança.
+`assets/resume-templates/` contém CSS e especificações de estilo, sem os dados do currículo. O arquivo `generate_resume.py` é uma **ferramenta de referência**, não o renderer de produção; sua execução depende de JSON privado. Os artefatos em `private/` são amostras de um documento específico e **não representam dados confirmados no banco**.
 
-## O que não está incluído
+## Escopo da entrega
 
-Nenhum código executável de backend, frontend ou MCP foi implementado neste pacote. Exemplos de API e estruturas de diretório são contratos e propostas, não interfaces já disponíveis.
+Documentação da stack aprovada (FastAPI + SQLAlchemy 2 + Alembic, Dramatiq/Redis, React/Vite, pnpm/uv/justfile), Career KB, templates, vagas, IA, Answer Engine, MCP, tracking, retrieval, segurança, distribuição, contratos e ADR-001…015.
 
-## Fontes técnicas
+## Estado deste repositório
 
-Links de referência e pontos de verificação de versões estão em [docs/references.md](docs/references.md).
+Sincronizado com o pacote de 11/11 por decisão do proprietário. O kickoff de M0 está em entrevista; prioridade: chegar rapidamente à construção e exportação do currículo em M3. Veja [decisões e proveniência da sincronização](docs/specification-sync-2026-11-11.md) e [contexto de M0](.specs/features/m0-foundation/context.md). O manifesto público atual é verificável com `sha256sum --check MANIFEST.sha256`; o manifesto de origem de 04/11 está preservado em `docs/history/`.
+
+Os arquivos de documentação modular não disponíveis no contexto anterior foram **redigidos a partir do PROJECT_SOURCE.md**, não recuperados de um repositório implementado. As assinaturas de contratos são conceituais e demandam versionamento e testes antes de implementação.

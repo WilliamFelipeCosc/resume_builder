@@ -6,10 +6,10 @@
 
 | Nível | Ferramenta sugerida | Conteúdo |
 |---|---|---|
-| Unit | Vitest | Domínio, políticas, ChangeSets, schemas, dedup, scoring |
-| Integração | Vitest + SQLite/Redis de teste | Drizzle, migrations, filas, reindexação, auditoria |
-| UI E2E | Playwright Test | Editor, revisão, preview, upload, PDF |
-| MCP Contract | SDK client + fixtures | stdio/HTTP, tools/resources/prompts, autorização, versionamento |
+| Unit | Pytest (Python) / Vitest (frontend) | Domínio, políticas, ChangeSets, schemas, dedup, componentes |
+| Integração | Pytest + SQLite/Redis isolados | SQLAlchemy 2/Alembic, Dramatiq, reindexação, auditoria, contratos OpenAPI e cliente TS gerado |
+| UI E2E / export | Playwright Test e checks Python | Editor, revisão, preview, upload, PDF renderizado por Playwright Python/Chromium; extração, regressão visual e paginação dos templates visual/ATS |
+| MCP Contract | Pytest + SDK Python client + fixtures | stdio/HTTP, tools/resources/prompts, autorização, versionamento |
 | CLI Compatibility | Hermes + ao menos outro CLI | leitura + reporte com dados fictícios; logs de versão e limitações |
 | AI evals | runner local + datasets versionados | extraction F1, evidence precision, unsupported claims, schema validity |
 | Resiliência | fault injection controlado | Worker crash, Redis offline, retries, restore, replay report |

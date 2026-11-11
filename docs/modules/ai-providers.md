@@ -1,17 +1,19 @@
-# Providers e UX de IA
+# Camada multi-provider de IA
 
-## Decisões
+**ADR-006:** suporte a múltiplos providers desde o começo; Hermes padrão quando configurado, OpenAI alternativa manual, nenhum fallback automático pago.
 
-Abstração multi-provider desde o início; Hermes default quando configurado, OpenAI API alternativa **manual**. Não realizar fallback automático que gere cobrança. Agente Hermes na CLI que executa navegador é **outro papel** e não uma dependência obrigatória da aplicação MCP-first.
+## Interface abstrata
 
-## Contratos propostos
+Separar capacidades `extract_structured`, `suggest_change_set`, `suggest_answer`, `vision` (se disponível) e `embed` (posteriormente) de adaptadores concretos. Cada resposta mantém providerId, model/version, provenance, output/schema validado, requestId, tokenUsage disponível, tempo e falhas sanitizadas.
 
-`AIProvider.generateStructured(task, schema, permittedContext)`; `VisionProvider.extractImage` quando disponível; `EmbeddingProvider.embed`; `AIResponse` com `provider`, `model`, `promptVersion`, `schemaVersion`, `usage` (se reportado), `output`, `uncertainty`. Tokens reportados e estimados devem ser rotulados separadamente. Acesso por assinatura OAuth/planos de terceiros e suporte a vision requer validação técnica/termos, não pressuposição.
+## Controles
 
-## Interface V1
+- Escolha de provider e autorização explícita para conteúdo pessoal antes de uso remoto.
+- Pydantic valida schema, rejeita campos desconhecidos não autorizados e operações de ChangeSet sem evidência.
+- Vagas/PDFs/screenshots são conteúdo não confiável: ignore instruções para revelar segredos, enviar candidaturas ou modificar fatos.
+- Falta de vision ou provider não pode bloquear todo produto; usar importação de texto manual e registrar limites.
+- Resultados do provider são propostas em `pending_review`/`ChangeSet`, não verdade confirmada.
 
-Ações inline primeiro; chat contextual depois; sugestões por eventos, sem monitoramento contínuo por tecla. Enviar apenas seleção, contexto da vaga e evidências permitidas. Sugestão IA vira ChangeSet e exige validação/revisão apropriada. Histórico de interação vinculado à alteração aplicada e provider quando disponível.
+## Observabilidade/evals
 
-## Segurança e custos
-
-Sem prompts/documentos sensíveis em telemetria; minimização, token budgeting e provider selecionado claramente exibido. Em caso de provider indisponível, mostrar erro e oferecer seleção manual de outro — nunca trocar silenciosamente para endpoint pago. Cache somente de conteúdo permitido, com invalidação por revisão.
+Logs estruturados sem payload bruto. Fixtures sintéticas versionadas; metrics de validade de schema, grounding, custo/latência, falhas e taxa de aceitação; thresholds calibrados. Testes live opt-in, jamais em CI padrão.

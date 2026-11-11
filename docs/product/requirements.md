@@ -4,12 +4,12 @@ Status: `DECIDED` salvo quando marcado de outro modo. A implementação deve vin
 
 | ID | Requisito | Versão |
 |---|---|---|
-| REQ-KB-001 | Criar/editar Experience, Project, Achievement, Skill e Evidence relacionados | M1 |
+| REQ-KB-001 | Criar/editar Profile, Experience, Statement, Project, Achievement, Skill, Education, Language e Evidence relacionados | M1 |
 | REQ-KB-002 | Manter proveniência, status de confirmação, versões e privacidade | M1→V1 |
 | REQ-KB-003 | Importar PDF, DOCX, MD, TXT, JSON, diretórios, Obsidian, GitHub e exportações LinkedIn | V1 |
-| REQ-KB-004 | Staging Area e revisão de propostas de ingestão/dedup/conflitos | V1 |
+| REQ-KB-004 | Staging Area e revisão de propostas de ingestão/dedup/conflitos; importação inicial privada do currículo em pending_review sem confirmação automática | M1 mínimo→V1 |
 | REQ-RES-001 | Gerar ResumeDocument estruturado a partir da Career KB | M2 |
-| REQ-RES-002 | Preview + template ATS + exportação PDF, histórico/revisão | M2 |
+| REQ-RES-002 | Preview + template visual padrão resume-reference-slate-sidebar-v1 e alternativa ats-linear-v1 + exportação PDF, histórico/revisão | M2 |
 | REQ-RES-003 | Editor inline/drag-drop, estilo, templates e preview paginado | V1 |
 | REQ-RES-004 | ChangeSets com diff, aprovação e rollback | M3 mínimo→V1 |
 | REQ-RES-005 | Exportar PDF ATS/visual, DOCX e HTML com validação | V1 |
@@ -27,7 +27,7 @@ Status: `DECIDED` salvo quando marcado de outro modo. A implementação deve vin
 | REQ-SEC-001 | Política de privacidade antes de enviar dados ao MCP/provider | Desde M0 |
 | REQ-SEC-002 | Keyring, loopback, autenticação/origem/host, auditoria e rate limits | V1 |
 | REQ-DATA-001 | Backups locais automáticos, restore verificado e exportação portátil | V1 |
-| REQ-OPS-001 | Pino, OTel, Jaeger opcional, Sentry opt-in e métricas de agentes | V1 |
+| REQ-OPS-001 | structlog, OTel, Jaeger opcional, Sentry opt-in e métricas de agentes | V1 |
 | REQ-LIN-001 | Distribuir Web local e Tauri/RPM com instalação manual assistida | V1 |
 | REQ-QA-001 | Quality Gates, AI Evals e testes de contratos MCP com dois clientes | V1 |
 | REQ-V2-001 | Descoberta automática de vagas | V2 |

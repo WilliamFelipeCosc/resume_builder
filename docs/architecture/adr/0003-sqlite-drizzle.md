@@ -1,23 +1,5 @@
-# ADR-003 — SQLite + Drizzle
+# ADR-003 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-003](ADR-003.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Aplicação pessoal com entidades relacionadas, operações majoritariamente locais e necessidade de backups portáteis.
-
-## Decisão
-
-Persistência principal em SQLite/Drizzle, modo WAL e migrations; documentos binários no filesystem XDG.
-
-## Consequências
-
-Controle de escritores e backups consistentes; Redis não guarda fatos canônicos.
-
-## Alternativas consideradas
-
-Prisma ou PostgreSQL não serão dependências da V1.
-
-## Verificação
-
-Testes de transações, migrations, concorrência básica e restore com manifest.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

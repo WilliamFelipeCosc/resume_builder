@@ -1,45 +1,65 @@
-# Arquitetura de software
+# Arquitetura — Visão geral
 
-## Estilo e fronteiras (DECIDED)
-
-Monólito modular em NestJS, React/Vite no browser, Worker Node separado com BullMQ/Redis, SQLite/Drizzle e filesystem local. Tauri reutiliza a mesma interface React; MCP Server independente como entrada externa para Application Services. Sem orquestração de navegador no backend.
+**Status:** DECIDED conforme ADR-001…015; detalhes de implementação sujeitos a contrato e teste. Prioridade: primeira experiência utilizável em M3.
 
 ```text
-Web/Tauri --> API/Services --> DB/Filesystem
-                        \--> Redis/BullMQ --> Worker --> AI/Document adapters
-CLI agents --> MCP stdio/HTTP --> Authorized Application Services --> DB/AI/KB
-CLI agents --> browser controlled independently of Resume Builder
+[React/Vite/TypeScript] -- REST/OpenAPI --> [FastAPI / Services] -- SQLAlchemy --> [SQLite WAL]
+           |                                    |                    |
+  [Tauri Desktop na V1]                        |                    +--> [XDG Files]
+                                                +--> [Redis] --> [Dramatiq Python Worker]
+                                                +--> [Hermes / OpenAI explicit AI adapters]
+                                                +--> [SQL + FTS5/BM25 Retrieval]
+             [MCP Python stdio/HTTP] -- authorized services --^
+                        ^
+           [External Hermes/Codex/Claude/Kimi] --> [Browser externo e sites de vagas]
 ```
 
-## Fronteiras internas
+## Componentes
 
-- **Domain:** entidades, invariantes, políticas; não importa SDK de LLM/browser.
-- **Application Services:** orquestram casos de uso, UoW/transações, permissões, auditoria.
-- **Adapters:** SQLite, Redis, filesystem, Hermes, OpenAI, formatadores, extractors, MCP transports.
-- **API:** REST + SSE para eventos relevantes; validação, autenticação local e observabilidade.
-- **MCP:** mapeia Tools/Resources/Prompts para Application Services com escopo; não implementa lógica de negócio duplicada.
-- **Worker:** ingestão, geração de documentos, matching/IA e tarefas; retries condicionados a idempotência e status.
+- **Web:** React, TypeScript, Vite. Formulários, Staging Area, preview, diff/approval, tracking. Cliente TS gerado de OpenAPI.
+- **API:** FastAPI/Pydantic. Autorização por operação e serviço, validação em runtime, Application Services não acoplados aos adaptadores HTTP.
+- **Core Python:** domain services sem FastAPI/transport; políticas de privacidade e proveniência em fronteiras de persistência, retrieval, IA e MCP.
+- **Persistência:** SQLite local, WAL, SQLAlchemy 2, migrações Alembic serializadas, arquivos em XDG e backups consistentes.
+- **Worker:** Dramatiq + Redis, jobs identificados e idempotentes; retries controlados e limites de recurso; resultados importantes sempre persistidos em SQLite (Redis não é fonte canônica).
+- **MCP:** processo Python via `stdio` no M0.5 e Streamable HTTP antes do término da V1; chama serviços autenticados, sem SQL/shell genéricos e sem controle de navegador. Testes com dois clientes.
+- **Renderer:** `ResumeDocument` estruturado + tokens de template; Playwright Python/Chromium **somente** para exportar PDF do HTML local; DOCX/HTML em M6.
+- **IA:** providers explicitamente selecionados, Hermes padrão quando disponível, OpenAI manual, sem fallback automático pago. Prompt injection de vagas/documentos é tratado como entrada não confiável.
 
-## Pacotes iniciais propostos (PROPOSED)
+## Composição de pacotes proposta (não executável ainda)
 
 ```text
-apps/web/ apps/api/ apps/worker/ apps/mcp-server/ apps/desktop/
-packages/domain/ packages/contracts/ packages/database/
-packages/ai/ packages/career-kb/ packages/resumes/
-packages/job-intelligence/ packages/application-context/
-packages/application-answers/ packages/mcp-contracts/
-packages/documents/ packages/ui/ packages/config/
-infra/compose.yaml tests/fixtures/ tests/ai-evals/
+apps/web/                       # React/Vite
+apps/desktop/                   # Tauri no M7
+backend/api/                   # FastAPI routers/adapters
+backend/core/                  # domain + application services
+backend/worker/                # Dramatiq
+backend/mcp_server/            # stdio/HTTP MCP
+backend/migrations/            # Alembic
+packages/api-client/           # TS gerado de OpenAPI
+assets/resume-templates/       # spec/CSS/templates
+private/                       # dados pessoais locais (não versionados)
+docs/                          # contratos, módulos, ADRs
+PROJECT_SOURCE.md, AGENTS.md
+pyproject.toml, uv.lock, pnpm-workspace.yaml, justfile # futuros artefatos da implementação
 ```
 
-Não criar pacotes vazios sem consumidores reais. O objetivo é reduzir acoplamento, não maximizar quantidade de packages. Dependências: `domain` sem imports de infra; adapters dependem de portas; UI chama API; MCP chama cases de aplicação.
+Não afirmar que os arquivos de configuração futuros ou comandos de desenvolvimento já existem. O pacote entregue contém a documentação, não um monorepo executável.
 
-## Concorrência e confiabilidade
+## Fluxos críticos
 
-API/Worker compartilham SQLite no mesmo host (WAL, busy timeout e transações curtas). Redis executa filas, **não** substitui o banco como estado canônico. Persistir `WorkItem`/eventos de domínio para reconciliar tarefas após reboot/restore. Retries só em ações seguras ou idempotentes. Uma candidatura externa nunca é automaticamente reenviada pelo aplicativo.
+1. Importação: source privado → parser → normalização → Staging Area `pending_review` → revisão → `CareerFact` confirmado/auditoria.
+2. Currículo: facts permitidos → `ResumeDocument` → `ResumeRevision` → HTML renderizado → PDF validado.
+3. Vaga: URL/texto/imagem → `JobSnapshot` → `JobRequirement[]` → matching explicável → `ChangeSet` → aprovação → PDF associado.
+4. MCP: cliente externo autorizado → `ApplicationContextService` → evidências minimizadas → relato idempotente não confirmado de envio.
 
-## Decisões de integração
+## Limites de transação
 
-Hermes pode representar duas integrações separadas: (1) provider para tarefas de IA **internas**; (2) **agente CLI externo** cliente MCP. Não confundir capacidades, autenticação, custos ou permissões. A API OpenAI é alternativa **manual**, não fallback silencioso.
+Commit SQLite com audit trail para revisão de fatos, revisões de currículo, ChangeSets e reports; manter vínculos/hash a arquivos sob disciplina de escrita atômica e recuperação. Locks/transactions para migrations e escritor único; não assumir que WAL permite vários escritores simultâneos. Jobs reexecutados não podem duplicar revisões ou sobrescrever aprovações.
 
-Consulte [ADR-004](adr/0004-mcp-external-execution.md) e [MCP](../modules/mcp-server.md).
+## Observabilidade e segurança
+
+`structlog` JSON, OTel/Jaeger opcionais, Sentry opt-in sanitizado, auditoria de domínio separada de log. Rede loopback e autenticação adequada; `Origin`/`Host`, CSRF aplicável, limitação de payload/rate limit e DNS rebinding. Segredos no keyring. Dados externos e prompts são não confiáveis.
+
+## DoD do MVP
+
+Ver `../roadmap/acceptance-criteria.md` — o M3 precisa de importação por URL/texto/screenshot com fallbacks, matching fundamentado, revisão, seleção visual/ATS, PDF versionado e privacidade testada. MCP completo e embeddings não são pré-requisitos de M3.

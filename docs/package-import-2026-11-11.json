@@ -1,0 +1,248 @@
+{
+  "source": "/home/williamf/Documentos/Projects/resume_builder_spec/",
+  "date": "2026-11-11",
+  "excluded": [
+    "private/",
+    "old/",
+    "PACKAGE_MANIFEST.json"
+  ],
+  "note": "Hashes da fonte pública no momento da importação; adaptações locais documentadas em specification-sync-2026-11-11.md. MANIFEST.sha256 na raiz verifica o conteúdo público final do repositório.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sourceSha256": "5f5a0a051c3fe965f61d38654a6175d58145004072b0f916a88560b4a27d76bf"
+    },
+    {
+      "path": "ARQUIVOS_E_PROVENIENCIA.md",
+      "sourceSha256": "53c2608b388c3c6d6d39c1c3ac03f6d5e890321a007760b8146ae81ad947fd66"
+    },
+    {
+      "path": "PROJECT_SOURCE.md",
+      "sourceSha256": "7676abf9612bd92dc2bab45da1d06f04926b46177a956a65daed27e35c891d33"
+    },
+    {
+      "path": "README.md",
+      "sourceSha256": "9f801e0c01a1e22b28fbfff22f413ef6fd7a9625feb124007672d2ce990935b8"
+    },
+    {
+      "path": "assets/resume-templates/README.md",
+      "sourceSha256": "cecef6104fe05e5ec4d43140cf155e137a3c6ad7e0f5a20ae262ab75092dcb68"
+    },
+    {
+      "path": "assets/resume-templates/ats-linear-v1/README.md",
+      "sourceSha256": "e36f11413a25539b1e4bbfdb1a15b7af5752ddeac1606e5738a4a37e2cb58a84"
+    },
+    {
+      "path": "assets/resume-templates/ats-linear-v1/template.css",
+      "sourceSha256": "eb66614dfa2eb6fb01a340ffa398448f45bb1a0320d0064ba268ae609eee7c57"
+    },
+    {
+      "path": "assets/resume-templates/resume-reference-slate-sidebar-v1/README.md",
+      "sourceSha256": "682b4d9c3cbf714d91640dbf1ec6c7c993907a3d080a04dc7add88e1bb8d55e0"
+    },
+    {
+      "path": "assets/resume-templates/resume-reference-slate-sidebar-v1/generate_resume.py",
+      "sourceSha256": "663deffd225491e13c14068e6bf267459724839b0fbc13bc53438bdbb815e642"
+    },
+    {
+      "path": "assets/resume-templates/resume-reference-slate-sidebar-v1/resume_template.css",
+      "sourceSha256": "175dfbc74f2a7d2e0ff7a6b30fe6fd089f2e9c7ec821d18108419595b35622fe"
+    },
+    {
+      "path": "assets/resume-templates/resume-reference-slate-sidebar-v1/resume_template_spec.json",
+      "sourceSha256": "5285dff63b1a12f5308b29dc5b2d20e42322f8f760b298a9d8533d8429e8f473"
+    },
+    {
+      "path": "docs/README.md",
+      "sourceSha256": "badbfe3a66f53bc438ab565d939fcb42d0d30f81774b382e12519f530aef608f"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-001.md",
+      "sourceSha256": "4c2249bdbeb4ade7a646ea4108962b0d6fa732b881d70051d8d7190a92cb9219"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-002.md",
+      "sourceSha256": "3551cc8e77afd48f011e592238819d71855bc3e1c36b5d00d8c14b56ca65519e"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-003.md",
+      "sourceSha256": "d57089ff6f8075ff9587693c05041d3598640716795928e9c96f7866c7237d83"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-004.md",
+      "sourceSha256": "48a1abeeef66d2437644da2e0174738342d0fe273a9e7bf8689d07a187348b7f"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-005.md",
+      "sourceSha256": "01ba765bb9bda7128483efbca2552a7eeaca7ad23fbc2f0d7720832b0cb88ae5"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-006.md",
+      "sourceSha256": "d21ed23d6b18184625d2f92a733811678d74f461e46f99deebf1fe4eb5d7e591"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-007.md",
+      "sourceSha256": "2408ef66e07ea320980a25fc9ab10e3deb6544542247f4cf1e72b9b7fa811c97"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-008.md",
+      "sourceSha256": "4628814a74ea14e4ac3c7487e1c13ab83b30cae96a57c991c92ae5a1ccd9fb75"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-009.md",
+      "sourceSha256": "8090b0497f73b066b2fed50ec306f3bc74c7c83c301d11d0643afaafd3bc8d24"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-010.md",
+      "sourceSha256": "0f4f46fe839cd3cc8d035ab66b80af516564a5eeac4429e375b932d01ace4740"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-011.md",
+      "sourceSha256": "064c6fd45407a610a3dc7281f278392a24aeac4e034142b3c2eab3cffa695c9c"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-012.md",
+      "sourceSha256": "d8baea823f39f3a5978f6bcc2d532e30c5702102d9efbb771cd2000b8141eb9b"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-013.md",
+      "sourceSha256": "3e14107c761e1bf2a48cee638260d2d6c51c7c15ae9fb2ace1e85774ae59674f"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-014.md",
+      "sourceSha256": "a4831f28190962962852afd6762dec1795ac0579265cfecc5ebf5adcae0be6c5"
+    },
+    {
+      "path": "docs/architecture/adr/ADR-015.md",
+      "sourceSha256": "0cab43884bf1b48027fcb9bb913ca7a815de72e3fa5ad4fa427cf4be0cda45ab"
+    },
+    {
+      "path": "docs/architecture/adr/README.md",
+      "sourceSha256": "deb502da4d91285efce12f801b2e4c4d40ff868f9024611fb22e2b66c279c56e"
+    },
+    {
+      "path": "docs/architecture/data-model.md",
+      "sourceSha256": "5eae153096d6cee8011dfebf0f08183ef8e6fa352b6a83edfd4991580aca6b1c"
+    },
+    {
+      "path": "docs/architecture/local-operations.md",
+      "sourceSha256": "9df9dc14a9dedf42c785cc6e139d08dc8fd3d786d3ea6061114953050c5527f8"
+    },
+    {
+      "path": "docs/architecture/overview.md",
+      "sourceSha256": "430ae653a9945d835e63b378b414a2ff435568fc2e1fcab6bfc77bc28f2fa9ac"
+    },
+    {
+      "path": "docs/architecture/security-and-privacy.md",
+      "sourceSha256": "5b58dbf92025cc9a04fb73365f918c6812bcb33d7fe36db729f4e9cf562dc087"
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "sourceSha256": "a49f49cc6e24782bd52a3be9bb28fde50ad5401f4fcd1e1b66f403dd3fe5a4f7"
+    },
+    {
+      "path": "docs/contracts/application-context.md",
+      "sourceSha256": "780d29d15cfb5edc0a4d01257221f801ea240e6dd1a47d4a1f2ca164ef9a7a8f"
+    },
+    {
+      "path": "docs/contracts/career-kb.md",
+      "sourceSha256": "ed12d6ceb8350429b451a815c45ae4361b6dc8498d3d93119cacd8091aa53b3d"
+    },
+    {
+      "path": "docs/contracts/change-set.md",
+      "sourceSha256": "b564ef06e3de6a7ed3374feb35438b98d218a7da31877e6da9be78c1b48ed02e"
+    },
+    {
+      "path": "docs/contracts/events.md",
+      "sourceSha256": "6322f8cf055b7fcd875449b7affef6cae5a139566aab9be58b57d80d26aa40a3"
+    },
+    {
+      "path": "docs/contracts/examples/models.py",
+      "sourceSha256": "80e6aa995134897a5e51664b7ba50fde17507b3f47fb2806ff1d9b0209220c11"
+    },
+    {
+      "path": "docs/contracts/job-intelligence.md",
+      "sourceSha256": "098b53ddaf230aa2c5e1497fbfbeee3d51c49ad99bfb07d20378360709a357be"
+    },
+    {
+      "path": "docs/contracts/mcp-tools.md",
+      "sourceSha256": "438fc5fd02a4eb5dd8c9ffd8234452c812f874dc69b261a90c1f0857d0b80222"
+    },
+    {
+      "path": "docs/contracts/rest-openapi.md",
+      "sourceSha256": "45636e3acafb74cb27a69c997091bcec69e6a83d07cf35f1fe28f274a1be49ce"
+    },
+    {
+      "path": "docs/contracts/resume-document.md",
+      "sourceSha256": "4e3bb9942462f8df22efe68d119895fca41cd4deea3d30eae8c61c50c5bb22ac"
+    },
+    {
+      "path": "docs/decisions/open-decisions.md",
+      "sourceSha256": "4ff28086aca93e64e9b96eb24471a14961af8b2ee9cb08f6ccb20b441d8da35b"
+    },
+    {
+      "path": "docs/implementation-scaffolds/README.md",
+      "sourceSha256": "ba9d86e94b0fcc8fdbf5f1468c49a09a25be6baede8c5419a7ed75943704aa43"
+    },
+    {
+      "path": "docs/implementation-scaffolds/justfile.example",
+      "sourceSha256": "430cae01cbab9935673ab4183e80a8a4fce18feda101a63016defe8b35841c4b"
+    },
+    {
+      "path": "docs/implementation-scaffolds/pnpm-workspace.yaml.example",
+      "sourceSha256": "ec76f912990752e1b4af2ef361c95c6b84eda251de9709bf6276fe45a08ca0a6"
+    },
+    {
+      "path": "docs/implementation-scaffolds/pyproject.toml.example",
+      "sourceSha256": "51d5e4197906fcb42a9d890ff4f97918ef4dbb41fc408c034b1ad02b05a08f6a"
+    },
+    {
+      "path": "docs/implementation-scaffolds/uv.lock.NOT_CREATED.md",
+      "sourceSha256": "5d8aff4448194706e02cc246b5b4a9277890fe0dac1d8373509c8972edcad15e"
+    },
+    {
+      "path": "docs/modules/ai-providers.md",
+      "sourceSha256": "7de254ea7d54baa4d7b6cb80e279d0bba59c6ff882e006726df56244e17f8b7e"
+    },
+    {
+      "path": "docs/modules/application-answers.md",
+      "sourceSha256": "af6ce877aac029e5c44846a68226d41a96076f5d13e59a6bdc16216e14e4e83a"
+    },
+    {
+      "path": "docs/modules/application-tracking.md",
+      "sourceSha256": "2a03c05e51e94b3052896c5117e2f01769dc67c4f4b1a70275994ecea685dbde"
+    },
+    {
+      "path": "docs/modules/career-kb.md",
+      "sourceSha256": "525002b507834f82dec9c733e6951d72f55a3dd1f297f909524a1ca60b15870e"
+    },
+    {
+      "path": "docs/modules/context-retrieval.md",
+      "sourceSha256": "b274d2dbd63337b7317cebebaf8ec13962981ffd38d2c963bf1aa270b174c4ff"
+    },
+    {
+      "path": "docs/modules/job-intelligence.md",
+      "sourceSha256": "79851f9f09cb8fc27bbd8e60f166eee38a1b7bf1b774e098d6cf5905e6b49a57"
+    },
+    {
+      "path": "docs/modules/mcp-server.md",
+      "sourceSha256": "c88eebce0dbb17d76b1b317d30a43b3ad686f2f5e71283bbae2a2706f13548c3"
+    },
+    {
+      "path": "docs/modules/resume-studio.md",
+      "sourceSha256": "b650d6db9de31037ad6a37809a73296f9b8f8ad192300fa60193414c17d37b48"
+    },
+    {
+      "path": "docs/references.md",
+      "sourceSha256": "a4746be811e89941a85ad76e0c5cafa8804fb3f3b6ee476dd8cc49fd2fd45a43"
+    },
+    {
+      "path": "docs/roadmap/acceptance-criteria.md",
+      "sourceSha256": "cb86ffff312f9c8d3725e0141e2d86a3a308b998d60e15029f6864f633cff0cc"
+    },
+    {
+      "path": "docs/roadmap/milestones.md",
+      "sourceSha256": "43661b494da853aade0dc38f12fa45cb3bf6fed573748f1dcc1a04af064e0d6d"
+    }
+  ]
+}

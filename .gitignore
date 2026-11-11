@@ -36,3 +36,31 @@ backups/
 .vscode/
 .DS_Store
 *~
+
+# Python and private reference material (2026-11-11 package)
+# Dados pessoais, documentos e artefatos de demonstração privados
+private/
+**/career_kb_seed.json
+**/resume_document_seed.json
+**/Curriculo.pdf
+**/curriculo_template_recriado.*
+**/previa_curriculo.png
+# Runtime and credentials
+.env
+.env.*
+!.env.example
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.db
+*.db-wal
+*.db-shm
+.venv/
+__pycache__/
+.pytest_cache/
+node_modules/
+dist/
+coverage/
+*.log
+# Preserve the repository's existing allowance for example environment files.
+!.env.*.example

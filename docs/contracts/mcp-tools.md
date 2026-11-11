@@ -1,6 +1,6 @@
 # Contratos MCP — rascunho V1
 
-**Status:** `PROPOSED` na assinatura exata; responsabilidades `DECIDED`. Fixar versionamento e JSON Schema/Zod ao implementar.
+**Status:** `PROPOSED` na assinatura exata; responsabilidades `DECIDED`. Fixar versionamento, schemas Pydantic/JSON Schema e compatibilidade OpenAPI/MCP ao implementar. Implementação futura: SDK MCP Python.
 
 ## Convenções
 
@@ -50,6 +50,14 @@ Persistir `reportingSource=external_agent`, `confirmationState=reported_by_agent
 
 ## Transportes
 
-- `stdio`: sem mensagens fora do protocolo em stdout; processo por conexão.
+- `stdio`: Python SDK, sem mensagens fora do protocolo em stdout (logs structlog em stderr); processo por conexão.
 - HTTP: endpoint no loopback, auth/capabilities, Origin/Host e DNS rebinding check, rate limit, CSRF se aplicável, limites de sessão.
-- Usar mesmo catálogo de ferramentas e schemas, com testes cruzados e versionamento explícito.
+- Usar mesmo catálogo de ferramentas e schemas gerados/validados em Python nos dois transportes, com testes cruzados e versionamento explícito.
+
+## Critérios e implementação Python
+
+- Registrar schema/capability version na resposta `get_server_capabilities`; o catálogo exato será congelado após o spike M0.5 e testes com duas CLIs.
+- `report_application_result.status` deve obedecer a `ApplicationReport.status` em `PROJECT_SOURCE.md` (`in_progress|blocked|reported_submitted|reported_failed|unknown`), sem extrapolar confirmação.
+- Distinção entre evento operacional (`report_application_progress`) e resultado (`report_application_result`) deve ser preservada em auditoria.
+- `suggest_answer` usa adaptador de provider configurado explicitamente; erros seguros e opção de cliente usar modelo próprio.
+- Evitar expor URL/file path de documento sem autorização para finalidade e escopo corretos.

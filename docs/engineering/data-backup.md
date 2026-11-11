@@ -1,6 +1,6 @@
 # Persistência, backup, restore e portabilidade
 
-**DECIDED:** SQLite/Drizzle + arquivos XDG; Redis é fila operacional, não banco de verdade. Backups automáticos locais e exportações portáteis na V1.
+**DECIDED:** SQLite/SQLAlchemy 2/Alembic + arquivos XDG; Redis é fila operacional, não banco de verdade. Backups automáticos locais e exportações portáteis na V1.
 
 ## Backup
 
@@ -8,7 +8,7 @@ Snapshot consistente do SQLite em WAL (não copiar apenas `.db` vivo sem o méto
 
 ## Restore
 
-Validar hash e versão → bloquear novas gravações → restaurar em diretório temporário → rodar integridade e migrations controladas → promover artefato validado e manter rollback → reconciliar tasks pendentes com SQLite/BullMQ. Relatos de submissão com estado incerto não originam reenvios automáticos.
+Validar hash e versão → bloquear novas gravações → restaurar em diretório temporário → rodar integridade e migrations controladas → promover artefato validado e manter rollback → reconciliar tasks pendentes com SQLite/Dramatiq. Relatos de submissão com estado incerto não originam reenvios automáticos.
 
 ## Portabilidade
 

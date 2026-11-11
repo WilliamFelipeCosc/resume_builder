@@ -1,0 +1,60 @@
+{
+  "template_id": "resume-reference-slate-sidebar-v1",
+  "source_document_id": "source-70143dd67238",
+  "source_page": {
+    "width_pt": 595.92,
+    "height_pt": 924,
+    "pages": 1,
+    "note": "Tamanho personalizado no documento original (não A4)."
+  },
+  "colors": {
+    "sidebar": "#99A2B3",
+    "timeline_and_headings": "#99A2B3",
+    "body_text": "#777777",
+    "primary_text": "#020203",
+    "background": "#FFFFFF"
+  },
+  "composition": {
+    "sidebar_start_x_pt": 424.5,
+    "sidebar_width_pt": 171,
+    "timeline_x_pt": 48,
+    "main_content_left_pt": 60.75,
+    "entry_content_x_pt": 147,
+    "sidebar_content_left_pt": 448.6,
+    "main_column_width_pt": 338
+  },
+  "typography": {
+    "display_font_in_source": "Libre Caslon Text Regular (embedded in PDF)",
+    "body_font_in_source": "Roboto Regular (embedded in PDF)",
+    "name_size_pt": 24,
+    "body_size_pt": 8.25,
+    "sections_uppercase": true,
+    "titles_bold_letter_spacing": true
+  },
+  "content_order": {
+    "left": [
+      "name",
+      "headline",
+      "experience_timeline",
+      "education_timeline"
+    ],
+    "sidebar": [
+      "contact",
+      "objective",
+      "skills",
+      "languages"
+    ]
+  },
+  "design_rules": [
+    "Manter faixa lateral cinza-azulada à direita, fundo branco à esquerda e marcadores verticais na linha do tempo.",
+    "Cabeçalho com nome grande em serifada e cargo pequeno à direita.",
+    "Títulos das experiências em letras maiúsculas e negrito, empresas logo abaixo.",
+    "Bullets pequenos em cinza e datas à esquerda.",
+    "As seções da lateral têm títulos pretos e textos em preto.",
+    "Se texto crescer, paginar sem cortes ou sobreposição, mantendo o idioma, proveniência e a ordem lógica para extração ATS."
+  ],
+  "ats_note": "Layout visual com colunas não garante leitura linear por todos os ATS; manter template ATS simplificado opcional, como previsto no escopo da V1.",
+  "generator_file": "generate_resume.py",
+  "stylesheet_file": "resume_template.css",
+  "example_pdf": "curriculo_template_recriado.pdf"
+}

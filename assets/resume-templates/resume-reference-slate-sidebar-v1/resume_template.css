@@ -1,0 +1,48 @@
+/* Resume Builder | visual reference: Curriculo.pdf (30 May 2025)
+ * Color/geometry reproduced from source PDF; fonts fall back to installed serif/sans.
+ * Page width/height are CUSTOM by design, not standard A4.
+ * Keep both content and style separate for future tailoring.
+ */
+@page { size: 595.92pt 924pt; margin: 0; }
+* { box-sizing: border-box; }
+html,body { padding:0; margin:0; background:#fff; color:#020203; }
+body { font: 8.25pt/1.545 'Roboto', Arial, sans-serif; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.right-background { position:fixed; right:0; top:0; width:171.42pt; height:100vh; background:#99A2B3; z-index:0; }
+.timeline-line { position:fixed; left:48pt; top:0; bottom:0; width:.75pt; background:#e5e8ec; z-index:0; }
+.page-content { position:relative; z-index:1; width:344pt; margin-left:60.75pt; padding-top:46.7pt; padding-bottom:0pt; }
+.resume-header { position:relative; height:79pt; }
+.resume-header h1 { margin:0; font-family:'Libre Caslon Text', Georgia, 'Times New Roman', serif; font-size:24pt; line-height:31pt; font-weight:400; letter-spacing:-1.05pt; white-space:nowrap; }
+.subtitle { position:absolute; left:174pt; top:31pt; width:69pt; line-height:10pt; font-size:8.25pt; font-style:italic; white-space:nowrap; text-align:right; }
+.section-header { margin:0 0 27.5pt; font-size:8.25pt; letter-spacing:.9pt; line-height:10pt; color:#99A2B3; text-transform:uppercase; font-weight:700; }
+.entry { display:grid; grid-template-columns:86.25pt 1fr; position:relative; margin-bottom:20pt; break-inside:avoid; page-break-inside:avoid; }
+.entry:before { content:''; position:absolute; left:-13.5pt; top:0; width:2.25pt; height:24pt; background:#99A2B3; border-radius:2pt; }
+.entry-date { font-size:8.25pt; line-height:12pt; color:#000; padding-top:0pt; }
+.entry-date span { display:block; }
+.entry-body { min-width:0; }
+.entry-role { font-size:8.25pt; text-transform:uppercase; line-height:15pt; letter-spacing:.85pt; font-weight:700; margin:0; }
+.entry-org { margin:0 0 6pt; font-size:8.25pt; line-height:15pt; letter-spacing:.5pt; font-weight:700; }
+.entry-org .location { font-weight:400; letter-spacing:0; }
+.entry-bullets { margin:0; padding-left:0; list-style:none; font-size:8.25pt; color:#777; line-height:12.75pt; }
+.entry-bullets li { position:relative; margin:0 0 0.5pt; }
+.entry-bullets li:before { content:'•'; position:absolute; left:-8.5pt; top:0; font-size:8pt; }
+.education { margin-top:29pt; }
+.education .section-header { margin-bottom:27pt; }
+.education .entry { margin-bottom:15pt; }
+.education .entry-org { margin-bottom:0; }
+.education .detail { font-size:8.25pt; color:#777; line-height:12.75pt; margin:7pt 0 0; }
+.sidebar { position:fixed; z-index:2; left:424.5pt; top:0; width:171.42pt; height:924pt; color:#020203; }
+.side-inner { position:relative; width:100%; height:100%; }
+.contact-block { position:absolute; left:24.1pt; top:47pt; width:139pt; }
+.contact-row { display:flex; gap:10pt; align-items:center; margin-bottom:12pt; min-height:9pt; white-space:nowrap; font-size:8.25pt; line-height:10pt; }
+.contact-row svg { flex:0 0 11pt; width:11pt; height:11pt; stroke:#020203; stroke-width:1.3; fill:none; }
+.side-section { position:absolute; left:24.1pt; width:127pt; }
+.side-section h2 { margin:0 0 14pt; font-size:8.25pt; line-height:10pt; letter-spacing:.9pt; font-weight:700; }
+.side-section p { margin:0; font-size:8.25pt; line-height:12.75pt; }
+.side-section.objective { top:114pt; }
+.side-section.skills { top:245pt; }
+.side-section.languages { top:462pt; }
+.side-list { padding:0 0 0 18pt; margin:0; list-style-type:disc; }
+.side-list li { font-size:8.25pt; line-height:15.75pt; padding:0; margin:0; }
+.side-section.languages .side-list li { line-height:18pt; }
+@media screen { body { background:#f0f1f5; } .paper { position:relative; width:595.92pt; min-height:924pt; margin:24px auto; background:white; box-shadow:0px 5px 24px rgba(0,0,0,.18); overflow:hidden; } .right-background,.timeline-line,.sidebar { position:absolute; height:100%; } }
+@media print { .paper { display:contents; } .page-content { width:344pt; } }

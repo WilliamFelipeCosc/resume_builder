@@ -1,23 +1,5 @@
-# ADR-006 — IA multi-provider sem fallback pago
+# ADR-006 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-006](ADR-006.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Aplicativo precisa de IA para extração, matching, tailoring e respostas; usuário usa Hermes e quer alternativa OpenAI.
-
-## Decisão
-
-Camada multi-provider; Hermes default quando configurado, OpenAI alternativa escolhida manualmente. MCP opcionalmente expõe serviços de IA; executor externo pode usar modelo próprio.
-
-## Consequências
-
-Evita lock-in e chamadas pagas inesperadas; diferenças de capacidade/tokens/vision precisam ser detectadas em runtime.
-
-## Alternativas consideradas
-
-Provider único ou fallback automático para API paga foram descartados.
-
-## Verificação
-
-Testes de provider unavailable, explicit selection, custos e ausência de auto-fallback.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

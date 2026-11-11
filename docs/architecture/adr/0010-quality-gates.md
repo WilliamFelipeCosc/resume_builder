@@ -1,23 +1,5 @@
-# ADR-010 — Testes progressivos e Quality Gates V1
+# ADR-010 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-010](ADR-010.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Integração de LLMs e CLIs é probabilística; segurança e portabilidade não podem depender só de demos.
-
-## Decisão
-
-Testes unitários/integração/E2E, mocks e evals, contratos MCP, segurança e restore; iniciar simples e expandir até V1; CI determinístico e live eval controlado.
-
-## Consequências
-
-Ganho de confiabilidade com custo de testes e fixtures; thresholds IA definidos por baseline, não arbitrários.
-
-## Alternativas consideradas
-
-Aceitação apenas funcional ou benchmarking extremo obrigatório foram descartados.
-
-## Verificação
-
-Checklist AC-M7 e evidência de rodadas de testes reais/simulados em releases.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

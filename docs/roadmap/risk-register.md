@@ -8,7 +8,7 @@
 | R-004 | Agente externo envia sem autorização | Alto | Limites explicitados; não oferecer submit MCP; operador usa controles do agente; sem alegar enforcement fora MCP |
 | R-005 | URL bloqueada / página dinâmica | Médio | Fallback manual/screenshot; não integrar browser no app |
 | R-006 | Screenshot parcialmente ilegível | Médio | Confidence/uncertainties e revisão dos requisitos |
-| R-007 | Retries duplicam reports ou inconsistência de BullMQ | Alto | IdempotencyKey, invariantes e reconciliadores em SQLite |
+| R-007 | Retries duplicam reports ou inconsistência de Dramatiq | Alto | IdempotencyKey, invariantes e reconciliadores em SQLite |
 | R-008 | Backup inconsistente DB/arquivos | Alto | Snapshot SQLite + file manifest + restore test |
 | R-009 | Custos/tokens de providers | Médio | Provider manual e quotas; sem fallback pago automático |
 | R-010 | Escopo excessivo atrasa M3 | Alto | Vertical Slices, separar Core e Complete, limitar extras |

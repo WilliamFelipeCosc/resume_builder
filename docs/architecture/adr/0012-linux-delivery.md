@@ -1,23 +1,5 @@
-# ADR-012 — Web primeiro, Tauri V1, instalação manual
+# ADR-012 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-012](ADR-012.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-O projeto usa Linux e serviços externos; instalar/alterar Chrome, Docker ou Hermes silenciosamente seria indesejável.
-
-## Decisão
-
-Web local no início, Tauri desktop + RPM na V1 completa; Compose Redis manual, units systemd user opcionais e `resume-agent doctor` diagnóstico não destrutivo.
-
-## Consequências
-
-Menos automação no instalador, mais documentação; evitar dependências invisíveis e necessidade de root para uso comum.
-
-## Alternativas consideradas
-
-Tauri-first e setup totalmente gerenciado foram descartados.
-
-## Verificação
-
-V1 inicia em Web/Tauri; doctor detecta falhas e não executa instalações.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

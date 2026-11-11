@@ -1,0 +1,6 @@
+# Documentação de comandos almejados; não execute como projeto funcional.
+help:
+  @echo 'Scaffold only. Implement commands during M0.'
+
+# Futuras receitas: api, web, worker, test, migrate, gen-api-client, doctor.
+# Nunca instalar dependências, iniciar Docker ou alterar host de modo automático sem consentimento.

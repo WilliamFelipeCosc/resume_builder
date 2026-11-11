@@ -1,23 +1,5 @@
-# ADR-004 — MCP-first, sem browser integrado
+# ADR-004 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-004](ADR-004.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-O usuário deseja execução pelo Hermes/Codex/Claude Code/Kimi na própria CLI, evitando que o aplicativo controle navegador.
-
-## Decisão
-
-Remover browser automation, Chrome/CDP manager, Hermes browser executor e UI de screenshots internos. O aplicativo fornece contexto pelo MCP; agentes CLI externos navegam e preenchem.
-
-## Consequências
-
-Portabilidade entre agentes; observabilidade limitada a tool calls/reportes; sem controle técnico de ações do agente fora do MCP.
-
-## Alternativas consideradas
-
-Execução integrada com Playwright/Hermes no Worker foi explicitamente descartada.
-
-## Verificação
-
-M0.5: agente CLI externo preenche formulário fake a partir de MCP, e nenhum módulo do app contém executor navegador.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

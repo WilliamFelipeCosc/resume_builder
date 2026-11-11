@@ -1,25 +1,21 @@
 # Application Answer Engine
 
-**REQ-ANS-001 — DECIDED.** Serviço reutilizável pela API/Resume Studio/MCP; não depende da escolha do executor CLI.
+**Marcos:** M4 disponibiliza consulta/sugestão inicial por MCP; M5 completa respostas e reuso.
 
-## Tipos de pergunta
+## Tipos de perguntas
 
-- Factual: fatos estáveis e verificados, ex. anos de atuação **somente se calculáveis a partir de datas confirmadas**.
-- Técnica: conhecimento/experiência atestados por evidência.
-- Comportamental: relatos sobre projetos e realizações com fonte.
-- Preferência: remuneração pretendida, modalidade, disponibilidade — configurados pelo usuário, não inferidos.
-- Elegibilidade/sensível: autorização de trabalho, localização, identidade, questões pessoais — pedir confirmação explícita; não automatizar supostos valores.
+Factual, técnica, comportamental, preferência e elegibilidade/sensível. O modelo de Answer deve preservar pergunta, texto, idioma, intenção, versão, evidenceIds, status (`suggested`, `approved`, etc.), uso autorizado e referência a application/job.
 
-## Reuso
+## Fluxo
 
-Normalizar intenção da pergunta; buscar respostas previamente aprovadas e vínculo com vaga/empresa. Reuso automático apenas quando contexto semântico e fatos forem compatíveis. Não reciclar motivação específica de empresa em outra candidatura sem revisão.
+1. Receber pergunta no contexto de candidatura e classificar tipo.
+2. Recuperar somente fontes e respostas aprovadas compatíveis com a finalidade.
+3. Formular proposta com fatos sustentados e assinalar desconhecidos; preferência, elegibilidade e sensíveis exigem resposta/validação humana quando necessário.
+4. Mostrar diff/aprovação seletiva; registrar versão aprovada e âmbito de reutilização.
+5. MCP pode retornar `approved_answers` e `suggest_answer`, sem workflow formal interativo remoto na V1.
 
-## Geração
+Nunca reutilizar cegamente motivação para uma empresa diferente, dados sensíveis ou salários/autorização de trabalho sem confirmação. Nunca converter sugestões em fatos canônicos. Provider pago exige escolha explícita.
 
-1. Consultar fatos autorizados e respostas aprovadas.
-2. Se informação insuficiente, retornar `missingInformation`/`requiresReview`.
-3. Se provider selecionado estiver disponível, gerar rascunho tipado com `evidenceIds` e estado `suggested`.
-4. Validar schema, políticas de privacidade e apoio das afirmações; revisão seletiva para lacunas, ambiguidade, preferências e categorias sensíveis.
-5. Não gravar novas respostas como `approved` ou fatos canônicos sem a ação adequada.
+## Aceite
 
-MCP V1 pode expor `suggest_answer` **opcional** e `get_approved_answers` para o agente externo, que pode usar modelo próprio. V1 não fornece uma ferramenta de aprovação remota formal; esta integração é V2.
+AC-M5-001; CI com perguntas adversariais, desconhecidos e reuso por intenção testados; rastreabilidade e privacy gates obrigatórios.

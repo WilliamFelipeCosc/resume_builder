@@ -6,7 +6,7 @@ M0/M0.5/M1/M2 são **mínimos funcionais**, não módulos encerrados. O primeiro
 
 ## V1 completa — DECIDED
 
-Career KB relacional com ingestion multi-fonte e Staging Area; Resume Studio completo (inline, drag-drop, ChangeSets, versões e múltiplos formatos); Job Intelligence (URL/texto/screenshot, matching); Answer Engine com respostas fundamentadas; MCP stdio/HTTP bidirecional **para reporte**, sem aprovação remota formal; Job Tracking manual básico; recuperação híbrida embeddings+FTS; testes e Quality Gates; Pino/OTel/Sentry opt-in; backup automático local; web + Tauri/RPM no Linux.
+Career KB relacional com ingestion multi-fonte e Staging Area; Resume Studio completo (inline, drag-drop, ChangeSets, versões e múltiplos formatos); Job Intelligence (URL/texto/screenshot, matching); Answer Engine com respostas fundamentadas; MCP stdio/HTTP bidirecional **para reporte**, sem aprovação remota formal; Job Tracking manual básico; recuperação híbrida embeddings+FTS; testes e Quality Gates; structlog/OTel/Sentry opt-in; backup automático local; web + Tauri/RPM no Linux.
 
 ## V2 — DEFERRED
 

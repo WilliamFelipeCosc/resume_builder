@@ -1,6 +1,6 @@
 # Observabilidade e auditoria
 
-**REQ-OPS-001 — DECIDED.** Instrumentação progressiva: Pino + SQLite audit no início; OpenTelemetry e Jaeger opcional até V1; Sentry opt-in e sanitizado.
+**REQ-OPS-001 — DECIDED.** Instrumentação progressiva: structlog + SQLite audit no início; OpenTelemetry e Jaeger opcional até V1; Sentry opt-in e sanitizado.
 
 ## Logs
 
@@ -8,7 +8,7 @@ JSON `event`, `service`, `requestId`, `traceId`, `applicationId?`, `jobId?`, `cl
 
 ## Tracing
 
-Rastreamento `API -> BullMQ -> Worker -> provider`, `CLI -> MCP -> service -> DB/AI`; correlação quando tecnicamente suportada; spans de Pino/OTel/Sentry sem instrumentação duplicada. Exemplos de spans: parse_job, context_retrieval, suggestion_generation, render_pdf, mcp_tool_call, report_persist.
+Rastreamento `API -> Dramatiq -> Worker -> provider`, `CLI -> MCP -> service -> DB/AI`; correlação quando tecnicamente suportada; spans de structlog/OTel/Sentry sem instrumentação duplicada. Exemplos de spans: parse_job, context_retrieval, suggestion_generation, render_pdf, mcp_tool_call, report_persist.
 
 ## Métricas
 

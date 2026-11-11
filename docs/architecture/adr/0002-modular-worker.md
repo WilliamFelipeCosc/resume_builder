@@ -1,23 +1,5 @@
-# ADR-002 — Monólito modular + Worker e Redis
+# ADR-002 — endereço anterior
 
-**Status:** Accepted | **Escopo:** V1, salvo indicações explícitas de V2
+Este endereço foi substituído por [ADR-002](ADR-002.md), alinhado ao pacote aprovado de 2026-11-11. Use o registro atual para decisões e implementação.
 
-## Contexto
-
-Há operações rápidas (CRUD) e longas (extração, inferência, PDF) com ciclos de vida distintos.
-
-## Decisão
-
-NestJS monólito modular e Worker Node separado usando BullMQ/Redis. pnpm Workspaces+Turborepo. RabbitMQ apenas experimento opcional.
-
-## Consequências
-
-Worker e API têm isolamentos de processos; Redis requer operação local; SQLite permanece fonte de verdade para jobs/checkpoints importantes.
-
-## Alternativas consideradas
-
-Monólito em um processo ou microserviços foram considerados menos adequados.
-
-## Verificação
-
-Job de teste passa com retry/idempotência; API fica responsiva durante tarefas longas.
+A versão anterior permanece no histórico Git anterior à sincronização, commit `d2ba2e0abd88190af5d9ec41989c8f6d4342f6c2`.

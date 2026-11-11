@@ -4,11 +4,11 @@
 
 ## Desenvolvimento
 
-pnpm Workspaces/Turborepo coordenam API/Web/Worker/MCP; Redis iniciado manualmente no Compose com AOF e healthcheck; RabbitMQ `profile` experimental. Hermes/OpenAI provider e agentes CLI configurados separadamente; app não instala Chrome/agents automaticamente.
+pnpm Workspaces cuida do frontend; uv workspaces cuida de API/Worker/MCP Python e justfile coordena comandos; Redis iniciado manualmente no Compose com AOF e healthcheck; RabbitMQ `profile` experimental. Hermes/OpenAI provider e agentes CLI configurados separadamente; app não instala Chrome/agents automaticamente.
 
 ## Distribuição
 
-Tauri reutiliza frontend React e acessa API local. WebKitGTK para UI Tauri não se confunde com browser utilizado por agentes CLI. RPM priorizado para Fedora/Nobara; AppImage `PROPOSED` opcional. Considerar empacotar runtimes Node para produção: escolha técnica aberta a spike, não pressupor Node global instalado. Redis/serviços externos são pré-requisitos documentados.
+Tauri reutiliza frontend React e acessa API local. WebKitGTK para UI Tauri não se confunde com browser utilizado por agentes CLI. RPM priorizado para Fedora/Nobara; AppImage `PROPOSED` opcional. Considerar empacotar Python/Chromium e dependências de produção: escolha técnica aberta a spike, não pressupor Node global instalado. Redis/serviços externos são pré-requisitos documentados.
 
 ## Services
 

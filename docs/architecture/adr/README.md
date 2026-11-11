@@ -1,7 +1,5 @@
-# Architecture Decision Records (ADRs)
+# Registro de decisões arquiteturais (ADR)
 
-ADRs `0001` a `0013` registram as **decisões aprovadas** no levantamento. IDs podem ser referidos em PRs, tarefas e alterações de escopo.
+Os ADRs 001–015 documentam as decisões `DECIDED` do `PROJECT_SOURCE.md`. Documentos históricos detalhados de alguns ADRs **não estavam disponíveis** nesta conversa; estes registros foram redigidos com o contexto e consequências do documento consolidado, sem pretensão de reproduzir atas originais. Os primeiros 13 preservam o escopo preexistente; os ADRs 014/015 foram aprovados posteriormente.
 
-Para qualquer alteração relevante: criar novo ADR que supersede o anterior (não apagar histórico), indicar motivo, alternativas e testes de validação; atualizar `PROJECT_SOURCE.md` e documentação de módulo.
-
-O uso de ADRs não obriga metodologia SDD/EDD formal na V1.
+**Regra:** conflito real com decisão aprovada mais recente deve ser registrado, não resolvido silenciosamente. `docs/decisions/open-decisions.md` não é autorização para trocar stack ou escopo.
