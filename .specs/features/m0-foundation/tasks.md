@@ -83,13 +83,23 @@ T1 → T2 → T3 → T4 → T5 → T6 → T7 → T8 → T9 → T10 → T11 → T
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 3 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Build Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 3 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Build Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: smoke
 **Gate**: Build Python
 **Commit**: `feat(m0): bootstrap python workspace`
+
+**Evidence:** `uv sync --all-packages --locked` passou (33 pacotes); `.venv/bin/pytest tests/smoke -q`: 5 passed; Ruff check/format passaram. Execução direta da venv equivale ao runner uv sem acesso ao cache externo bloqueado. Nenhum teste removido/ignorado.
+
+| Critério T2 / FND | Evidência (assertion) | Resultado / reverse mapping |
+|---|---|---|
+| Imports dos três membros sem efeitos, FND-21/22 | tests/smoke/test_workspace.py:20 `assert completed.returncode == 0`; :22 `assert list(tmp_path.iterdir()) == []` | 3 casos, mantidos: workspace e isolamento |
+| Dependências compatíveis/importáveis, FND-21 | tests/smoke/test_workspace.py:27 `assert importlib.import_module(name).__name__ == name` | imports reais, mantido: build Python |
+| Coleta isolada, FND-22 | tests/smoke/test_workspace.py:34 `assert config["tool"]["pytest"]["ini_options"]["testpaths"] == ["tests"]` | mantido: não coletar private |
+
+Adequação: critérios T2 cobertos; sem assertions rasas ou casos fora do escopo; padrão docs/engineering/testing.md seguido. Não demonstra ainda AC-M0 completo.
 
 ### T3: Workspace frontend reproduzível
 
