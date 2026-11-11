@@ -6,13 +6,15 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from uuid import UUID, uuid4
 
-from sqlalchemy import Engine, insert, select
+from sqlalchemy import Engine, func, insert, select, update
 
-from resume_core.contracts import DiagnosticExecution
+from resume_core.contracts import DiagnosticExecution, DiagnosticResult
 from resume_core.database import diagnostic_runs as runs
 
 EPOCH = datetime(1970, 1, 1, tzinfo=UTC)
 ACTIVE = ("pending", "queued", "running")
+TOTAL_US = 120_000_000
+LEASE_US = 30_000_000
 
 
 def to_micros(value: datetime) -> int:
@@ -37,6 +39,13 @@ class ActiveDiagnosticConflict(Exception):
 class CreateOutcome:
     execution: DiagnosticExecution
     created: bool
+
+
+@dataclass(frozen=True)
+class Lease:
+    execution: DiagnosticExecution
+    token: UUID
+    expires_at: datetime
 
 
 class DiagnosticRepository:
@@ -106,3 +115,60 @@ class DiagnosticRepository:
                 .first()
             )
             return execution_from_row(row) if row is not None else None
+
+    def claim(self, execution_id: UUID) -> Lease | None:
+        token = uuid4()
+        with self._write() as (connection, now):
+            row = (
+                connection.execute(
+                    update(runs)
+                    .where(
+                        runs.c.id == str(execution_id),
+                        runs.c.status.in_(("pending", "queued")),
+                        runs.c.attempt_count < 3,
+                        runs.c.created_at > now - TOTAL_US,
+                    )
+                    .values(
+                        status="running",
+                        attempt_count=runs.c.attempt_count + 1,
+                        lease_token=str(token),
+                        lease_expires_at=func.min(now + LEASE_US, runs.c.created_at + TOTAL_US),
+                        updated_at=now,
+                        delivery_warning=None,
+                    )
+                    .returning(runs)
+                )
+                .mappings()
+                .first()
+            )
+            if row is None:
+                return None
+            return Lease(
+                execution_from_row(row),
+                token,
+                EPOCH + timedelta(microseconds=row["lease_expires_at"]),
+            )
+
+    def complete(self, execution_id: UUID, token: UUID) -> bool:
+        with self._write() as (connection, now):
+            row = connection.execute(
+                update(runs)
+                .where(
+                    runs.c.id == str(execution_id),
+                    runs.c.status == "running",
+                    runs.c.lease_token == str(token),
+                    runs.c.lease_expires_at > now,
+                    runs.c.created_at > now - TOTAL_US,
+                )
+                .values(
+                    status="succeeded",
+                    updated_at=now,
+                    result=DiagnosticResult().model_dump(),
+                    error=None,
+                    delivery_warning=None,
+                    lease_token=None,
+                    lease_expires_at=None,
+                )
+                .returning(runs.c.id)
+            ).first()
+            return row is not None

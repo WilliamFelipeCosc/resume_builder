@@ -294,13 +294,25 @@ Adequacy: eight cases map to T8, no speculative tests. Full HTTP409 and queue or
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): guard worker leases`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration/test_diagnostic_{migration,repository,leases}.py -q`: 103 passed, including12 lease cases. Atomic UPDATE RETURNING, clock read after write lock; no processing/Redis in transaction.
+
+| Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
+|---|---|---|
+| claim/count, FND-09 | tests/integration/test_diagnostic_leases.py: claim test asserts running/1/30s; concurrent test one owner/1 | keep: actual attempts only |
+| fixture result, FND-02 | same file complete test asserts succeeded, exact message/version, timestamps/correlation/count and null error/warning | keep: complete contract |
+| time fences, FND-10 | same file elapsed30/30.000001/120 returns False,29.999999 True; lease capped at total120 | keep: exact deadline |
+| stale/terminal, FND-12 | same file wrong token False; terminal equality; old token False after new claim | keep: no late effects |
+| budget | same file exhausted budget claim None/count3 | keep: approved cap |
+
+Adequacy:12 cases cover all T9 local outcomes; no assertions weakened/removed/skipped. Recovery itself remains T10.
 
 ### T10: Reconciliação de prazo e tentativas
 
