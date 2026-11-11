@@ -355,13 +355,24 @@ Adequacy: all11 cases map to approved time/recovery criteria; no removed/weakene
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 6 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário + integração
 **Gate**: Full focal
 **Commit**: `feat(m0): authorize diagnostic service`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration/test_diagnostic_migration.py tests/integration/test_diagnostic_repository.py tests/integration/test_diagnostic_leases.py tests/integration/test_diagnostic_recovery.py tests/integration/test_diagnostic_service_sqlite.py -q`:126 passed (8 authorization negatives +4 service SQLite). Ruff green.
+
+| Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
+|---|---|---|
+| Deny before repo, FND-14 | tests/unit/test_diagnostic_service.py: PermissionDenied + `spy.calls == []` for None/empty subject/no capabilities and cross-capability access | keep: zero read/write/reconcile |
+| DTO/latest, FND-01/04 | tests/integration/test_diagnostic_service_sqlite.py: empty execution None, key/request equality, latest equals created | keep: approved contract |
+| Reconcile before read/create | tests/integration/test_diagnostic_service_sqlite.py: expired latest failed/deadline_exceeded, old run failed before new pending | keep: approved observation |
+| Same key/conflict, FND-05/06 | tests/integration/test_diagnostic_service_sqlite.py: replay.created False, equal execution; raises ActiveDiagnosticConflict; original unchanged | keep: stable service behavior |
+
+Adequacy:12 cases map to T11, no removed/skipped/weakened assertions. HTTP401/409 are later adapter responsibilities.
 
 ### T12: Política de logs estruturados
 
