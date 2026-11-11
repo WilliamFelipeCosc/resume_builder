@@ -418,13 +418,23 @@ Adequacy: all16 cases derive from FND-18; no tests removed/ignored or assertions
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): implement local session channel`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration -q --basetemp=/tmp/rb-b3`:166 passed, including14 new session-channel cases. Short basetemp avoids Linux AF_UNIX path length limit; sockets require authorized execution. Ruff green. No tests deleted/weakened.
+
+| Criterion / FND | Assertion evidence and expected value | Reverse mapping |
+|---|---|---|
+| Private channel/UID, FND-13/16 | tests/integration/test_session_channel.py:21/22 mode0700/0600; :25 authorized session; :34 unauthorized UID; :35 ticket_count0 | keep: local auth boundary |
+| Atomic TTL/restart, FND-13/15 | :43 redeem expired is None; :52 exactly1 concurrent redemption; :60 unauthorized old session; :61 old ticket None | keep: ephemeral lifecycle |
+| Secure lifecycle, FND-16 | :70 same live inode; :71 still serves; :101 target unchanged; :112 stale recovery ticket; :127 live inode unchanged; :77/85/98/131 ValueError on unsafe/missing paths | keep: permissions/symlink/lock checks |
+
+Adequacy: all14 cases map to T13/FND-13/15/16; outcome and negative side effects covered; no HTTP/launcher completion claimed.
 
 ### T14: Rota de resgate de sessão
 
