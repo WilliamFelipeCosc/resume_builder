@@ -536,13 +536,26 @@ Adequacy:9 cases cover every T16 criterion, state and payload values explicit; n
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): reconcile redis delivery`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration -q --basetemp=/tmp/rb-b3`:217 passed,9 new delivery cases incl real Redis stop/start. `uv sync --all-packages --locked`, Ruff/format green. Test Redis pinned `redis@sha256:71885d8cc6e42f2bc0aa2eb853bfc4be200b5108a46ac50e117ae1df0531fb80`; Docker lifecycle is test-only explicit gate invocation, loopback fixed test port, tmpfs/no persistence, own container cleaned. Application never launches Redis.
+
+| Criterion / FND | Assertion evidence / expected value | Reverse mapping |
+|---|---|---|
+| Publish after commit, FND-01 | tests/integration/test_diagnostic_delivery.py:40 durable pending inside publisher; :45 exact canonical ID/requestId args; :46 kwargs empty; :47 max_retries0; :48 queued | keep: actual broker transport |
+| Offline/recovery, FND-07/08 | :62 failure within1s; :64 pending; :65 exact warning; :69 no terminal error; :75 sameID; :76 queued; :77 warning cleared; :78 count0; :79 real messageID | keep: real Redis outage |
+| Reserve/redelivery, FND-08 | :88 second reservation None; :92 queue0 at0.999s after loss; :95 requeued at1s; :96 count0 | keep: lost queue recovery/rate |
+| Races/terminal, FND-12 | :111 succeeded; :112 count1; :113/114 late failure rejected/unchanged; :121–123 running unchanged | keep: Worker wins publication race |
+| Deadline/lifecycle, FND-11 | :132/133 failed deadline_exceeded; :134 no queued message; :135 no reservation; :150 startup already failed; :192 loop writes expired without read | keep: expiry before dispatch |
+| Event loop responsiveness | :170 responsive before published; :171 resulting queued | keep: asynchronous IO requirement |
+
+Adequacy:9 scenarios cover listed T17 outcomes; broker mocks only supplement real integration. Test harness fixed Docker port assignment and installed Dramatiq qsize accessor; zero-message assertions retained, no tests removed/weakened. Shared core owns broker adapter to avoid API↔Worker package dependency; same selected dependencies, lock metadata updated.
 
 ### T18: Actor do diagnóstico fixo
 

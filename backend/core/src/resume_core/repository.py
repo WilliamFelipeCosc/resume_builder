@@ -6,9 +6,14 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from uuid import UUID, uuid4
 
-from sqlalchemy import Engine, func, insert, select, update
+from sqlalchemy import Engine, func, insert, or_, select, update
 
-from resume_core.contracts import DiagnosticError, DiagnosticExecution, DiagnosticResult
+from resume_core.contracts import (
+    DeliveryWarning,
+    DiagnosticError,
+    DiagnosticExecution,
+    DiagnosticResult,
+)
 from resume_core.database import diagnostic_runs as runs
 
 EPOCH = datetime(1970, 1, 1, tzinfo=UTC)
@@ -231,3 +236,44 @@ class DiagnosticRepository:
                 )
                 changed += 1
         return changed
+
+    def reserve_delivery(self) -> DiagnosticExecution | None:
+        """Reserve at most one publication per second, before network I/O."""
+        with self._write() as (connection, now):
+            row = (
+                connection.execute(
+                    update(runs)
+                    .where(
+                        runs.c.status.in_(("pending", "queued")),
+                        runs.c.next_delivery_at <= now,
+                        runs.c.attempt_count < 3,
+                        runs.c.created_at > now - TOTAL_US,
+                    )
+                    .values(next_delivery_at=now + 1_000_000)
+                    .returning(runs)
+                )
+                .mappings()
+                .first()
+            )
+            return execution_from_row(row) if row is not None else None
+
+    def finish_delivery(self, execution_id: UUID, succeeded: bool) -> bool:
+        with self._write() as (connection, now):
+            status = "queued" if succeeded else "pending"
+            warning = None if succeeded else DeliveryWarning().model_dump()
+            condition = (
+                runs.c.delivery_warning.is_not(None)
+                if succeeded
+                else runs.c.delivery_warning.is_(None)
+            )
+            result = connection.execute(
+                update(runs)
+                .where(
+                    runs.c.id == str(execution_id),
+                    runs.c.status.in_(("pending", "queued")),
+                    runs.c.created_at > now - TOTAL_US,
+                    or_(runs.c.status != status, condition),
+                )
+                .values(status=status, delivery_warning=warning, updated_at=now)
+            )
+            return result.rowcount > 0

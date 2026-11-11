@@ -24,3 +24,22 @@ def repository(tmp_path):
     clock = Clock()
     yield DiagnosticRepository(engine, clock=clock), clock
     engine.dispose()
+
+
+@pytest.fixture(scope="session")
+def isolated_redis():
+    from redis_harness import DockerRedis
+
+    with DockerRedis() as server:
+        yield server
+
+
+@pytest.fixture
+def redis_broker(isolated_redis):
+    from uuid import uuid4
+
+    from resume_core.broker import make_broker
+
+    broker = make_broker(isolated_redis.url, "rb-test-" + uuid4().hex)
+    yield broker
+    broker.client.close()

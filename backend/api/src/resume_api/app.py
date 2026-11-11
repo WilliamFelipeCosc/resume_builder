@@ -162,7 +162,12 @@ class Boundary:
 
 
 def create_app(
-    *, service, runtime_root=None, environment="development", origin="http://127.0.0.1:8000"
+    *,
+    service,
+    runtime_root=None,
+    environment="development",
+    origin="http://127.0.0.1:8000",
+    reconciler=None,
 ):
     if (
         not re.fullmatch(r"http://127\.0\.0\.1:[1-9][0-9]{0,4}", origin)
@@ -177,7 +182,17 @@ def create_app(
             raise ValueError("A secure XDG runtime directory is required")
         with SessionChannel(runtime_root, environment, store=sessions) as channel:
             app.state.channel = channel
-            yield
+            stop = asyncio.Event()
+            task = None
+            if reconciler is not None:
+                await reconciler.tick()
+                task = asyncio.create_task(reconciler.run(stop))
+            try:
+                yield
+            finally:
+                stop.set()
+                if task is not None:
+                    await task
         sessions.clear()
 
     app = FastAPI(
@@ -189,6 +204,7 @@ def create_app(
         lifespan=lifespan,
     )
     app.state.sessions, app.state.service = sessions, service
+    app.state.reconciler = reconciler
     app.add_middleware(Boundary, sessions=sessions, origin=origin)
 
     @app.exception_handler(RequestValidationError)
