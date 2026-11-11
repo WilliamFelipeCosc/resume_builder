@@ -172,13 +172,24 @@ Adequação: todos critérios da prova cobertos, sem testes removidos/ignorados;
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 5 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Quick Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 5 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Quick Python passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário
 **Gate**: Quick Python
 **Commit**: `feat(m0): isolate environment paths`
+
+**Evidence:** `.venv/bin/pytest tests/unit/test_paths.py -q`: 19 passed; Ruff check/format e diff check verdes. Paths sem I/O de conteúdo, criação explícita, nenhum Redis/provider iniciado.
+
+| Critério / FND | Assertion / resultado definido | Reverse mapping |
+|---|---|---|
+| XDG e namespace por ambiente, FND-22 | tests/unit/test_paths.py:15…19 paths exatos e diretório vazio; :24…27 defaults HOME | manter: resolução sem side effects |
+| Nomes/paths inválidos, FND-22 | :34 `raises(ValueError, match="environment")`; :69 relative/absolute; :78 symlink | manter: configuração segura |
+| Teste temporário explícito, FND-22 | :39 test_root obrigatório; :49…52 paths temporários ignoram XDG; :56 recusa root em dev; :61 recusa fora de temp | manter: proteção dados locais |
+| Diretórios privados, FND-22/23 | :87 `st_mode & 0o777 == 0o700`; :93 recusa existente inseguro; :95 sem alterar permissões | manter: criação somente explícita |
+
+Adequação: 19 casos necessários aos critérios de configuração/isolamento, nenhuma leitura de private nem dependência de sistema iniciada. Nenhum teste removido/ignorado.
 
 ### T6: Contrato Pydantic do diagnóstico
 

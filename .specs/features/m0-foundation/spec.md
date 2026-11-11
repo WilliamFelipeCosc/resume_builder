@@ -1,6 +1,6 @@
 # M0 — Foundation mínima
 
-**Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T4 concluídas; bootstrap isolado comprovado em Chromium headless, fluxo integrado pendente.
+**Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T5 concluídas; bootstrap isolado e paths verificados, fluxo integrado pendente.
 **Gathered:** 2026-11-11.
 **Context:** [context.md](context.md).
 **Fontes:** [PROJECT_SOURCE.md](../../../PROJECT_SOURCE.md), [roadmap](../../../docs/roadmap/milestones.md), [ACs](../../../docs/roadmap/acceptance-criteria.md).
@@ -175,7 +175,7 @@ Uma nova intenção após estado terminal cria outro ID e outra chave. Repetir a
 | FND-19 | Migração | AC-M0-001 | Tasks: T7, T22 | Pending |
 | FND-20 | OpenAPI e cliente TS | AC-M0-001 | Tasks: T1, T3, T6, T19, T22 | Pending |
 | FND-21 | Checks locais | REQ-QA-001; AC-M0-001/002 | Tasks: T1, T2, T3, T21, T22 | Partial: T1/T2/T3 |
-| FND-22 | Isolamento | REQ-SEC-001/002; entrevista | Tasks: T2, T5, T7, T21, T22 | Partial: T2 |
+| FND-22 | Isolamento | REQ-SEC-001/002; entrevista | Tasks: T2, T5, T7, T21, T22 | Partial: T2/T5 |
 | FND-23 | Operação manual | REQ-LIN-001; ADR-002/012 | Tasks: T1, T5, T22 | Pending |
 
 **Coverage:** 23 requisitos, todos mapeados às 22 tarefas propostas; nenhum implementado ou verificado. Desenho e tarefas aprovados; T1 documental concluída.
