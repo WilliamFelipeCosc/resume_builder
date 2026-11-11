@@ -8,7 +8,7 @@ from uuid import UUID, uuid4
 
 from sqlalchemy import Engine, func, insert, select, update
 
-from resume_core.contracts import DiagnosticExecution, DiagnosticResult
+from resume_core.contracts import DiagnosticError, DiagnosticExecution, DiagnosticResult
 from resume_core.database import diagnostic_runs as runs
 
 EPOCH = datetime(1970, 1, 1, tzinfo=UTC)
@@ -172,3 +172,62 @@ class DiagnosticRepository:
                 .returning(runs.c.id)
             ).first()
             return row is not None
+
+    @staticmethod
+    def _failure_values(now: int, code=None):
+        return dict(
+            status="failed" if code else "pending",
+            updated_at=now,
+            lease_token=None,
+            lease_expires_at=None,
+            result=None,
+            delivery_warning=None,
+            error=DiagnosticError.for_code(code).model_dump() if code else None,
+            next_delivery_at=now,
+        )
+
+    def fail_attempt(self, execution_id: UUID, token: UUID) -> bool:
+        with self._write() as (connection, now):
+            row = (
+                connection.execute(
+                    select(runs).where(
+                        runs.c.id == str(execution_id),
+                        runs.c.status == "running",
+                        runs.c.lease_token == str(token),
+                        runs.c.lease_expires_at > now,
+                        runs.c.created_at > now - TOTAL_US,
+                    )
+                )
+                .mappings()
+                .first()
+            )
+            if row is None:
+                return False
+            code = "attempts_exhausted" if row["attempt_count"] >= 3 else None
+            connection.execute(
+                update(runs).where(runs.c.id == row["id"]).values(**self._failure_values(now, code))
+            )
+            return True
+
+    def reconcile(self) -> int:
+        changed = 0
+        with self._write() as (connection, now):
+            rows = (
+                connection.execute(select(runs).where(runs.c.status.in_(ACTIVE))).mappings().all()
+            )
+            for row in rows:
+                if row["created_at"] + TOTAL_US <= now:
+                    code = "deadline_exceeded"
+                elif row["status"] == "running" and row["lease_expires_at"] <= now:
+                    code = "attempts_exhausted" if row["attempt_count"] >= 3 else None
+                elif row["status"] != "running" and row["attempt_count"] >= 3:
+                    code = "attempts_exhausted"
+                else:
+                    continue
+                connection.execute(
+                    update(runs)
+                    .where(runs.c.id == row["id"])
+                    .values(**self._failure_values(now, code))
+                )
+                changed += 1
+        return changed

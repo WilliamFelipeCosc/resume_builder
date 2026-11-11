@@ -324,13 +324,26 @@ Adequacy:12 cases cover all T9 local outcomes; no assertions weakened/removed/sk
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 9 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário + integração
 **Gate**: Full focal
 **Commit**: `feat(m0): reconcile diagnostic deadlines`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration/test_diagnostic_migration.py tests/integration/test_diagnostic_repository.py tests/integration/test_diagnostic_leases.py tests/integration/test_diagnostic_recovery.py -q`: 114 passed,11 recovery cases. Ruff + diff green, controlled clock with real SQLite; no waiting120s.
+
+| Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
+|---|---|---|
+| Recover abandoned lease, FND-08/09 | tests/integration/test_diagnostic_recovery.py:19 `recovered.id == original.id`, :22 status pending, :23 attempt1, :26 attempt2, :27 old token False, :28 new True | keep: same execution |
+| Failure/retry, FND-10 | tests/integration/test_diagnostic_recovery.py:35 failure True; :37 pending; :40 no final error; :41 duplicate False | keep: valid failure ownership |
+| Third failure, FND-11 | tests/integration/test_diagnostic_recovery.py:51 failed, :52 count3, :53 exact attempts_exhausted payload, :58 claim None; :71/:73 abandoned third same outcome | keep: budget |
+| Exact total deadline, FND-11 | tests/integration/test_diagnostic_recovery.py:81 no claim; :84 failed; :86 exact deadline_exceeded payload for120/120.000001/1000 | keep: deadline |
+| Before boundary / polling | tests/integration/test_diagnostic_recovery.py:98 zero changes; :99 equal DTO; :109 capped microsecond before120 | keep: precise limits |
+| Immutable terminal, FND-12 | tests/integration/test_diagnostic_recovery.py:118 expired failure False; :124 failed unchanged; :135 success unchanged | keep: no late effects |
+
+Adequacy: all11 cases map to approved time/recovery criteria; no removed/weakened/skipped tests. Real Worker interruption belongs T21.
 
 ### T11: Serviço de diagnóstico autorizado
 
