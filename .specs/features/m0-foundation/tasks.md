@@ -265,13 +265,24 @@ Adequacy: all local T7 criteria covered with real SQLite; no removed/skipped tes
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 7 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 7 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: integração
 **Gate**: Full focal
 **Commit**: `feat(m0): persist diagnostic intentions`
+
+**Evidence:** `.venv/bin/pytest tests/unit tests/integration/test_diagnostic_migration.py tests/integration/test_diagnostic_repository.py -q`: 91 passed (8 new repository cases). Ruff check/format green. BEGIN IMMEDIATE serializes create; commit precedes return and no broker dependency exists.
+
+| Criterion / FND | Assertion evidence / expected outcome | Reverse mapping |
+|---|---|---|
+| Persist full pending, FND-01 | tests/integration/test_diagnostic_repository.py:28–40 values pending/0/UUID/UTC/null and durable row | keep: intention contract |
+| latest/reopen, FND-04 | same file empty/latest/timestamp-tie tests: None, same DTO, deterministic max UUID | keep: latest query |
+| same key incl terminal, FND-05 | same file replay/terminal tests: created=False and equal prior execution while another active | keep: idempotency |
+| concurrent distinct/same keys, FND-06 | same file concurrent tests: one created and one ID; distinct keys one winner | keep: SQLite concurrency |
+
+Adequacy: eight cases map to T8, no speculative tests. Full HTTP409 and queue ordering remain T15/T17. No tests removed/skipped.
 
 ### T9: Posse e conclusão condicionais
 
