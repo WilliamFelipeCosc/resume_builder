@@ -7,7 +7,7 @@
 
 Usar `tlc-spec-driven` e seu fluxo Execute/Critical Rules. Uma tarefa por vez; testes na mesma tarefa, gate verde e atualização de tasks/spec antes do commit atômico Conventional Commits. Sem push/deploy. Se a skill não estiver disponível, parar e informar.
 
-Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T12 concluídas com gates registrados; T13–T22 pendentes.
+Prova de bootstrap em T4 bloqueia T13: falha exige revisão, sem fallback de autorização. Contagens abaixo são mínimos de casos planejados, não resultados nem quotas que substituam cobertura. Registrar contagem real e nenhum teste removido silenciosamente. T1–T18 concluídas com gates registrados; T19–T22 pendentes.
 
 ## Test Coverage Matrix
 
@@ -567,13 +567,26 @@ Adequacy:9 scenarios cover listed T17 outcomes; broker mocks only supplement rea
 **Tools**: terminal/patch; Context7 para APIs novas; Serena para navegação quando houver código; skill tlc-spec-driven. Proposta sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entrega descrita em What funciona e atende os FNDs citados.
-- [ ] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
-- [ ] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
+- [x] Entrega descrita em What funciona e atende os FNDs citados.
+- [x] Testes da camada escritos junto da implementação, mínimo planejado de 8 casos/checks pertinentes; contagem real registrada.
+- [x] Gate Full focal passa com comandos e evidências registrados; tasks/spec atualizados no commit atômico.
 
 **Tests**: unitário + integração
 **Gate**: Full focal
 **Commit**: `feat(m0): process fixed diagnostic`
+
+**Evidence:** accumulated `.venv/bin/pytest tests/unit tests/integration tests/smoke -q --basetemp=/tmp/rb-b3`:232 passed,10 new Worker cases incl actual separate Worker process/Redis/SQLite. `pnpm --filter web test`3 passed; typecheck/build, Chromium probe1 passed, uv locked, Ruff/format green. Starlette emits one HTTPX deprecation warning; Chromium emits environment color warning; neither suppressed. No tests removed/weakened.
+
+| Criterion / FND | Assertion evidence / expected value | Reverse mapping |
+|---|---|---|
+| Real Worker/fixed effect, FND-02/12 | tests/integration/test_diagnostic_worker.py:58/59 sameID/correlation; :60 fixed result; :61 no error/warning; :62 attempt1; :66 duplicate redelivery unchanged; :70 exit0 | keep: real subprocess transport/persistence |
+| Claim/deadline validity, FND-09/10/11 | :89 no claim means no fixture; :90 lease unchanged; :101–106 exact30s rejects success and reconciles pending/count1; :113/114 no start at120s/count0; :116 deadline_exceeded | keep: validity fence |
+| Third failure/terminal, FND-11/12 | :128 exact attempts1..3; :130/131 failed/attempts_exhausted; :132 no result/warning; :134 terminal unchanged | keep: bounded retries |
+| Correlation/postcommit replay | :140/141 invalid ID/correlation cannot claim; :142 unchanged; :159–163 postcommit error still succeeded/count1/fixed result/unchanged | keep: duplicates/error recovery |
+| Safe process/logs, FND-18 | :71 stdout empty; :72 JSON logs; :75–77 canonical IDs/count; :78 succeeded event; :178–183 sanitized failure; :200–204 startup exit1 JSON no sentinel/trace | keep: safe CLI/Worker logs |
+| Broker retry policy, FND-09/10 | :189 max_retries0; :190 supplemental30000ms TimeLimit | keep: one domain retry budget |
+
+Adequacy:10 scenarios anchored to T18/FNDs, resulting state/payload verified. Actual process uses one Dramatiq Worker with one thread; broker default middleware inspected, no metrics server; safe logging configured after imports and before setup. Real kill/restart during processing remains expanded T21 harness; no desktop/complete UI claim.
 
 ### Phase 4: Contrato, Web e aceite real
 
