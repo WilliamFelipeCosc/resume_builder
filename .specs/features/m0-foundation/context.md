@@ -1,7 +1,7 @@
 # M0 — Contexto de kickoff
 
 **Gathered:** 2026-11-11
-**Status:** Decisões funcionais coletadas; contexto e spec propostos para revisão. Implementação não iniciada.
+**Status:** Decisões funcionais, contrato e abordagem de recuperação aprovados; desenho técnico aprovado em 2026-11-11. Implementação não iniciada.
 **Spec:** [spec.md](spec.md).
 **Autoridade:** PROJECT_SOURCE.md e docs/specification-sync-2026-11-11.md.
 
@@ -58,7 +58,13 @@ Foundation executável mínima para o caminho M0 → M0.5 → M1 → M2 → M3. 
 - Não há necessidade de matriz multiplataforma em M0; o ambiente observado é o ponto inicial, sem alegação de suporte validado.
 - Ordem das tarefas e testes será apresentada após revisão da spec e do desenho, mantendo gate separado de M0.5 e M3 prioritário.
 
-Propostas abertas não constituem escolhas aprovadas. Nenhuma spec ou lista final de tarefas foi aprovada; testes de aplicação NOT_RUN.
+## Aprovações de 2026-11-11 — revisão da spec
+
+- Proprietário aprovou UUIDs/UTC, resultado fixo `m0-v1`, rotas de health/diagnóstico, códigos HTTP, limite de 1 KiB e polling/reconciliação de 1 s.
+- Aprovado `deliveryWarning` opcional com código estável e mensagem sanitizada para indisponibilidade transitória do Redis; removido na recuperação da entrega. `error` continua exclusivo de falha terminal.
+- Aprovado usar o registro do diagnóstico como intenção durável, reconciliador na API e posse temporária por tentativa; sem outbox separada em M0.
+- A garantia é efeito persistido único; não é entrega única de mensagens.
+- Estas decisões substituem o caráter proposto dos respectivos itens acima. DDL, bootstrap e desenho detalhado aprovados pelo proprietário em 2026-11-11; prova técnica continua obrigatória. O limite de 30 s é de validade da tentativa, sem garantia de interrupção física de código bloqueado. Testes de aplicação NOT_RUN.
 
 ## Deferred Ideas
 
