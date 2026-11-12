@@ -225,13 +225,17 @@ Persistência transacional e replay entre processos permanecem para T6–T9.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Upgrade/downgrade/upgrade passam em banco temporário; tabela não relacionada é preservada; histórico M0 não é alterado e schema antigo é detectável.
-- [ ] Cobertura da camada Migração satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Upgrade/downgrade/upgrade passam em banco temporário; tabela não relacionada é preservada; histórico M0 não é alterado e schema antigo é detectável.
+- [x] Cobertura da camada Migração satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration — tests/integration/mcp_spike/test_migration.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_migration.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): migrate synthetic report database`
+
+**Evidência T6**: 5 testes focais passaram, cobrindo banco não migrado,
+upgrade e constraints, ciclo reversível com dados alheios preservados,
+versão desconhecida e isolamento do banco M0. Ruff check e format passaram.
 
 ### T7: Repositório transacional idempotente
 
