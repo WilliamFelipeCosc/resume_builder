@@ -143,6 +143,8 @@ T2 cobre parcialmente os contratos de SPIKE-01, SPIKE-02, SPIKE-06, SPIKE-11 e
 SPIKE-19; os requisitos permanecem pendentes de execução pelos serviços e clientes.
 T3 cobre a fixture de SPIKE-02, SPIKE-04, SPIKE-12 e SPIKE-14; os requisitos
 continuam pendentes de validação ponta a ponta e conferência do proprietário.
+T4 implementa parte da política de SPIKE-03, SPIKE-04, SPIKE-10, SPIKE-18 e
+SPIKE-19; seu uso efetivo pelos serviços e adapter ainda precisa de verificação.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

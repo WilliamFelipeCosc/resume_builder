@@ -1,7 +1,7 @@
 # M0.5 — Tarefas de implementação
 
 **Status:** Em execução — tarefas, matriz de testes e gates aprovados pelo proprietário
-em 2026-11-12. T1–T3 concluídas; T4–T20 pendentes.
+em 2026-11-12. T1–T4 concluídas; T5–T20 pendentes.
 **Design:** [design.md](design.md), aprovado em 2026-11-12. **Spec:** [spec.md](spec.md).
 **Escopo:** REQ-MCP-001, recortes SEC/OPS/QA; AC-M05-001/002; 21 requisitos SPIKE.
 
@@ -175,13 +175,19 @@ linhas 27–30 conferem restrições explícitas. A demonstração real permanec
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Perfis Hermes/Codex têm o schema aprovado; faltas/extras/wildcards/permissões/UID/symlinks inválidos falham fechado; clientId de tool não amplia acesso e nenhum segredo é necessário.
-- [ ] Cobertura da camada Política/perfis satisfeita, com pelo menos 12 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Perfis Hermes/Codex têm o schema aprovado; faltas/extras/wildcards/permissões/UID/symlinks inválidos falham fechado; clientId de tool não amplia acesso e nenhum segredo é necessário.
+- [x] Cobertura da camada Política/perfis satisfeita, com pelo menos 12 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit + integration — tests/unit/mcp_spike/test_policy.py tests/integration/mcp_spike/test_profiles.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_policy.py tests/integration/mcp_spike/test_profiles.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): enforce local profile capabilities`
+
+**Evidência T4**: 22 testes focais passaram; ruff check, format --check e
+git diff --check passaram. `test_policy.py` cobre perfis, campos extras, curingas,
+escopos e ausência de principal; `test_profiles.py` cobre arquivos ausentes ou
+removidos, permissões, proprietário, symlinks e identidade divergente. A ligação
+dos serviços à política e a identidade nas chamadas MCP serão verificadas em T8–T12.
 
 ### T5: Metadados e engine SQLite isolados
 
