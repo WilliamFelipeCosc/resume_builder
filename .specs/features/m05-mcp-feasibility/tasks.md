@@ -448,13 +448,19 @@ evitar colisão de basename na coleta com teste M0, sem alteração de conteúdo
 **Tools**: Terminal/patch/git; Serena; Context7; fontes oficiais; skills tlc-spec-driven e OpenAI Docs para Codex. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Comandos já existem e são verificáveis; tempo de investigação e diagnóstico estão definidos; fonte oficial orienta clientes; detalhes/credenciais pessoais não são copiados e edição global não é presumida.
-- [ ] Cobertura da camada Documentação satisfeita, com pelo menos 3 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Comandos já existem e são verificáveis; tempo de investigação e diagnóstico estão definidos; fonte oficial orienta clientes; detalhes/credenciais pessoais não são copiados e edição global não é presumida.
+- [x] Cobertura da camada Documentação satisfeita, com pelo menos 3 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: documental — Links locais, comandos --help e comparação dos fragmentos com o contrato implementado
 **Gate**: Documental
 **Commit**: `docs(mcp): document local compatibility procedure`
+
+**Evidência T16**: `just --list`, quatro dry-runs init/serve/reports/form e
+ajudas `resume_mcp_server`, `serve`, `form_server` e `codex mcp add` passaram;
+TOML parseado com `tomllib`, argumentos/perfil Hermes e duas fixtures locais
+verificados; `git diff --check` passou. Fontes oficiais de Hermes e Codex no
+runbook. `codex-cli 0.167.1` inventariado; versão Hermes e testes live pendentes.
 
 ### T17: Compatibilidade real Hermes
 
