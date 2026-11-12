@@ -42,7 +42,7 @@ as suites do spike são novos alvos planejados, criados com cada componente.
 | Serviço | unit | Cada REQ aplicável e falhas, sem acesso não autorizado a fixture/repositório | tests/unit/mcp_spike/test_*service.py | Quick focal |
 | Logging | unit + integration | Sem echo de segredos/inputs rejeitados; stdout somente protocolo e stderr sanitizado | tests/unit/mcp_spike/test_logging.py; tests/integration/mcp_spike/test_dependency_logging.py | Full focal |
 | Adapter MCP | integration | Subprocesso stdio/SDK: negotiation, schemas, duas tools, resultados e todos os negativos | tests/integration/mcp_spike/test_stdio_adapter.py | Full focal |
-| Operação | integration ou smoke | Init/serve/reports com isolamento, migração explícita, comandos e encerramento | tests/integration/mcp_spike/test_operations.py; tests/smoke/test_mcp_spike_commands.py | Full focal ou Smoke focal conforme tarefa |
+| Operação | integration ou smoke | Init/serve/reports com isolamento, migração explícita, comandos e encerramento | tests/integration/mcp_spike/test_mcp_spike_operations.py; tests/smoke/test_mcp_spike_commands.py | Full focal ou Smoke focal conforme tarefa |
 | Servidor fake | integration | Somente assets fixos em loopback; Host, traversal e POST negados | tests/integration/mcp_spike/test_form_server.py | Full focal |
 | Documentação | documental | Links/comandos/fontes correspondem ao código e não contêm dados privados | docs/engineering/m05-mcp-operation.md | Documental |
 | Live CLI | live | Hermes e Codex reais: list/get/report/replay; versões e recibos | .specs/features/m05-mcp-feasibility/live/ | Live CLI |
@@ -363,8 +363,8 @@ Há dois avisos de depreciação dos aliases MCP SDK no teste; CLIs reais penden
 - [x] Cobertura da camada Operação satisfeita, com pelo menos 10 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
 - [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
-**Tests**: integration — tests/integration/mcp_spike/test_operations.py
-**Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_operations.py -q --basetemp=/tmp/rb-m05-tests; Lint
+**Tests**: integration — tests/integration/mcp_spike/test_mcp_spike_operations.py
+**Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_mcp_spike_operations.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): add scoped local lifecycle commands`
 
 **Evidência T12**: 12 testes de subprocesso passaram incluindo duas sessões MCP
@@ -423,13 +423,18 @@ traversal, arquivos não autorizados e POST. Ruff check, format e diff --check p
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] just --list e invocações de ajuda/dry-run apontam para comandos implementados; nenhuma instalação ocorre em serve; check-mcp-spike roda apenas suites determinísticas, nunca CLIs/providers live.
-- [ ] Cobertura da camada Operação satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] just --list e invocações de ajuda/dry-run apontam para comandos implementados; nenhuma instalação ocorre em serve; check-mcp-spike roda apenas suites determinísticas, nunca CLIs/providers live.
+- [x] Cobertura da camada Operação satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: smoke — tests/smoke/test_mcp_spike_commands.py
 **Gate**: Smoke focal: uv run --all-packages --locked pytest tests/smoke/test_mcp_spike_commands.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `chore(mcp): wire reproducible local commands`
+
+**Evidência T15**: 6 testes smoke passaram; check-mcp-spike passou com 168 testes;
+gate de fase `just check-python` passou com 422 testes e `just lint` passou. Dois
+avisos conhecidos de aliases SDK em testes. Renomeado teste de operação MCP para
+evitar colisão de basename na coleta com teste M0, sem alteração de conteúdo.
 
 ### Phase 4: Operação e validação real
 

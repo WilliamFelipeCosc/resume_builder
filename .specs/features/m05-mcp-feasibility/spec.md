@@ -165,6 +165,8 @@ T13 acrescenta formulário fictício sem envio para SPIKE-04/12/13/14; demonstra
 em navegador externo e conferência visual do proprietário continuam pendentes.
 T14 serve somente o formulário em loopback para SPIKE-04/12/13; navegação real
 por cliente externo e conferência do proprietário continuam pendentes.
+T15 oferece comandos reproduzíveis e check determinístico para SPIKE-04/16/18;
+verificação das duas CLIs reais e aceite do proprietário continuam pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

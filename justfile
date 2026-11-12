@@ -27,6 +27,22 @@ worker:
 open:
     uv run --all-packages --locked python -m resume_api open
 
+# The MCP spike uses only the already installed environment.
+mcp-spike-init:
+    uv run --all-packages --locked --no-sync python -m resume_mcp_server init
+
+mcp-spike-serve profile:
+    uv run --all-packages --locked --no-sync python -m resume_mcp_server serve --profile {{quote(profile)}}
+
+mcp-spike-form:
+    uv run --all-packages --locked --no-sync python -m resume_mcp_server.form_server
+
+mcp-spike-reports profile:
+    uv run --all-packages --locked --no-sync python -m resume_mcp_server reports --profile {{quote(profile)}}
+
+check-mcp-spike:
+    uv run --all-packages --locked --no-sync pytest tests/unit/mcp_spike tests/integration/mcp_spike tests/smoke/test_mcp_spike_workspace.py tests/smoke/test_mcp_spike_commands.py -q --basetemp=/tmp/rb-m05-tests
+
 build:
     pnpm --filter web build
 
