@@ -381,13 +381,16 @@ Ruff check, format e diff --check passaram; clientes reais permanecem pendentes.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Campos/rótulos correspondem aos quatro valores aprovados; não há valores de resposta no HTML nem script/browser runner; controle de envio é inerte e a página identifica claramente o experimento.
-- [ ] Cobertura da camada Fixture satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Campos/rótulos correspondem aos quatro valores aprovados; não há valores de resposta no HTML nem script/browser runner; controle de envio é inerte e a página identifica claramente o experimento.
+- [x] Cobertura da camada Fixture satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit — tests/unit/mcp_spike/test_form_fixture.py
 **Gate**: Quick focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_form_fixture.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): add local fictional application form`
+
+**Evidência T13**: 4 testes passaram para rótulos, ausência de valores, scripts e
+submissão, e identificação do experimento. Ruff check, format e diff --check passaram.
 
 ### T14: Servidor local restrito do formulário
 

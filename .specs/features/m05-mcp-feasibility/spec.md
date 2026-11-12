@@ -161,6 +161,8 @@ T11 conecta as duas tools stdio aos serviços e valida erros e schemas em testes
 subprocesso; execução operacional e evidência com clientes reais seguem pendentes.
 T12 oferece init, serve e relatórios locais isolados para SPIKE-04/05/07/08/16/18/19;
 compatibilidade nas CLIs reais e critérios de aceite continuam pendentes.
+T13 acrescenta formulário fictício sem envio para SPIKE-04/12/13/14; demonstração
+em navegador externo e conferência visual do proprietário continuam pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |
