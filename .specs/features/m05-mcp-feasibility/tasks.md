@@ -315,13 +315,17 @@ O gate de fase `just check-python` passou com 365 testes; `just lint` passou.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Sentinelas em valores/exceções não aparecem nos streams; eventos úteis permanecem identificáveis; dependências não contaminam stdout e regressão da política M0 passa.
-- [ ] Cobertura da camada Logging satisfeita, com pelo menos 6 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Sentinelas em valores/exceções não aparecem nos streams; eventos úteis permanecem identificáveis; dependências não contaminam stdout e regressão da política M0 passa.
+- [x] Cobertura da camada Logging satisfeita, com pelo menos 6 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit + integration — tests/unit/mcp_spike/test_logging.py tests/integration/mcp_spike/test_dependency_logging.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_logging.py tests/integration/mcp_spike/test_dependency_logging.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): sanitize protocol process logging`
+
+**Evidência T10**: 6 testes focais passaram, incluindo subprocessos com FastMCP;
+22 testes passaram incluindo regressão M0. Ruff check, format e diff --check passaram.
+O processo MCP deve chamar `configure_mcp_logging` antes de servir requests.
 
 ### T11: Adapter FastMCP com duas ferramentas
 

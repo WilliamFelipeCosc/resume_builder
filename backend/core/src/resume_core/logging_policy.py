@@ -22,6 +22,9 @@ EVENTS = frozenset(
         "bootstrap_rejected",
         "internal_error",
         "dependency_event",
+        "mcp_server_started",
+        "mcp_request_completed",
+        "mcp_request_failed",
     }
 )
 CODES = frozenset(
@@ -90,3 +93,10 @@ def configure_logging(*, stream: TextIO | None = None) -> None:
         wrapper_class=structlog.stdlib.BoundLogger,
         cache_logger_on_first_use=False,
     )
+
+
+def configure_mcp_logging(*, stream: TextIO | None = None) -> None:
+    """Load FastMCP's handlers first, then replace them with the allowlist."""
+    import fastmcp  # noqa: F401
+
+    configure_logging(stream=stream)

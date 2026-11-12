@@ -155,6 +155,8 @@ T8 cobre consulta autorizada e negação antes da recuperação (SPIKE-02/03/04/
 integração com o adapter e clientes continua pendente.
 T9 cobre autorização e identidade do serviço de relatos para SPIKE-06/08/09/10/
 11/15/18/20; adapter, CLIs e demonstração real permanecem pendentes.
+T10 adiciona política de logs MCP para SPIKE-04/05/16; integração ao processo
+stdio e validação nos clientes permanecem pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |
