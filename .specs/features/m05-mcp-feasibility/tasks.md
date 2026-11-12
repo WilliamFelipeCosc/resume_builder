@@ -402,13 +402,16 @@ submissão, e identificação do experimento. Ruff check, format e diff --check 
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] GET esperado funciona; Host inválido, traversal, arquivos fora da whitelist e POST não são aceitos; sem listagem de diretórios, browser integrado ou endpoint MCP HTTP.
-- [ ] Cobertura da camada Servidor fake satisfeita, com pelo menos 8 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] GET esperado funciona; Host inválido, traversal, arquivos fora da whitelist e POST não são aceitos; sem listagem de diretórios, browser integrado ou endpoint MCP HTTP.
+- [x] Cobertura da camada Servidor fake satisfeita, com pelo menos 8 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration — tests/integration/mcp_spike/test_form_server.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_form_server.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): serve the restricted demo form`
+
+**Evidência T14**: 13 testes HTTP passaram para asset fixo, bind loopback, Host,
+traversal, arquivos não autorizados e POST. Ruff check, format e diff --check passaram.
 
 ### T15: Comandos just reproduzíveis do spike
 
