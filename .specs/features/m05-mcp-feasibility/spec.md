@@ -157,6 +157,8 @@ T9 cobre autorização e identidade do serviço de relatos para SPIKE-06/08/09/1
 11/15/18/20; adapter, CLIs e demonstração real permanecem pendentes.
 T10 adiciona política de logs MCP para SPIKE-04/05/16; integração ao processo
 stdio e validação nos clientes permanecem pendentes.
+T11 conecta as duas tools stdio aos serviços e valida erros e schemas em testes de
+subprocesso; execução operacional e evidência com clientes reais seguem pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

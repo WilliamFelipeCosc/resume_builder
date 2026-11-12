@@ -337,13 +337,17 @@ O processo MCP deve chamar `configure_mcp_logging` antes de servir requests.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Cliente SDK negocia subprocesso stdio e confere tools/list, schemas e saídas; extras/coerções/tamanhos falham sem efeito; erros usam isError e códigos seguros sem echo; nenhuma tool genérica é exposta.
-- [ ] Cobertura da camada Adapter MCP satisfeita, com pelo menos 12 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Cliente SDK negocia subprocesso stdio e confere tools/list, schemas e saídas; extras/coerções/tamanhos falham sem efeito; erros usam isError e códigos seguros sem echo; nenhuma tool genérica é exposta.
+- [x] Cobertura da camada Adapter MCP satisfeita, com pelo menos 12 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration — tests/integration/mcp_spike/test_stdio_adapter.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_stdio_adapter.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): expose scoped stdio tools`
+
+**Evidência T11**: 16 testes de subprocesso stdio passaram, cobrindo catálogo,
+autorização, limites, erros sanitizados, replay e conflito; lint/format passaram.
+Há dois avisos de depreciação dos aliases MCP SDK no teste; CLIs reais pendentes.
 
 ### T12: CLI de composição e ciclo de vida
 
