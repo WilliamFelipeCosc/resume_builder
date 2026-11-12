@@ -247,13 +247,17 @@ versão desconhecida e isolamento do banco M0. Ruff check e format passaram.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Replay preserva recibo/registro/timestamp; conteúdo diferente não altera original; falha de commit/lock não retorna sucesso; reinício e dois processos concorrentes produzem um único evento por chave.
-- [ ] Cobertura da camada Persistência satisfeita, com pelo menos 10 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Replay preserva recibo/registro/timestamp; conteúdo diferente não altera original; falha de commit/lock não retorna sucesso; reinício e dois processos concorrentes produzem um único evento por chave.
+- [x] Cobertura da camada Persistência satisfeita, com pelo menos 10 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration — tests/integration/mcp_spike/test_repository.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_repository.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): persist idempotent progress receipts`
+
+**Evidência T7**: 12 testes focais passaram, cobrindo persistência, replay,
+conflito, escopo da chave, falha antes do commit, lock e retry, processos
+sequenciais e concorrentes. Ruff check e format passaram.
 
 ### T8: Serviço autorizado de consulta
 

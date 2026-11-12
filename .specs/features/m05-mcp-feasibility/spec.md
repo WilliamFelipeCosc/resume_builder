@@ -149,6 +149,8 @@ T5 define o armazenamento de SPIKE-04, SPIKE-07, SPIKE-08, SPIKE-09, SPIKE-11
 e SPIKE-21; os fluxos transacionais e entre processos seguem pendentes.
 T6 adiciona migração reversível isolada para SPIKE-04, SPIKE-07 e SPIKE-11;
 persistência de recibos entre processos e validação de clientes continuam pendentes.
+T7 cobre a persistência transacional, replay, conflito, falhas e concorrência de
+SPIKE-06/07/08/09/20/21; execução via serviços e clientes permanece pendente.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |
