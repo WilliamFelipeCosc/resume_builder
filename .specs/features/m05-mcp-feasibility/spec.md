@@ -153,6 +153,8 @@ T7 cobre a persistência transacional, replay, conflito, falhas e concorrência 
 SPIKE-06/07/08/09/20/21; execução via serviços e clientes permanece pendente.
 T8 cobre consulta autorizada e negação antes da recuperação (SPIKE-02/03/04/18/19);
 integração com o adapter e clientes continua pendente.
+T9 cobre autorização e identidade do serviço de relatos para SPIKE-06/08/09/10/
+11/15/18/20; adapter, CLIs e demonstração real permanecem pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

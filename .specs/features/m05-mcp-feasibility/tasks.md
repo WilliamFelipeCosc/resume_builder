@@ -291,13 +291,17 @@ Ruff check e format passaram. Execução pelo adapter continua pendente.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Relato permitido produz receiptId e reported_by_agent; principal sem escrita não acessa repositório; nenhum argumento permite confirmação ou outro cliente; erros/replay conservam semântica aprovada.
-- [ ] Cobertura da camada Serviço satisfeita, com pelo menos 8 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Relato permitido produz receiptId e reported_by_agent; principal sem escrita não acessa repositório; nenhum argumento permite confirmação ou outro cliente; erros/replay conservam semântica aprovada.
+- [x] Cobertura da camada Serviço satisfeita, com pelo menos 8 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit — tests/unit/mcp_spike/test_progress_service.py
 **Gate**: Quick focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_progress_service.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): authorize progress reporting`
+
+**Evidência T9**: 11 testes focais passaram, cobrindo recibo por identidade do
+perfil, autorização antes de escrita, rejeição de extras, erros e replay.
+O gate de fase `just check-python` passou com 365 testes; `just lint` passou.
 
 ### Phase 3: Servidor MCP e cenário local
 

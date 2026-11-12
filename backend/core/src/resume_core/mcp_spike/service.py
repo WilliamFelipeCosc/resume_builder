@@ -2,8 +2,14 @@
 
 from collections.abc import Callable
 
-from resume_core.mcp_spike.contracts import ApplicationContext, ContextQuery
+from resume_core.mcp_spike.contracts import (
+    ApplicationContext,
+    ContextQuery,
+    ProgressReport,
+    Receipt,
+)
 from resume_core.mcp_spike.policy import Profile, require
+from resume_core.mcp_spike.repository import Repository
 
 
 class ContextNotFound(Exception):
@@ -20,3 +26,13 @@ class ContextService:
         if context is None or context.application_id != query.application_id:
             raise ContextNotFound
         return context
+
+
+class ProgressService:
+    def __init__(self, repository: Repository):
+        self._repository = repository
+
+    def report(self, principal: Profile | None, request: ProgressReport) -> Receipt:
+        require(principal, "application_progress:write", request.application_id)
+        assert principal is not None
+        return self._repository.record(principal.client_id, request)
