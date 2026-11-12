@@ -359,13 +359,17 @@ Há dois avisos de depreciação dos aliases MCP SDK no teste; CLIs reais penden
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Init prepara apenas ambiente sintético; serve exige perfil e schema válido sem migrar silenciosamente; restart preserva recibos; perfil removido bloqueia novas sessões; inspeção filtra perfil e não aceita SQL/path arbitrário.
-- [ ] Cobertura da camada Operação satisfeita, com pelo menos 10 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Init prepara apenas ambiente sintético; serve exige perfil e schema válido sem migrar silenciosamente; restart preserva recibos; perfil removido bloqueia novas sessões; inspeção filtra perfil e não aceita SQL/path arbitrário.
+- [x] Cobertura da camada Operação satisfeita, com pelo menos 10 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration — tests/integration/mcp_spike/test_operations.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_operations.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): add scoped local lifecycle commands`
+
+**Evidência T12**: 12 testes de subprocesso passaram incluindo duas sessões MCP
+com replay, perfis removidos, schema antigo, symlinks e restrições de CLI.
+Ruff check, format e diff --check passaram; clientes reais permanecem pendentes.
 
 ### T13: Formulário HTML fictício
 
