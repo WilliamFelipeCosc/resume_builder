@@ -1,0 +1,14 @@
+{
+  "applicationId": "app-demo",
+  "jobSnapshotId": "synthetic-job-demo",
+  "resumeRevisionId": "synthetic-resume-demo",
+  "approvedAnswers": ["Tenho experiência fictícia em projetos de demonstração."],
+  "evidenceRefs": ["synthetic-evidence-demo"],
+  "restrictions": ["Dados fictícios para demonstração.", "Não enviar candidatura."],
+  "formValues": {
+    "fullName": "Alex Exemplo",
+    "email": "alex@example.invalid",
+    "targetRole": "Desenvolvedor de Demonstração",
+    "approvedAnswer": "Tenho experiência fictícia em projetos de demonstração."
+  }
+}

@@ -1,7 +1,7 @@
 # M0.5 — Tarefas de implementação
 
 **Status:** Em execução — tarefas, matriz de testes e gates aprovados pelo proprietário
-em 2026-11-12. T1–T2 concluídas; T3–T20 pendentes.
+em 2026-11-12. T1–T3 concluídas; T4–T20 pendentes.
 **Design:** [design.md](design.md), aprovado em 2026-11-12. **Spec:** [spec.md](spec.md).
 **Escopo:** REQ-MCP-001, recortes SEC/OPS/QA; AC-M05-001/002; 21 requisitos SPIKE.
 
@@ -152,13 +152,18 @@ aos critérios de T2; a validação em transporte e autorização permanece pend
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Fixture valida no DTO, cabe nos limites e contém app-demo; approvedAnswer corresponde à approvedAnswers; referências não apontam a private, KB real ou arquivos pessoais.
-- [ ] Cobertura da camada Fixture satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Fixture valida no DTO, cabe nos limites e contém app-demo; approvedAnswer corresponde à approvedAnswers; referências não apontam a private, KB real ou arquivos pessoais.
+- [x] Cobertura da camada Fixture satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit — tests/unit/mcp_spike/test_fixture.py
 **Gate**: Quick focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_fixture.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): add fictional application context fixture`
+
+**Evidência T3**: 4 testes focais passaram; ruff check, format --check e
+git diff --check passaram. `test_fixture.py` linhas 9–12 validam o DTO e tamanho;
+linhas 15–18 conferem candidatura/resposta; linhas 21–24 as referências sintéticas;
+linhas 27–30 conferem restrições explícitas. A demonstração real permanece pendente.
 
 ### T4: Perfis locais e política de capacidades
 

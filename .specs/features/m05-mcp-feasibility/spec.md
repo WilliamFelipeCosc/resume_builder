@@ -141,6 +141,8 @@ T1 concluída parcialmente para SPIKE-04, SPIKE-16 e SPIKE-18; os requisitos
 permanecem pendentes até os respectivos testes e evidências de integração.
 T2 cobre parcialmente os contratos de SPIKE-01, SPIKE-02, SPIKE-06, SPIKE-11 e
 SPIKE-19; os requisitos permanecem pendentes de execução pelos serviços e clientes.
+T3 cobre a fixture de SPIKE-02, SPIKE-04, SPIKE-12 e SPIKE-14; os requisitos
+continuam pendentes de validação ponta a ponta e conferência do proprietário.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |
