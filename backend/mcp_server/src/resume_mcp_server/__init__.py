@@ -1,0 +1,1 @@
+"""MCP spike adapter package."""

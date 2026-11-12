@@ -8,7 +8,7 @@ dependencies = []
 package = false
 
 [tool.uv.workspace]
-members = ["backend/core", "backend/api", "backend/worker"]
+members = ["backend/core", "backend/api", "backend/worker", "backend/mcp_server"]
 
 [tool.uv.sources]
 resume-core = { workspace = true }
