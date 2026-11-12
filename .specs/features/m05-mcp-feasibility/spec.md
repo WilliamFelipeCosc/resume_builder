@@ -151,6 +151,8 @@ T6 adiciona migração reversível isolada para SPIKE-04, SPIKE-07 e SPIKE-11;
 persistência de recibos entre processos e validação de clientes continuam pendentes.
 T7 cobre a persistência transacional, replay, conflito, falhas e concorrência de
 SPIKE-06/07/08/09/20/21; execução via serviços e clientes permanece pendente.
+T8 cobre consulta autorizada e negação antes da recuperação (SPIKE-02/03/04/18/19);
+integração com o adapter e clientes continua pendente.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

@@ -269,13 +269,17 @@ sequenciais e concorrentes. Ruff check e format passaram.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Contexto autorizado coincide com a fixture; principal ausente/sem capacidade/candidatura fora de escopo não recupera dados; fixture concedida ausente falha sem inventar contexto.
-- [ ] Cobertura da camada Serviço satisfeita, com pelo menos 8 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Contexto autorizado coincide com a fixture; principal ausente/sem capacidade/candidatura fora de escopo não recupera dados; fixture concedida ausente falha sem inventar contexto.
+- [x] Cobertura da camada Serviço satisfeita, com pelo menos 8 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit — tests/unit/mcp_spike/test_context_service.py
 **Gate**: Quick focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_context_service.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): authorize synthetic context retrieval`
+
+**Evidência T8**: 9 testes focais passaram; comparam toda a fixture e verificam
+perfis autorizados, negação antes de recuperação e fixture ausente/divergente.
+Ruff check e format passaram. Execução pelo adapter continua pendente.
 
 ### T9: Serviço autorizado de relato
 
