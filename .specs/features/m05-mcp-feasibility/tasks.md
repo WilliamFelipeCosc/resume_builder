@@ -1,7 +1,7 @@
 # M0.5 — Tarefas de implementação
 
 **Status:** Em execução — tarefas, matriz de testes e gates aprovados pelo proprietário
-em 2026-11-12. T1–T4 concluídas; T5–T20 pendentes.
+em 2026-11-12. T1–T5 concluídas; T6–T20 pendentes.
 **Design:** [design.md](design.md), aprovado em 2026-11-12. **Spec:** [spec.md](spec.md).
 **Escopo:** REQ-MCP-001, recortes SEC/OPS/QA; AC-M05-001/002; 21 requisitos SPIKE.
 
@@ -199,13 +199,19 @@ dos serviços à política e a identidade nas chamadas MCP serão verificadas em
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Oito colunas obrigatórias, tipos e constraints conferem com o desenho; testes usam SQLite temporário e não alteram banco M0; nenhum I/O ocorre por import.
-- [ ] Cobertura da camada Persistência satisfeita, com pelo menos 7 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Oito colunas obrigatórias, tipos e constraints conferem com o desenho; testes usam SQLite temporário e não alteram banco M0; nenhum I/O ocorre por import.
+- [x] Cobertura da camada Persistência satisfeita, com pelo menos 7 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration — tests/integration/mcp_spike/test_database.py
 **Gate**: Full focal: uv run --all-packages --locked pytest tests/integration/mcp_spike/test_database.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): define isolated report storage`
+
+**Evidência T5**: 17 testes SQLite focais passaram. `just check-python` passou
+com 328 testes fora do sandbox após falhas de integração sob restrições locais;
+`just lint` passou. `test_database.py` confere schema, oito colunas TEXT e NOT
+NULL, PK, unicidade, CHECKs, WAL, timeout, isolamento de nome e import sem I/O.
+Persistência transacional e replay entre processos permanecem para T6–T9.
 
 ### Phase 2: Persistência e serviços
 

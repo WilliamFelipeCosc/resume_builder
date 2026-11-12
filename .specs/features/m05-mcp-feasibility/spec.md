@@ -145,6 +145,8 @@ T3 cobre a fixture de SPIKE-02, SPIKE-04, SPIKE-12 e SPIKE-14; os requisitos
 continuam pendentes de validação ponta a ponta e conferência do proprietário.
 T4 implementa parte da política de SPIKE-03, SPIKE-04, SPIKE-10, SPIKE-18 e
 SPIKE-19; seu uso efetivo pelos serviços e adapter ainda precisa de verificação.
+T5 define o armazenamento de SPIKE-04, SPIKE-07, SPIKE-08, SPIKE-09, SPIKE-11
+e SPIKE-21; os fluxos transacionais e entre processos seguem pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |
