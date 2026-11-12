@@ -1,7 +1,7 @@
 # M0.5 — Tarefas de implementação
 
 **Status:** Em execução — tarefas, matriz de testes e gates aprovados pelo proprietário
-em 2026-11-12. T1 concluída; T2–T20 pendentes.
+em 2026-11-12. T1–T2 concluídas; T3–T20 pendentes.
 **Design:** [design.md](design.md), aprovado em 2026-11-12. **Spec:** [spec.md](spec.md).
 **Escopo:** REQ-MCP-001, recortes SEC/OPS/QA; AC-M05-001/002; 21 requisitos SPIKE.
 
@@ -127,13 +127,20 @@ sem casos fora do escopo. Os requisitos e ACs completos continuam pendentes.
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Entradas planas e saídas aprovadas fazem roundtrip; extras/coerções/IDs inválidos são rejeitados; fronteiras 128/129, 2000/2001, 4096/4097 e 16384/16385 e Unicode têm resultados explícitos.
-- [ ] Cobertura da camada Contratos satisfeita, com pelo menos 18 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Entradas planas e saídas aprovadas fazem roundtrip; extras/coerções/IDs inválidos são rejeitados; fronteiras 128/129, 2000/2001, 4096/4097 e 16384/16385 e Unicode têm resultados explícitos.
+- [x] Cobertura da camada Contratos satisfeita, com pelo menos 18 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: unit — tests/unit/mcp_spike/test_contracts.py
 **Gate**: Quick focal: uv run --all-packages --locked pytest tests/unit/mcp_spike/test_contracts.py -q --basetemp=/tmp/rb-m05-tests; Lint
 **Commit**: `feat(mcp): define strict spike wire contracts`
+
+**Evidência T2**: teste focal 28 passed; ruff check, format --check e git diff
+--check passaram. `test_contracts.py`: linhas 14–43 verificam aliases, IDs,
+tipos, eventos e extras; linhas 46–66 conferem limites de caracteres e bytes,
+inclusive UTF-8; linhas 69 em diante verificam roundtrip de contexto/recibo,
+UUIDs, ausência de confirmação e envelope excedente. Esses testes correspondem
+aos critérios de T2; a validação em transporte e autorização permanece pendente.
 
 ### T3: Contexto sintético versionado
 
