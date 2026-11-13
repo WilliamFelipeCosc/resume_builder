@@ -493,13 +493,16 @@ duas tools, comparação integral da fixture, relato, replay e recibo persistido
 **Tools**: Terminal/patch/git; Serena; Context7; fontes oficiais; skills tlc-spec-driven e OpenAI Docs para Codex. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Quatro verificações passam no cliente real e o resultado não é inferido do teste SDK; registrar versão executada (inventário inicial 0.167.1), limites e diagnóstico se necessário; sem mudar provider silenciosamente.
-- [ ] Cobertura da camada Live CLI satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Quatro verificações passam no cliente real e o resultado não é inferido do teste SDK; registrar versão executada (inventário inicial 0.167.1), limites e diagnóstico se necessário; sem mudar provider silenciosamente.
+- [x] Cobertura da camada Live CLI satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: live — Sessão Codex real; checklist discovery/context/progress/replay e recibos persistidos
 **Gate**: Live CLI
 **Commit**: `test(mcp): record Codex compatibility evidence`
+
+**Evidência T18**: [Sessão real e diagnóstico](live/codex.md): descoberta e
+chamadas reais, comparação da fixture, relato, replay e recibo persistido.
 
 ### T19: Demonstração externa com conferência do proprietário
 

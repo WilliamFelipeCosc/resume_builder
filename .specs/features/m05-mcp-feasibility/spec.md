@@ -170,7 +170,9 @@ verificação das duas CLIs reais e aceite do proprietário continuam pendentes.
 T16 documenta operação, isolamento e procedimento live para SPIKE-04/12/13/14/16/17;
 suas evidências de execução real e os dois ACs continuam pendentes.
 T17 verificou descoberta, consulta, relato e replay em Hermes real para
-SPIKE-01/02/06/08/11/16; Codex e os dois ACs continuam pendentes.
+SPIKE-01/02/06/08/11/16.
+T18 verificou as mesmas operações em Codex real para SPIKE-01/02/06/08/11/16;
+conferência humana e validação independente continuam pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |
