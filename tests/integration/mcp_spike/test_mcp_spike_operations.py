@@ -143,3 +143,34 @@ def test_reports_filter_profile_and_restart_preserves_receipt(env):
     assert len(codex) == 1
     assert codex[0]["event"] == "started"
     assert hermes == []
+
+
+def test_server_startup_and_denied_query_do_not_read_fixture(env, monkeypatch):
+    from unittest.mock import Mock
+
+    from resume_core.mcp_spike.contracts import ContextQuery
+    from resume_core.paths import resolve_paths
+    from resume_core.service import PermissionDenied
+    from resume_mcp_server import __main__ as lifecycle
+    from resume_mcp_server import server
+
+    assert cli(env, "init").returncode == 0
+    config, _ = paths(env)
+    profile_path = config / "profiles/codex.json"
+    profile = json.loads(profile_path.read_text())
+    profile["capabilities"] = []
+    profile_path.write_text(json.dumps(profile))
+    fixture = Mock()
+    monkeypatch.setattr(lifecycle, "FIXTURE", fixture)
+    monkeypatch.setattr("resume_core.logging_policy.configure_mcp_logging", lambda: None)
+
+    def create(principal, contexts, progress):
+        fixture.read_text.assert_not_called()
+        with pytest.raises(PermissionDenied):
+            contexts.get(principal, ContextQuery(applicationId="app-demo"))
+        fixture.read_text.assert_not_called()
+        return Mock()
+
+    monkeypatch.setattr(server, "create_server", create)
+    lifecycle._serve(resolve_paths("mcp-spike", env), "codex")
+    fixture.read_text.assert_not_called()

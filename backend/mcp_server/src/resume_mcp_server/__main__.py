@@ -95,10 +95,12 @@ def _serve(paths: EnvironmentPaths, name: str) -> None:
 
     principal, engine = _open(paths, name)
     try:
-        context = ApplicationContext.model_validate_json(FIXTURE.read_text(encoding="utf-8"))
-        service = ContextService(
-            lambda application_id: context if application_id == context.application_id else None
-        )
+
+        def load_context(application_id: str) -> ApplicationContext | None:
+            context = ApplicationContext.model_validate_json(FIXTURE.read_text(encoding="utf-8"))
+            return context if application_id == context.application_id else None
+
+        service = ContextService(load_context)
         create_server(principal, service, ProgressService(Repository(engine))).run(
             transport="stdio", show_banner=False
         )
