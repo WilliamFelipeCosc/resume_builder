@@ -174,3 +174,56 @@ def test_server_startup_and_denied_query_do_not_read_fixture(env, monkeypatch):
     monkeypatch.setattr(server, "create_server", create)
     lifecycle._serve(resolve_paths("mcp-spike", env), "codex")
     fixture.read_text.assert_not_called()
+
+
+def test_malformed_json_frame_is_sanitized_and_does_not_block_next_frame(env):
+    assert cli(env, "init").returncode == 0
+    initialize = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+            "protocolVersion": "2025-11-25",
+            "capabilities": {},
+            "clientInfo": {"name": "synthetic-test", "version": "1"},
+        },
+    }
+    result = subprocess.run(
+        [sys.executable, "-m", "resume_mcp_server", "serve", "--profile", "codex"],
+        env=env,
+        input="{malformed-frame-sentinel\n" + json.dumps(initialize) + "\n",
+        capture_output=True,
+        text=True,
+        timeout=20,
+    )
+    assert "malformed-frame-sentinel" not in result.stdout
+    assert "malformed-frame-sentinel" not in result.stderr
+    responses = [json.loads(line) for line in result.stdout.splitlines()]
+    assert all(response["jsonrpc"] == "2.0" for response in responses)
+    assert any(response.get("id") == 1 and "result" in response for response in responses)
+
+
+@pytest.mark.parametrize("size", [4097, 65536])
+def test_large_valid_protocol_frame_is_not_a_domain_input_limit(env, size):
+    assert cli(env, "init").returncode == 0
+    initialize = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "padding": "x" * size,
+        "params": {
+            "protocolVersion": "2025-11-25",
+            "capabilities": {},
+            "clientInfo": {"name": "synthetic-test", "version": "1"},
+        },
+    }
+    result = subprocess.run(
+        [sys.executable, "-m", "resume_mcp_server", "serve", "--profile", "codex"],
+        env=env,
+        input=json.dumps(initialize) + "\n",
+        capture_output=True,
+        text=True,
+        timeout=20,
+    )
+    responses = [json.loads(line) for line in result.stdout.splitlines()]
+    assert any(response.get("id") == 1 and "result" in response for response in responses)

@@ -94,6 +94,13 @@ investigação após até 60 minutos de trabalho ativo por cliente. Tempo aguard
 proprietário não conta. Troca de cliente ou continuação além do limite exige
 reavaliação; não altere provider nem use fallback pago automaticamente.
 
+O teste de transporte stdio com FastMCP 4.1.8 e MCP SDK 2.3.0 envia JSON
+malformado seguido de uma inicialização válida e confirma que a segunda resposta
+chega, sem ecoar a sentinela nos streams. Inicializações válidas com 4.097 e
+65.536 caracteres extras no frame também foram aceitas. Esses exemplos não medem
+um limite máximo de frame anterior ao parse. O teto de 4.096 bytes aprovado é
+aplicado aos argumentos validados das tools, não ao frame JSON-RPC bruto.
+
 ## Demonstração com proprietário
 
 Depois das duas validações, escolha uma CLI cuja capacidade de navegador próprio
