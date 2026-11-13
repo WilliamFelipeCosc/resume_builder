@@ -171,8 +171,9 @@ T16 documenta operação, isolamento e procedimento live para SPIKE-04/12/13/14/
 suas evidências de execução real e os dois ACs continuam pendentes.
 T17 verificou descoberta, consulta, relato e replay em Hermes real para
 SPIKE-01/02/06/08/11/16.
-T18 verificou as mesmas operações em Codex real para SPIKE-01/02/06/08/11/16;
-conferência humana e validação independente continuam pendentes.
+T18 verificou as mesmas operações em Codex real para SPIKE-01/02/06/08/11/16.
+T19 demonstrou preenchimento via Hermes e o proprietário confirmou os quatro
+campos e ausência de envio; validação independente continua pendente.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

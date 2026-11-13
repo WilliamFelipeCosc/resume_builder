@@ -514,13 +514,16 @@ chamadas reais, comparação da fixture, relato, replay e recibo persistido.
 **Tools**: Terminal/git e cliente CLI externo com suas próprias ferramentas; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Cliente escolhido por capacidade real de browser usa suas próprias ferramentas; proprietário confirma cada campo; recibo de progresso é separado da conferência; sem presença/conferência não há PASS de AC-M05-002.
-- [ ] Cobertura da camada Live formulário satisfeita, com pelo menos 6 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Cliente escolhido por capacidade real de browser usa suas próprias ferramentas; proprietário confirma cada campo; recibo de progresso é separado da conferência; sem presença/conferência não há PASS de AC-M05-002.
+- [x] Cobertura da camada Live formulário satisfeita, com pelo menos 6 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: live + UAT — Quatro comparações visuais pelo proprietário, recibo form_filled e registro de parada sem envio
 **Gate**: Live formulário
 **Commit**: `test(mcp): record external form demonstration`
+
+**Evidência T19**: [Demonstração e confirmação visual](live/form-demo.md): quatro
+comparações confirmadas pelo proprietário, parada sem envio e recibo persistido.
 
 ### T20: Evidência integrada e entrega ao Verifier
 
