@@ -472,13 +472,16 @@ runbook. `codex-cli 0.167.1` inventariado; versão Hermes e testes live pendente
 **Tools**: Terminal/git e cliente CLI externo com suas próprias ferramentas; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] Quatro verificações passam em cliente real, com fixture/versionamento e recibos; se houver falha, manter tarefa pendente e apresentar diagnóstico após até 60 min, sem reparar instalação ou trocar provider silenciosamente.
-- [ ] Cobertura da camada Live CLI satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] Quatro verificações passam em cliente real, com fixture/versionamento e recibos; se houver falha, manter tarefa pendente e apresentar diagnóstico após até 60 min, sem reparar instalação ou trocar provider silenciosamente.
+- [x] Cobertura da camada Live CLI satisfeita, com pelo menos 4 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: live — Sessão Hermes real; checklist discovery/context/progress/replay e recibos persistidos
 **Gate**: Live CLI
 **Commit**: `test(mcp): record Hermes compatibility evidence`
+
+**Evidência T17**: [Sessão real e diagnóstico](live/hermes.md): descoberta de
+duas tools, comparação integral da fixture, relato, replay e recibo persistido.
 
 ### T18: Compatibilidade real Codex
 
