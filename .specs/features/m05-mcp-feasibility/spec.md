@@ -174,6 +174,8 @@ SPIKE-01/02/06/08/11/16.
 T18 verificou as mesmas operações em Codex real para SPIKE-01/02/06/08/11/16.
 T19 demonstrou preenchimento via Hermes e o proprietário confirmou os quatro
 campos e ausência de envio; validação independente continua pendente.
+T20 registrou os gates integrados e as referências dos 21 requisitos; o parecer
+independente e a conclusão dos ACs permanecem pendentes.
 
 | Requirement ID | Story / comportamento | Fonte e aceite | Phase | Status |
 | --- | --- | --- | --- | --- |

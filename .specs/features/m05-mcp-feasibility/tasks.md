@@ -535,13 +535,18 @@ comparações confirmadas pelo proprietário, parada sem envio e recibo persisti
 **Tools**: Terminal/patch/git; Serena para navegação; Context7 e fontes oficiais quando depender de API; skill tlc-spec-driven. Proposta de ferramentas ainda sujeita à escolha do proprietário.
 **Done when**:
 
-- [ ] just check e check-mcp-spike passam, lock/workspace reproduzíveis e evidências dos 21 requisitos são referenciadas; contagens reais e limitações explícitas; nenhuma compatibilidade fictícia apresentada como live.
-- [ ] Cobertura da camada Evidência integrada satisfeita, com pelo menos 21 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
-- [ ] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
+- [x] just check e check-mcp-spike passam, lock/workspace reproduzíveis e evidências dos 21 requisitos são referenciadas; contagens reais e limitações explícitas; nenhuma compatibilidade fictícia apresentada como live.
+- [x] Cobertura da camada Evidência integrada satisfeita, com pelo menos 21 cenários/checks pertinentes planejados; contagem e evidência reais registradas, sem exclusões silenciosas.
+- [x] Gate indicado passa; task/spec atualizados no mesmo commit atômico, sem alegar conclusão de AC ainda pendente.
 
 **Tests**: integration + smoke + live evidence — Suites existentes e do spike, lock/Compose quando aplicável, registros live T17–T19
 **Gate**: Build integrado
 **Commit**: `test(mcp): record integrated milestone evidence`
+
+**Evidência T20**: [Mapa e gates integrados](execution.md): 21 referências de
+requisitos, 14 caminhos locais verificados, 422 Python, 17 Vitest, 3 Chromium,
+168 testes MCP, lock Python e frontend, build, contrato e lint aprovados. Dois
+avisos de depreciação SDK; Verifier independente ainda pendente.
 
 ## Task Granularity Check
 
