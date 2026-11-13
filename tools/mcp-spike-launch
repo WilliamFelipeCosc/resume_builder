@@ -1,0 +1,19 @@
+#!/bin/sh
+# The CLI may inherit credentials; the MCP server receives only local path settings.
+set -eu
+
+if [ "$#" -ne 1 ] || { [ "$1" != hermes ] && [ "$1" != codex ]; }; then
+    printf '%s\n' 'Usage: mcp-spike-launch hermes|codex' >&2
+    exit 2
+fi
+
+: "${HOME:?HOME is required}"
+repo_dir=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd -P)
+exec /usr/bin/env -i \
+    HOME="$HOME" \
+    XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}" \
+    XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}" \
+    XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}" \
+    XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}" \
+    PATH=/usr/bin:/bin LANG=C.UTF-8 \
+    "$repo_dir/.venv/bin/python" -m resume_mcp_server serve --profile "$1"

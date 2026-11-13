@@ -46,25 +46,27 @@ Os trechos abaixo são exemplos sanitizados, não alteram configuração por si 
 Substitua `/CAMINHO/ABSOLUTO/DO/REPOSITORIO` pelo caminho real do checkout, sem
 incluir tokens. Use o Python do `.venv` já instalado, sem download na inicialização.
 Defina, quando necessário, os quatro valores `XDG_DATA_HOME`, `XDG_CONFIG_HOME`,
-`XDG_CACHE_HOME`, `XDG_STATE_HOME` usados no `init` e verifique que a CLI não
-repassa segredos desnecessários ao subprocesso. O mecanismo efetivo de ambiente
-precisa ser verificado na execução live de cada versão.
+`XDG_CACHE_HOME`, `XDG_STATE_HOME` usados no `init`. O launcher do repositório
+usa `env -i` para executar o servidor com apenas HOME, os quatro caminhos XDG,
+PATH e LANG. Ele não repassa variáveis de credenciais herdadas da CLI ao Python
+do servidor. Testes de subprocesso observam o ambiente do processo em Linux;
+a execução efetiva por cada CLI exige evidência live separada.
 
 Exemplo Hermes, de acordo com a [documentação MCP do Hermes](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp):
 
 ```yaml
 mcp_servers:
   resume-spike:
-    command: /CAMINHO/ABSOLUTO/DO/REPOSITORIO/.venv/bin/python
-    args: ["-m", "resume_mcp_server", "serve", "--profile", "hermes"]
+    command: /CAMINHO/ABSOLUTO/DO/REPOSITORIO/tools/mcp-spike-launch
+    args: ["hermes"]
 ```
 
 Exemplo Codex, conforme a [documentação oficial de MCP do Codex](https://developers.openai.com/codex/mcp):
 
 ```toml
 [mcp_servers.resume-spike]
-command = "/CAMINHO/ABSOLUTO/DO/REPOSITORIO/.venv/bin/python"
-args = ["-m", "resume_mcp_server", "serve", "--profile", "codex"]
+command = "/CAMINHO/ABSOLUTO/DO/REPOSITORIO/tools/mcp-spike-launch"
+args = ["codex"]
 ```
 
 O inventário local identificou `codex-cli 0.167.1`; confirme novamente a versão

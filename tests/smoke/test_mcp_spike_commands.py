@@ -29,7 +29,7 @@ def test_spike_commands_are_listed():
     "recipe,arguments,expected",
     [
         ("mcp-spike-init", [], "resume_mcp_server init"),
-        ("mcp-spike-serve", ["codex"], "resume_mcp_server serve --profile 'codex'"),
+        ("mcp-spike-serve", ["codex"], "./tools/mcp-spike-launch 'codex'"),
         ("mcp-spike-form", [], "resume_mcp_server.form_server"),
         ("mcp-spike-reports", ["hermes"], "resume_mcp_server reports --profile 'hermes'"),
     ],
@@ -37,7 +37,10 @@ def test_spike_commands_are_listed():
 def test_dry_runs_call_scoped_installed_commands(recipe, arguments, expected):
     output = just("--dry-run", recipe, *arguments)
     assert expected in output
-    assert "--no-sync" in output
+    if recipe != "mcp-spike-serve":
+        assert "--no-sync" in output
+    else:
+        assert "uv " not in output
     assert "uv sync" not in output
 
 

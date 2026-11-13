@@ -32,7 +32,7 @@ mcp-spike-init:
     uv run --all-packages --locked --no-sync python -m resume_mcp_server init
 
 mcp-spike-serve profile:
-    uv run --all-packages --locked --no-sync python -m resume_mcp_server serve --profile {{quote(profile)}}
+    ./tools/mcp-spike-launch {{quote(profile)}}
 
 mcp-spike-form:
     uv run --all-packages --locked --no-sync python -m resume_mcp_server.form_server

@@ -4,11 +4,14 @@ import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 import pytest
 from fastmcp import Client
 from fastmcp.client.transports import StdioTransport
+
+LAUNCHER = Path(__file__).resolve().parents[3] / "tools/mcp-spike-launch"
 
 
 @pytest.fixture
@@ -227,3 +230,47 @@ def test_large_valid_protocol_frame_is_not_a_domain_input_limit(env, size):
     )
     responses = [json.loads(line) for line in result.stdout.splitlines()]
     assert any(response.get("id") == 1 and "result" in response for response in responses)
+
+
+@pytest.mark.parametrize("profile", ["hermes", "codex"])
+def test_launcher_limits_server_environment(env, profile):
+    assert cli(env, "init").returncode == 0
+    parent_env = env | {"M05_FAKE_SECRET_SENTINEL": "synthetic-secret"}
+    process = subprocess.Popen(
+        [str(LAUNCHER), profile],
+        env=parent_env,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    try:
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            assert process.poll() is None
+            cmdline = Path(f"/proc/{process.pid}/cmdline").read_bytes().split(b"\0")
+            if b"resume_mcp_server" in cmdline:
+                break
+            time.sleep(0.01)
+        else:
+            pytest.fail("MCP server did not start")
+        environment = Path(f"/proc/{process.pid}/environ").read_bytes().split(b"\0")
+        keys = {item.split(b"=", 1)[0].decode() for item in environment if item}
+        assert keys == {
+            "HOME",
+            "XDG_DATA_HOME",
+            "XDG_CONFIG_HOME",
+            "XDG_CACHE_HOME",
+            "XDG_STATE_HOME",
+            "PATH",
+            "LANG",
+        }
+        assert "M05_FAKE_SECRET_SENTINEL" not in keys
+    finally:
+        process.terminate()
+        process.communicate(timeout=10)
+
+
+def test_launcher_rejects_unrecognized_profile(env):
+    result = subprocess.run([str(LAUNCHER), "other"], env=env, capture_output=True, text=True)
+    assert result.returncode != 0
+    assert result.stdout == ""
