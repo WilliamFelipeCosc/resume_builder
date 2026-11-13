@@ -53,9 +53,9 @@ class SafeToolMiddleware(Middleware):
         try:
             check_json_size(arguments, 4096)
             if name == "get_application_context":
-                ContextQuery.model_validate(arguments)
+                ContextQuery.model_validate(arguments, by_alias=True, by_name=False)
             elif name == "report_application_progress":
-                ProgressReport.model_validate(arguments)
+                ProgressReport.model_validate(arguments, by_alias=True, by_name=False)
             return await call_next(context)
         except ValidationError, ValueError:
             raise _error("SCHEMA_INVALID") from None

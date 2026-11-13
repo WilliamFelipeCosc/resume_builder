@@ -70,6 +70,19 @@ def test_catalog_and_context(harness):
             }
             context_tool = next(t for t in tools if t.name == "get_application_context")
             assert set(context_tool.inputSchema["properties"]) == {"applicationId"}
+            progress_tool = next(t for t in tools if t.name == "report_application_progress")
+            assert set(progress_tool.inputSchema["properties"]) == {
+                "applicationId",
+                "executionId",
+                "idempotencyKey",
+                "event",
+            }
+            assert set(progress_tool.inputSchema["required"]) == {
+                "applicationId",
+                "executionId",
+                "idempotencyKey",
+                "event",
+            }
             response = await client.call_tool_mcp(
                 "get_application_context", {"applicationId": "app-demo"}
             )
@@ -195,3 +208,32 @@ def test_persistence_failure_returns_temporary_error(harness, tmp_path):
             assert "database-sentinel" not in result.content[0].text
 
     run(scenario())
+
+
+@pytest.mark.parametrize(
+    "tool,args",
+    [
+        ("get_application_context", {"application_id": "app-demo"}),
+        (
+            "report_application_progress",
+            {
+                "application_id": "app-demo",
+                "execution_id": "run",
+                "idempotency_key": "key",
+                "event": "started",
+            },
+        ),
+    ],
+)
+def test_python_names_are_rejected_on_wire_without_side_effects(harness, tmp_path, tool, args):
+    import sqlite3
+
+    async def scenario():
+        async with Client(harness) as client:
+            result = await client.call_tool_mcp(tool, args)
+            assert result.is_error
+            assert text_payload(result)["error"]["code"] == "SCHEMA_INVALID"
+
+    run(scenario())
+    with sqlite3.connect(tmp_path / "mcp-spike.sqlite3") as connection:
+        assert connection.execute("SELECT COUNT(*) FROM mcp_spike_reports").fetchone()[0] == 0
