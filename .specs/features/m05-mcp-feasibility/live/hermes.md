@@ -54,3 +54,37 @@ registrou descoberta do servidor cerca de 24 segundos após o início da sessão
 uma nova sessão, após a descoberta, executou as três chamadas MCP. Não houve
 alteração de provider, reparo de instalação, submissão ou validação de navegador.
 Os períodos de espera por permissão não são tempo de investigação ativa.
+
+## Verificação do ambiente após correção
+
+Em 2026-11-13, após o commit `6b61c0a`, o cliente real executou `hermes -p
+m05-spike mcp test resume-spike` com uma variável sentinela fictícia no ambiente
+do cliente e na configuração MCP temporária. O cliente conectou via stdio e
+descobriu as duas ferramentas com exit 0. Um wrapper de medição efêmero, que
+executa em seguida o `tools/mcp-spike-launch` real, registrou somente a presença
+da sentinela antes do launcher e seu PID. Um observador local conferiu o mesmo
+PID após `exec`, identificou `resume_mcp_server` e comparou os nomes do ambiente
+em `/proc/<pid>/environ` à allowlist. Resultado: sentinela presente antes,
+ausente depois; os sete nomes observados pertenciam à allowlist. Os valores do
+ambiente não foram registrados ou exibidos. O perfil dedicado foi restaurado para
+usar diretamente o launcher restrito, sem o wrapper e sem a sentinela.
+Os scripts efêmeros usados estão preservados como [wrapper](environment_probe.py)
+e [observador](environment_observer.py); o [resultado sanitizado](environment-hermes.json)
+contém apenas asserções booleanas e contagem. Os caminhos fixos nos scripts são
+os do ambiente desta execução; adapte-os para repetir em outro ambiente.
+
+Uma sessão Hermes adicional consultou contexto e repetiu relato com recibo
+`1c8abb5c-0439-4e9e-95f1-f88e4d019afb`, `reported_by_agent`. Como o gateway
+preexistente pode ter mantido a conexão anterior, não se atribui essa sessão ao
+processo medido no teste de ambiente. A descoberta e o ambiente medido foram
+obtidos na mesma execução real de `hermes mcp test`.
+
+## Limite dos tempos de investigação
+
+A transcrição local registra a sessão autenticada inicial de `2026-11-12
+19:45:13` a `19:45:34` UTC (diferença entre primeira e última mensagem: 21,15 s)
+e a sessão com sucesso de `19:45:50` a `19:46:19` UTC (29,24 s). A repetição
+posterior de consulta/relato foi de `2026-11-13 03:58:07` a `03:58:22` UTC
+(15,25 s). Esses intervalos não incluem pesquisa, preparação ou esperas. O tempo
+ativo total histórico não foi medido; portanto, os registros disponíveis não
+comprovam a aplicação do limite total de 60 minutos.

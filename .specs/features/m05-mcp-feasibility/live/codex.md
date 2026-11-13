@@ -42,3 +42,33 @@ porque o modo não interativo usava política de aprovação `never`. Uma segund
 sessão com aprovação restrita às duas ferramentas acima executou as três chamadas.
 Nenhum provider foi trocado, nenhuma configuração global foi escrita e nenhum
 formulário foi enviado.
+
+## Verificação do ambiente após correção
+
+Em 2026-11-13, após o commit `6b61c0a`, repetimos `codex exec` com a mesma
+configuração isolada e aprovação específica das duas tools. A variável sentinela
+fictícia foi adicionada ao ambiente do cliente e à configuração MCP efêmera.
+Um wrapper de medição registrou apenas a presença da sentinela antes de executar
+o `tools/mcp-spike-launch` real e seu PID. Um observador local identificou o
+mesmo PID após `exec` como `resume_mcp_server` e comparou os nomes em
+`/proc/<pid>/environ` com a allowlist. Resultado: sentinela presente antes,
+ausente depois; os sete nomes observados pertenciam à allowlist. Os valores do
+ambiente não foram registrados ou exibidos. A medição e as chamadas pertencem à
+mesma sessão real, sem modificar a configuração global do Codex.
+Os scripts efêmeros usados estão preservados como [wrapper](environment_probe.py)
+e [observador](environment_observer.py); o [resultado sanitizado](environment-codex.json)
+contém apenas asserções booleanas e contagem. Os caminhos fixos nos scripts são
+os do ambiente desta execução; adapte-os para repetir em outro ambiente.
+
+Essa sessão consultou a fixture e registrou/repetiu o evento `started` com
+`codex-env-001` e `codex-env-key-001`. Ambas as respostas devolveram o recibo
+`34074414-2409-40aa-96b1-331d10405d2c`, `reported_by_agent`; o recibo foi
+encontrado em `reports`, com `created_at=2026-11-13T04:00:32.968944Z`.
+
+## Limite dos tempos de investigação
+
+As marcas UTC de persistência verificáveis foram `2026-11-13T01:20:16.908551Z`
+para a primeira sessão bem-sucedida e `2026-11-13T04:00:32.968944Z` para a
+repetição após correção. As sessões anteriores eram efêmeras; não foi registrado
+o início/fim da investigação ativa nem sua duração total. Não é possível afirmar
+a partir dessas marcas se o limite de 60 minutos foi observado.
