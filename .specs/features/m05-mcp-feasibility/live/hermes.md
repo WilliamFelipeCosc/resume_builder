@@ -88,3 +88,25 @@ posterior de consulta/relato foi de `2026-11-13 03:58:07` a `03:58:22` UTC
 (15,25 s). Esses intervalos não incluem pesquisa, preparação ou esperas. O tempo
 ativo total histórico não foi medido; portanto, os registros disponíveis não
 comprovam a aplicação do limite total de 60 minutos.
+
+## Nova sessão após correção do launcher
+
+Em 2026-11-16, um perfil Hermes dedicado `m05-reverify`, usando o provider
+existente, configurou o servidor novo `resume-fresh-20261116` com o launcher
+restrito e diretórios XDG sintéticos. Um wrapper temporário mediu o processo
+na inicialização: a sentinela fictícia estava presente antes do launcher e
+ausente após `exec`; os sete nomes observados estavam na allowlist. Nenhum
+valor do ambiente foi registrado.
+
+Na sessão real iniciada às 15:13 no horário local, o Hermes chamou a consulta
+e repetiu o relato `started` com a mesma chave. As duas respostas retornaram
+`ea092961-4b03-4eb4-99e7-775b06789f59` e `reported_by_agent`; a leitura do banco
+sintético confirmou uma única linha com esse recibo e os identificadores da
+execução. O cliente terminou sem enviar formulário. O log do gateway registra
+uma inicialização do servidor com o novo nome antes da sessão e as chamadas
+nessa conexão. A continuidade do PID no instante exato das chamadas não foi
+medida; por isso não se afirma essa medição como prova independente.
+O [wrapper](environment-probe-reverify.py), o
+[observador](environment-observer-reverify.py) e o
+[resultado sanitizado](environment-hermes-reverify.json) preservam a medição.
+Seus caminhos absolutos são específicos desta execução temporária.
