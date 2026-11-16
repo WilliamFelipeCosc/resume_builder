@@ -211,8 +211,8 @@ independente, demonstração local privada e revisão do registro de esforço.
 
 | Requirement ID | Story / cobertura | Phase | Status |
 | --- | --- | --- | --- |
-| MONE-01 | S1: CI antes do domínio; roadmap M1 | Tasks | In Tasks |
-| MONE-02 | S1: evidência remota distinta; REQ-QA-001 | Tasks | In Tasks |
+| MONE-01 | S1: CI antes do domínio; roadmap M1 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
+| MONE-02 | S1: evidência remota distinta; REQ-QA-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | Tasks | In Tasks |
 | MONE-04 | S2: vínculos; REQ-KB-001/002, AC-M1-001 | Tasks | In Tasks |
 | MONE-05 | S2: integridade referencial; AC-M1-001 | Tasks | In Tasks |
@@ -243,7 +243,7 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-30 | S6: PDF imutável; AC-M1-003 | Tasks | In Tasks |
 | MONE-31 | S6: falha sem parcial; AC-M1-001/003 | Tasks | In Tasks |
 | MONE-32 | S6: durabilidade; REQ-KB-002/004 | Tasks | In Tasks |
-| MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | Tasks | In Tasks |
+| MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | Tasks | In Tasks |
 | MONE-35 | S7: verificação do piloto; REQ-QA-001 | Tasks | In Tasks |
 | MONE-36 | S7: carga privada revisada; AC-M1-002/003 | Tasks | In Tasks |

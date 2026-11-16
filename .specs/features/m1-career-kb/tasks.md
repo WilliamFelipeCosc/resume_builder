@@ -8,7 +8,7 @@ Um deliverable atômico por tarefa; testes da mudança e registro de progresso
 fazem parte do mesmo commit. Verifier independente final e sensor são obrigatórios.
 
 **Design:** [design.md](design.md), aprovado pelo proprietário em 2026-11-16.
-**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 1/64 concluída.
+**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 2/64 concluídas.
 **Início:** autorizado explicitamente pelo proprietário em 2026-11-16 às 20:17 (-03); execução iniciada na T1.
 **Escopo:** M1; REQ-KB-001/002/004, REQ-SEC-001, AC-M1-001/002/003.
 **Não executado:** nenhuma instalação, alteração funcional ou teste de runtime nesta preparação.
@@ -164,7 +164,7 @@ baseline para o sensor independente.
 
 #### T2: Preparar GitHub Actions antes do domínio
 
-**Status**: Pending
+**Status**: Complete
 **What**: Preparar runner Linux com pins/locks, Docker e Chromium para executar os gates existentes; resultados locais e remotos separados.
 **Where**: `.github/workflows/check.yml`
 **Supporting**: lockfile(s), configuração mínima e evidência de compatibilidade da dependência/runner.
@@ -173,8 +173,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-01, MONE-02, MONE-33
 **Tools**: PY
 **Done when**:
-- [ ] Instalação reproduzível; comandos locais executáveis; CI remoto marcado NOT_RUN até push autorizado.
-- [ ] Gate BUILD passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Instalação reproduzível; comandos locais executáveis; CI remoto marcado NOT_RUN até push autorizado.
+- [x] Gate BUILD passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: verification — nenhum arquivo de testes novo obrigatório; verificação descrita na matriz; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: BUILD
 **Commit**: `ci: add reproducible project checks`
