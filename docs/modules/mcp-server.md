@@ -1,6 +1,10 @@
 # MCP Server e agentes externos
 
-**M0.5 spike, M4 full.** SDK **Python** oficial, versão a validar e pin após testes com clientes.
+**M0.5 spike, M4 full.** Framework independente **FastMCP** sobre SDK MCP Python,
+escolhido pelo proprietário; ver [ADR-016](../architecture/adr/ADR-016.md).
+Desenho M0.5 aprovado: FastMCP 4.1.8, resolução com SDK 2.3.0; instalação, runtime
+e compatibilidade dos clientes ainda pendentes. Serviços Python diretos no M0.5;
+montagem HTTP no FastAPI no M4.
 
 ## Princípios inegociáveis
 

@@ -1,6 +1,6 @@
 # Resume Builder — PROJECT_SOURCE
 
-> **Status:** especificação de produto e arquitetura consolidada a partir da entrevista com o proprietário, em 2026-11-04, e atualizada mediante aprovação explícita em 2026-11-11 (migração para Python/FastAPI, base profissional inicial e template visual). **Não representa software já implementado.** Idioma de trabalho: português; nomes de contratos e código em inglês. Fonte autocontida para ChatGPT Project.
+> **Status:** especificação de produto e arquitetura consolidada a partir da entrevista com o proprietário, em 2026-11-04, e atualizada mediante aprovação explícita em 2026-11-11 (migração para Python/FastAPI, base profissional inicial e template visual) e 2026-11-12 (FastMCP independente e desenho M0.5). **Não representa software já implementado.** Idioma de trabalho: português; nomes de contratos e código em inglês. Fonte autocontida para ChatGPT Project.
 
 ## 1. Objetivo e limites
 
@@ -31,6 +31,7 @@ Criar uma aplicação pessoal **local-first no Linux** para manter uma Career Kn
 | ADR-013 | Documentação | Modular + `PROJECT_SOURCE.md` autocontido + ADRs + `AGENTS.md` independente do agente. |
 | ADR-014 | Importação inicial da Career KB | `Curriculo.pdf` é o primeiro documento-fonte; dados extraídos e estruturados entram em Staging Area privada, com revisão humana e proveniência antes de persistir fatos confirmados. Seeds não equivalem a banco inicializado. |
 | ADR-015 | Template visual | `resume-reference-slate-sidebar-v1`, derivado do PDF fornecido, é o template visual padrão. Preservar template ATS linear como alternativa; conteúdo estruturado independente do layout, com validação de paginação e legibilidade. |
+| ADR-016 | Framework MCP | FastMCP independente sobre SDK MCP Python; serviços de aplicação compartilháveis; `stdio` no M0.5 e integração HTTP com FastAPI no M4. Desenho aprovado, runtime e clientes pendentes. |
 
 ## 3. Arquitetura lógica
 
@@ -95,7 +96,7 @@ MCP conecta-se a **Application Services** autenticados, sem acesso irrestrito ao
 ### 4.5 MCP Server / agentes externos
 
 - Aplicação **não controla navegador**; agentes compatíveis operam na própria CLI.
-- SDK MCP Python: `stdio` + Streamable HTTP com contratos versionados e testes por cliente; validar versões, transportes e compatibilidade com pelo menos dois clientes no spike M0.5.
+- FastMCP independente sobre o SDK MCP Python, conforme escolha do proprietário em 2026-11-12 (ADR-016): `stdio` no M0.5 e Streamable HTTP integrado ao FastAPI no M4, com serviços de aplicação compartilháveis e contratos versionados. Validar compatibilidade real com pelo menos dois clientes no spike; resolução de dependências não substitui testes de runtime/clientes.
 - Tools/Resources/Prompts para consultar contextos mínimos, currículos, evidências, vagas, respostas aprovadas e pedir sugestão opcional; tools bidirecionais para **relatar** progresso e resultado.
 - Escopos restritos, consultas associadas a candidatura, validação em runtime, IDs de idempotência, logs sanitizados e auditoria.
 - Sem ferramentas MCP de SQL/shell genérico ou `submit_application`.
@@ -230,7 +231,7 @@ Schemas executáveis e operações MCP serão definidos e validados em `docs/con
 - Nome público final do produto e identidade visual do aplicativo (distinta do template de currículo já aprovado).
 - Lib do editor inline/drag-and-drop, templates **adicionais** e componente UI; o template visual padrão `resume-reference-slate-sidebar-v1` e a alternativa ATS linear já foram definidos.
 - Modelo e runtime de embeddings locais; implementação concreta do índice vetorial e método de fusão/rerank, sujeitos a benchmark.
-- SDK MCP/versões por cliente e esquema exato de autenticação HTTP/stdio — validar no spike e fixar versões verificadas.
+- FastMCP independente escolhido (ADR-016); versões efetivas por cliente e autorização HTTP ainda exigem validação. O desenho M0.5 aprova perfis locais restritos para `stdio`; a resolução FastMCP 4.1.8/SDK 2.3.0 foi verificada sem instalação, mas runtime e clientes continuam pendentes.
 - Integração prática do Hermes como provider de inferência (autenticação e capacidades reais), fluxo vision, limites e termos; sem presunção de uso gratuito ilimitado.
 - Estrutura e thresholds definitivos de AI Evals, baseados em corpus de teste e custos medidos.
 - Detalhes de empacotamento Tauri, disponibilidade de componentes em distribuições Linux suportadas.

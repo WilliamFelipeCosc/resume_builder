@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-12",
+  "kind": "dependency-resolution-only",
+  "candidate": "fastmcp==4.1.8",
+  "pythonVersion": "3.14",
+  "platform": "x86_64-unknown-linux-gnu",
+  "index": "https://pypi.org/simple",
+  "existingRegistryPins": 31,
+  "existingPinsPreserved": true,
+  "resolvedDistributions": 78,
+  "repositoryUvLockSha256": "d140b5cb1e8f6bd3ec6b82f7b3eced7a8d8c5d08a6120775dafbd4e9e10a411c",
+  "exitCode": 0,
+  "packagesInstalled": false,
+  "runtimeTested": false,
+  "clientCompatibilityTested": false,
+  "commandTemplate": "uv --cache-dir <temporary-cache> pip compile dependency-input.txt --python-version 3.14 --python-platform x86_64-unknown-linux-gnu --index-url https://pypi.org/simple --no-build --no-header --output-file <temporary-output> --quiet",
+  "sandboxNote": "Initial DNS failed; narrow network escalation for this compile succeeded. Repository lockfile unchanged."
+}

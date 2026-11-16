@@ -1,6 +1,10 @@
 # Contratos MCP — rascunho V1
 
-**Status:** `PROPOSED` na assinatura exata; responsabilidades `DECIDED`. Fixar versionamento, schemas Pydantic/JSON Schema e compatibilidade OpenAPI/MCP ao implementar. Implementação futura: SDK MCP Python.
+**Status:** catálogo V1 `PROPOSED` na assinatura exata; responsabilidades `DECIDED`.
+Para as duas tools do M0.5, o [desenho aprovado](../../.specs/features/m05-mcp-feasibility/design.md)
+define o recorte `m05.v1`, ainda sem implementação. Framework escolhido: FastMCP
+independente sobre SDK MCP Python, conforme [ADR-016](../architecture/adr/ADR-016.md).
+Schemas Pydantic/JSON Schema executáveis e compatibilidade real continuam pendentes.
 
 ## Convenções
 
@@ -50,7 +54,7 @@ Persistir `reportingSource=external_agent`, `confirmationState=reported_by_agent
 
 ## Transportes
 
-- `stdio`: Python SDK, sem mensagens fora do protocolo em stdout (logs structlog em stderr); processo por conexão.
+- `stdio`: FastMCP independente sobre SDK Python, sem mensagens fora do protocolo em stdout (logs structlog em stderr); processo por conexão.
 - HTTP: endpoint no loopback, auth/capabilities, Origin/Host e DNS rebinding check, rate limit, CSRF se aplicável, limites de sessão.
 - Usar mesmo catálogo de ferramentas e schemas gerados/validados em Python nos dois transportes, com testes cruzados e versionamento explícito.
 
