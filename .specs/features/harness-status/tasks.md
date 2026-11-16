@@ -59,7 +59,7 @@ T3 → T4
 **Depends on**: T2
 **Requirement**: HAR-06, HAR-07, HAR-08
 **Done when**:
-- [ ] All 31 IDs map to current criteria and stale M0.5, M1 and M2 descriptions are corrected.
+- [x] All 31 IDs map to current criteria and stale M0.5, M1 and M2 descriptions are corrected.
 **Tests**: none; inspect actual Obsidian and criteria.
 **Gate**: Build.
 

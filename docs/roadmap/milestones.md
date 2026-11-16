@@ -18,7 +18,7 @@
 
 **Saída:** registro reproduzível de versão de clientes, tool calls e relatório; nenhum browser integrado; eventuais limitações documentadas. Se fracassar em cliente específico, documentar e testar alternativa sem redesenhar a aplicação inteira.
 
-**Alvos escolhidos no kickoff:** Hermes e Codex; compatibilidade ainda não validada. O spike tem execução/gate separado de M0.
+**Resultado local (2026-11-16):** Hermes e Codex exercitaram tools e replay com dados sintéticos; o proprietário conferiu o formulário fictício. M0.5 foi aceito com exceção histórica para SPIKE-17, pois o tempo ativo total não pôde ser reconstruído. Ver [validação independente](../../.specs/features/m05-mcp-feasibility/validation.md) e [exceção](../../.specs/features/m05-mcp-feasibility/historical-exception.md). O spike não demonstra MCP V1 completo. O estado canônico dos marcos está em [milestone-status.json](../process/milestone-status.json).
 
 ## M1 — Career KB Core
 

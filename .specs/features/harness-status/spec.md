@@ -74,9 +74,9 @@ Milestone evidence and Obsidian planning notes drift. Effort and verification fi
 | HAR-03 | P1 | Execute | Implementing |
 | HAR-04 | P1 | Execute | Implementing |
 | HAR-05 | P1 | Execute | Implementing |
-| HAR-06 | P2 | Execute | Pending |
-| HAR-07 | P2 | Execute | Pending |
-| HAR-08 | P2 | Execute | Pending |
+| HAR-06 | P2 | Execute | Implementing |
+| HAR-07 | P2 | Execute | Implementing |
+| HAR-08 | P2 | Execute | Implementing |
 | HAR-09 | P2 | Execute | Pending |
 | HAR-10 | P2 | Execute | Pending |
 
