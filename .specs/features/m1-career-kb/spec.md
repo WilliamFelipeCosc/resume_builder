@@ -245,7 +245,7 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-32 | S6: durabilidade; REQ-KB-002/004 | Tasks | In Tasks |
 | MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | Tasks | In Tasks |
-| MONE-35 | S7: verificação do piloto; REQ-QA-001 | Tasks | In Tasks |
+| MONE-35 | S7: verificação do piloto; REQ-QA-001 | T4 e tarefas restantes | In Progress (descoberta preparada) |
 | MONE-36 | S7: carga privada revisada; AC-M1-002/003 | Tasks | In Tasks |
 | MONE-37 | S7: evidência e limitações; AC-M1-001/002/003 | Tasks | In Tasks |
 | MONE-38 | S7: piloto medido; workflow de estado/esforço | T1, T61–T64 | In Progress (T1 baseline registrado) |

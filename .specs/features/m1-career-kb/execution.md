@@ -29,3 +29,10 @@
 - Spike fictício em `/tmp/rb-m1-spike`: QueryClientProvider/useQuery, Router Data, RHF e Tailwind Vite; primeira compilação TS falhou por declaração CSS ausente, corrigida adicionando `vite/client` ao tsconfig temporário; build inicial passou. Repetição com Node 24.18.0: tsc exit 0 e Vite build exit 0, 67 módulos e CSS gerado. Não representa teste de integração do produto.
 - WEB inicial passou sob Node 26 detectado posteriormente; repetido com PATH Node 24 explícito: 17 Vitest, typecheck, build, contrato determinístico e Ruff PASS. Solicitação de aprovação posterior a 20:34:21; execução observada às 20:35:18 e conclusão até 20:35:24 -03. Espera por aprovação separada do trabalho ativo; limites exatos desconhecidos. `pnpm list` adicional no sandbox falhou por SQLite do store somente leitura; não é gate, versões verificadas por lock e registro.
 - MONE-03/33 parcialmente atendidos pela compatibilidade; não indicam aceite funcional. APIs consultadas via Context7 nas documentações oficiais genéricas, sem dados privados.
+
+## T4 — descoberta de testes
+
+- Início observado: 20:36:38 -03. Plano: incluir `m1-*.spec.ts` no mesmo harness real e descoberta `.test.ts`/`.test.tsx` no Vitest, preservar testes existentes, dados temporários e zero retries; verificar listagem com fixtures transitórias e executar BUILD.
+- Playwright `--list`: 2 diagnósticos existentes e 1 probe M1 transitório (3 em 2 arquivos); Vitest `list`: testes existentes e probe `.test.ts`. Primeira listagem Vitest falhou por caminho de configuração duplicado; corrigida e repetida com exit 0. Probes removidos, T6 continua responsável por demonstrar coleta real persistente. Harness permanece com dados temporários e `retries: 0`.
+- BUILD começou após 20:37:04 e terminou antes de 20:38:30 -03: PASS, 435 Python (2 avisos), 17 Vitest, 3 Playwright, typecheck, build, contrato e Ruff. Comando BUILD da T1. Intervalo de gate/espera separado do trabalho ativo; duração ativa líquida unknown.
+- MONE-01/33/35 parcialmente atendidos pela descoberta; coleta real de teste M1 pendente de T6.
