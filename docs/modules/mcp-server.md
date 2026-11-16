@@ -2,8 +2,9 @@
 
 **M0.5 spike, M4 full.** Framework independente **FastMCP** sobre SDK MCP Python,
 escolhido pelo proprietário; ver [ADR-016](../architecture/adr/ADR-016.md).
-Desenho M0.5 aprovado: FastMCP 4.1.8, resolução com SDK 2.3.0; instalação, runtime
-e compatibilidade dos clientes ainda pendentes. Serviços Python diretos no M0.5;
+M0.5 validou FastMCP 4.1.8 com SDK 2.3.0 e clientes Hermes e Codex em `stdio`,
+com dados sintéticos e [exceção histórica documentada](../../.specs/features/m05-mcp-feasibility/historical-exception.md).
+Serviços Python diretos no M0.5;
 montagem HTTP no FastAPI no M4.
 
 ## Princípios inegociáveis

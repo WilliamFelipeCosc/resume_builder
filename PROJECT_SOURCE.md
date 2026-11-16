@@ -31,7 +31,7 @@ Criar uma aplicação pessoal **local-first no Linux** para manter uma Career Kn
 | ADR-013 | Documentação | Modular + `PROJECT_SOURCE.md` autocontido + ADRs + `AGENTS.md` independente do agente. |
 | ADR-014 | Importação inicial da Career KB | `Curriculo.pdf` é o primeiro documento-fonte; dados extraídos e estruturados entram em Staging Area privada, com revisão humana e proveniência antes de persistir fatos confirmados. Seeds não equivalem a banco inicializado. |
 | ADR-015 | Template visual | `resume-reference-slate-sidebar-v1`, derivado do PDF fornecido, é o template visual padrão. Preservar template ATS linear como alternativa; conteúdo estruturado independente do layout, com validação de paginação e legibilidade. |
-| ADR-016 | Framework MCP | FastMCP independente sobre SDK MCP Python; serviços de aplicação compartilháveis; `stdio` no M0.5 e integração HTTP com FastAPI no M4. Desenho aprovado, runtime e clientes pendentes. |
+| ADR-016 | Framework MCP | FastMCP independente sobre SDK MCP Python; serviços de aplicação compartilháveis; `stdio` no M0.5 e integração HTTP com FastAPI no M4. Spike validado com Hermes e Codex; HTTP permanece para M4. |
 
 ## 3. Arquitetura lógica
 
@@ -231,7 +231,7 @@ Schemas executáveis e operações MCP serão definidos e validados em `docs/con
 - Nome público final do produto e identidade visual do aplicativo (distinta do template de currículo já aprovado).
 - Lib do editor inline/drag-and-drop, templates **adicionais** e componente UI; o template visual padrão `resume-reference-slate-sidebar-v1` e a alternativa ATS linear já foram definidos.
 - Modelo e runtime de embeddings locais; implementação concreta do índice vetorial e método de fusão/rerank, sujeitos a benchmark.
-- FastMCP independente escolhido (ADR-016); versões efetivas por cliente e autorização HTTP ainda exigem validação. O desenho M0.5 aprova perfis locais restritos para `stdio`; a resolução FastMCP 4.1.8/SDK 2.3.0 foi verificada sem instalação, mas runtime e clientes continuam pendentes.
+- FastMCP independente escolhido (ADR-016); M0.5 validou FastMCP 4.1.8/SDK 2.3.0 e perfis locais restritos `stdio` com Hermes e Codex. Autorização e transporte HTTP permanecem para M4. O aceite inclui exceção histórica de evidência SPIKE-17 documentada em `.specs/features/m05-mcp-feasibility/historical-exception.md`.
 - Integração prática do Hermes como provider de inferência (autenticação e capacidades reais), fluxo vision, limites e termos; sem presunção de uso gratuito ilimitado.
 - Estrutura e thresholds definitivos de AI Evals, baseados em corpus de teste e custos medidos.
 - Detalhes de empacotamento Tauri, disponibilidade de componentes em distribuições Linux suportadas.

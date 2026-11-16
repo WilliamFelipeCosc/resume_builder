@@ -2,9 +2,11 @@
 
 **Status:** catálogo V1 `PROPOSED` na assinatura exata; responsabilidades `DECIDED`.
 Para as duas tools do M0.5, o [desenho aprovado](../../.specs/features/m05-mcp-feasibility/design.md)
-define o recorte `m05.v1`, ainda sem implementação. Framework escolhido: FastMCP
+define o recorte `m05.v1` implementado no spike. Framework escolhido: FastMCP
 independente sobre SDK MCP Python, conforme [ADR-016](../architecture/adr/ADR-016.md).
-Schemas Pydantic/JSON Schema executáveis e compatibilidade real continuam pendentes.
+Schemas executáveis e compatibilidade `stdio` com Hermes e Codex foram validados
+no recorte sintético; o catálogo V1 completo e HTTP continuam futuros. Veja a
+[verificação independente](../../.specs/features/m05-mcp-feasibility/validation.md).
 
 ## Convenções
 

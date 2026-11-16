@@ -6,4 +6,4 @@ Os ADRs 001–015 documentam as decisões `DECIDED` do `PROJECT_SOURCE.md`. Docu
 
 [ADR-016 — FastMCP independente](ADR-016.md) registra a escolha do framework e o
 desenho M0.5 aprovados pelo proprietário em 2026-11-12, preservando os limites dos
-ADRs 004/005. Runtime e compatibilidade real continuam pendentes.
+ADRs 004/005. O spike `stdio` foi validado com Hermes e Codex; HTTP permanece para M4.
