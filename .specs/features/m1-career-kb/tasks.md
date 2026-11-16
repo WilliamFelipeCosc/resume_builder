@@ -8,7 +8,7 @@ Um deliverable atômico por tarefa; testes da mudança e registro de progresso
 fazem parte do mesmo commit. Verifier independente final e sensor são obrigatórios.
 
 **Design:** [design.md](design.md), aprovado pelo proprietário em 2026-11-16.
-**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 4/64 concluídas.
+**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 5/64 concluídas.
 **Início:** autorizado explicitamente pelo proprietário em 2026-11-16 às 20:17 (-03); execução iniciada na T1.
 **Escopo:** M1; REQ-KB-001/002/004, REQ-SEC-001, AC-M1-001/002/003.
 **Não executado:** nenhuma instalação, alteração funcional ou teste de runtime nesta preparação.
@@ -215,7 +215,7 @@ baseline para o sensor independente.
 
 #### T5: Fixar dependências de upload e metadados
 
-**Status**: Pending
+**Status**: Complete
 **What**: Declarar multipart diretamente na API e pypdf no pacote do leitor de fontes; resolver lock e importar em ambiente limpo sem ler dados privados.
 **Where**: `backend/api/pyproject.toml`
 **Supporting**: lockfile(s), configuração mínima e evidência de compatibilidade da dependência/runner.
@@ -224,8 +224,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-14, MONE-15, MONE-30, MONE-33
 **Tools**: PY
 **Done when**:
-- [ ] Importação sem efeitos colaterais; parsing de PDF sintético; lock completo e pins mantidos.
-- [ ] Gate BUILD passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Importação sem efeitos colaterais; parsing de PDF sintético; lock completo e pins mantidos.
+- [x] Gate BUILD passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: verification — nenhum arquivo de testes novo obrigatório; verificação descrita na matriz; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: BUILD
 **Commit**: `build(api): pin source metadata dependencies`

@@ -36,3 +36,10 @@
 - Playwright `--list`: 2 diagnósticos existentes e 1 probe M1 transitório (3 em 2 arquivos); Vitest `list`: testes existentes e probe `.test.ts`. Primeira listagem Vitest falhou por caminho de configuração duplicado; corrigida e repetida com exit 0. Probes removidos, T6 continua responsável por demonstrar coleta real persistente. Harness permanece com dados temporários e `retries: 0`.
 - BUILD começou após 20:37:04 e terminou antes de 20:38:30 -03: PASS, 435 Python (2 avisos), 17 Vitest, 3 Playwright, typecheck, build, contrato e Ruff. Comando BUILD da T1. Intervalo de gate/espera separado do trabalho ativo; duração ativa líquida unknown.
 - MONE-01/33/35 parcialmente atendidos pela descoberta; coleta real de teste M1 pendente de T6.
+
+## T5 — upload e metadados
+
+- Início observado: 20:39:09 -03. Plano: declarar multipart existente diretamente na API e pypdf no core, gerar lock, verificar ambiente limpo com PDF sintético e executar BUILD. A skill PDF e documentação oficial de FastAPI/pypdf foram consultadas; conteúdo privado não foi acessado.
+- `uv lock`: 86 pacotes resolvidos, adicionou pypdf 6.21.4; multipart 0.0.33 já constava transitivamente. `UV_PROJECT_ENVIRONMENT=/tmp/rb-m1-clean-venv uv sync --all-packages --locked`: exit 0, CPython 3.14.8, 82 pacotes instalados; aviso de hardlink entre filesystems, fallback cópia. Aprovação foi aguardada após 20:40:07; início/fim exatos da espera unknown.
+- Na instalação limpa, importações de `pypdf` e `python_multipart` e PDF sintético estrito em memória: 1 página, título fictício e não criptografado, PASS; nenhum arquivo pessoal lido. Isso não valida ainda o leitor limitado de produção T15.
+- BUILD após 20:41:48 até antes de 20:43:13 -03: PASS, 435 Python (2 avisos), 17 Vitest, 3 Playwright, typecheck/build/contrato/Ruff. Gate e espera não são somados ao trabalho ativo; duração líquida unknown. MONE-14/15/30/33 parcialmente atendidos, sem completar os comportamentos de importação.
