@@ -70,7 +70,7 @@ T3 → T4
 **Depends on**: T3
 **Requirement**: HAR-09, HAR-10
 **Done when**:
-- [ ] Workflow and measurement template cover required fields and preserve gates.
+- [x] Workflow and measurement template cover required fields and preserve gates.
 **Tests**: none; inspect documentation.
 **Gate**: Build.
 
