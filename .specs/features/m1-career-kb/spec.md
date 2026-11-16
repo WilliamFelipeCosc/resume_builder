@@ -213,7 +213,7 @@ independente, demonstração local privada e revisão do registro de esforço.
 | --- | --- | --- | --- |
 | MONE-01 | S1: CI antes do domínio; roadmap M1 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-02 | S1: evidência remota distinta; REQ-QA-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
-| MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | Tasks | In Tasks |
+| MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | T3 e tarefas restantes | In Progress (dependências fixadas) |
 | MONE-04 | S2: vínculos; REQ-KB-001/002, AC-M1-001 | Tasks | In Tasks |
 | MONE-05 | S2: integridade referencial; AC-M1-001 | Tasks | In Tasks |
 | MONE-06 | S2: autorização pré-leitura/escrita; REQ-SEC-001 | Tasks | In Tasks |
