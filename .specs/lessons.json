@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "promote_threshold": 2,
+  "window_days": 45,
+  "quarantine_threshold": 2,
+  "next_id": 8,
+  "lessons": [
+    {
+      "id": "L-001",
+      "key": "ac_gap::test authorization before the first retrieval in the actual process lifecycle not only in an injected service",
+      "text": "Test authorization before the first retrieval in the actual process lifecycle, not only in an injected service.",
+      "signal": "ac_gap",
+      "scope": "mcp",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "backend/mcp_server/src/resume_mcp_server/__main__.py:98 (mcp)"
+      ],
+      "created": "2026-11-13T02:46:10Z",
+      "last_seen": "2026-11-13T02:46:10Z"
+    },
+    {
+      "id": "L-002",
+      "key": "ac_gap::test invalid wire aliases through the transport and assert the specified safe error code",
+      "text": "Test invalid wire aliases through the transport and assert the specified safe error code.",
+      "signal": "ac_gap",
+      "scope": "mcp",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "backend/mcp_server/src/resume_mcp_server/server.py:70 (mcp)"
+      ],
+      "created": "2026-11-13T02:46:22Z",
+      "last_seen": "2026-11-13T02:46:22Z"
+    },
+    {
+      "id": "L-003",
+      "key": "ac_gap::verify subprocess environment isolation with synthetic sentinels for every supported client",
+      "text": "Verify subprocess environment isolation with synthetic sentinels for every supported client.",
+      "signal": "ac_gap",
+      "scope": "mcp",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        ".specs/features/m05-mcp-feasibility/design.md:248 (mcp)"
+      ],
+      "created": "2026-11-13T02:46:26Z",
+      "last_seen": "2026-11-13T02:46:26Z"
+    },
+    {
+      "id": "L-004",
+      "key": "ac_gap::exercise malformed transport frames in a subprocess and document actual parser limits",
+      "text": "Exercise malformed transport frames in a subprocess and document actual parser limits.",
+      "signal": "ac_gap",
+      "scope": "mcp",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        ".specs/features/m05-mcp-feasibility/design.md:220 (mcp)"
+      ],
+      "created": "2026-11-13T02:46:31Z",
+      "last_seen": "2026-11-13T02:46:31Z"
+    },
+    {
+      "id": "L-005",
+      "key": "ac_gap::assert the full published input schema for every exposed tool",
+      "text": "Assert the full published input schema for every exposed tool.",
+      "signal": "ac_gap",
+      "scope": "mcp",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "tests/integration/mcp_spike/test_stdio_adapter.py:72 (mcp)"
+      ],
+      "created": "2026-11-13T02:46:35Z",
+      "last_seen": "2026-11-13T02:46:35Z"
+    },
+    {
+      "id": "L-006",
+      "key": "ac_gap::record active investigation start and end times for each external client compatibility issue",
+      "text": "Record active investigation start and end times for each external client compatibility issue.",
+      "signal": "ac_gap",
+      "scope": "mcp",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        ".specs/features/m05-mcp-feasibility/live/hermes.md:43 (mcp)"
+      ],
+      "created": "2026-11-13T02:46:39Z",
+      "last_seen": "2026-11-13T02:46:39Z"
+    },
+    {
+      "id": "L-007",
+      "key": "gate_fail::record and investigate intermittent worker startup timeouts observed in integrated checks",
+      "text": "Record and investigate intermittent worker startup timeouts observed in integrated checks.",
+      "signal": "gate_fail",
+      "scope": "integration",
+      "status": "candidate",
+      "features": [
+        "m05-mcp-feasibility"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "tests/integration/test_real_recovery.py:182 (integration)"
+      ],
+      "created": "2026-11-13T02:46:45Z",
+      "last_seen": "2026-11-13T02:46:45Z"
+    }
+  ]
+}
