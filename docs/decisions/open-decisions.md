@@ -15,3 +15,12 @@ Fonte: `PROJECT_SOURCE.md` §12. **Não alterar ADRs 001–015** sem aprovação
 **Fechado, não reabrir aqui:** backend FastAPI/Python, SQLAlchemy 2/Alembic, Dramatiq/Redis, pnpm+uv+justfile, Pytest/structlog, MCP-first, template visual padrão e alternativa ATS, modelo KB ampliado, M3 prioritário.
 
 Pequenas escolhas de implementação (por exemplo, nomes de rotas ou versões exatas) exigem spike/nota técnica; preferir ADR adicional se a decisão mudar comportamento ou riscos.
+
+**Decisões parciais de UI antecipadas para M1 (2026-11-16):** o proprietário
+aprovou frontend Feature-based, Tailwind com tokens padrão, shadcn/ui,
+TanStack Query, React Hook Form e React Router Data Mode como SPA no Vite.
+As escolhas estão em [contexto M1](../../.specs/features/m1-career-kb/context.md)
+e AD-002 de `.specs/STATE.md`; detalhes e compatibilidade estão no
+[design proposto](../../.specs/features/m1-career-kb/design.md).
+Isso não representa implementação ou compatibilidade já testada, nem fecha
+OPEN-02 para editor inline/drag-and-drop e templates adicionais de M6.

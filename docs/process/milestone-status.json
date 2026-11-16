@@ -4,7 +4,7 @@
   "milestones": {
     "M0": {"status": "accepted", "criteria": ["AC-M0-001", "AC-M0-002"], "evidence": ".specs/features/m0-foundation/validation.md", "exceptions": []},
     "M0.5": {"status": "accepted_with_exception", "criteria": ["AC-M05-001", "AC-M05-002"], "evidence": ".specs/features/m05-mcp-feasibility/validation.md", "exceptions": ["SPIKE-17 active investigation time not reconstructed; owner accepted the historical evidence gap in .specs/features/m05-mcp-feasibility/historical-exception.md"]},
-    "M1": {"status": "planned", "criteria": ["AC-M1-001", "AC-M1-002", "AC-M1-003"], "evidence": "docs/roadmap/acceptance-criteria.md", "exceptions": []},
+    "M1": {"status": "in_progress", "criteria": ["AC-M1-001", "AC-M1-002", "AC-M1-003"], "evidence": ".specs/features/m1-career-kb/execution.md", "exceptions": []},
     "M2": {"status": "planned", "criteria": ["AC-M2-001", "AC-M2-002", "AC-M2-003"], "evidence": "docs/roadmap/acceptance-criteria.md", "exceptions": []},
     "M3": {"status": "planned", "criteria": ["AC-M3-001", "AC-M3-002", "AC-M3-003", "AC-M3-004", "AC-M3-005", "AC-M3-006"], "evidence": "docs/roadmap/acceptance-criteria.md", "exceptions": []},
     "M4": {"status": "planned", "criteria": ["AC-M4-001", "AC-M4-002"], "evidence": "docs/roadmap/acceptance-criteria.md", "exceptions": []},

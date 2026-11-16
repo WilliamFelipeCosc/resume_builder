@@ -13,16 +13,23 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 - **Date**: 2026-11-12
 - **Status**: active
 
+### AD-002
+- **Decision**: Organizar o frontend por funcionalidades (Feature-based), com componentes genéricos compartilhados; usar Tailwind com tokens padrão, shadcn/ui, TanStack Query sobre SDK OpenAPI gerado, React Hook Form e React Router Data Mode como SPA no Vite.
+- **Reason**: Escolhas explícitas do proprietário na entrevista M1 de 2026-11-16; definir convenções antes de implementar várias telas.
+- **Trade-off**: Novas dependências e código de componentes sob manutenção do projeto; exigir spike de compatibilidade com os pins atuais e separação entre estado da API, rascunhos e UI.
+- **Scope**: Frontend de aplicação a partir do M1; estado de UI local inicialmente, sem store global; não define estilos do renderer de currículo nem editor avançado M6.
+- **Date**: 2026-11-16
+- **Status**: active; decisões aprovadas, implementação NOT_RUN.
+
 ## Handoff
 
-- **Feature**: harness-status — reconciliação de 31 slices, status canônico, verificação de divergência e modelo de medição.
-- **Phase / Task**: T1–T4 concluídas; parecer independente PASS com limitações em `.specs/features/harness-status/validation.md`.
-- **Completed**: registro canônico `docs/process/milestone-status.json`; notas Obsidian M0–M7 e índice sincronizados; checker de snapshot offline; modelo de medição preparado para M1.
-- **Gates**: 4 testes focais, Ruff check e format, snapshot real e validate_state passaram. Sensor independente detectou 2/2 mutações; `just check` completo não foi executado nesta alteração de processo.
-- **In-progress**: piloto e retrospectiva M1 dependem de autorização e execução posteriores; não são alegados como concluídos.
-- **Next step**: preparar M1 conforme AC-M1-001/002/003 e usar `docs/process/milestone-effort-template.md`; consultar `docs/process/milestone-status-workflow.md` antes de atualizar estados.
-- **Blockers**: tempo ativo histórico SPIKE-17 não comprovado; exceção aceita em M0.5. O checker não mede disponibilidade nem texto narrativo do vault em tempo real.
-- **Uncommitted files**: alterações preexistentes em PROJECT_SOURCE, ADR-016, contratos/módulos/decisões, contexto/pesquisa M0.5 e `.serena/` continuam fora do escopo.
-- **Branch**: main
+- **Feature**: m1-career-kb — planejamento do Career KB Core completo.
+- **Phase / Task**: execução autorizada pelo proprietário em 2026-11-16 às 20:17 (-03); T1 baseline concluída, 1/64 concluída; estado canônico in_progress.
+- **Completed**: planejamento, spec, design, ferramentas e lotes sequenciais aprovados; branch local criada sem descartar alterações.
+- **Gates**: validadores estritos de spec/tasks aprovados; BUILD de baseline passou. Evidência em `.specs/features/m1-career-kb/execution.md`.
+- **In-progress**: T2; primeiro lote T1–T6 sequencial.
+- **Next step**: preparar CI local e executar gate T2; seguir plano aprovado sem push.
+- **Blockers**: aceite privado requer intervenção humana após piloto independente; CI remoto não autorizado.
+- **Branch**: feature/m1-career-kb, base d2a609d.
 
 Operação: docs/engineering/m0-local-operation.md; just setup, just build, just redis-up (manual), just migrate, just api, just worker e just open. XDG_RUNTIME_DIR privado obrigatório; dados profissionais/providers/MCP/CI não utilizados. Testes: PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check, Docker e Chromium necessários. Evidências detalhadas e limites em .specs/features/m0-foundation/validation.md.
