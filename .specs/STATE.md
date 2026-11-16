@@ -15,15 +15,14 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 
 ## Handoff
 
-- **Feature**: m05-mcp-feasibility — contexto e especificação aprovados em 2026-11-12
-- **Phase / Task**: M0.5 T1–T20 concluídas; verificação independente PASS com exceção histórica aceita pelo proprietário.
-- **Completed**: Hermes e Codex validaram as duas tools e replay; proprietário conferiu os quatro campos sem envio. Correções de autorização, validação wire, framing e ambiente restrito commitadas; evidência e exceção em 905b720 e 93739b6.
-- **Gates**: just check PASS: 431 testes Python, 17 Vitest, 3 Chromium, contratos, build e lint; just check-mcp-spike: 177 testes; validate_state PASS. Dois avisos de depreciação SDK.
-- **Sensor**: revalidação independente detectou 5/5 mutações em cópia isolada; parecer anterior detectou 7/7.
-- **In-progress**: nenhum desenvolvimento M0.5 pendente; relatório independente e lições registram a revalidação.
-- **Next step**: seguir o roadmap, preservando o limite de investigação de 60 minutos; consultar validation.md e historical-exception.md para limites do aceite.
-- **Blockers**: SPIKE-17 histórico não comprovado; proprietário aceitou exceção documentada em 2026-11-16. Continuidade exata do PID Hermes não medida durante chamadas.
-- **Uncommitted files**: planejamento .specs/features/m05-mcp-feasibility/, STATE, ADR-016 e sincronização da escolha FastMCP em PROJECT_SOURCE/módulo/contratos/decisões; .serena/ preexistente permanece fora do escopo
+- **Feature**: harness-status — reconciliação de 31 slices, status canônico, verificação de divergência e modelo de medição.
+- **Phase / Task**: T1–T4 concluídas; parecer independente PASS com limitações em `.specs/features/harness-status/validation.md`.
+- **Completed**: registro canônico `docs/process/milestone-status.json`; notas Obsidian M0–M7 e índice sincronizados; checker de snapshot offline; modelo de medição preparado para M1.
+- **Gates**: 4 testes focais, Ruff check e format, snapshot real e validate_state passaram. Sensor independente detectou 2/2 mutações; `just check` completo não foi executado nesta alteração de processo.
+- **In-progress**: piloto e retrospectiva M1 dependem de autorização e execução posteriores; não são alegados como concluídos.
+- **Next step**: preparar M1 conforme AC-M1-001/002/003 e usar `docs/process/milestone-effort-template.md`; consultar `docs/process/milestone-status-workflow.md` antes de atualizar estados.
+- **Blockers**: tempo ativo histórico SPIKE-17 não comprovado; exceção aceita em M0.5. O checker não mede disponibilidade nem texto narrativo do vault em tempo real.
+- **Uncommitted files**: alterações preexistentes em PROJECT_SOURCE, ADR-016, contratos/módulos/decisões, contexto/pesquisa M0.5 e `.serena/` continuam fora do escopo.
 - **Branch**: main
 
 Operação: docs/engineering/m0-local-operation.md; just setup, just build, just redis-up (manual), just migrate, just api, just worker e just open. XDG_RUNTIME_DIR privado obrigatório; dados profissionais/providers/MCP/CI não utilizados. Testes: PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check, Docker e Chromium necessários. Evidências detalhadas e limites em .specs/features/m0-foundation/validation.md.

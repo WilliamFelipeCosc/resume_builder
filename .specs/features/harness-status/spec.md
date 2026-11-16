@@ -6,8 +6,8 @@ Milestone evidence and Obsidian planning notes drift. Effort and verification fi
 
 ## Goals
 
-- [ ] Maintain repository-owned milestone status and detect stale Obsidian projections.
-- [ ] Provide a measurement template and reconcile the slice notes against approved criteria.
+- [x] Maintain repository-owned milestone status and detect stale Obsidian projections.
+- [x] Provide a measurement template and reconcile the slice notes against approved criteria.
 
 ## Out of Scope
 
@@ -69,18 +69,18 @@ Milestone evidence and Obsidian planning notes drift. Effort and verification fi
 
 | Requirement ID | Story | Phase | Status |
 | --- | --- | --- | --- |
-| HAR-01 | P1 | Execute | Implementing |
-| HAR-02 | P1 | Execute | Implementing |
-| HAR-03 | P1 | Execute | Implementing |
-| HAR-04 | P1 | Execute | Implementing |
-| HAR-05 | P1 | Execute | Implementing |
-| HAR-06 | P2 | Execute | Implementing |
-| HAR-07 | P2 | Execute | Implementing |
-| HAR-08 | P2 | Execute | Implementing |
-| HAR-09 | P2 | Execute | Implementing |
-| HAR-10 | P2 | Execute | Implementing |
+| HAR-01 | P1 | Execute | Verified |
+| HAR-02 | P1 | Execute | Verified |
+| HAR-03 | P1 | Execute | Verified |
+| HAR-04 | P1 | Execute | Verified |
+| HAR-05 | P1 | Execute | Verified |
+| HAR-06 | P2 | Execute | Verified |
+| HAR-07 | P2 | Execute | Verified |
+| HAR-08 | P2 | Execute | Verified |
+| HAR-09 | P2 | Execute | Verified |
+| HAR-10 | P2 | Execute | Verified |
 
 ## Success Criteria
 
-- [ ] Matching and negative drift scenarios produce the specified exit codes.
-- [ ] Slice status and scope reconcile with current evidence without claiming M1 execution.
+- [x] Matching and negative drift scenarios produce the specified exit codes.
+- [x] Slice status and scope reconcile with current evidence without claiming M1 execution.
