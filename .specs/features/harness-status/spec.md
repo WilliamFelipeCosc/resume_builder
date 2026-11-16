@@ -70,10 +70,10 @@ Milestone evidence and Obsidian planning notes drift. Effort and verification fi
 | Requirement ID | Story | Phase | Status |
 | --- | --- | --- | --- |
 | HAR-01 | P1 | Execute | Implementing |
-| HAR-02 | P1 | Execute | Pending |
-| HAR-03 | P1 | Execute | Pending |
-| HAR-04 | P1 | Execute | Pending |
-| HAR-05 | P1 | Execute | Pending |
+| HAR-02 | P1 | Execute | Implementing |
+| HAR-03 | P1 | Execute | Implementing |
+| HAR-04 | P1 | Execute | Implementing |
+| HAR-05 | P1 | Execute | Implementing |
 | HAR-06 | P2 | Execute | Pending |
 | HAR-07 | P2 | Execute | Pending |
 | HAR-08 | P2 | Execute | Pending |

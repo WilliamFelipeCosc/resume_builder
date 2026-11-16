@@ -48,7 +48,7 @@ T3 → T4
 **Depends on**: T1
 **Requirement**: HAR-02, HAR-03, HAR-04, HAR-05
 **Done when**:
-- [ ] Matching, differing, missing and invalid snapshots produce specified results without writes.
+- [x] Matching, differing, missing and invalid snapshots produce specified results without writes.
 **Tests**: unit, `tests/unit/test_milestone_drift.py`.
 **Gate**: Quick.
 
