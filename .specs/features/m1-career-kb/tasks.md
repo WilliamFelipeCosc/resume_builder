@@ -251,7 +251,7 @@ baseline para o sensor independente.
 
 #### T7: Estender erros HTTP tipados sem eco de input
 
-**Status**: Pending
+**Status**: Complete
 **What**: Manter envelope error, requestId e fieldErrors seguros para 404/409/413/415/422/429/503; preservar comportamento M0.
 **Where**: `backend/api/src/resume_api/errors.py`
 **Supporting**: serviço/repositório focal, registro do router, DTO/exports necessários, OpenAPI/SDK regenerados e testes da operação.
@@ -260,8 +260,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-12, MONE-15, MONE-23, MONE-26, MONE-29, MONE-34
 **Tools**: PY
 **Done when**:
-- [ ] Erros de campo e de revisão tipados; input sentinela e detalhes internos ausentes; enum/schema exportável offline.
-- [ ] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Erros de campo e de revisão tipados; input sentinela e detalhes internos ausentes; enum/schema exportável offline.
+- [x] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t7.py e/ou tests/integration/test_m1_t7.py; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: HTTP
 **Commit**: `feat(api): expose safe m1 error contracts`

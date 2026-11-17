@@ -17,36 +17,12 @@ from pydantic import BaseModel, ConfigDict, Field
 from resume_core.contracts import DiagnosticCreate, DiagnosticResponse
 from resume_core.repository import ActiveDiagnosticConflict
 from resume_core.service import Principal
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from resume_api.errors import ERRORS, HttpErrorResponse, error_response
 from resume_api.session import SessionChannel, SessionStore
 
 COOKIE_NAME = "resume_session"
-ERRORS = {
-    401: ("unauthorized", "Open the application using the local command."),
-    403: ("forbidden_origin", "Local origin is required."),
-    409: ("active_diagnostic", "A diagnostic is already active."),
-    413: ("body_too_large", "Request body exceeds 1024 bytes."),
-    422: ("invalid_request", "Request does not match the contract."),
-    500: ("internal_error", "Request could not be completed."),
-}
-
-
-class HttpError(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    code: Literal[
-        "unauthorized",
-        "forbidden_origin",
-        "active_diagnostic",
-        "body_too_large",
-        "invalid_request",
-        "internal_error",
-    ]
-    message: str
-
-
-class HttpErrorResponse(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    error: HttpError
 
 
 class HealthResponse(BaseModel):
@@ -55,11 +31,6 @@ class HealthResponse(BaseModel):
 
 ERROR_RESPONSES = {code: {"model": HttpErrorResponse} for code in ERRORS}
 SESSION_SECURITY = {"security": [{"LocalSession": []}]}
-
-
-def error_response(status):
-    code, message = ERRORS[status]
-    return JSONResponse({"error": {"code": code, "message": message}}, status_code=status)
 
 
 class BootstrapRequest(BaseModel):
@@ -119,7 +90,7 @@ class Boundary:
             await send(message)
 
         async def reject(code):
-            await error_response(code)(scope, receive, safe_send)
+            await error_response(code, request_id)(scope, receive, safe_send)
 
         try:
             if duplicate or headers.get(b"host") != self.host or origin not in (None, self.origin):
@@ -238,13 +209,23 @@ def create_app(
     app.state.reconciler = reconciler
     app.add_middleware(Boundary, sessions=sessions, origin=origin)
 
+    @app.exception_handler(StarletteHTTPException)
+    async def http_error(request, error):
+        if error.status_code in ERRORS:
+            return error_response(error.status_code, request.state.request_id)
+        return error_response(500, request.state.request_id)
+
     @app.exception_handler(RequestValidationError)
     async def invalid_request(request, error):
-        return error_response(422)
+        return error_response(
+            422,
+            request.state.request_id,
+            fields=tuple(str(item["loc"][-1]) for item in error.errors() if item.get("loc")),
+        )
 
     @app.exception_handler(Exception)
     async def unexpected_error(request, error):
-        return error_response(500)
+        return error_response(500, request.state.request_id)
 
     @app.get("/api/health", response_model=HealthResponse, operation_id="get_health")
     async def health():
@@ -280,10 +261,10 @@ def create_app(
     @app.post(
         "/api/session/bootstrap", response_model=BootstrapResponse, operation_id="bootstrap_session"
     )
-    async def bootstrap(body: BootstrapRequest):
+    async def bootstrap(body: BootstrapRequest, request: Request):
         session = sessions.redeem(body.ticket)
         if session is None:
-            return error_response(401)
+            return error_response(401, request.state.request_id)
         response = JSONResponse({"authorized": True})
         response.set_cookie(COOKIE_NAME, session, httponly=True, samesite="strict", path="/")
         structlog.get_logger().info("session_started")
@@ -306,7 +287,7 @@ def create_app(
                 request_id=UUID(request.state.request_id),
             )
         except ActiveDiagnosticConflict:
-            return error_response(409)
+            return error_response(409, request.state.request_id)
         structlog.get_logger().info(
             "diagnostic_created",
             request_id=request.state.request_id,

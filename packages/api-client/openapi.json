@@ -219,6 +219,75 @@
         "title": "DiagnosticResult",
         "type": "object"
       },
+      "FieldError": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "const": "invalid",
+            "default": "invalid",
+            "title": "Code",
+            "type": "string"
+          },
+          "path": {
+            "enum": [
+              "ticket",
+              "idempotency_key",
+              "idempotencyKey",
+              "baseRevisionId",
+              "full_name",
+              "professional_headline",
+              "email",
+              "phone_original",
+              "objective_original",
+              "city_of_residence",
+              "country_of_residence",
+              "linkedin_url",
+              "github_url",
+              "company_name_original",
+              "job_title_original",
+              "start_date_original",
+              "end_date_original",
+              "start_period",
+              "end_period",
+              "end_date_is_current_as_of_source",
+              "location",
+              "text_original",
+              "text_current",
+              "statement_type",
+              "title",
+              "title_is_generated_label",
+              "description_original",
+              "description_current",
+              "time_to_develop_original",
+              "metric_type",
+              "metric_value",
+              "metric_unit",
+              "metric_meaning",
+              "name",
+              "original_labels",
+              "category",
+              "explicitly_listed_in_skills_section",
+              "institution",
+              "program_original",
+              "ongoing_as_of_source_document",
+              "currently_ongoing",
+              "language",
+              "proficiency_original",
+              "description",
+              "evidence_kind",
+              "source_document_id",
+              "page"
+            ],
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "FieldError",
+        "type": "object"
+      },
       "HealthResponse": {
         "properties": {
           "status": {
@@ -240,22 +309,51 @@
             "enum": [
               "unauthorized",
               "forbidden_origin",
+              "forbidden",
+              "not_found",
               "active_diagnostic",
+              "stale_revision",
+              "idempotency_conflict",
+              "dependent_changes",
+              "missing_candidate_dependency",
               "body_too_large",
+              "unsupported_media_type",
               "invalid_request",
+              "rate_limited",
+              "storage_unavailable",
+              "database_busy",
               "internal_error"
             ],
             "title": "Code",
             "type": "string"
           },
+          "fieldErrors": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FieldError"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fielderrors"
+          },
           "message": {
             "title": "Message",
+            "type": "string"
+          },
+          "requestId": {
+            "title": "Requestid",
             "type": "string"
           }
         },
         "required": [
           "code",
-          "message"
+          "message",
+          "requestId"
         ],
         "title": "HttpError",
         "type": "object"
@@ -342,6 +440,16 @@
             },
             "description": "Forbidden"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
           "409": {
             "content": {
               "application/json": {
@@ -362,6 +470,16 @@
             },
             "description": "Content Too Large"
           },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
           "422": {
             "content": {
               "application/json": {
@@ -372,6 +490,16 @@
             },
             "description": "Unprocessable Content"
           },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
           "500": {
             "content": {
               "application/json": {
@@ -381,6 +509,16 @@
               }
             },
             "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "security": [
@@ -425,6 +563,16 @@
             },
             "description": "Forbidden"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
           "409": {
             "content": {
               "application/json": {
@@ -445,6 +593,16 @@
             },
             "description": "Content Too Large"
           },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
           "422": {
             "content": {
               "application/json": {
@@ -455,6 +613,16 @@
             },
             "description": "Unprocessable Content"
           },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
           "500": {
             "content": {
               "application/json": {
@@ -464,6 +632,16 @@
               }
             },
             "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "security": [
@@ -508,6 +686,16 @@
             },
             "description": "Forbidden"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
           "409": {
             "content": {
               "application/json": {
@@ -528,6 +716,16 @@
             },
             "description": "Content Too Large"
           },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
           "422": {
             "content": {
               "application/json": {
@@ -538,6 +736,16 @@
             },
             "description": "Unprocessable Content"
           },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
           "500": {
             "content": {
               "application/json": {
@@ -547,6 +755,16 @@
               }
             },
             "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "summary": "Health"
@@ -596,6 +814,16 @@
             },
             "description": "Forbidden"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
           "409": {
             "content": {
               "application/json": {
@@ -616,6 +844,16 @@
             },
             "description": "Content Too Large"
           },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
           "422": {
             "content": {
               "application/json": {
@@ -626,6 +864,16 @@
             },
             "description": "Unprocessable Content"
           },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
           "500": {
             "content": {
               "application/json": {
@@ -635,6 +883,16 @@
               }
             },
             "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
           }
         },
         "summary": "Bootstrap"

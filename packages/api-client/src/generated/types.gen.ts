@@ -121,6 +121,20 @@ export type DiagnosticResult = {
 };
 
 /**
+ * FieldError
+ */
+export type FieldError = {
+    /**
+     * Code
+     */
+    code?: 'invalid';
+    /**
+     * Path
+     */
+    path: 'ticket' | 'idempotency_key' | 'idempotencyKey' | 'baseRevisionId' | 'full_name' | 'professional_headline' | 'email' | 'phone_original' | 'objective_original' | 'city_of_residence' | 'country_of_residence' | 'linkedin_url' | 'github_url' | 'company_name_original' | 'job_title_original' | 'start_date_original' | 'end_date_original' | 'start_period' | 'end_period' | 'end_date_is_current_as_of_source' | 'location' | 'text_original' | 'text_current' | 'statement_type' | 'title' | 'title_is_generated_label' | 'description_original' | 'description_current' | 'time_to_develop_original' | 'metric_type' | 'metric_value' | 'metric_unit' | 'metric_meaning' | 'name' | 'original_labels' | 'category' | 'explicitly_listed_in_skills_section' | 'institution' | 'program_original' | 'ongoing_as_of_source_document' | 'currently_ongoing' | 'language' | 'proficiency_original' | 'description' | 'evidence_kind' | 'source_document_id' | 'page';
+};
+
+/**
  * HealthResponse
  */
 export type HealthResponse = {
@@ -137,11 +151,19 @@ export type HttpError = {
     /**
      * Code
      */
-    code: 'unauthorized' | 'forbidden_origin' | 'active_diagnostic' | 'body_too_large' | 'invalid_request' | 'internal_error';
+    code: 'unauthorized' | 'forbidden_origin' | 'forbidden' | 'not_found' | 'active_diagnostic' | 'stale_revision' | 'idempotency_conflict' | 'dependent_changes' | 'missing_candidate_dependency' | 'body_too_large' | 'unsupported_media_type' | 'invalid_request' | 'rate_limited' | 'storage_unavailable' | 'database_busy' | 'internal_error';
+    /**
+     * Fielderrors
+     */
+    fieldErrors?: Array<FieldError> | null;
     /**
      * Message
      */
     message: string;
+    /**
+     * Requestid
+     */
+    requestId: string;
 };
 
 /**
@@ -168,6 +190,10 @@ export type CreateDiagnosticErrors = {
      */
     403: HttpErrorResponse;
     /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
      * Conflict
      */
     409: HttpErrorResponse;
@@ -176,13 +202,25 @@ export type CreateDiagnosticErrors = {
      */
     413: HttpErrorResponse;
     /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
      * Unprocessable Content
      */
     422: HttpErrorResponse;
     /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
      * Internal Server Error
      */
     500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
 };
 
 export type CreateDiagnosticError = CreateDiagnosticErrors[keyof CreateDiagnosticErrors];
@@ -217,6 +255,10 @@ export type GetLatestDiagnosticErrors = {
      */
     403: HttpErrorResponse;
     /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
      * Conflict
      */
     409: HttpErrorResponse;
@@ -225,13 +267,25 @@ export type GetLatestDiagnosticErrors = {
      */
     413: HttpErrorResponse;
     /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
      * Unprocessable Content
      */
     422: HttpErrorResponse;
     /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
      * Internal Server Error
      */
     500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
 };
 
 export type GetLatestDiagnosticError = GetLatestDiagnosticErrors[keyof GetLatestDiagnosticErrors];
@@ -262,6 +316,10 @@ export type GetHealthErrors = {
      */
     403: HttpErrorResponse;
     /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
      * Conflict
      */
     409: HttpErrorResponse;
@@ -270,13 +328,25 @@ export type GetHealthErrors = {
      */
     413: HttpErrorResponse;
     /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
      * Unprocessable Content
      */
     422: HttpErrorResponse;
     /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
      * Internal Server Error
      */
     500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
 };
 
 export type GetHealthError = GetHealthErrors[keyof GetHealthErrors];
@@ -307,6 +377,10 @@ export type BootstrapSessionErrors = {
      */
     403: HttpErrorResponse;
     /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
      * Conflict
      */
     409: HttpErrorResponse;
@@ -315,13 +389,25 @@ export type BootstrapSessionErrors = {
      */
     413: HttpErrorResponse;
     /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
      * Unprocessable Content
      */
     422: HttpErrorResponse;
     /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
      * Internal Server Error
      */
     500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
 };
 
 export type BootstrapSessionError = BootstrapSessionErrors[keyof BootstrapSessionErrors];
