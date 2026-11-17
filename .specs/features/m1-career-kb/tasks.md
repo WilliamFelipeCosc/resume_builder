@@ -8,7 +8,7 @@ Um deliverable atômico por tarefa; testes da mudança e registro de progresso
 fazem parte do mesmo commit. Verifier independente final e sensor são obrigatórios.
 
 **Design:** [design.md](design.md), aprovado pelo proprietário em 2026-11-16.
-**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 20/64 concluídas.
+**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 21/64 concluídas.
 **Início:** autorizado explicitamente pelo proprietário em 2026-11-16 às 20:17 (-03); execução iniciada na T1.
 **Escopo:** M1; REQ-KB-001/002/004, REQ-SEC-001, AC-M1-001/002/003.
 **Não executado:** nenhuma instalação, alteração funcional ou teste de runtime nesta preparação.
@@ -495,7 +495,7 @@ baseline para o sensor independente.
 
 #### T21: Implementar criação autorizada de fatos
 
-**Status**: Pending
+**Status**: Complete
 **What**: Criar os nove tipos unverified com fonte, metadados e revisão inicial, sem promover valores de outros campos ou fatos.
 **Where**: `backend/core/src/resume_core/career_kb/create.py`
 **Supporting**: testes/evidências e wiring mínimo estritamente necessários ao deliverable.
@@ -504,8 +504,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-03, MONE-06, MONE-10, MONE-22, MONE-25, MONE-26, MONE-27
 **Tools**: PY
 **Done when**:
-- [ ] Nove tipos; fonte obrigatória autorizada; confirmação inicial unverified; chave igual/diferente; spy nega antes da leitura.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Nove tipos; fonte obrigatória autorizada; confirmação inicial unverified; chave igual/diferente; spy nega antes da leitura.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t21.py e/ou tests/integration/test_m1_t21.py; mínimo de 5 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(kb): create grounded unverified facts`
