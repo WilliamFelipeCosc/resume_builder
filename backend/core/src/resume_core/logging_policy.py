@@ -46,6 +46,7 @@ CODES = frozenset(
         "body_too_large",
         "unsupported_media_type",
         "invalid_request",
+        "response_too_large",
         "rate_limited",
         "storage_unavailable",
         "database_busy",

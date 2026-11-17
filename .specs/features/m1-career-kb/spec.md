@@ -213,18 +213,18 @@ independente, demonstração local privada e revisão do registro de esforço.
 
 | Requirement ID | Story / cobertura | Phase | Status |
 | --- | --- | --- | --- |
-| MONE-01 | S1: CI antes do domínio; roadmap M1 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
-| MONE-02 | S1: evidência remota distinta; REQ-QA-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
-| MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | T3, T16, T18–T22 e tarefas restantes | In Progress (consulta tipada) |
+| MONE-01 | S1: CI antes do domínio; roadmap M1 | T2 e tarefas restantes | In Progress (CI remoto não verificado) |
+| MONE-02 | S1: evidência remota distinta; REQ-QA-001 | T2 e tarefas restantes | In Progress (CI remoto não verificado) |
+| MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | T3, T16, T18–T23 e tarefas restantes | In Progress (criação e consulta HTTP tipadas) |
 | MONE-04 | S2: vínculos; REQ-KB-001/002, AC-M1-001 | T12, T19 e tarefas restantes | In Progress (identidade e conteúdo tipado) |
 | MONE-05 | S2: integridade referencial; AC-M1-001 | T12, T19 e tarefas restantes | In Progress (restrições de identidade e Profile) |
-| MONE-06 | S2: autorização pré-leitura/escrita; REQ-SEC-001 | T13, T16, T17, T21, T22 e tarefas restantes | In Progress (consulta e criação autorizadas) |
-| MONE-07 | S2: privacidade por campo/fonte; REQ-KB-002, REQ-SEC-001 | T13, T17, T20, T22 e tarefas restantes | In Progress (projeção e fontes filtradas) |
+| MONE-06 | S2: autorização pré-leitura/escrita; REQ-SEC-001 | T13, T16, T17, T21–T23 e tarefas restantes | In Progress (criação/consulta e HTTP autorizados) |
+| MONE-07 | S2: privacidade por campo/fonte; REQ-KB-002, REQ-SEC-001 | T13, T17, T20, T22, T23 e tarefas restantes | In Progress (projeção, fontes e respostas HTTP filtradas) |
 | MONE-08 | S2: arquivo histórico; AC-M1-001 | T12, T19, T22 e tarefas restantes | In Progress (filtro de arquivo) |
 | MONE-09 | S3: edição sem confirmação herdada; AC-M1-001 | T18, T20 e tarefas restantes | In Progress (snapshots e confirmação por campo) |
 | MONE-10 | S3: confirmação explícita; REQ-KB-002 | T18, T21 e tarefas restantes | In Progress (criação unverified) |
 | MONE-11 | S3: rejeição sem overwrite; AC-M1-001 | Tasks | In Tasks |
-| MONE-12 | S3: concorrência; REQ-KB-002 | T11, T18, T20 e tarefas restantes | In Progress (atualização condicional) |
+| MONE-12 | S3: concorrência; REQ-KB-002 | T11, T18, T20, T23 e tarefas restantes | In Progress (atualização condicional e contratos HTTP) |
 | MONE-13 | S3: histórico/diff; AC-M1-001 | T13, T20, T22 e tarefas restantes | In Progress (projeções e snapshot filtrado) |
 | MONE-14 | S4: associação fonte/seed; AC-M1-002 | T8, T14, T15 e tarefas restantes | In Progress (entrada e PDF limitado) |
 | MONE-15 | S4: validação negativa; AC-M1-002 | T8, T15 e tarefas restantes | In Progress (entrada e PDF limitado) |
@@ -234,7 +234,7 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-19 | S4: diferenças da proposta; AC-M1-002 | Tasks | In Tasks |
 | MONE-20 | S4: dedup ambígua; REQ-KB-004 | Tasks | In Tasks |
 | MONE-21 | S5: decisões/diff; AC-M1-003 | Tasks | In Tasks |
-| MONE-22 | S5: aceite sem confirmar; AC-M1-002/003 | T16, T21 e tarefas restantes | In Progress (criação unverified) |
+| MONE-22 | S5: aceite sem confirmar; AC-M1-002/003 | T16, T21, T23 e tarefas restantes | In Progress (criação unverified exposta por HTTP) |
 | MONE-23 | S5: lote atômico; AC-M1-003 | T11 e tarefas restantes | In Progress (transação explícita) |
 | MONE-24 | S5: commit e auditoria; AC-M1-003 | T11, T20 e tarefas restantes | In Progress (transação e snapshots) |
 | MONE-25 | S5: replay idempotente; REQ-KB-004 | T20, T21 e tarefas restantes | In Progress (replay autorizado) |
@@ -245,14 +245,14 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-30 | S6: PDF imutável; AC-M1-003 | T12, T14, T16, T17 e tarefas restantes | In Progress (fonte por hash e download verificado) |
 | MONE-31 | S6: falha sem parcial; AC-M1-001/003 | T11, T14 e tarefas restantes | In Progress (transação explícita e instalação atômica) |
 | MONE-32 | S6: durabilidade; REQ-KB-002/004 | T12, T14, T19 e tarefas restantes | In Progress (histórico e conteúdo tipado) |
-| MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
-| MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | T13, T15, T17 e tarefas restantes | In Progress (parser e fonte protegidos) |
+| MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto não verificado) |
+| MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | T13, T15, T17, T23 e tarefas restantes | In Progress (parser, fontes e erros HTTP protegidos) |
 | MONE-35 | S7: verificação do piloto; REQ-QA-001 | T4 e tarefas restantes | In Progress (descoberta preparada) |
 | MONE-36 | S7: carga privada revisada; AC-M1-002/003 | Tasks | In Tasks |
 | MONE-37 | S7: evidência e limitações; AC-M1-001/002/003 | Tasks | In Tasks |
 | MONE-38 | S7: piloto medido; workflow de estado/esforço | T1, T61–T64 | In Progress (T1 baseline registrado) |
 
-**Coverage:** 38 requisitos mapeados às 64 tarefas propostas; a matriz requisito→tarefa está em [tasks.md](tasks.md). Nenhuma tarefa foi executada ou marcada Verified.
+**Coverage:** 38 requisitos mapeados às 64 tarefas; T1–T23 concluídas com gates locais registrados em [execution.md](execution.md). Verificação independente e aceite final ainda pendentes; a matriz requisito→tarefa está em [tasks.md](tasks.md).
 MONE-01/02 correspondem aos dois critérios de S1, respectivamente.
 Edge Cases especializam MONE-16/17/21 sem novos requisitos independentes.
 

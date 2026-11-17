@@ -177,3 +177,50 @@ Contexto, design, spec e handoff foram sincronizados com as escolhas.
 A espera por esclarecimento é separada do esforço ativo, sem reconstruir
 duração não instrumentada. T18 está liberada; runtime e seu gate ainda
 não executados neste registro de decisão.
+
+## T23 — rotas HTTP concretas e fechamento da fase 4
+
+- Implementação iniciada pelo worker Terra e preservada sem commit quando
+  atingiu quota. Às 10:32 (-03) de 2026-11-17 o proprietário pediu commit e
+  push; o principal conferiu os dez arquivos pendentes e concluiu a validação,
+  sem alterar comportamento ou enfraquecer testes. Escopo: 27 operações
+  concretas de criação/lista/detalhe dos nove tipos; composição de serviços,
+  contratos de erro e OpenAPI/SDK gerados. REQ-KB-001/002, REQ-SEC-001 e
+  MONE-03/06/07/12/22/34 parcialmente atendidos; o marco continua in_progress.
+- `just generate` PASS com PATH Node 24 explícito. Gate PY: 141 passed,
+  435 deselected em 7,91 s. BUILD final executado com o comando integral
+  documentado no handoff, entre 10:33 e 10:35:13 (-03): exit 0, **576 Python
+  (2 avisos de depreciação existentes), 19 Vitest, 4 Playwright**, typecheck,
+  build, contrato (duas gerações idênticas), Ruff e diff-check PASS. A execução
+  elimina a lacuna de evidência do último BUILD interrompido do worker.
+- O intervalo de gate é espera observada, não tempo ativo líquido estimado.
+  Nenhuma instalação/dependência nova, teste removido, assertion relaxada,
+  fonte privada ou candidatura real. Push autorizado pelo pedido atual;
+  resultado do CI remoto ainda não verificado.
+
+### Adequação T23 — critérios e evidência
+
+Todas as âncoras abaixo referem-se a `tests/integration/test_m1_t23.py`,
+salvo indicação explícita de outra camada. As 15 execuções focais derivam
+dos sete testes, incluindo nove tipos parametrizados.
+
+| Critério / requisito | Arquivo:linha e assertion | Resultado exigido |
+| --- | --- | --- |
+| Nove criações/listas/detalhes concretos, MONE-03 | `:79` created.status_code == 201; `:83` result.status_code == 200 e ID igual; `:84` revisionId igual; `:86` cada campo igual ao fornecido; `:88` lista 200/limit == 2 | Round trip preserva identidade, revisão e conteúdo |
+| Replay e conflito tipados | `:81` replay.status_code == 200 e JSON original; `:213` changed.status_code == 409 e code == idempotency_conflict | Não duplicar nem reaplicar comando divergente |
+| Paginação/filtro por campo do Profile | `:100` total == 1; `:101` ID criado; `:109`, `:114` parâmetros inválidos == 422 | Parsing HTTP e limites/filtros aprovados |
+| Principal do body negado e erros sem eco, MONE-34 | `:133` invalid.status_code == 422 e SECRET_SENTINEL ausente; `:140` fieldErrors == [{path: fullName, code: invalid}] | Identidade vem da composição e payload rejeitado não vaza |
+| Sessão/Origin/Host e referência não visível, MONE-06 | `:121`, `:126` origem inválida == 403; `:158` sem sessão == 401; `:165` fonte oculta == 404/not_found; `:167` Host inválido == 403 | Autorização e respostas estáveis |
+| Budget e estado incompleto | `:180` status == 422; `:181` code == response_too_large; `:182` mensagem pede página menor; `:195` incompleto == 404; `:196` total == 0 | Sem truncar nem expor criação incompleta |
+| Campo e fonte restritos, MONE-07 | `:231` fullName == Synthetic; `:232` phoneOriginal is None; `:233` restrictedFields == [phoneOriginal]; `:234` provenance == [] e PRIVATE ausente | Omitir conteúdo/referência não autorizados |
+| Schema concreto/offline e IDs únicos | `:247` len(operations) == len(set(operations)); `:250` operationId == create_kind; `:251` request schema com ref; `:252` operationId == list_kind; `:239` spy falha se acesso ao banco | Export sem I/O privado e sem DTO genérico de escrita |
+| Criação não confirma qualificações, MONE-22 | `tests/integration/test_m1_t21.py:71` tuple(row) == (kind, confidential, unverified); `:86` zero campos confirmed | Serviço usado pela rota mantém unidades unverified |
+
+Mapeamento reverso: teste parametrizado de round trip → MONE-03/replay;
+query parsing → limites e decisão Profile; errors/auth → MONE-06/34;
+budget/incompleto → limite de resposta/atomicidade; redaction → MONE-07 e
+conflito; OpenAPI offline → critério contratual T23. Cada cenário tem
+assertions de resultado, não apenas contagem de chamadas. Nenhum teste
+foi criado fora do escopo; locais/runners seguem AGENTS.md e a matriz.
+Veredito de adequação local: critérios T23 cobertos, sem SPEC_DEVIATION
+novo; Verifier do marco e sensor permanecem tarefas futuras.

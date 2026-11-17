@@ -11,6 +11,8 @@ import structlog
 import uvicorn
 from alembic import command
 from resume_core.broker import RedisPublisher, make_broker
+from resume_core.career_kb.create import CareerCreateService
+from resume_core.career_kb.queries import CareerQueries
 from resume_core.database import make_engine, migration_config
 from resume_core.logging_policy import configure_logging
 from resume_core.paths import resolve_paths
@@ -93,6 +95,8 @@ def main():
         service=DiagnosticService(repo),
         source_service=ManualNoteService(engine, storage),
         source_queries=SourceQueries(engine, storage),
+        career_create=CareerCreateService(engine),
+        career_queries=CareerQueries(engine),
         runtime_root=Path(os.environ["XDG_RUNTIME_DIR"]),
         environment=args.environment,
         origin=f"http://127.0.0.1:{args.port}",

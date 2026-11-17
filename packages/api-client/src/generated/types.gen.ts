@@ -5,6 +5,66 @@ export type ClientOptions = {
 };
 
 /**
+ * AchievementContent
+ */
+export type AchievementContent = {
+    /**
+     * Metricmeaning
+     */
+    metricMeaning?: string | null;
+    /**
+     * Metrictype
+     */
+    metricType?: string | null;
+    /**
+     * Metricunit
+     */
+    metricUnit?: string | null;
+    /**
+     * Metricvalue
+     */
+    metricValue?: string | null;
+    /**
+     * Textcurrent
+     */
+    textCurrent?: string | null;
+    /**
+     * Textoriginal
+     */
+    textOriginal: string;
+};
+
+/**
+ * AchievementReadContent
+ */
+export type AchievementReadContent = {
+    /**
+     * Metricmeaning
+     */
+    metricMeaning?: string | null;
+    /**
+     * Metrictype
+     */
+    metricType?: string | null;
+    /**
+     * Metricunit
+     */
+    metricUnit?: string | null;
+    /**
+     * Metricvalue
+     */
+    metricValue?: string | null;
+    /**
+     * Textcurrent
+     */
+    textCurrent?: string | null;
+    /**
+     * Textoriginal
+     */
+    textOriginal?: string | null;
+};
+
+/**
  * BootstrapRequest
  */
 export type BootstrapRequest = {
@@ -22,6 +82,281 @@ export type BootstrapResponse = {
      * Authorized
      */
     authorized: boolean;
+};
+
+/**
+ * CareerCreated
+ */
+export type CareerCreated = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * CreateCommand[AchievementContent]
+ */
+export type CreateCommandAchievementContent = {
+    content: AchievementContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[EducationContent]
+ */
+export type CreateCommandEducationContent = {
+    content: EducationContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[EvidenceContent]
+ */
+export type CreateCommandEvidenceContent = {
+    content: EvidenceContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[ExperienceContent]
+ */
+export type CreateCommandExperienceContent = {
+    content: ExperienceContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[LanguageContent]
+ */
+export type CreateCommandLanguageContent = {
+    content: LanguageContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[ProfileContent]
+ */
+export type CreateCommandProfileContent = {
+    content: ProfileContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[ProjectContent]
+ */
+export type CreateCommandProjectContent = {
+    content: ProjectContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[SkillContent]
+ */
+export type CreateCommandSkillContent = {
+    content: SkillContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * CreateCommand[StatementContent]
+ */
+export type CreateCommandStatementContent = {
+    content: StatementContent;
+    /**
+     * Fieldprivacy
+     */
+    fieldPrivacy?: {
+        [key: string]: 'public' | 'professional' | 'confidential' | 'secret';
+    };
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Privacy
+     */
+    privacy?: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Profileid
+     */
+    profileId: string | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
 };
 
 /**
@@ -121,6 +456,210 @@ export type DiagnosticResult = {
 };
 
 /**
+ * EducationContent
+ */
+export type EducationContent = {
+    /**
+     * Currentlyongoing
+     */
+    currentlyOngoing?: boolean | null;
+    /**
+     * Descriptioncurrent
+     */
+    descriptionCurrent?: string | null;
+    /**
+     * Descriptionoriginal
+     */
+    descriptionOriginal?: string | null;
+    /**
+     * Enddateoriginal
+     */
+    endDateOriginal?: string | null;
+    endPeriod?: PartialDate | null;
+    /**
+     * Institution
+     */
+    institution: string;
+    /**
+     * Location
+     */
+    location?: string | null;
+    /**
+     * Ongoingasofsourcedocument
+     */
+    ongoingAsOfSourceDocument?: boolean | null;
+    /**
+     * Programoriginal
+     */
+    programOriginal: string;
+    /**
+     * Startdateoriginal
+     */
+    startDateOriginal?: string | null;
+    startPeriod?: PartialDate | null;
+};
+
+/**
+ * EducationReadContent
+ */
+export type EducationReadContent = {
+    /**
+     * Currentlyongoing
+     */
+    currentlyOngoing?: boolean | null;
+    /**
+     * Descriptioncurrent
+     */
+    descriptionCurrent?: string | null;
+    /**
+     * Descriptionoriginal
+     */
+    descriptionOriginal?: string | null;
+    /**
+     * Enddateoriginal
+     */
+    endDateOriginal?: string | null;
+    endPeriod?: PartialDate | null;
+    /**
+     * Institution
+     */
+    institution?: string | null;
+    /**
+     * Location
+     */
+    location?: string | null;
+    /**
+     * Ongoingasofsourcedocument
+     */
+    ongoingAsOfSourceDocument?: boolean | null;
+    /**
+     * Programoriginal
+     */
+    programOriginal?: string | null;
+    /**
+     * Startdateoriginal
+     */
+    startDateOriginal?: string | null;
+    startPeriod?: PartialDate | null;
+};
+
+/**
+ * EvidenceContent
+ */
+export type EvidenceContent = {
+    /**
+     * Description
+     */
+    description: string;
+    /**
+     * Evidencekind
+     */
+    evidenceKind: 'documentary' | 'manual_note';
+    /**
+     * Excerpt
+     */
+    excerpt?: string | null;
+    /**
+     * Page
+     */
+    page?: number | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+};
+
+/**
+ * EvidenceReadContent
+ */
+export type EvidenceReadContent = {
+    /**
+     * Description
+     */
+    description?: string | null;
+    /**
+     * Evidencekind
+     */
+    evidenceKind?: 'documentary' | 'manual_note' | null;
+    /**
+     * Excerpt
+     */
+    excerpt?: string | null;
+    /**
+     * Page
+     */
+    page?: number | null;
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId?: string | null;
+};
+
+/**
+ * ExperienceContent
+ */
+export type ExperienceContent = {
+    /**
+     * Companynameoriginal
+     */
+    companyNameOriginal: string;
+    /**
+     * Enddateiscurrentasofsource
+     */
+    endDateIsCurrentAsOfSource?: boolean | null;
+    /**
+     * Enddateoriginal
+     */
+    endDateOriginal?: string | null;
+    endPeriod?: PartialDate | null;
+    /**
+     * Jobtitleoriginal
+     */
+    jobTitleOriginal: string;
+    /**
+     * Location
+     */
+    location?: string | null;
+    /**
+     * Startdateoriginal
+     */
+    startDateOriginal?: string | null;
+    startPeriod?: PartialDate | null;
+};
+
+/**
+ * ExperienceReadContent
+ */
+export type ExperienceReadContent = {
+    /**
+     * Companynameoriginal
+     */
+    companyNameOriginal?: string | null;
+    /**
+     * Enddateiscurrentasofsource
+     */
+    endDateIsCurrentAsOfSource?: boolean | null;
+    /**
+     * Enddateoriginal
+     */
+    endDateOriginal?: string | null;
+    endPeriod?: PartialDate | null;
+    /**
+     * Jobtitleoriginal
+     */
+    jobTitleOriginal?: string | null;
+    /**
+     * Location
+     */
+    location?: string | null;
+    /**
+     * Startdateoriginal
+     */
+    startDateOriginal?: string | null;
+    startPeriod?: PartialDate | null;
+};
+
+/**
  * FieldError
  */
 export type FieldError = {
@@ -131,7 +670,7 @@ export type FieldError = {
     /**
      * Path
      */
-    path: 'ticket' | 'idempotency_key' | 'idempotencyKey' | 'baseRevisionId' | 'full_name' | 'professional_headline' | 'email' | 'phone_original' | 'objective_original' | 'city_of_residence' | 'country_of_residence' | 'linkedin_url' | 'github_url' | 'company_name_original' | 'job_title_original' | 'start_date_original' | 'end_date_original' | 'start_period' | 'end_period' | 'end_date_is_current_as_of_source' | 'location' | 'text_original' | 'text_current' | 'statement_type' | 'title' | 'text' | 'title_is_generated_label' | 'description_original' | 'description_current' | 'time_to_develop_original' | 'metric_type' | 'metric_value' | 'metric_unit' | 'metric_meaning' | 'name' | 'original_labels' | 'category' | 'explicitly_listed_in_skills_section' | 'institution' | 'program_original' | 'ongoing_as_of_source_document' | 'currently_ongoing' | 'language' | 'proficiency_original' | 'description' | 'evidence_kind' | 'source_document_id' | 'page';
+    path: 'ticket' | 'idempotency_key' | 'idempotencyKey' | 'sourceDocumentId' | 'profileId' | 'fieldPrivacy' | 'confirmationField' | 'fullName' | 'professionalHeadline' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | 'companyNameOriginal' | 'jobTitleOriginal' | 'startDateOriginal' | 'endDateOriginal' | 'startPeriod' | 'endPeriod' | 'endDateIsCurrentAsOfSource' | 'textOriginal' | 'textCurrent' | 'statementType' | 'titleIsGeneratedLabel' | 'descriptionOriginal' | 'descriptionCurrent' | 'timeToDevelopOriginal' | 'metricType' | 'metricValue' | 'metricUnit' | 'metricMeaning' | 'originalLabels' | 'explicitlyListedInSkillsSection' | 'programOriginal' | 'ongoingAsOfSourceDocument' | 'currentlyOngoing' | 'proficiencyOriginal' | 'evidenceKind' | 'baseRevisionId' | 'full_name' | 'professional_headline' | 'email' | 'phone_original' | 'objective_original' | 'city_of_residence' | 'country_of_residence' | 'linkedin_url' | 'github_url' | 'company_name_original' | 'job_title_original' | 'start_date_original' | 'end_date_original' | 'start_period' | 'end_period' | 'end_date_is_current_as_of_source' | 'location' | 'text_original' | 'text_current' | 'statement_type' | 'title' | 'text' | 'title_is_generated_label' | 'description_original' | 'description_current' | 'time_to_develop_original' | 'metric_type' | 'metric_value' | 'metric_unit' | 'metric_meaning' | 'name' | 'original_labels' | 'category' | 'explicitly_listed_in_skills_section' | 'institution' | 'program_original' | 'ongoing_as_of_source_document' | 'currently_ongoing' | 'language' | 'proficiency_original' | 'description' | 'evidence_kind' | 'source_document_id' | 'page';
 };
 
 /**
@@ -151,7 +690,7 @@ export type HttpError = {
     /**
      * Code
      */
-    code: 'unauthorized' | 'forbidden_origin' | 'forbidden' | 'not_found' | 'active_diagnostic' | 'stale_revision' | 'idempotency_conflict' | 'dependent_changes' | 'missing_candidate_dependency' | 'body_too_large' | 'unsupported_media_type' | 'invalid_request' | 'rate_limited' | 'storage_unavailable' | 'database_busy' | 'internal_error';
+    code: 'unauthorized' | 'forbidden_origin' | 'forbidden' | 'not_found' | 'active_diagnostic' | 'stale_revision' | 'idempotency_conflict' | 'dependent_changes' | 'missing_candidate_dependency' | 'body_too_large' | 'unsupported_media_type' | 'invalid_request' | 'response_too_large' | 'rate_limited' | 'storage_unavailable' | 'database_busy' | 'internal_error';
     /**
      * Fielderrors
      */
@@ -171,6 +710,34 @@ export type HttpError = {
  */
 export type HttpErrorResponse = {
     error: HttpError;
+};
+
+/**
+ * LanguageContent
+ */
+export type LanguageContent = {
+    /**
+     * Language
+     */
+    language: string;
+    /**
+     * Proficiencyoriginal
+     */
+    proficiencyOriginal: string;
+};
+
+/**
+ * LanguageReadContent
+ */
+export type LanguageReadContent = {
+    /**
+     * Language
+     */
+    language?: string | null;
+    /**
+     * Proficiencyoriginal
+     */
+    proficiencyOriginal?: string | null;
 };
 
 /**
@@ -199,6 +766,709 @@ export type ManualNoteResponse = {
      * Sourceid
      */
     sourceId: string;
+};
+
+/**
+ * Page[ProfileReadEnvelope[ProfileReadContent]]
+ */
+export type PageProfileReadEnvelopeProfileReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ProfileReadEnvelopeProfileReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[AchievementReadContent]]
+ */
+export type PageReadEnvelopeAchievementReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeAchievementReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[EducationReadContent]]
+ */
+export type PageReadEnvelopeEducationReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeEducationReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[EvidenceReadContent]]
+ */
+export type PageReadEnvelopeEvidenceReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeEvidenceReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[ExperienceReadContent]]
+ */
+export type PageReadEnvelopeExperienceReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeExperienceReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[LanguageReadContent]]
+ */
+export type PageReadEnvelopeLanguageReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeLanguageReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[ProjectReadContent]]
+ */
+export type PageReadEnvelopeProjectReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeProjectReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[SkillReadContent]]
+ */
+export type PageReadEnvelopeSkillReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeSkillReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * Page[ReadEnvelope[StatementReadContent]]
+ */
+export type PageReadEnvelopeStatementReadContent = {
+    /**
+     * Items
+     */
+    items: Array<ReadEnvelopeStatementReadContent>;
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Offset
+     */
+    offset: number;
+    /**
+     * Total
+     */
+    total: number;
+};
+
+/**
+ * PartialDate
+ */
+export type PartialDate = {
+    /**
+     * Precision
+     */
+    precision: 'year' | 'month' | 'day';
+    /**
+     * Value
+     */
+    value: string;
+};
+
+/**
+ * ProfileContent
+ */
+export type ProfileContent = {
+    /**
+     * Cityofresidence
+     */
+    cityOfResidence?: string | null;
+    /**
+     * Countryofresidence
+     */
+    countryOfResidence?: string | null;
+    /**
+     * Email
+     */
+    email?: string | null;
+    /**
+     * Fullname
+     */
+    fullName: string;
+    /**
+     * Githuburl
+     */
+    githubUrl?: string | null;
+    /**
+     * Linkedinurl
+     */
+    linkedinUrl?: string | null;
+    /**
+     * Objectiveoriginal
+     */
+    objectiveOriginal?: string | null;
+    /**
+     * Phoneoriginal
+     */
+    phoneOriginal?: string | null;
+    /**
+     * Professionalheadline
+     */
+    professionalHeadline?: string | null;
+};
+
+/**
+ * ProfileReadContent
+ */
+export type ProfileReadContent = {
+    /**
+     * Cityofresidence
+     */
+    cityOfResidence?: string | null;
+    /**
+     * Countryofresidence
+     */
+    countryOfResidence?: string | null;
+    /**
+     * Email
+     */
+    email?: string | null;
+    /**
+     * Fullname
+     */
+    fullName?: string | null;
+    /**
+     * Githuburl
+     */
+    githubUrl?: string | null;
+    /**
+     * Linkedinurl
+     */
+    linkedinUrl?: string | null;
+    /**
+     * Objectiveoriginal
+     */
+    objectiveOriginal?: string | null;
+    /**
+     * Phoneoriginal
+     */
+    phoneOriginal?: string | null;
+    /**
+     * Professionalheadline
+     */
+    professionalHeadline?: string | null;
+};
+
+/**
+ * ProfileReadEnvelope[ProfileReadContent]
+ */
+export type ProfileReadEnvelopeProfileReadContent = {
+    content: ProfileReadContent;
+    /**
+     * Fieldconfirmations
+     */
+    fieldConfirmations: {
+        [key: string]: 'unverified' | 'confirmed';
+    };
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ProjectContent
+ */
+export type ProjectContent = {
+    /**
+     * Descriptioncurrent
+     */
+    descriptionCurrent?: string | null;
+    /**
+     * Descriptionoriginal
+     */
+    descriptionOriginal?: string | null;
+    /**
+     * Timetodeveloporiginal
+     */
+    timeToDevelopOriginal?: string | null;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Titleisgeneratedlabel
+     */
+    titleIsGeneratedLabel?: boolean | null;
+};
+
+/**
+ * ProjectReadContent
+ */
+export type ProjectReadContent = {
+    /**
+     * Descriptioncurrent
+     */
+    descriptionCurrent?: string | null;
+    /**
+     * Descriptionoriginal
+     */
+    descriptionOriginal?: string | null;
+    /**
+     * Timetodeveloporiginal
+     */
+    timeToDevelopOriginal?: string | null;
+    /**
+     * Title
+     */
+    title?: string | null;
+    /**
+     * Titleisgeneratedlabel
+     */
+    titleIsGeneratedLabel?: boolean | null;
+};
+
+/**
+ * ProvenanceReference
+ */
+export type ProvenanceReference = {
+    /**
+     * Excerpt
+     */
+    excerpt?: string | null;
+    /**
+     * Fieldkey
+     */
+    fieldKey?: string | null;
+    /**
+     * Page
+     */
+    page?: number | null;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Sourcedocumentid
+     */
+    sourceDocumentId: string;
+    /**
+     * Sourcesha256
+     */
+    sourceSha256: string;
+};
+
+/**
+ * ReadEnvelope[AchievementReadContent]
+ */
+export type ReadEnvelopeAchievementReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: AchievementReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[EducationReadContent]
+ */
+export type ReadEnvelopeEducationReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: EducationReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[EvidenceReadContent]
+ */
+export type ReadEnvelopeEvidenceReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: EvidenceReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[ExperienceReadContent]
+ */
+export type ReadEnvelopeExperienceReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: ExperienceReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[LanguageReadContent]
+ */
+export type ReadEnvelopeLanguageReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: LanguageReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[ProjectReadContent]
+ */
+export type ReadEnvelopeProjectReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: ProjectReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[SkillReadContent]
+ */
+export type ReadEnvelopeSkillReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: SkillReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * ReadEnvelope[StatementReadContent]
+ */
+export type ReadEnvelopeStatementReadContent = {
+    /**
+     * Confirmation
+     */
+    confirmation: 'unverified' | 'confirmed';
+    content: StatementReadContent;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Provenance
+     */
+    provenance?: Array<ProvenanceReference>;
+    /**
+     * Restrictedfields
+     */
+    restrictedFields?: Array<string>;
+    /**
+     * Revisionid
+     */
+    revisionId: string;
+};
+
+/**
+ * SkillContent
+ */
+export type SkillContent = {
+    /**
+     * Category
+     */
+    category?: string | null;
+    /**
+     * Explicitlylistedinskillssection
+     */
+    explicitlyListedInSkillsSection?: boolean | null;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Originallabels
+     */
+    originalLabels?: Array<string>;
+};
+
+/**
+ * SkillReadContent
+ */
+export type SkillReadContent = {
+    /**
+     * Category
+     */
+    category?: string | null;
+    /**
+     * Explicitlylistedinskillssection
+     */
+    explicitlyListedInSkillsSection?: boolean | null;
+    /**
+     * Name
+     */
+    name?: string | null;
+    /**
+     * Originallabels
+     */
+    originalLabels?: Array<string> | null;
 };
 
 /**
@@ -234,6 +1504,1995 @@ export type SourceResponse = {
      */
     title: string | null;
 };
+
+/**
+ * StatementContent
+ */
+export type StatementContent = {
+    /**
+     * Statementtype
+     */
+    statementType?: 'responsibility' | 'activity' | 'result' | 'editorial' | 'unspecified' | null;
+    /**
+     * Textcurrent
+     */
+    textCurrent?: string | null;
+    /**
+     * Textoriginal
+     */
+    textOriginal: string;
+};
+
+/**
+ * StatementReadContent
+ */
+export type StatementReadContent = {
+    /**
+     * Statementtype
+     */
+    statementType?: 'responsibility' | 'activity' | 'result' | 'editorial' | 'unspecified' | null;
+    /**
+     * Textcurrent
+     */
+    textCurrent?: string | null;
+    /**
+     * Textoriginal
+     */
+    textOriginal?: string | null;
+};
+
+export type ListAchievementData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/achievement';
+};
+
+export type ListAchievementErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListAchievementError = ListAchievementErrors[keyof ListAchievementErrors];
+
+export type ListAchievementResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeAchievementReadContent;
+};
+
+export type ListAchievementResponse = ListAchievementResponses[keyof ListAchievementResponses];
+
+export type CreateAchievementData = {
+    body: CreateCommandAchievementContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/achievement';
+};
+
+export type CreateAchievementErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateAchievementError = CreateAchievementErrors[keyof CreateAchievementErrors];
+
+export type CreateAchievementResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateAchievementResponse = CreateAchievementResponses[keyof CreateAchievementResponses];
+
+export type GetAchievementData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/achievement/{entity_id}';
+};
+
+export type GetAchievementErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetAchievementError = GetAchievementErrors[keyof GetAchievementErrors];
+
+export type GetAchievementResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeAchievementReadContent;
+};
+
+export type GetAchievementResponse = GetAchievementResponses[keyof GetAchievementResponses];
+
+export type ListEducationData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/education';
+};
+
+export type ListEducationErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListEducationError = ListEducationErrors[keyof ListEducationErrors];
+
+export type ListEducationResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeEducationReadContent;
+};
+
+export type ListEducationResponse = ListEducationResponses[keyof ListEducationResponses];
+
+export type CreateEducationData = {
+    body: CreateCommandEducationContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/education';
+};
+
+export type CreateEducationErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateEducationError = CreateEducationErrors[keyof CreateEducationErrors];
+
+export type CreateEducationResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateEducationResponse = CreateEducationResponses[keyof CreateEducationResponses];
+
+export type GetEducationData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/education/{entity_id}';
+};
+
+export type GetEducationErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetEducationError = GetEducationErrors[keyof GetEducationErrors];
+
+export type GetEducationResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeEducationReadContent;
+};
+
+export type GetEducationResponse = GetEducationResponses[keyof GetEducationResponses];
+
+export type ListEvidenceData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/evidence';
+};
+
+export type ListEvidenceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListEvidenceError = ListEvidenceErrors[keyof ListEvidenceErrors];
+
+export type ListEvidenceResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeEvidenceReadContent;
+};
+
+export type ListEvidenceResponse = ListEvidenceResponses[keyof ListEvidenceResponses];
+
+export type CreateEvidenceData = {
+    body: CreateCommandEvidenceContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/evidence';
+};
+
+export type CreateEvidenceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateEvidenceError = CreateEvidenceErrors[keyof CreateEvidenceErrors];
+
+export type CreateEvidenceResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateEvidenceResponse = CreateEvidenceResponses[keyof CreateEvidenceResponses];
+
+export type GetEvidenceData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/evidence/{entity_id}';
+};
+
+export type GetEvidenceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetEvidenceError = GetEvidenceErrors[keyof GetEvidenceErrors];
+
+export type GetEvidenceResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeEvidenceReadContent;
+};
+
+export type GetEvidenceResponse = GetEvidenceResponses[keyof GetEvidenceResponses];
+
+export type ListExperienceData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/experience';
+};
+
+export type ListExperienceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListExperienceError = ListExperienceErrors[keyof ListExperienceErrors];
+
+export type ListExperienceResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeExperienceReadContent;
+};
+
+export type ListExperienceResponse = ListExperienceResponses[keyof ListExperienceResponses];
+
+export type CreateExperienceData = {
+    body: CreateCommandExperienceContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/experience';
+};
+
+export type CreateExperienceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateExperienceError = CreateExperienceErrors[keyof CreateExperienceErrors];
+
+export type CreateExperienceResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateExperienceResponse = CreateExperienceResponses[keyof CreateExperienceResponses];
+
+export type GetExperienceData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/experience/{entity_id}';
+};
+
+export type GetExperienceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetExperienceError = GetExperienceErrors[keyof GetExperienceErrors];
+
+export type GetExperienceResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeExperienceReadContent;
+};
+
+export type GetExperienceResponse = GetExperienceResponses[keyof GetExperienceResponses];
+
+export type ListLanguageData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/language';
+};
+
+export type ListLanguageErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListLanguageError = ListLanguageErrors[keyof ListLanguageErrors];
+
+export type ListLanguageResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeLanguageReadContent;
+};
+
+export type ListLanguageResponse = ListLanguageResponses[keyof ListLanguageResponses];
+
+export type CreateLanguageData = {
+    body: CreateCommandLanguageContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/language';
+};
+
+export type CreateLanguageErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateLanguageError = CreateLanguageErrors[keyof CreateLanguageErrors];
+
+export type CreateLanguageResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateLanguageResponse = CreateLanguageResponses[keyof CreateLanguageResponses];
+
+export type GetLanguageData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/language/{entity_id}';
+};
+
+export type GetLanguageErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetLanguageError = GetLanguageErrors[keyof GetLanguageErrors];
+
+export type GetLanguageResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeLanguageReadContent;
+};
+
+export type GetLanguageResponse = GetLanguageResponses[keyof GetLanguageResponses];
+
+export type ListProfileData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/profile';
+};
+
+export type ListProfileErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListProfileError = ListProfileErrors[keyof ListProfileErrors];
+
+export type ListProfileResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageProfileReadEnvelopeProfileReadContent;
+};
+
+export type ListProfileResponse = ListProfileResponses[keyof ListProfileResponses];
+
+export type CreateProfileData = {
+    body: CreateCommandProfileContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/profile';
+};
+
+export type CreateProfileErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateProfileError = CreateProfileErrors[keyof CreateProfileErrors];
+
+export type CreateProfileResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateProfileResponse = CreateProfileResponses[keyof CreateProfileResponses];
+
+export type GetProfileData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/profile/{entity_id}';
+};
+
+export type GetProfileErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetProfileError = GetProfileErrors[keyof GetProfileErrors];
+
+export type GetProfileResponses = {
+    /**
+     * Successful Response
+     */
+    200: ProfileReadEnvelopeProfileReadContent;
+};
+
+export type GetProfileResponse = GetProfileResponses[keyof GetProfileResponses];
+
+export type ListProjectData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/project';
+};
+
+export type ListProjectErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListProjectError = ListProjectErrors[keyof ListProjectErrors];
+
+export type ListProjectResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeProjectReadContent;
+};
+
+export type ListProjectResponse = ListProjectResponses[keyof ListProjectResponses];
+
+export type CreateProjectData = {
+    body: CreateCommandProjectContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/project';
+};
+
+export type CreateProjectErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateProjectError = CreateProjectErrors[keyof CreateProjectErrors];
+
+export type CreateProjectResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateProjectResponse = CreateProjectResponses[keyof CreateProjectResponses];
+
+export type GetProjectData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/project/{entity_id}';
+};
+
+export type GetProjectErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetProjectError = GetProjectErrors[keyof GetProjectErrors];
+
+export type GetProjectResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeProjectReadContent;
+};
+
+export type GetProjectResponse = GetProjectResponses[keyof GetProjectResponses];
+
+export type ListSkillData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/skill';
+};
+
+export type ListSkillErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListSkillError = ListSkillErrors[keyof ListSkillErrors];
+
+export type ListSkillResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeSkillReadContent;
+};
+
+export type ListSkillResponse = ListSkillResponses[keyof ListSkillResponses];
+
+export type CreateSkillData = {
+    body: CreateCommandSkillContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/skill';
+};
+
+export type CreateSkillErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateSkillError = CreateSkillErrors[keyof CreateSkillErrors];
+
+export type CreateSkillResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateSkillResponse = CreateSkillResponses[keyof CreateSkillResponses];
+
+export type GetSkillData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/skill/{entity_id}';
+};
+
+export type GetSkillErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetSkillError = GetSkillErrors[keyof GetSkillErrors];
+
+export type GetSkillResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeSkillReadContent;
+};
+
+export type GetSkillResponse = GetSkillResponses[keyof GetSkillResponses];
+
+export type ListStatementData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Offset
+         */
+        offset?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Sort
+         */
+        sort?: 'createdAt' | '-createdAt';
+        /**
+         * Archived
+         */
+        archived?: boolean | null;
+        /**
+         * Confirmation
+         */
+        confirmation?: 'confirmed' | 'unverified' | null;
+        /**
+         * Confirmationfield
+         */
+        confirmationField?: 'fullName' | 'professionalHeadline' | 'email' | 'phoneOriginal' | 'objectiveOriginal' | 'cityOfResidence' | 'countryOfResidence' | 'linkedinUrl' | 'githubUrl' | null;
+    };
+    url: '/api/career/statement';
+};
+
+export type ListStatementErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type ListStatementError = ListStatementErrors[keyof ListStatementErrors];
+
+export type ListStatementResponses = {
+    /**
+     * Successful Response
+     */
+    200: PageReadEnvelopeStatementReadContent;
+};
+
+export type ListStatementResponse = ListStatementResponses[keyof ListStatementResponses];
+
+export type CreateStatementData = {
+    body: CreateCommandStatementContent;
+    path?: never;
+    query?: never;
+    url: '/api/career/statement';
+};
+
+export type CreateStatementErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateStatementError = CreateStatementErrors[keyof CreateStatementErrors];
+
+export type CreateStatementResponses = {
+    /**
+     * OK
+     */
+    200: CareerCreated;
+    /**
+     * Successful Response
+     */
+    201: CareerCreated;
+};
+
+export type CreateStatementResponse = CreateStatementResponses[keyof CreateStatementResponses];
+
+export type GetStatementData = {
+    body?: never;
+    path: {
+        /**
+         * Entity Id
+         */
+        entity_id: string;
+    };
+    query?: never;
+    url: '/api/career/statement/{entity_id}';
+};
+
+export type GetStatementErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetStatementError = GetStatementErrors[keyof GetStatementErrors];
+
+export type GetStatementResponses = {
+    /**
+     * Successful Response
+     */
+    200: ReadEnvelopeStatementReadContent;
+};
+
+export type GetStatementResponse = GetStatementResponses[keyof GetStatementResponses];
 
 export type CreateDiagnosticData = {
     body: DiagnosticCreate;

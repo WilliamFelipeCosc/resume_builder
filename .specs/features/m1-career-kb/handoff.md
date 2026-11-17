@@ -1,5 +1,24 @@
 # Handoff — execução M1 Career KB
 
+## Atualização após pedido de commit e push
+
+Em 2026-11-17 às 10:32 (-03), o proprietário autorizou commit e push.
+T23 foi conferida e concluída: o gate focal passou com 141 testes M1
+(435 deselected) e o BUILD integral da árvore final terminou exit 0 antes
+de 10:35:13 (-03), com **576 Python, 19 Vitest, 4 Playwright**, typecheck,
+build, contrato determinístico e lint PASS. Permanecem dois avisos de
+depreciação já conhecidos. A lacuna do BUILD final descrita no snapshot
+original abaixo foi resolvida por esta execução real.
+
+Estado atual: **23/64 concluídas**, fases 1–4 entregues localmente;
+próxima tarefa T24, lote Terra T24–T28. Implementação e coartefatos T23
+entram no commit `feat(api): expose typed career resources`, com tasks,
+spec, execução e STATE sincronizados. O push da branch atual está
+autorizado; resultados do CI remoto não foram verificados neste registro.
+M1 continua in_progress, sem piloto independente/carga privada/aceite final.
+
+## Snapshot original da sessão, preservado para histórico
+
 **Registrado:** 2026-11-17 às 10:22 (-03), America/Sao_Paulo.
 **Período coberto:** início autorizado em 2026-11-16 às 20:17 (-03),
 interrupção noturna e retomada em 2026-11-17 às 08:48 (-03), até o pedido

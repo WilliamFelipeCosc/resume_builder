@@ -22,6 +22,7 @@ from resume_core.service import Clearance, Principal
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from resume_api.errors import ERRORS, HttpErrorResponse, error_response
+from resume_api.routers.career import router as career_router
 from resume_api.routers.source_notes import router as source_notes_router
 from resume_api.routers.sources import router as sources_router
 from resume_api.session import SessionChannel, SessionStore
@@ -267,6 +268,8 @@ def create_app(
     principal_factory=local_owner,
     source_service=None,
     source_queries=None,
+    career_create=None,
+    career_queries=None,
 ):
     if (
         not re.fullmatch(r"http://127\.0\.0\.1:[1-9][0-9]{0,4}", origin)
@@ -306,6 +309,9 @@ def create_app(
     app.state.sessions, app.state.service = sessions, service
     app.state.source_service = source_service
     app.state.source_queries = source_queries
+    app.state.career_create = career_create
+    app.state.career_queries = career_queries
+    app.include_router(career_router)
     app.include_router(source_notes_router)
     app.include_router(sources_router)
     app.state.reconciler = reconciler

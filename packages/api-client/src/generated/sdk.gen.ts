@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { BootstrapSessionData, BootstrapSessionErrors, BootstrapSessionResponses, CreateDiagnosticData, CreateDiagnosticErrors, CreateDiagnosticResponses, CreateManualNoteData, CreateManualNoteErrors, CreateManualNoteResponses, DownloadSourceData, DownloadSourceErrors, DownloadSourceResponses, GetHealthData, GetHealthErrors, GetHealthResponses, GetLatestDiagnosticData, GetLatestDiagnosticErrors, GetLatestDiagnosticResponses, GetSourceData, GetSourceErrors, GetSourceResponses } from './types.gen';
+import type { BootstrapSessionData, BootstrapSessionErrors, BootstrapSessionResponses, CreateAchievementData, CreateAchievementErrors, CreateAchievementResponses, CreateDiagnosticData, CreateDiagnosticErrors, CreateDiagnosticResponses, CreateEducationData, CreateEducationErrors, CreateEducationResponses, CreateEvidenceData, CreateEvidenceErrors, CreateEvidenceResponses, CreateExperienceData, CreateExperienceErrors, CreateExperienceResponses, CreateLanguageData, CreateLanguageErrors, CreateLanguageResponses, CreateManualNoteData, CreateManualNoteErrors, CreateManualNoteResponses, CreateProfileData, CreateProfileErrors, CreateProfileResponses, CreateProjectData, CreateProjectErrors, CreateProjectResponses, CreateSkillData, CreateSkillErrors, CreateSkillResponses, CreateStatementData, CreateStatementErrors, CreateStatementResponses, DownloadSourceData, DownloadSourceErrors, DownloadSourceResponses, GetAchievementData, GetAchievementErrors, GetAchievementResponses, GetEducationData, GetEducationErrors, GetEducationResponses, GetEvidenceData, GetEvidenceErrors, GetEvidenceResponses, GetExperienceData, GetExperienceErrors, GetExperienceResponses, GetHealthData, GetHealthErrors, GetHealthResponses, GetLanguageData, GetLanguageErrors, GetLanguageResponses, GetLatestDiagnosticData, GetLatestDiagnosticErrors, GetLatestDiagnosticResponses, GetProfileData, GetProfileErrors, GetProfileResponses, GetProjectData, GetProjectErrors, GetProjectResponses, GetSkillData, GetSkillErrors, GetSkillResponses, GetSourceData, GetSourceErrors, GetSourceResponses, GetStatementData, GetStatementErrors, GetStatementResponses, ListAchievementData, ListAchievementErrors, ListAchievementResponses, ListEducationData, ListEducationErrors, ListEducationResponses, ListEvidenceData, ListEvidenceErrors, ListEvidenceResponses, ListExperienceData, ListExperienceErrors, ListExperienceResponses, ListLanguageData, ListLanguageErrors, ListLanguageResponses, ListProfileData, ListProfileErrors, ListProfileResponses, ListProjectData, ListProjectErrors, ListProjectResponses, ListSkillData, ListSkillErrors, ListSkillResponses, ListStatementData, ListStatementErrors, ListStatementResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -17,6 +17,393 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
      */
     meta?: keyof ClientMeta extends never ? Record<string, unknown> : ClientMeta;
 };
+
+/**
+ * List Items
+ */
+export const listAchievement = <ThrowOnError extends boolean = false>(options?: Options<ListAchievementData, ThrowOnError>): RequestResult<ListAchievementResponses, ListAchievementErrors, ThrowOnError> => (options?.client ?? client).get<ListAchievementResponses, ListAchievementErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/achievement',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createAchievement = <ThrowOnError extends boolean = false>(options: Options<CreateAchievementData, ThrowOnError>): RequestResult<CreateAchievementResponses, CreateAchievementErrors, ThrowOnError> => (options.client ?? client).post<CreateAchievementResponses, CreateAchievementErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/achievement',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getAchievement = <ThrowOnError extends boolean = false>(options: Options<GetAchievementData, ThrowOnError>): RequestResult<GetAchievementResponses, GetAchievementErrors, ThrowOnError> => (options.client ?? client).get<GetAchievementResponses, GetAchievementErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/achievement/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listEducation = <ThrowOnError extends boolean = false>(options?: Options<ListEducationData, ThrowOnError>): RequestResult<ListEducationResponses, ListEducationErrors, ThrowOnError> => (options?.client ?? client).get<ListEducationResponses, ListEducationErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/education',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createEducation = <ThrowOnError extends boolean = false>(options: Options<CreateEducationData, ThrowOnError>): RequestResult<CreateEducationResponses, CreateEducationErrors, ThrowOnError> => (options.client ?? client).post<CreateEducationResponses, CreateEducationErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/education',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getEducation = <ThrowOnError extends boolean = false>(options: Options<GetEducationData, ThrowOnError>): RequestResult<GetEducationResponses, GetEducationErrors, ThrowOnError> => (options.client ?? client).get<GetEducationResponses, GetEducationErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/education/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listEvidence = <ThrowOnError extends boolean = false>(options?: Options<ListEvidenceData, ThrowOnError>): RequestResult<ListEvidenceResponses, ListEvidenceErrors, ThrowOnError> => (options?.client ?? client).get<ListEvidenceResponses, ListEvidenceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/evidence',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createEvidence = <ThrowOnError extends boolean = false>(options: Options<CreateEvidenceData, ThrowOnError>): RequestResult<CreateEvidenceResponses, CreateEvidenceErrors, ThrowOnError> => (options.client ?? client).post<CreateEvidenceResponses, CreateEvidenceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/evidence',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getEvidence = <ThrowOnError extends boolean = false>(options: Options<GetEvidenceData, ThrowOnError>): RequestResult<GetEvidenceResponses, GetEvidenceErrors, ThrowOnError> => (options.client ?? client).get<GetEvidenceResponses, GetEvidenceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/evidence/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listExperience = <ThrowOnError extends boolean = false>(options?: Options<ListExperienceData, ThrowOnError>): RequestResult<ListExperienceResponses, ListExperienceErrors, ThrowOnError> => (options?.client ?? client).get<ListExperienceResponses, ListExperienceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/experience',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createExperience = <ThrowOnError extends boolean = false>(options: Options<CreateExperienceData, ThrowOnError>): RequestResult<CreateExperienceResponses, CreateExperienceErrors, ThrowOnError> => (options.client ?? client).post<CreateExperienceResponses, CreateExperienceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/experience',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getExperience = <ThrowOnError extends boolean = false>(options: Options<GetExperienceData, ThrowOnError>): RequestResult<GetExperienceResponses, GetExperienceErrors, ThrowOnError> => (options.client ?? client).get<GetExperienceResponses, GetExperienceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/experience/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listLanguage = <ThrowOnError extends boolean = false>(options?: Options<ListLanguageData, ThrowOnError>): RequestResult<ListLanguageResponses, ListLanguageErrors, ThrowOnError> => (options?.client ?? client).get<ListLanguageResponses, ListLanguageErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/language',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createLanguage = <ThrowOnError extends boolean = false>(options: Options<CreateLanguageData, ThrowOnError>): RequestResult<CreateLanguageResponses, CreateLanguageErrors, ThrowOnError> => (options.client ?? client).post<CreateLanguageResponses, CreateLanguageErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/language',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getLanguage = <ThrowOnError extends boolean = false>(options: Options<GetLanguageData, ThrowOnError>): RequestResult<GetLanguageResponses, GetLanguageErrors, ThrowOnError> => (options.client ?? client).get<GetLanguageResponses, GetLanguageErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/language/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listProfile = <ThrowOnError extends boolean = false>(options?: Options<ListProfileData, ThrowOnError>): RequestResult<ListProfileResponses, ListProfileErrors, ThrowOnError> => (options?.client ?? client).get<ListProfileResponses, ListProfileErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/profile',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createProfile = <ThrowOnError extends boolean = false>(options: Options<CreateProfileData, ThrowOnError>): RequestResult<CreateProfileResponses, CreateProfileErrors, ThrowOnError> => (options.client ?? client).post<CreateProfileResponses, CreateProfileErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/profile',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getProfile = <ThrowOnError extends boolean = false>(options: Options<GetProfileData, ThrowOnError>): RequestResult<GetProfileResponses, GetProfileErrors, ThrowOnError> => (options.client ?? client).get<GetProfileResponses, GetProfileErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/profile/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listProject = <ThrowOnError extends boolean = false>(options?: Options<ListProjectData, ThrowOnError>): RequestResult<ListProjectResponses, ListProjectErrors, ThrowOnError> => (options?.client ?? client).get<ListProjectResponses, ListProjectErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/project',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createProject = <ThrowOnError extends boolean = false>(options: Options<CreateProjectData, ThrowOnError>): RequestResult<CreateProjectResponses, CreateProjectErrors, ThrowOnError> => (options.client ?? client).post<CreateProjectResponses, CreateProjectErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/project',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getProject = <ThrowOnError extends boolean = false>(options: Options<GetProjectData, ThrowOnError>): RequestResult<GetProjectResponses, GetProjectErrors, ThrowOnError> => (options.client ?? client).get<GetProjectResponses, GetProjectErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/project/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listSkill = <ThrowOnError extends boolean = false>(options?: Options<ListSkillData, ThrowOnError>): RequestResult<ListSkillResponses, ListSkillErrors, ThrowOnError> => (options?.client ?? client).get<ListSkillResponses, ListSkillErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/skill',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createSkill = <ThrowOnError extends boolean = false>(options: Options<CreateSkillData, ThrowOnError>): RequestResult<CreateSkillResponses, CreateSkillErrors, ThrowOnError> => (options.client ?? client).post<CreateSkillResponses, CreateSkillErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/skill',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getSkill = <ThrowOnError extends boolean = false>(options: Options<GetSkillData, ThrowOnError>): RequestResult<GetSkillResponses, GetSkillErrors, ThrowOnError> => (options.client ?? client).get<GetSkillResponses, GetSkillErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/skill/{entity_id}',
+    ...options
+});
+
+/**
+ * List Items
+ */
+export const listStatement = <ThrowOnError extends boolean = false>(options?: Options<ListStatementData, ThrowOnError>): RequestResult<ListStatementResponses, ListStatementErrors, ThrowOnError> => (options?.client ?? client).get<ListStatementResponses, ListStatementErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/statement',
+    ...options
+});
+
+/**
+ * Create
+ */
+export const createStatement = <ThrowOnError extends boolean = false>(options: Options<CreateStatementData, ThrowOnError>): RequestResult<CreateStatementResponses, CreateStatementErrors, ThrowOnError> => (options.client ?? client).post<CreateStatementResponses, CreateStatementErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/statement',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Detail
+ */
+export const getStatement = <ThrowOnError extends boolean = false>(options: Options<GetStatementData, ThrowOnError>): RequestResult<GetStatementResponses, GetStatementErrors, ThrowOnError> => (options.client ?? client).get<GetStatementResponses, GetStatementErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/career/statement/{entity_id}',
+    ...options
+});
 
 /**
  * Create Diagnostic

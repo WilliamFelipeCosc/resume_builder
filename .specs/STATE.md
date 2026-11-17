@@ -24,13 +24,13 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 ## Handoff
 
 - **Feature**: m1-career-kb — execução do Career KB Core.
-- **Phase / Task**: snapshot 2026-11-17 às 10:22 (-03); T1–T22 concluídas (22/64), T23 parcialmente implementada e sem commit; M1 in_progress. Handoff detalhado: `.specs/features/m1-career-kb/handoff.md`.
-- **Completed**: fases 1–3; contratos/tabelas tipadas, repositório, criação e consultas autorizadas de T18–T22; correções de leitura/proveniência/CHECKs. Último commit de implementação `ac94851`. Decisões manuais T16/T18/T22 aprovadas e documentadas; sem nova entrevista para essas escolhas.
-- **Gates**: último BUILD confirmado anterior aos CHECKs finais: 575 Python, 19 Vitest, 4 Playwright e checks PASS; pós-CHECKs, worker informou gate HTTP/PY 141 passed, 435 deselected e lint PASS. BUILD final após `ac94851` iniciado, resultado não confirmado devido à quota. Não declarar fase 4 verde sem repetir.
-- **In-progress** (file:line): `backend/api/src/resume_api/routers/career.py:28` (27 rotas concretas); `tests/integration/test_m1_t23.py:72` e coartefatos de SDK/composição, não commitados.
-- **Next step**: reconciliar diff de T23, repetir HTTP/BUILD na árvore final, registrar adequação/status/traceabilidade e commit local; só depois despachar Terra para T24–T28. Preservar preferência GPT Terra e lotes sequenciais.
-- **Blockers**: worker Terra atingiu limite de uso; nenhum resultado final do último BUILD. Sem decisão de negócio pendente. Piloto independente, revisão privada humana e aceite final ainda futuros; CI remoto NOT_RUN e push não autorizado.
-- **Uncommitted files**: T23 em `backend/api/src/resume_api/{__main__,app,errors}.py`, `backend/api/src/resume_api/routers/career.py`, `backend/core/src/resume_core/logging_policy.py`, `packages/api-client/openapi.json`, `packages/api-client/src/generated/{index,sdk.gen,types.gen}.ts`, `tests/integration/test_m1_t23.py`; lista exata e contexto em handoff.md. Documentos deste handoff são adicionais a essa captura.
+- **Phase / Task**: snapshot 2026-11-17 às 10:35 (-03); fases 1–4 e T1–T23 concluídas (23/64), M1 in_progress. Handoff detalhado atualizado: `.specs/features/m1-career-kb/handoff.md`.
+- **Completed**: CI/dependências/UI básica, fronteiras/persistência/fontes, nove tipos KB com criação/consulta/proveniência e 27 rotas HTTP concretas; OpenAPI/SDK gerados, erros tipados e revisão dos CHECKs. Decisões manuais T16/T18/T22 aprovadas; não repetir entrevistas dessas escolhas.
+- **Gates**: principal repetiu a validação da árvore final após o pedido de commit/push: geração PASS, focal 141 passed/435 deselected, BUILD integral exit 0 com 576 Python (2 avisos existentes), 19 Vitest, 4 Playwright, typecheck/build/contrato/lint PASS. Lacuna do último BUILD do worker resolvida; evidência em execution.md.
+- **In-progress**: commit/push solicitado às 10:32 (-03); nenhum incremento T24 iniciado. T23 foi fechada com status/rastreabilidade e evidências no mesmo commit.
+- **Next step**: conferir git e retomar próximo lote Terra T24–T28 (cliente TS, sessão/cache, Router, ProfileEditor e lista/detalhe), em sequência. Não refazer T1–T23. Preservar dados fictícios e preferência GPT Terra.
+- **Blockers**: sem decisão de negócio pendente; worker anterior atingiu quota, verificar capacidade ao retomar delegação. Piloto independente, revisão privada e aceite final ainda futuros. Push autorizado neste pedido; resultado do CI remoto não verificado.
+- **Uncommitted files**: nenhum após o commit de fechamento T23; conferir git antes de retomar.
 - **Branch**: feature/m1-career-kb, base d2a609d; conferir git antes de retomar. Ambiente atual full access/approval never: não enviar sandbox_permissions; isso não autoriza operações remotas ou dados reais.
 
 Operação e comandos: handoff.md e docs/engineering/m0-local-operation.md; PATH Node 24 e PLAYWRIGHT_BROWSERS_PATH explícitos. Dados fictícios; não carregar fontes pessoais antes do piloto independente e revisão humana.
