@@ -319,7 +319,7 @@ baseline para o sensor independente.
 
 #### T11: Criar Unit of Work explícita
 
-**Status**: Pending
+**Status**: Complete
 **What**: Compartilhar conexão entre repositórios, usar escrita IMMEDIATE e rollback total, com erro seguro de lock e sessões restritas ao trabalho.
 **Where**: `backend/core/src/resume_core/persistence/unit_of_work.py`
 **Supporting**: mapping ORM/migration correspondente, fixtures sintéticas e testes de integridade/rollback.
@@ -328,8 +328,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-12, MONE-23, MONE-24, MONE-31, MONE-32
 **Tools**: PY
 **Done when**:
-- [ ] Dois escritores serializados ou falha segura; exceção faz rollback; sessão/conexão não escapa após close.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Dois escritores serializados ou falha segura; exceção faz rollback; sessão/conexão não escapa após close.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t11.py e/ou tests/integration/test_m1_t11.py; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(data): add explicit career unit of work`

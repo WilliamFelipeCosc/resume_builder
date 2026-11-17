@@ -76,3 +76,9 @@
 - Início observado: 2026-11-16 21:44:30 -03. Cada conexão da engine, inclusive Alembic, ativa foreign_keys preservando WAL e busy_timeout 250 ms.
 - Gate PY observado 21:44:53–21:45:21 -03: pytest M1 21 passed, 435 deselected; lint falhou duas vezes por ordenação/espaço de imports, corrigido e PASS. Teste adicional `pytest tests/integration/test_diagnostic_migration.py -q`: 17 passed. Espera por gate/aprovação separada; duração ativa unknown.
 - `tests/integration/test_m1_t10.py:10` testa SQL inválido em duas conexões e pragmas; `:28` observa FK durante upgrade/downgrade/upgrade e preserva a tabela M0. MONE-05/31/32 parcialmente atendidos.
+
+## T11 — Unit of Work
+
+- Início observado aproximadamente 2026-11-16 21:45:21 -03. Sessão vinculada à conexão única com BEGIN IMMEDIATE, propriedade de commit/rollback pela UoW, bloqueio mapeado a erro seguro e fechamento definitivo. Documentação SQLAlchemy consultada via Context7 sobre sessão vinculada a transação externa.
+- Gate PY observado 21:46:43–21:47:29 -03: inicialmente 24 M1 passaram; após proteção de propriedade transacional, 25 passed, 435 deselected; lint inicialmente falhou por imports, corrigido e PASS. Espera por gate/aprovação separada; duração ativa unknown.
+- `tests/integration/test_m1_t11.py:18` valida commit e referências fechadas; `:39` rollback de duas tabelas; `:51` conflito de escrita e recuperação; `:65` impede commit/rollback pela sessão. MONE-12/23/24/31/32 parcialmente atendidos.
