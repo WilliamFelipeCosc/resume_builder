@@ -8,7 +8,7 @@ Um deliverable atômico por tarefa; testes da mudança e registro de progresso
 fazem parte do mesmo commit. Verifier independente final e sensor são obrigatórios.
 
 **Design:** [design.md](design.md), aprovado pelo proprietário em 2026-11-16.
-**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 17/64 concluídas.
+**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 18/64 concluídas.
 **Início:** autorizado explicitamente pelo proprietário em 2026-11-16 às 20:17 (-03); execução iniciada na T1.
 **Escopo:** M1; REQ-KB-001/002/004, REQ-SEC-001, AC-M1-001/002/003.
 **Não executado:** nenhuma instalação, alteração funcional ou teste de runtime nesta preparação.
@@ -444,7 +444,7 @@ baseline para o sensor independente.
 
 #### T18: Formalizar DTOs tipados das entidades KB
 
-**Status**: Pending
+**Status**: Complete
 **What**: Codificar os nove tipos e comandos aprovados, períodos parciais, null/redigido, metadados e listas; extra forbid e aliases camelCase.
 **Where**: `backend/core/src/resume_core/career_kb/contracts.py`
 **Supporting**: exports/consumidor gerado e testes positivos/negativos de contrato.
@@ -453,8 +453,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-03, MONE-09, MONE-10, MONE-12, MONE-17
 **Tools**: PY
 **Done when**:
-- [ ] Round trip dos nove tipos; nullable histórico; confirmação por campo Profile; extras/coerções inválidos; texto/data limites.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Round trip dos nove tipos; nullable histórico; confirmação por campo Profile; extras/coerções inválidos; texto/data limites.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t18.py e/ou tests/integration/test_m1_t18.py; mínimo de 5 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(kb): define typed career contracts`

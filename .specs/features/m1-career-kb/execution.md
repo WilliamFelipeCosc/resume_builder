@@ -121,6 +121,12 @@
 - Gate HTTP PASS: 74 passed/435 deselected, geração/contrato determinístico/typecheck/lint PASS. Primeiro BUILD passou 509 Python, 19 Vitest, typecheck/build/contrato e falhou no browser por Chromium temporário ausente. Instalação autorizada repetida; browser separado 4/4 PASS. Após reforço só de asserções, focal T17 5/5 PASS. BUILD completo repetido e concluído 09:08 -03: PASS, 509 Python (2 warnings existentes), 19 Vitest, 4 Playwright, typecheck/build/contrato/lint. Esperas separadas do esforço ativo; duração líquida unknown.
 - Adequação: `tests/integration/test_m1_t17.py:58` confere payload completo, `:67` bytes, attachment e no-store; `:72` prova SQL com filtro de classificação e ausente/oculto; `:86` confirma 404 e separação de acesso ao fato; `:103` bloqueia adulteração/ausência; `:124` nega capability antes do repositório. Montagem StaticFiles existente serve apenas `/assets`, nenhuma fonte privada. MONE-06/07/30/34 parcialmente atendidos; CI remoto NOT_RUN.
 
+## T18 — contratos tipados
+
+- Início observado 09:14:13 -03 após aprovação de tipos/envelopes às 09:12/09:13; espera por decisão separada, duração ativa líquida unknown. Premissas: campos e limites aprovados, classificação confidential padrão, confirmação não fornecida na criação. Arquivos: contratos, testes e rastreabilidade.
+- Nove conteúdos, comandos e leituras concretas, datas parciais, metadados e paginação validados por Pydantic; metricValue permanece texto. Gate PY concluído antes de 09:15:53 -03: 93 passed/435 deselected e lint PASS.
+- Adequação: `tests/unit/test_m1_t18.py:25` valida roundtrip dos nove conteúdos; `:33` associa Profile e restringe classificação/campos; `:58` distingue unknown/restricted e confirmação por campo; `:76`/`:84` datas válidas/inválidas; `:89` extras, coerções e limites. 19 casos focais, todos derivados dos critérios; nenhum teste anterior alterado ou omitido. MONE-03/09/10/12/17 parcialmente atendidos; persistência e rotas pendentes.
+
 ### Revisão complementar de T14/T15
 
 - Em 2026-11-17, entre a lacuna identificada em T16 e sua resolução humana às 08:56 (-03), o principal revisou armazenamento e limites. T14 preserva a propriedade de instalação atômica sem sobrescrita usando hard link; o manifesto tipado fornece hash/referência/tamanho, e os serviços persistem a referência e o hash no SourceDocument existente. Não se exige um segundo arquivo de manifesto.
