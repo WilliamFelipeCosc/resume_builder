@@ -73,6 +73,7 @@ FieldPath = Literal[
     "text_current",
     "statement_type",
     "title",
+    "text",
     "title_is_generated_label",
     "description_original",
     "description_current",

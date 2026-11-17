@@ -408,7 +408,7 @@ baseline para o sensor independente.
 
 #### T16: Criar fonte manual privada
 
-**Status**: Pending
+**Status**: Complete
 **What**: Entregar POST de anotação humana privada com serviço/recibo associado, sem confirmar qualificações; registrar router e SDK no mesmo incremento.
 **Where**: `backend/api/src/resume_api/routers/source_notes.py`
 **Supporting**: serviço/repositório focal, registro do router, DTO/exports necessários, OpenAPI/SDK regenerados e testes da operação.
@@ -417,8 +417,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-03, MONE-06, MONE-22, MONE-27, MONE-30
 **Tools**: PY
 **Done when**:
-- [ ] Fonte manual unverified não é prova externa; repetição idempotente; negativa sem escrita; fonte recuperável pelo proprietário.
-- [ ] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Fonte manual unverified não é prova externa; repetição idempotente; negativa sem escrita; fonte recuperável pelo proprietário.
+- [x] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t16.py e/ou tests/integration/test_m1_t16.py; mínimo de 4 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: HTTP
 **Commit**: `feat(sources): record private manual provenance`

@@ -22,6 +22,7 @@ from resume_core.service import Clearance, Principal
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from resume_api.errors import ERRORS, HttpErrorResponse, error_response
+from resume_api.routers.source_notes import router as source_notes_router
 from resume_api.session import SessionChannel, SessionStore
 
 COOKIE_NAME = "resume_session"
@@ -263,6 +264,7 @@ def create_app(
     reconciler=None,
     web_root=None,
     principal_factory=local_owner,
+    source_service=None,
 ):
     if (
         not re.fullmatch(r"http://127\.0\.0\.1:[1-9][0-9]{0,4}", origin)
@@ -300,6 +302,8 @@ def create_app(
         responses=ERROR_RESPONSES,
     )
     app.state.sessions, app.state.service = sessions, service
+    app.state.source_service = source_service
+    app.include_router(source_notes_router)
     app.state.reconciler = reconciler
     app.add_middleware(
         Boundary, sessions=sessions, origin=origin, principal_factory=principal_factory

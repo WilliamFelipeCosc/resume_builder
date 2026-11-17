@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { BootstrapSessionData, BootstrapSessionErrors, BootstrapSessionResponses, CreateDiagnosticData, CreateDiagnosticErrors, CreateDiagnosticResponses, GetHealthData, GetHealthErrors, GetHealthResponses, GetLatestDiagnosticData, GetLatestDiagnosticErrors, GetLatestDiagnosticResponses } from './types.gen';
+import type { BootstrapSessionData, BootstrapSessionErrors, BootstrapSessionResponses, CreateDiagnosticData, CreateDiagnosticErrors, CreateDiagnosticResponses, CreateManualNoteData, CreateManualNoteErrors, CreateManualNoteResponses, GetHealthData, GetHealthErrors, GetHealthResponses, GetLatestDiagnosticData, GetLatestDiagnosticErrors, GetLatestDiagnosticResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -58,6 +58,23 @@ export const getHealth = <ThrowOnError extends boolean = false>(options?: Option
  */
 export const bootstrapSession = <ThrowOnError extends boolean = false>(options: Options<BootstrapSessionData, ThrowOnError>): RequestResult<BootstrapSessionResponses, BootstrapSessionErrors, ThrowOnError> => (options.client ?? client).post<BootstrapSessionResponses, BootstrapSessionErrors, ThrowOnError>({
     url: '/api/session/bootstrap',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * Create Manual Note
+ */
+export const createManualNote = <ThrowOnError extends boolean = false>(options: Options<CreateManualNoteData, ThrowOnError>): RequestResult<CreateManualNoteResponses, CreateManualNoteErrors, ThrowOnError> => (options.client ?? client).post<CreateManualNoteResponses, CreateManualNoteErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/sources/manual-notes',
     ...options,
     headers: {
         'Content-Type': 'application/json',

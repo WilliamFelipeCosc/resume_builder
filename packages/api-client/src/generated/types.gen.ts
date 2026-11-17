@@ -131,7 +131,7 @@ export type FieldError = {
     /**
      * Path
      */
-    path: 'ticket' | 'idempotency_key' | 'idempotencyKey' | 'baseRevisionId' | 'full_name' | 'professional_headline' | 'email' | 'phone_original' | 'objective_original' | 'city_of_residence' | 'country_of_residence' | 'linkedin_url' | 'github_url' | 'company_name_original' | 'job_title_original' | 'start_date_original' | 'end_date_original' | 'start_period' | 'end_period' | 'end_date_is_current_as_of_source' | 'location' | 'text_original' | 'text_current' | 'statement_type' | 'title' | 'title_is_generated_label' | 'description_original' | 'description_current' | 'time_to_develop_original' | 'metric_type' | 'metric_value' | 'metric_unit' | 'metric_meaning' | 'name' | 'original_labels' | 'category' | 'explicitly_listed_in_skills_section' | 'institution' | 'program_original' | 'ongoing_as_of_source_document' | 'currently_ongoing' | 'language' | 'proficiency_original' | 'description' | 'evidence_kind' | 'source_document_id' | 'page';
+    path: 'ticket' | 'idempotency_key' | 'idempotencyKey' | 'baseRevisionId' | 'full_name' | 'professional_headline' | 'email' | 'phone_original' | 'objective_original' | 'city_of_residence' | 'country_of_residence' | 'linkedin_url' | 'github_url' | 'company_name_original' | 'job_title_original' | 'start_date_original' | 'end_date_original' | 'start_period' | 'end_period' | 'end_date_is_current_as_of_source' | 'location' | 'text_original' | 'text_current' | 'statement_type' | 'title' | 'text' | 'title_is_generated_label' | 'description_original' | 'description_current' | 'time_to_develop_original' | 'metric_type' | 'metric_value' | 'metric_unit' | 'metric_meaning' | 'name' | 'original_labels' | 'category' | 'explicitly_listed_in_skills_section' | 'institution' | 'program_original' | 'ongoing_as_of_source_document' | 'currently_ongoing' | 'language' | 'proficiency_original' | 'description' | 'evidence_kind' | 'source_document_id' | 'page';
 };
 
 /**
@@ -171,6 +171,34 @@ export type HttpError = {
  */
 export type HttpErrorResponse = {
     error: HttpError;
+};
+
+/**
+ * ManualNoteCreate
+ */
+export type ManualNoteCreate = {
+    /**
+     * Idempotencykey
+     */
+    idempotencyKey: string;
+    /**
+     * Text
+     */
+    text: string;
+    /**
+     * Title
+     */
+    title?: string | null;
+};
+
+/**
+ * ManualNoteResponse
+ */
+export type ManualNoteResponse = {
+    /**
+     * Sourceid
+     */
+    sourceId: string;
 };
 
 export type CreateDiagnosticData = {
@@ -420,3 +448,68 @@ export type BootstrapSessionResponses = {
 };
 
 export type BootstrapSessionResponse = BootstrapSessionResponses[keyof BootstrapSessionResponses];
+
+export type CreateManualNoteData = {
+    body: ManualNoteCreate;
+    path?: never;
+    query?: never;
+    url: '/api/sources/manual-notes';
+};
+
+export type CreateManualNoteErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type CreateManualNoteError = CreateManualNoteErrors[keyof CreateManualNoteErrors];
+
+export type CreateManualNoteResponses = {
+    /**
+     * OK
+     */
+    200: ManualNoteResponse;
+    /**
+     * Successful Response
+     */
+    201: ManualNoteResponse;
+};
+
+export type CreateManualNoteResponse = CreateManualNoteResponses[keyof CreateManualNoteResponses];
