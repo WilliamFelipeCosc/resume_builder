@@ -44,6 +44,7 @@ test('FND-03/04/13/14 definitive same-origin Web/API/Redis/Worker fixture', asyn
   const button = page.getByRole('button', { name: 'Executar diagnóstico de teste' });
   await expect(button).toBeEnabled();
   expect(new URL(page.url()).hash).toBe('');
+  expect((await page.request.get(ORIGIN + '/tests/fixtures/m1-t6/')).status()).toBe(404);
   expect(await page.evaluate(() => document.cookie)).toBe('');
   expect(await page.evaluate(() => localStorage.length)).toBe(0);
   const cookies = await page.context().cookies();

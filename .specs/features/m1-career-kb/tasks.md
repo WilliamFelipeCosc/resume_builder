@@ -8,7 +8,7 @@ Um deliverable atômico por tarefa; testes da mudança e registro de progresso
 fazem parte do mesmo commit. Verifier independente final e sensor são obrigatórios.
 
 **Design:** [design.md](design.md), aprovado pelo proprietário em 2026-11-16.
-**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 5/64 concluídas.
+**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 6/64 concluídas.
 **Início:** autorizado explicitamente pelo proprietário em 2026-11-16 às 20:17 (-03); execução iniciada na T1.
 **Escopo:** M1; REQ-KB-001/002/004, REQ-SEC-001, AC-M1-001/002/003.
 **Não executado:** nenhuma instalação, alteração funcional ou teste de runtime nesta preparação.
@@ -232,7 +232,7 @@ baseline para o sensor independente.
 
 #### T6: Configurar Tailwind e componentes shadcn necessários
 
-**Status**: Pending
+**Status**: Complete
 **What**: Configurar Tailwind com tokens padrão e primitivas aprovadas; gerar somente componentes usados; validar formulário e diálogo por teclado em fixture sintética.
 **Where**: `apps/web/vite.config.ts`
 **Supporting**: componentes/configuração gerados, teste Vitest e fixture temporária independente de compatibilidade, servida pelo teste externo no browser. A fixture não depende dos providers ou formulários de produto de T25 em diante e não adiciona rota de teste ao backend.
@@ -241,8 +241,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-03, MONE-33
 **Tools**: WEB
 **Done when**:
-- [ ] Tokens padrão; foco retorna ao acionador; Escape e teclado operam diálogo; build com pins.
-- [ ] Gate FRONT passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Tokens padrão; foco retorna ao acionador; Escape e teclado operam diálogo; build com pins.
+- [x] Gate FRONT passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + e2e — apps/web/tests/m1-t6.test.tsx e apps/web/tests/m1-t6.spec.ts; mínimo de 4 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: FRONT
 **Commit**: `feat(web): establish accessible ui primitives`
