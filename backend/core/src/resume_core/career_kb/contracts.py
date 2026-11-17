@@ -169,7 +169,11 @@ class ReadEnvelope(Contract, Generic[T]):
     @model_validator(mode="after")
     def valid_fields(self):
         aliases = {field.alias for field in type(self.content).model_fields.values()}
-        if not set(self.restricted_fields).issubset(aliases):
+        if not set(self.restricted_fields).issubset(aliases) or any(
+            getattr(self.content, name) is not None
+            for name, field in type(self.content).model_fields.items()
+            if field.alias in self.restricted_fields
+        ):
             raise ValueError("invalid restricted field")
         return self
 
@@ -191,6 +195,12 @@ class ProfileReadEnvelope(Contract, Generic[T]):
             raise ValueError("invalid field metadata")
         if set(self.restricted_fields) & set(self.field_confirmations):
             raise ValueError("restricted confirmation")
+        if any(
+            getattr(self.content, name) is not None
+            for name, field in type(self.content).model_fields.items()
+            if field.alias in self.restricted_fields
+        ):
+            raise ValueError("restricted value")
         return self
 
 
@@ -205,7 +215,12 @@ READ_CONTENT_TYPES = {
     kind: create_model(
         f"{kind.title()}ReadContent",
         __base__=Contract,
-        **{name: (field.annotation | None, None) for name, field in model.model_fields.items()},
+        **{
+            name: (Annotated[field.annotation | None, *field.metadata], None)
+            if field.metadata
+            else (field.annotation | None, None)
+            for name, field in model.model_fields.items()
+        },
     )
     for kind, model in CONTENT_TYPES.items()
 }

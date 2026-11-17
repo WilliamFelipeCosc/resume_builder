@@ -126,6 +126,7 @@
 - Início observado 09:14:13 -03 após aprovação de tipos/envelopes às 09:12/09:13; espera por decisão separada, duração ativa líquida unknown. Premissas: campos e limites aprovados, classificação confidential padrão, confirmação não fornecida na criação. Arquivos: contratos, testes e rastreabilidade.
 - Nove conteúdos, comandos e leituras concretas, datas parciais, metadados e paginação validados por Pydantic; metricValue permanece texto. Gate PY concluído antes de 09:15:53 -03: 93 passed/435 deselected e lint PASS.
 - Adequação: `tests/unit/test_m1_t18.py:25` valida roundtrip dos nove conteúdos; `:33` associa Profile e restringe classificação/campos; `:58` distingue unknown/restricted e confirmação por campo; `:76`/`:84` datas válidas/inválidas; `:89` extras, coerções e limites. 19 casos focais, todos derivados dos critérios; nenhum teste anterior alterado ou omitido. MONE-03/09/10/12/17 parcialmente atendidos; persistência e rotas pendentes.
+- Revisão posterior da T18 identificou perda de constraints nos DTOs nullable e possibilidade de marcar valor não nulo como restrito. Corrigidas ambas; teste focal adicional rejeita valor restrito, booleano coercivo e nome longo. Gate PY: 94 passed/435 deselected; lint inicialmente falhou por arquivo não rastreado em andamento de T19 ainda sem formatação, formatado e lint repetido PASS. Nenhuma asserção anterior alterada.
 
 ### Revisão complementar de T14/T15
 

@@ -70,6 +70,24 @@ def test_m1_read_distinguishes_unknown_and_restricted_profile_fields():
     assert result.field_confirmations == {"email": "confirmed"}
 
 
+def test_m1_read_rejects_restricted_values_and_invalid_field_types():
+    payload = {
+        "id": str(uuid4()),
+        "revisionId": str(uuid4()),
+        "privacy": "public",
+        "content": {"name": "visible"},
+        "restrictedFields": ["name"],
+        "confirmation": "unverified",
+    }
+    with pytest.raises(ValidationError):
+        READ_TYPES["skill"].model_validate(payload)
+    for content in ({"name": "x" * 257}, {"explicitlyListedInSkillsSection": "true"}):
+        with pytest.raises(ValidationError):
+            READ_TYPES["skill"].model_validate(
+                payload | {"content": content, "restrictedFields": []}
+            )
+
+
 @pytest.mark.parametrize(
     ("value", "precision"), [("2024", "year"), ("2024-02", "month"), ("2024-02-29", "day")]
 )
