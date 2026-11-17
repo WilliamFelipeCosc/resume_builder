@@ -70,3 +70,9 @@
 - Início observado: 2026-11-16 21:43:31 -03. Allowlist ampliada para eventos/códigos e identificadores estáticos M1; caminhos arbitrários, query e conteúdo continuam omitidos.
 - Gate PY observado 21:43:53–21:44:05 -03: pytest M1 19 passed, 435 deselected; `just lint` PASS. Aprovação e gates separados do trabalho ativo; duração líquida unknown.
 - `tests/integration/test_m1_t9.py:11` captura aplicação e dependência, valida preservação de evento/path/código permitidos e ausência de sentinelas de contato, trecho, filename, exceção e query. MONE-34 parcialmente atendido; integrações futuras precisam usar a allowlist.
+
+## T10 — chaves estrangeiras SQLite
+
+- Início observado: 2026-11-16 21:44:30 -03. Cada conexão da engine, inclusive Alembic, ativa foreign_keys preservando WAL e busy_timeout 250 ms.
+- Gate PY observado 21:44:53–21:45:21 -03: pytest M1 21 passed, 435 deselected; lint falhou duas vezes por ordenação/espaço de imports, corrigido e PASS. Teste adicional `pytest tests/integration/test_diagnostic_migration.py -q`: 17 passed. Espera por gate/aprovação separada; duração ativa unknown.
+- `tests/integration/test_m1_t10.py:10` testa SQL inválido em duas conexões e pragmas; `:28` observa FK durante upgrade/downgrade/upgrade e preserva a tabela M0. MONE-05/31/32 parcialmente atendidos.

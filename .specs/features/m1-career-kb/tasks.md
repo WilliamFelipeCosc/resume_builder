@@ -302,7 +302,7 @@ baseline para o sensor independente.
 
 #### T10: Habilitar integridade referencial SQLite
 
-**Status**: Pending
+**Status**: Complete
 **What**: Habilitar foreign_keys em cada conexão inclusive migration, preservando WAL e busy_timeout atuais.
 **Where**: `backend/core/src/resume_core/database.py`
 **Supporting**: mapping ORM/migration correspondente, fixtures sintéticas e testes de integridade/rollback.
@@ -311,8 +311,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-05, MONE-31, MONE-32
 **Tools**: PY
 **Done when**:
-- [ ] FK inválida rejeitada por SQL direto; nova conexão também enforce; M0 upgrade/downgrade preservado.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] FK inválida rejeitada por SQL direto; nova conexão também enforce; M0 upgrade/downgrade preservado.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t10.py e/ou tests/integration/test_m1_t10.py; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(data): enforce sqlite foreign keys`

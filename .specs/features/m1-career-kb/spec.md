@@ -215,7 +215,7 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-02 | S1: evidência remota distinta; REQ-QA-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | T3 e tarefas restantes | In Progress (dependências fixadas) |
 | MONE-04 | S2: vínculos; REQ-KB-001/002, AC-M1-001 | Tasks | In Tasks |
-| MONE-05 | S2: integridade referencial; AC-M1-001 | Tasks | In Tasks |
+| MONE-05 | S2: integridade referencial; AC-M1-001 | T10 e tarefas restantes | In Progress (integridade SQLite) |
 | MONE-06 | S2: autorização pré-leitura/escrita; REQ-SEC-001 | T8 e tarefas restantes | In Progress (política de entrada) |
 | MONE-07 | S2: privacidade por campo/fonte; REQ-KB-002, REQ-SEC-001 | T8 e tarefas restantes | In Progress (política de entrada) |
 | MONE-08 | S2: arquivo histórico; AC-M1-001 | Tasks | In Tasks |
@@ -241,8 +241,8 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-28 | S6: reversão auditável; AC-M1-003 | Tasks | In Tasks |
 | MONE-29 | S6: bloqueio de undo; AC-M1-003 | T7 e tarefas restantes | In Progress (contrato de erros) |
 | MONE-30 | S6: PDF imutável; AC-M1-003 | T5 e tarefas restantes | In Progress (dependências fixadas) |
-| MONE-31 | S6: falha sem parcial; AC-M1-001/003 | Tasks | In Tasks |
-| MONE-32 | S6: durabilidade; REQ-KB-002/004 | Tasks | In Tasks |
+| MONE-31 | S6: falha sem parcial; AC-M1-001/003 | T10 e tarefas restantes | In Progress (integridade SQLite) |
+| MONE-32 | S6: durabilidade; REQ-KB-002/004 | T10 e tarefas restantes | In Progress (integridade SQLite) |
 | MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | T7–T9 e tarefas restantes | In Progress (entrada e logs) |
 | MONE-35 | S7: verificação do piloto; REQ-QA-001 | T4 e tarefas restantes | In Progress (descoberta preparada) |
