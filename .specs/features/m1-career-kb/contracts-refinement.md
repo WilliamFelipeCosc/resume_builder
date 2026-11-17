@@ -65,3 +65,13 @@ Listagens seguem `{items, offset, limit, total}`, como no design.
 Os comandos de escrita que alteram estado recebem `baseRevisionId` e
 `idempotencyKey` conforme o protocolo já aprovado. A aprovação desta
 proposta não autoriza novas operações ou mudanças nos campos de negócio.
+
+## Filtro de confirmação do Profile
+
+Em 2026-11-17 às 09:32 (-03), o proprietário aprovou exigir
+`confirmationField` junto de `confirmation=confirmed|unverified` para
+filtrar Profile. O campo usa um alias permitido do DTO, como `fullName`.
+Não existe agregação implícita de qualquer/todos os campos. A privacidade
+da unidade é aplicada no SQL antes da seleção e do total: o estado de um
+campo restrito não aparece indiretamente pela contagem. Os demais tipos
+continuam com filtro por entidade; neles `confirmationField` não se aplica.

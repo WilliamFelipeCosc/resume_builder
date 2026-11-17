@@ -391,6 +391,11 @@ após validá-los. Paginação usa sort por created_at e UUID como desempate;
 filtros e total consideram somente entidades visíveis. Offset não fornece
 snapshot entre páginas; após mutação, invalidar listagem e permitir recarregar.
 
+Refinamento aprovado em 2026-11-17 às 09:32 (-03): filtro de confirmação
+do Profile exige `confirmationField` explícito e `confirmation`; os demais
+tipos continuam por entidade. O SQL filtra a classificação do campo antes
+de selecionar e contar, conforme [contracts-refinement.md](contracts-refinement.md).
+
 ## Authorization and Privacy Matrix — Proposed
 
 Separar capability de operação e clearance de conteúdo. Principal local do

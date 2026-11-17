@@ -185,6 +185,14 @@ fieldPrivacy e leitura com restrictedFields e confirmação na granularidade
 já aprovada. Essa decisão fecha a lacuna de T18, sem novos campos de
 qualificação nem promoção automática de conteúdo.
 
+### Filtro de confirmação aprovado em T22
+
+Em 2026-11-17 às 09:32 (-03), o proprietário escolheu filtrar Profile
+por um campo explícito (`confirmationField`) em conjunto com `confirmation`.
+Não agregar a confirmação do perfil. Nos demais tipos, a unidade é a
+entidade. Excluir unidades restritas também do filtro/total, com autorização
+no SQL. A decisão complementa os formatos de contracts-refinement.md.
+
 ## Deferred Ideas
 
 Importadores completos PDF/DOCX/Obsidian/GitHub/LinkedIn, embeddings,
