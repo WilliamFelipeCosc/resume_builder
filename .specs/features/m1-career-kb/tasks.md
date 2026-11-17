@@ -389,7 +389,7 @@ baseline para o sensor independente.
 
 #### T15: Implementar leitor limitado de metadados PDF
 
-**Status**: Pending
+**Status**: Complete
 **What**: Ler somente estrutura/páginas com pypdf estrito em subprocesso limitado; saída mínima e erros sanitizados, sem extração textual.
 **Where**: `backend/core/src/resume_core/sources/pdf_metadata.py`
 **Supporting**: testes/evidências e wiring mínimo estritamente necessários ao deliverable.
@@ -398,8 +398,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-14, MONE-15, MONE-30, MONE-34
 **Tools**: PY
 **Done when**:
-- [ ] PDF válido, inválido, criptografado, >50 páginas, timeout e memória; warning sentinela não sai; sem chamada de extract_text.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] PDF válido, inválido, criptografado, >50 páginas, timeout e memória; warning sentinela não sai; sem chamada de extract_text.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t15.py e/ou tests/integration/test_m1_t15.py; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(sources): inspect bounded pdf metadata`
