@@ -1,6 +1,7 @@
-# M1 — refinamento proposto dos contratos T18
+# M1 — refinamento aprovado dos contratos T18
 
-**Status:** aguardando decisão humana; não é contrato executável aprovado.
+**Status:** aprovado pelo proprietário em 2026-11-17 às 09:12/09:13 (-03);
+contratos executáveis serão implementados em T18.
 **Data:** 2026-11-17. Complementa os campos de negócio de `design.md` sem
 criar taxonomias, qualificações ou confirmação automática.
 
@@ -10,9 +11,8 @@ criar taxonomias, qualificações ou confirmação automática.
 - `category`, `metricType` e `metricUnit`: texto opcional até 256 caracteres;
   sem enums ou conversão para uma taxonomia não aprovada.
 - `metricMeaning`: texto opcional até 8.000 caracteres.
-- `metricValue`: proposta de texto opcional até 8.000 caracteres, preservado
-  sem conversão numérica ou inferência. Alternativa: decimal informado
-  explicitamente, sem extrair números automaticamente de narrativa.
+- `metricValue`: texto opcional até 8.000 caracteres, preservado sem
+  conversão numérica ou inferência; escolha explícita do proprietário.
 - `PartialDate`: `{value: string, precision: 'year'|'month'|'day'}`, com
   formato ISO válido e coerente com a precisão; texto original permanece
   em seu campo próprio. Datas e atualidade desconhecidas continuam null.
@@ -35,7 +35,7 @@ DTOs são concretos para os nove tipos, com aliases camelCase e extra=forbid.
 ```
 
 `profileId` é null somente para Profile e obrigatório nos demais tipos.
-Privacidade inicial sugerida confidential; mudanças são explícitas e
+Privacidade inicial confidential; mudanças são explícitas e
 classificação de campo pode apenas restringir a da entidade. O mapa de
 campos é fechado pelos nomes permitidos de cada DTO, com default vazio.
 A criação gera IDs/revisões e estado unverified no servidor; o cliente não

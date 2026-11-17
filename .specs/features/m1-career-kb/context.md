@@ -174,6 +174,17 @@ pelo usuário e não confirma qualificações. O título é metadado privado.
 O corpo não permite escolher principal, clearance ou caminho de disco.
 Essa decisão complementa o design aprovado e libera T16.
 
+## Refinamento aprovado — tipos e envelopes de T18
+
+Em 2026-11-17 às 09:12/09:13 (-03), o proprietário escolheu metricValue
+como texto opcional preservado, sem conversão numérica, e aprovou os
+tipos e formatos de [contracts-refinement.md](contracts-refinement.md).
+Incluem rótulos como lista de textos, categorias/unidades textuais sem
+taxonomia, PartialDate com value/precision, envelopes de criação tipados,
+fieldPrivacy e leitura com restrictedFields e confirmação na granularidade
+já aprovada. Essa decisão fecha a lacuna de T18, sem novos campos de
+qualificação nem promoção automática de conteúdo.
+
 ## Deferred Ideas
 
 Importadores completos PDF/DOCX/Obsidian/GitHub/LinkedIn, embeddings,

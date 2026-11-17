@@ -71,6 +71,7 @@ Esta especificação cobre o marco completo sem antecipar importadores M6.
 | Revisão-base no transporte | Corpo tipado; conflito HTTP 409; comparação e escrita atômicas, incluindo revisões dos itens do lote | Escolha explícita após comparação das alternativas | Sim, entrevista técnica |
 | Abordagem do modelo KB | Tabelas tipadas por entidade para estado atual, histórico imutável e metadados por campo | Escolha explícita após comparação com registros genéricos JSON | Sim, início do Design |
 | Fonte manual de T16 | text obrigatório até 8.000, title opcional até 256 e idempotencyKey UUID; texto UTF-8 imutável por hash e confidential inicial | Fechar lacuna do DTO sem presumir campos; anotação não confirma qualificações | Sim, proprietário em 2026-11-17 às 08:56 (-03) |
+| Tipos e envelopes de T18 | metricValue textual preservado e formatos de contracts-refinement.md | Fechar tipos/transporte sem presumir taxonomias ou converter narrativa | Sim, proprietário em 2026-11-17 às 09:12/09:13 (-03) |
 
 **Open questions: none** — contexto e propostas complementares foram
 aprovados para Design. Campos,

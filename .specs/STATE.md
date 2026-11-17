@@ -27,9 +27,9 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 - **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; fases 1–3 concluídas, T1–T17 (17/64); estado canônico in_progress.
 - **Completed**: CI/dependências/UI básica, fronteiras e integridade, armazenamento/PDF limitado, fonte manual privada e consultas/download autorizados. Contrato manual aprovado em 2026-11-17 às 08:56 (-03). Commits até `68fcbd0`.
 - **Gates**: último BUILD completo T17: 509 Python (2 avisos de depreciação existentes), 19 Vitest, 4 Playwright e typecheck/build/contrato/lint PASS. Evidência em `.specs/features/m1-career-kb/execution.md`.
-- **In-progress**: proposta de refinamento dos tipos/envelopes de T18 em `.specs/features/m1-career-kb/contracts-refinement.md`, aguardando resposta humana; runtime T18 não iniciado.
-- **Next step**: após decisão sobre metricValue e formatos, registrar resultado e retomar worker Terra T18–T23, sem push.
-- **Blockers**: decisão T18 solicitada por schemas não definidos; aceite privado continua humano após piloto independente; CI remoto não autorizado.
+- **In-progress**: refinamento dos tipos/envelopes de T18 aprovado pelo proprietário em 2026-11-17 às 09:12/09:13 (-03), registrado em `.specs/features/m1-career-kb/contracts-refinement.md`; retomada do worker Terra.
+- **Next step**: executar T18–T23 com metricValue textual preservado e formatos aprovados, encerrar fase 4 com BUILD; sem push.
+- **Blockers**: nenhuma decisão de T18 pendente; aceite privado continua humano após piloto independente; CI remoto não autorizado.
 - **Branch**: feature/m1-career-kb, base d2a609d.
 
 Operação: docs/engineering/m0-local-operation.md; just setup, just build, just redis-up (manual), just migrate, just api, just worker e just open. XDG_RUNTIME_DIR privado obrigatório; dados profissionais/providers/MCP/CI não utilizados. Testes: PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check, Docker e Chromium necessários. Evidências detalhadas e limites em .specs/features/m0-foundation/validation.md.

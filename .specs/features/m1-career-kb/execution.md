@@ -135,3 +135,12 @@ ainda mostrava 6/64 e o handoff 15/64; ambos foram corrigidos pelos status
 individuais e commits. BUILD de T17: 509 Python, 19 Vitest, 4 Playwright e
 checks PASS. T18 aguarda decisão humana sobre tipos/envelopes em
 `contracts-refinement.md`; a proposta ainda não é implementação aprovada.
+
+## Decisão de tipos e envelopes T18
+
+O proprietário aprovou metricValue como texto opcional preservado às 09:12
+e os formatos de contracts-refinement.md às 09:13 (-03), em 2026-11-17.
+Contexto, design, spec e handoff foram sincronizados com as escolhas.
+A espera por esclarecimento é separada do esforço ativo, sem reconstruir
+duração não instrumentada. T18 está liberada; runtime e seu gate ainda
+não executados neste registro de decisão.

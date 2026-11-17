@@ -321,6 +321,12 @@ Reverter não muda o PDF, o seed, auditoria anterior ou snapshots anteriores.
 
 ## API Contracts — Proposed
 
+Os tipos e envelopes restantes foram refinados e aprovados pelo proprietário
+em 2026-11-17 às 09:12/09:13 (-03), conforme
+[contracts-refinement.md](contracts-refinement.md). Essa definição complementa
+os campos e a semântica deste design: metricValue textual preservado,
+PartialDate e DTOs concretos de criação/leitura, sem taxonomias ou coerções.
+
 DTOs Pydantic com aliases camelCase, extra=forbid e tipos fechados;
 seed usa DTO legado separado com snake_case. Exemplos públicos só fictícios.
 Rotas abaixo são propostas para a revisão deste design, não API publicada.
