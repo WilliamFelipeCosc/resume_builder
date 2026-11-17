@@ -91,3 +91,36 @@ def test_m1_pdf_worker_applies_memory_limit_without_text_extraction(monkeypatch,
     module._worker()
     assert limits == [(resource.RLIMIT_AS, (512 * 1024 * 1024, 512 * 1024 * 1024))]
     assert capsys.readouterr().out == "1"
+
+
+def test_m1_pdf_child_enforces_memory_and_discards_parser_warnings(tmp_path, monkeypatch, capfd):
+    import resume_core.sources.pdf_metadata as module
+
+    probe = tmp_path / "bounded_pdf_probe.py"
+    probe.write_text(
+        "import logging\n"
+        "import mmap\n"
+        "import sys\n"
+        "import warnings\n"
+        "import pypdf\n"
+        "from resume_core.sources.pdf_metadata import _worker\n"
+        "class Reader:\n"
+        "    is_encrypted = False\n"
+        "    pages = [object()]\n"
+        "    def __init__(self, source, strict):\n"
+        "        logging.warning('PDF_WARNING_SENTINEL')\n"
+        "        warnings.warn('PDF_WARNING_SENTINEL')\n"
+        "        sys.stderr.write('PDF_WARNING_SENTINEL')\n"
+        "        if source.read() == b'large':\n"
+        "            self.reservation = mmap.mmap(-1, 600 * 1024 * 1024)\n"
+        "pypdf.PdfReader = Reader\n"
+        "_worker()\n"
+    )
+    monkeypatch.setattr(module, "__file__", str(probe))
+    assert module.inspect_pdf(b"control").page_count == 1
+    with pytest.raises(PdfMetadataError) as error:
+        module.inspect_pdf(b"large")
+    assert error.value.code == "pdf_invalid"
+    captured = capfd.readouterr()
+    assert captured.out == ""
+    assert captured.err == ""

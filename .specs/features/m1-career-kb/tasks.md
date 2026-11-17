@@ -404,6 +404,8 @@ baseline para o sensor independente.
 **Gate**: PY
 **Commit**: `feat(sources): inspect bounded pdf metadata`
 
+**Evidência complementar**: revisão de 2026-11-17 em `execution.md`; teste adicional comprova RLIMIT_AS no subprocesso e descarte de warnings, além do spy inicial.
+
 #### T16: Criar fonte manual privada
 
 **Status**: Pending
