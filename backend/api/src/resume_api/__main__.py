@@ -17,6 +17,7 @@ from resume_core.paths import resolve_paths
 from resume_core.repository import DiagnosticRepository
 from resume_core.service import DiagnosticService
 from resume_core.sources.manual_notes import ManualNoteService
+from resume_core.sources.queries import SourceQueries
 from resume_core.sources.storage import SourceStorage
 
 from resume_api.app import create_app
@@ -87,9 +88,11 @@ def main():
     engine = make_engine(database)
     broker = make_broker(args.redis_url, namespace)
     repo = DiagnosticRepository(engine)
+    storage = SourceStorage(paths.data)
     app = create_app(
         service=DiagnosticService(repo),
-        source_service=ManualNoteService(engine, SourceStorage(paths.data)),
+        source_service=ManualNoteService(engine, storage),
+        source_queries=SourceQueries(engine, storage),
         runtime_root=Path(os.environ["XDG_RUNTIME_DIR"]),
         environment=args.environment,
         origin=f"http://127.0.0.1:{args.port}",

@@ -425,7 +425,7 @@ baseline para o sensor independente.
 
 #### T17: Consultar e baixar fontes autorizadas
 
-**Status**: Pending
+**Status**: Complete
 **What**: Entregar componente de leitura de metadados/download attachment, com checagem de escopo e integridade antes de abrir conteúdo.
 **Where**: `backend/api/src/resume_api/routers/sources.py`
 **Supporting**: serviço/repositório focal, registro do router, DTO/exports necessários, OpenAPI/SDK regenerados e testes da operação.
@@ -434,8 +434,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-06, MONE-07, MONE-30, MONE-34
 **Tools**: PY
 **Done when**:
-- [ ] Fonte oculta=404; arquivo adulterado/ausente bloqueia; no-store/attachment; liberar fato não libera PDF; nenhum StaticFiles privado.
-- [ ] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Fonte oculta=404; arquivo adulterado/ausente bloqueia; no-store/attachment; liberar fato não libera PDF; nenhum StaticFiles privado.
+- [x] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t17.py e/ou tests/integration/test_m1_t17.py; mínimo de 5 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: HTTP
 **Commit**: `feat(sources): serve authorized source attachments`

@@ -201,6 +201,40 @@ export type ManualNoteResponse = {
     sourceId: string;
 };
 
+/**
+ * SourceResponse
+ */
+export type SourceResponse = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Kind
+     */
+    kind: 'file' | 'manual_note';
+    /**
+     * Mediatype
+     */
+    mediaType: string | null;
+    /**
+     * Pagecount
+     */
+    pageCount: number | null;
+    /**
+     * Privacy
+     */
+    privacy: 'public' | 'professional' | 'confidential' | 'secret';
+    /**
+     * Sha256
+     */
+    sha256: string;
+    /**
+     * Title
+     */
+    title: string | null;
+};
+
 export type CreateDiagnosticData = {
     body: DiagnosticCreate;
     path?: never;
@@ -513,3 +547,135 @@ export type CreateManualNoteResponses = {
 };
 
 export type CreateManualNoteResponse = CreateManualNoteResponses[keyof CreateManualNoteResponses];
+
+export type GetSourceData = {
+    body?: never;
+    path: {
+        /**
+         * Source Id
+         */
+        source_id: string;
+    };
+    query?: never;
+    url: '/api/sources/{source_id}';
+};
+
+export type GetSourceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type GetSourceError = GetSourceErrors[keyof GetSourceErrors];
+
+export type GetSourceResponses = {
+    /**
+     * Successful Response
+     */
+    200: SourceResponse;
+};
+
+export type GetSourceResponse = GetSourceResponses[keyof GetSourceResponses];
+
+export type DownloadSourceData = {
+    body?: never;
+    path: {
+        /**
+         * Source Id
+         */
+        source_id: string;
+    };
+    query?: never;
+    url: '/api/sources/{source_id}/content';
+};
+
+export type DownloadSourceErrors = {
+    /**
+     * Unauthorized
+     */
+    401: HttpErrorResponse;
+    /**
+     * Forbidden
+     */
+    403: HttpErrorResponse;
+    /**
+     * Not Found
+     */
+    404: HttpErrorResponse;
+    /**
+     * Conflict
+     */
+    409: HttpErrorResponse;
+    /**
+     * Content Too Large
+     */
+    413: HttpErrorResponse;
+    /**
+     * Unsupported Media Type
+     */
+    415: HttpErrorResponse;
+    /**
+     * Unprocessable Content
+     */
+    422: HttpErrorResponse;
+    /**
+     * Too Many Requests
+     */
+    429: HttpErrorResponse;
+    /**
+     * Internal Server Error
+     */
+    500: HttpErrorResponse;
+    /**
+     * Service Unavailable
+     */
+    503: HttpErrorResponse;
+};
+
+export type DownloadSourceError = DownloadSourceErrors[keyof DownloadSourceErrors];
+
+export type DownloadSourceResponses = {
+    /**
+     * Successful Response
+     */
+    200: Blob | File;
+};
+
+export type DownloadSourceResponse = DownloadSourceResponses[keyof DownloadSourceResponses];

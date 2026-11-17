@@ -217,8 +217,8 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-03 | S2: core completo; REQ-KB-001/002, AC-M1-001 | T3, T16 e tarefas restantes | In Progress (fonte manual privada) |
 | MONE-04 | S2: vínculos; REQ-KB-001/002, AC-M1-001 | T12 e tarefas restantes | In Progress (fundação de histórico) |
 | MONE-05 | S2: integridade referencial; AC-M1-001 | T12 e tarefas restantes | In Progress (fundação de histórico) |
-| MONE-06 | S2: autorização pré-leitura/escrita; REQ-SEC-001 | T13, T16 e tarefas restantes | In Progress (projeção e escrita autorizadas) |
-| MONE-07 | S2: privacidade por campo/fonte; REQ-KB-002, REQ-SEC-001 | T13 e tarefas restantes | In Progress (projeção autorizada) |
+| MONE-06 | S2: autorização pré-leitura/escrita; REQ-SEC-001 | T13, T16, T17 e tarefas restantes | In Progress (projeção e fontes autorizadas) |
+| MONE-07 | S2: privacidade por campo/fonte; REQ-KB-002, REQ-SEC-001 | T13, T17 e tarefas restantes | In Progress (projeção e fontes autorizadas) |
 | MONE-08 | S2: arquivo histórico; AC-M1-001 | T12 e tarefas restantes | In Progress (fundação de histórico) |
 | MONE-09 | S3: edição sem confirmação herdada; AC-M1-001 | Tasks | In Tasks |
 | MONE-10 | S3: confirmação explícita; REQ-KB-002 | Tasks | In Tasks |
@@ -241,11 +241,11 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-27 | S5: auditoria; AC-M1-003 | T12, T16 e tarefas restantes | In Progress (auditoria de fonte manual) |
 | MONE-28 | S6: reversão auditável; AC-M1-003 | Tasks | In Tasks |
 | MONE-29 | S6: bloqueio de undo; AC-M1-003 | T7 e tarefas restantes | In Progress (contrato de erros) |
-| MONE-30 | S6: PDF imutável; AC-M1-003 | T12, T14, T16 e tarefas restantes | In Progress (fonte manual por hash) |
+| MONE-30 | S6: PDF imutável; AC-M1-003 | T12, T14, T16, T17 e tarefas restantes | In Progress (fonte por hash e download verificado) |
 | MONE-31 | S6: falha sem parcial; AC-M1-001/003 | T11, T14 e tarefas restantes | In Progress (transação explícita e instalação atômica) |
 | MONE-32 | S6: durabilidade; REQ-KB-002/004 | T12, T14 e tarefas restantes | In Progress (histórico e arquivo durável) |
 | MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
-| MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | T13, T15 e tarefas restantes | In Progress (projeção autorizada e parser isolado) |
+| MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | T13, T15, T17 e tarefas restantes | In Progress (parser e fonte protegidos) |
 | MONE-35 | S7: verificação do piloto; REQ-QA-001 | T4 e tarefas restantes | In Progress (descoberta preparada) |
 | MONE-36 | S7: carga privada revisada; AC-M1-002/003 | Tasks | In Tasks |
 | MONE-37 | S7: evidência e limitações; AC-M1-001/002/003 | Tasks | In Tasks |

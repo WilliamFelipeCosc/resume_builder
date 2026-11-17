@@ -2,7 +2,7 @@
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { BootstrapSessionData, BootstrapSessionErrors, BootstrapSessionResponses, CreateDiagnosticData, CreateDiagnosticErrors, CreateDiagnosticResponses, CreateManualNoteData, CreateManualNoteErrors, CreateManualNoteResponses, GetHealthData, GetHealthErrors, GetHealthResponses, GetLatestDiagnosticData, GetLatestDiagnosticErrors, GetLatestDiagnosticResponses } from './types.gen';
+import type { BootstrapSessionData, BootstrapSessionErrors, BootstrapSessionResponses, CreateDiagnosticData, CreateDiagnosticErrors, CreateDiagnosticResponses, CreateManualNoteData, CreateManualNoteErrors, CreateManualNoteResponses, DownloadSourceData, DownloadSourceErrors, DownloadSourceResponses, GetHealthData, GetHealthErrors, GetHealthResponses, GetLatestDiagnosticData, GetLatestDiagnosticErrors, GetLatestDiagnosticResponses, GetSourceData, GetSourceErrors, GetSourceResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -80,4 +80,30 @@ export const createManualNote = <ThrowOnError extends boolean = false>(options: 
         'Content-Type': 'application/json',
         ...options.headers
     }
+});
+
+/**
+ * Get Source
+ */
+export const getSource = <ThrowOnError extends boolean = false>(options: Options<GetSourceData, ThrowOnError>): RequestResult<GetSourceResponses, GetSourceErrors, ThrowOnError> => (options.client ?? client).get<GetSourceResponses, GetSourceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/sources/{source_id}',
+    ...options
+});
+
+/**
+ * Download Source
+ */
+export const downloadSource = <ThrowOnError extends boolean = false>(options: Options<DownloadSourceData, ThrowOnError>): RequestResult<DownloadSourceResponses, DownloadSourceErrors, ThrowOnError> => (options.client ?? client).get<DownloadSourceResponses, DownloadSourceErrors, ThrowOnError>({
+    security: [{
+            in: 'cookie',
+            name: 'resume_session',
+            type: 'apiKey'
+        }],
+    url: '/api/sources/{source_id}/content',
+    ...options
 });
