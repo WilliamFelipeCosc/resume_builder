@@ -24,12 +24,13 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 ## Handoff
 
 - **Feature**: m1-career-kb — execução do Career KB Core.
-- **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; fases 1–3 concluídas, T1–T22 (22/64); estado canônico in_progress.
-- **Completed**: CI/dependências/UI básica, fronteiras e integridade, armazenamento/PDF limitado, fonte manual privada e consultas/download autorizados. Contrato manual aprovado em 2026-11-17 às 08:56 (-03). Commits até `68fcbd0`.
-- **Gates**: último BUILD completo T17: 509 Python (2 avisos de depreciação existentes), 19 Vitest, 4 Playwright e typecheck/build/contrato/lint PASS. Evidência em `.specs/features/m1-career-kb/execution.md`.
-- **In-progress**: nenhum; T22 concluída.
-- **Next step**: executar T23 e encerrar fase 4 com BUILD; sem push.
-- **Blockers**: nenhuma decisão de T18 pendente; aceite privado continua humano após piloto independente; CI remoto não autorizado.
-- **Branch**: feature/m1-career-kb, base d2a609d.
+- **Phase / Task**: snapshot 2026-11-17 às 10:22 (-03); T1–T22 concluídas (22/64), T23 parcialmente implementada e sem commit; M1 in_progress. Handoff detalhado: `.specs/features/m1-career-kb/handoff.md`.
+- **Completed**: fases 1–3; contratos/tabelas tipadas, repositório, criação e consultas autorizadas de T18–T22; correções de leitura/proveniência/CHECKs. Último commit de implementação `ac94851`. Decisões manuais T16/T18/T22 aprovadas e documentadas; sem nova entrevista para essas escolhas.
+- **Gates**: último BUILD confirmado anterior aos CHECKs finais: 575 Python, 19 Vitest, 4 Playwright e checks PASS; pós-CHECKs, worker informou gate HTTP/PY 141 passed, 435 deselected e lint PASS. BUILD final após `ac94851` iniciado, resultado não confirmado devido à quota. Não declarar fase 4 verde sem repetir.
+- **In-progress** (file:line): `backend/api/src/resume_api/routers/career.py:28` (27 rotas concretas); `tests/integration/test_m1_t23.py:72` e coartefatos de SDK/composição, não commitados.
+- **Next step**: reconciliar diff de T23, repetir HTTP/BUILD na árvore final, registrar adequação/status/traceabilidade e commit local; só depois despachar Terra para T24–T28. Preservar preferência GPT Terra e lotes sequenciais.
+- **Blockers**: worker Terra atingiu limite de uso; nenhum resultado final do último BUILD. Sem decisão de negócio pendente. Piloto independente, revisão privada humana e aceite final ainda futuros; CI remoto NOT_RUN e push não autorizado.
+- **Uncommitted files**: T23 em `backend/api/src/resume_api/{__main__,app,errors}.py`, `backend/api/src/resume_api/routers/career.py`, `backend/core/src/resume_core/logging_policy.py`, `packages/api-client/openapi.json`, `packages/api-client/src/generated/{index,sdk.gen,types.gen}.ts`, `tests/integration/test_m1_t23.py`; lista exata e contexto em handoff.md. Documentos deste handoff são adicionais a essa captura.
+- **Branch**: feature/m1-career-kb, base d2a609d; conferir git antes de retomar. Ambiente atual full access/approval never: não enviar sandbox_permissions; isso não autoriza operações remotas ou dados reais.
 
-Operação: docs/engineering/m0-local-operation.md; just setup, just build, just redis-up (manual), just migrate, just api, just worker e just open. XDG_RUNTIME_DIR privado obrigatório; dados profissionais/providers/MCP/CI não utilizados. Testes: PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check, Docker e Chromium necessários. Evidências detalhadas e limites em .specs/features/m0-foundation/validation.md.
+Operação e comandos: handoff.md e docs/engineering/m0-local-operation.md; PATH Node 24 e PLAYWRIGHT_BROWSERS_PATH explícitos. Dados fictícios; não carregar fontes pessoais antes do piloto independente e revisão humana.
