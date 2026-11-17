@@ -23,12 +23,12 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 
 ## Handoff
 
-- **Feature**: m1-career-kb — planejamento do Career KB Core completo.
-- **Phase / Task**: execução autorizada pelo proprietário em 2026-11-16 às 20:17 (-03); Fase 2 concluída, 13/64 concluídas; estado canônico in_progress.
-- **Completed**: planejamento, spec, design, ferramentas e lotes sequenciais aprovados; branch local criada sem descartar alterações.
-- **Gates**: validadores estritos de spec/tasks aprovados; BUILD de baseline passou. Evidência em `.specs/features/m1-career-kb/execution.md`.
-- **In-progress**: nenhum; T13 concluída.
-- **Next step**: iniciar T14 no próximo lote sequencial; seguir plano aprovado sem push.
+- **Feature**: m1-career-kb — execução do Career KB Core.
+- **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; T1–T15 concluídas, 15/64; estado canônico in_progress.
+- **Completed**: fases 1/2, armazenamento imutável e leitor limitado PDF. Complemento de T15 verifica limite real de espaço de endereçamento e warnings. Contrato de fonte manual aprovado pelo proprietário em 2026-11-17 às 08:56 (-03), registrado em context/design/spec.
+- **Gates**: último BUILD completo da fase 2: 484 Python, 19 Vitest, 4 Playwright e checks PASS. Gate PY complementar de T15: 63 passed, 435 deselected, lint PASS. BUILD da fase 3 pendente de T17. Evidência em `.specs/features/m1-career-kb/execution.md`.
+- **In-progress**: retomada do lote Terra T16–T23; T16 liberada após decisão humana, sem implementação ainda.
+- **Next step**: executar T16 com text, title opcional, idempotencyKey UUID e objeto UTF-8 imutável confidential; seguir lote sequencial até T23 sem push.
 - **Blockers**: aceite privado requer intervenção humana após piloto independente; CI remoto não autorizado.
 - **Branch**: feature/m1-career-kb, base d2a609d.
 

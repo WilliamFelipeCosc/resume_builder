@@ -163,6 +163,17 @@ inspecionados; o seed de currículo permanece reservado ao M2.
 Nenhum valor pessoal, trecho do currículo ou hash foi reproduzido aqui.
 Esta inspeção não constitui suíte de testes do M1 nem teste do futuro adapter.
 
+## Definição adicional aprovada — fonte manual
+
+Em 2026-11-17 às 08:56 (-03), o proprietário aprovou explicitamente o
+contrato que faltava em T16: `text` obrigatório, até 8.000 caracteres;
+`title` opcional, até 256 caracteres; `idempotencyKey` UUID. Guardar o texto
+em UTF-8 como objeto imutável por hash no armazenamento privado existente,
+com classificação inicial `confidential`. A anotação é uma fonte declarada
+pelo usuário e não confirma qualificações. O título é metadado privado.
+O corpo não permite escolher principal, clearance ou caminho de disco.
+Essa decisão complementa o design aprovado e libera T16.
+
 ## Deferred Ideas
 
 Importadores completos PDF/DOCX/Obsidian/GitHub/LinkedIn, embeddings,

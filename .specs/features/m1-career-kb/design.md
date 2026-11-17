@@ -353,6 +353,19 @@ endpoint que aceite nome arbitrário de entidade/tabela. Não expor um DTO
 Rotas estáticas proposals/links precedem parâmetros dinâmicos. DTO de leitura
 parcial por privacidade distingue valor desconhecido de campo redigido.
 
+### Fonte manual — contrato aprovado em 2026-11-17 às 08:56 (-03)
+
+`POST /api/sources/manual-notes` recebe somente `text` obrigatório (1 a
+8.000 caracteres), `title` opcional (até 256 caracteres, podendo ser null)
+e `idempotencyKey` UUID. Aplicar aliases/extra=forbid conforme as convenções
+da API. Preservar o texto fornecido, codificado em UTF-8 no SourceStorage
+imutável por hash; o título corresponde ao nome privado da fonte.
+Persistir hash, referência e media type em `source_documents`, com
+`kind=manual_note`, `privacy=confidential` e sem página PDF. A chave é
+escopada por principal/operação conforme o protocolo de recibos existente.
+A anotação não cria fatos nem confirma qualificações. O DTO não aceita
+principal, clearance, paths ou classificação escolhidos pelo cliente.
+
 Erros mantêm envelope `error`, com code/message estáveis, requestId e
 fieldErrors opcionais com caminhos permitidos; nunca ecoar input rejeitado.
 
