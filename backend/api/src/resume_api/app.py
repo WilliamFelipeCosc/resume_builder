@@ -7,7 +7,7 @@ from collections import deque
 from contextlib import asynccontextmanager
 from http.cookies import CookieError, SimpleCookie
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 from uuid import UUID, uuid4
 
 import structlog
@@ -34,7 +34,9 @@ class HealthResponse(BaseModel):
     status: Literal["ok"]
 
 
-ERROR_RESPONSES = {code: {"model": HttpErrorResponse} for code in ERRORS}
+ERROR_RESPONSES: dict[int | str, dict[str, Any]] = {
+    code: {"model": HttpErrorResponse} for code in ERRORS
+}
 SESSION_SECURITY = {"security": [{"LocalSession": []}]}
 
 
@@ -119,7 +121,7 @@ class Boundary:
                 except CookieError:
                     return await reject(401)
                 morsel = cookie.get(COOKIE_NAME)
-                if not self.sessions.authorized(morsel.value if morsel else None):
+                if morsel is None or not self.sessions.authorized(morsel.value):
                     return await reject(401)
                 principal = self.principal_factory()
                 scope["state"]["principal"] = principal

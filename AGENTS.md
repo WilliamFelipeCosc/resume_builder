@@ -26,6 +26,16 @@ Implementar um **Resume Builder local-first** que cria currículos fundamentados
 
 As instruções locais especializam convenções da área; preserve as invariantes globais. Mudanças que atravessam áreas exigem consultar cada guia e seus testes relacionados. Crie novos guias somente quando houver regras próprias, evitando duplicar esta raiz.
 
+## Navegação e análise de código
+
+Em tarefas que exijam entender ou alterar código, use **CodeGraph e os LSP do Serena** conforme o tipo de pergunta, sempre que estiverem disponíveis e aplicáveis:
+
+- **CodeGraph primeiro** para descobrir símbolos, entender como uma funcionalidade funciona, rastrear chamadas e dependências ou avaliar o impacto de uma mudança. Em repositório indexado (`.codegraph/`), consulte-o antes de buscas textuais ou leitura de código para essas questões. Use `codegraph_explore` ou `codegraph explore`.
+- **Serena/LSP** para navegação semântica em símbolos identificados: definição, implementações, referências, tipos, diagnósticos e operações de refatoração suportadas. Antes de usar o Serena em uma tarefa de código, leia suas instruções iniciais. Use os LSPs configurados para Python e TypeScript e limite a consulta aos arquivos ou símbolos pertinentes.
+- **Combine os dois** ao avaliar referências e impacto de alterações, sobretudo entre pacotes e através de reexports. Resultados vazios ou pequenos do LSP não provam ausência de usos: confirme com CodeGraph e `rg` antes de renomear, remover ou concluir que não há consumidores. O índice também pode estar incompleto ou desatualizado; confira o código atual quando necessário.
+- **`rg`** é apropriado para texto literal, mensagens, chaves e confirmação de ocorrências; use ferramentas estruturais quando o padrão exigir análise sintática. Não substitua testes ou revisão por resultados de navegação.
+- Se uma ferramenta ou servidor estiver indisponível, não indexado ou falhar, registre a limitação e use as alternativas disponíveis; não crie índice, instale dependências ou altere permissões automaticamente. Consulte `docs/engineering/serena-local.md` para configuração e limitações observadas.
+
 ## Regras invariantes
 
 - **Nunca** inventar experiência, certificação, remuneração, autorização de trabalho ou outras qualificações de uma pessoa. Textos gerados são propostas até revisão quando necessária.
