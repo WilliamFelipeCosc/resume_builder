@@ -24,12 +24,12 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 ## Handoff
 
 - **Feature**: m1-career-kb — execução do Career KB Core.
-- **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; T1–T15 concluídas, 15/64; estado canônico in_progress.
-- **Completed**: fases 1/2, armazenamento imutável e leitor limitado PDF. Complemento de T15 verifica limite real de espaço de endereçamento e warnings. Contrato de fonte manual aprovado pelo proprietário em 2026-11-17 às 08:56 (-03), registrado em context/design/spec.
-- **Gates**: último BUILD completo da fase 2: 484 Python, 19 Vitest, 4 Playwright e checks PASS. Gate PY complementar de T15: 63 passed, 435 deselected, lint PASS. BUILD da fase 3 pendente de T17. Evidência em `.specs/features/m1-career-kb/execution.md`.
-- **In-progress**: retomada do lote Terra T16–T23; T16 liberada após decisão humana, sem implementação ainda.
-- **Next step**: executar T16 com text, title opcional, idempotencyKey UUID e objeto UTF-8 imutável confidential; seguir lote sequencial até T23 sem push.
-- **Blockers**: aceite privado requer intervenção humana após piloto independente; CI remoto não autorizado.
+- **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; fases 1–3 concluídas, T1–T17 (17/64); estado canônico in_progress.
+- **Completed**: CI/dependências/UI básica, fronteiras e integridade, armazenamento/PDF limitado, fonte manual privada e consultas/download autorizados. Contrato manual aprovado em 2026-11-17 às 08:56 (-03). Commits até `68fcbd0`.
+- **Gates**: último BUILD completo T17: 509 Python (2 avisos de depreciação existentes), 19 Vitest, 4 Playwright e typecheck/build/contrato/lint PASS. Evidência em `.specs/features/m1-career-kb/execution.md`.
+- **In-progress**: proposta de refinamento dos tipos/envelopes de T18 em `.specs/features/m1-career-kb/contracts-refinement.md`, aguardando resposta humana; runtime T18 não iniciado.
+- **Next step**: após decisão sobre metricValue e formatos, registrar resultado e retomar worker Terra T18–T23, sem push.
+- **Blockers**: decisão T18 solicitada por schemas não definidos; aceite privado continua humano após piloto independente; CI remoto não autorizado.
 - **Branch**: feature/m1-career-kb, base d2a609d.
 
 Operação: docs/engineering/m0-local-operation.md; just setup, just build, just redis-up (manual), just migrate, just api, just worker e just open. XDG_RUNTIME_DIR privado obrigatório; dados profissionais/providers/MCP/CI não utilizados. Testes: PLAYWRIGHT_BROWSERS_PATH=/tmp/resume-builder-playwright just check, Docker e Chromium necessários. Evidências detalhadas e limites em .specs/features/m0-foundation/validation.md.

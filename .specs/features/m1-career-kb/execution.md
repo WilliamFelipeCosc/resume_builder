@@ -125,4 +125,13 @@
 
 - Em 2026-11-17, entre a lacuna identificada em T16 e sua resolução humana às 08:56 (-03), o principal revisou armazenamento e limites. T14 preserva a propriedade de instalação atômica sem sobrescrita usando hard link; o manifesto tipado fornece hash/referência/tamanho, e os serviços persistem a referência e o hash no SourceDocument existente. Não se exige um segundo arquivo de manifesto.
 - `tests/integration/test_m1_t15.py:96` executa o worker real em subprocesso com parser sintético: controle retorna uma página (`:120`); reserva virtual de 600 MiB sob RLIMIT_AS de 512 MiB resulta em `pdf_invalid` (`:123`); warnings e stderr injetados não chegam à saída do principal (`:125`, `:126`). O ensaio verifica o limite real de espaço de endereçamento, sem esgotar a memória física do host. O teste complementa o spy e os PDFs reais sintéticos já presentes; nenhum teste foi removido ou enfraquecido.
-- Gate focal: `uv run --all-packages --locked pytest tests/integration/test_m1_t15.py -q`, 9 passed em 0,68 s. Gate PY complementar observado entre 08:56 e 08:57 (-03): 63 passed, 435 deselected; `just lint` PASS (102 arquivos). Intervalos de execução são espera, não tempo ativo reconstruído. BUILD de fim da fase 3 continua pendente de T17; CI remoto NOT_RUN.
+- Gate focal: `uv run --all-packages --locked pytest tests/integration/test_m1_t15.py -q`, 9 passed em 0,68 s. Gate PY complementar observado entre 08:56 e 08:57 (-03): 63 passed, 435 deselected; `just lint` PASS (102 arquivos). Intervalos de execução são espera, não tempo ativo reconstruído. Naquele momento, BUILD da fase 3 ainda aguardava T17; o resultado posterior está no registro T17. CI remoto NOT_RUN.
+
+## Reconciliação após fase 3
+
+Em 2026-11-17 às 09:11 (-03), a conferência de git e dos status individuais
+confirmou T1–T17 concluídas (17/64), até `68fcbd0`. O resumo do tasks.md
+ainda mostrava 6/64 e o handoff 15/64; ambos foram corrigidos pelos status
+individuais e commits. BUILD de T17: 509 Python, 19 Vitest, 4 Playwright e
+checks PASS. T18 aguarda decisão humana sobre tipos/envelopes em
+`contracts-refinement.md`; a proposta ainda não é implementação aprovada.
