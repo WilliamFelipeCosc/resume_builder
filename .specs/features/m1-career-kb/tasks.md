@@ -8,7 +8,7 @@ Um deliverable atômico por tarefa; testes da mudança e registro de progresso
 fazem parte do mesmo commit. Verifier independente final e sensor são obrigatórios.
 
 **Design:** [design.md](design.md), aprovado pelo proprietário em 2026-11-16.
-**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 18/64 concluídas.
+**Spec:** [spec.md](spec.md). **Status:** Approved em 2026-11-16 às 20:09 (-03); 19/64 concluídas.
 **Início:** autorizado explicitamente pelo proprietário em 2026-11-16 às 20:17 (-03); execução iniciada na T1.
 **Escopo:** M1; REQ-KB-001/002/004, REQ-SEC-001, AC-M1-001/002/003.
 **Não executado:** nenhuma instalação, alteração funcional ou teste de runtime nesta preparação.
@@ -461,7 +461,7 @@ baseline para o sensor independente.
 
 #### T19: Mapear e migrar conteúdo tipado das nove entidades
 
-**Status**: Pending
+**Status**: Complete
 **What**: Criar tabelas tipadas e registry ORM correspondente, com exatamente um tipo por identidade, Profile/filhos e restrições aprovadas.
 **Where**: `backend/migrations/versions/0003_kb_entities.py`
 **Supporting**: mapping ORM/migration correspondente, fixtures sintéticas e testes de integridade/rollback.
@@ -470,8 +470,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-03, MONE-04, MONE-05, MONE-08, MONE-32
 **Tools**: PY
 **Done when**:
-- [ ] Nove tipos persistem; kind incorreto/filho sem Profile/registro órfão rejeitados; upgrade/downgrade preserva histórico e M0.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Nove tipos persistem; kind incorreto/filho sem Profile/registro órfão rejeitados; upgrade/downgrade preserva histórico e M0.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t19.py e/ou tests/integration/test_m1_t19.py; mínimo de 3 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(data): migrate typed career entities`

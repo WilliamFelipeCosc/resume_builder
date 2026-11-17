@@ -326,7 +326,8 @@ def upgrade():
 
 def downgrade():
     # SQLite legacy transaction mode otherwise auto-commits DDL and clears deferral.
-    op.execute("BEGIN")
+    if not op.get_bind().connection.driver_connection.in_transaction:
+        op.execute("BEGIN")
     op.execute("PRAGMA defer_foreign_keys=ON")
     for table in (
         "kb_revisions",

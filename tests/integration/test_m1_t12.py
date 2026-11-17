@@ -14,7 +14,7 @@ def setup_db(tmp_path):
     with engine.begin() as c:
         c.exec_driver_sql("CREATE TABLE unrelated (value TEXT)")
         c.exec_driver_sql("INSERT INTO unrelated VALUES ('keep')")
-    command.upgrade(config, "head")
+    command.upgrade(config, "0002_kb_foundation")
     return engine, config
 
 
@@ -65,7 +65,7 @@ def test_roundtrip_populated_foundation_preserves_m0_and_unrelated(tmp_path):
     with engine.connect() as c:
         assert c.exec_driver_sql("SELECT value FROM unrelated").scalar_one() == "keep"
         assert c.exec_driver_sql("SELECT count(*) FROM diagnostic_runs").scalar_one() == 0
-    command.upgrade(config, "head")
+    command.upgrade(config, "0002_kb_foundation")
     with engine.connect() as c:
         assert c.exec_driver_sql("PRAGMA foreign_key_check").all() == []
 
@@ -140,19 +140,23 @@ def test_active_link_uniqueness_and_fk_check(tmp_path):
         c.rollback()
         assert c.exec_driver_sql("PRAGMA foreign_key_check").all() == []
     command.downgrade(config, "0001_diagnostics")
-    command.upgrade(config, "head")
+    command.upgrade(config, "0002_kb_foundation")
     with engine.connect() as c:
         assert c.exec_driver_sql("PRAGMA foreign_key_check").all() == []
         assert c.exec_driver_sql("SELECT value FROM unrelated").scalar_one() == "keep"
 
 
 def test_model_and_migration_have_matching_columns(tmp_path):
+    from resume_core.career_kb.entity_models import ENTITY_MODELS
     from resume_core.career_kb.models import Base
     from sqlalchemy import inspect
 
     engine, _ = setup_db(tmp_path)
     inspector = inspect(engine)
+    later_tables = {model.__table__.name for model in ENTITY_MODELS.values()}
     for table in Base.metadata.tables.values():
+        if table.name in later_tables:
+            continue  # Later entity-content mappings are tested at their own migration head.
         assert set(table.columns.keys()) == {
             column["name"] for column in inspector.get_columns(table.name)
         }

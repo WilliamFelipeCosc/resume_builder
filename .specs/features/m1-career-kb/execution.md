@@ -128,6 +128,12 @@
 - Adequação: `tests/unit/test_m1_t18.py:25` valida roundtrip dos nove conteúdos; `:33` associa Profile e restringe classificação/campos; `:58` distingue unknown/restricted e confirmação por campo; `:76`/`:84` datas válidas/inválidas; `:89` extras, coerções e limites. 19 casos focais, todos derivados dos critérios; nenhum teste anterior alterado ou omitido. MONE-03/09/10/12/17 parcialmente atendidos; persistência e rotas pendentes.
 - Revisão posterior da T18 identificou perda de constraints nos DTOs nullable e possibilidade de marcar valor não nulo como restrito. Corrigidas ambas; teste focal adicional rejeita valor restrito, booleano coercivo e nome longo. Gate PY: 94 passed/435 deselected; lint inicialmente falhou por arquivo não rastreado em andamento de T19 ainda sem formatação, formatado e lint repetido PASS. Nenhuma asserção anterior alterada.
 
+## T19 — tabelas tipadas
+
+- Início observado 09:16:37 -03. Premissas: identidade e conteúdo em tabelas separadas; FK/kind/Profile no SQLite, conteúdo/head completo garantido pela UoW e consulta das tarefas seguintes. SQLite não permite exigir FK reversa diferível no commit sem mudar o modelo; entidades transitórias/incompletas não podem ser expostas. Arquivos: mapping, migrations, testes e rastreabilidade.
+- Migration 0003 cria nove tabelas e gatilhos de associação; downgrade preserva fundação e M0. Fixtures históricas T12 fixadas na revisão 0002, preservando suas asserções; smoke acompanha head 0003. Primeiro PY encontrou BEGIN duplicado no downgrade encadeado; corrigido BEGIN condicional na 0002. Gate repetido até 09:20:10 -03: 97 passed/435 deselected e lint PASS. Reforço posterior só de asserções focal: 3 passed.
+- Adequação: `tests/integration/test_m1_t19.py:18` persiste os nove tipos e confere todos os campos fornecidos e mapping; `:72` rejeita kind incorreto, Profile ausente e conteúdo órfão; `:89` downgrade/upgrade povoado preserva revisão e M0. Testes 0002/0003 focais 18 PASS. MONE-03/04/05/08/32 parcialmente atendidos; rollback e não exposição de estado incompleto exigem verificação em T20–T22.
+
 ### Revisão complementar de T14/T15
 
 - Em 2026-11-17, entre a lacuna identificada em T16 e sua resolução humana às 08:56 (-03), o principal revisou armazenamento e limites. T14 preserva a propriedade de instalação atômica sem sobrescrita usando hard link; o manifesto tipado fornece hash/referência/tamanho, e os serviços persistem a referência e o hash no SourceDocument existente. Não se exige um segundo arquivo de manifesto.
