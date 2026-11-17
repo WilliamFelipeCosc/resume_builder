@@ -2,6 +2,8 @@
 
 import asyncio
 import re
+import time
+from collections import deque
 from contextlib import asynccontextmanager
 from http.cookies import CookieError, SimpleCookie
 from pathlib import Path
@@ -43,8 +45,11 @@ class BootstrapResponse(BaseModel):
 
 
 class Boundary:
-    def __init__(self, app, *, sessions, origin):
+    def __init__(self, app, *, sessions, origin, principal_factory):
         self.app, self.sessions, self.origin = app, sessions, origin
+        self.principal_factory = principal_factory
+        self.rates = {}
+        self.preparing = False
         self.host = origin.removeprefix("http://")
 
     async def __call__(self, scope, receive, send):
@@ -66,6 +71,7 @@ class Boundary:
         origin = headers.get(b"origin")
         status = 500
         started = False
+        preparing = False
 
         async def safe_send(message):
             nonlocal status, started
@@ -89,8 +95,11 @@ class Boundary:
                 ] + additions
             await send(message)
 
-        async def reject(code):
-            await error_response(code, request_id)(scope, receive, safe_send)
+        async def reject(code, *, error_code=None):
+            response = error_response(code, request_id, code=error_code)
+            if code == 429:
+                response.headers["Retry-After"] = "60"
+            await response(scope, receive, safe_send)
 
         try:
             if duplicate or headers.get(b"host") != self.host or origin not in (None, self.origin):
@@ -109,8 +118,27 @@ class Boundary:
                 morsel = cookie.get(COOKIE_NAME)
                 if not self.sessions.authorized(morsel.value if morsel else None):
                     return await reject(401)
-                scope["state"]["principal"] = Principal(
-                    "local-user", frozenset({"diagnostic:read", "diagnostic:write"})
+                principal = self.principal_factory()
+                scope["state"]["principal"] = principal
+                capability = route_capability(path, method)
+                if capability and capability not in principal.capabilities:
+                    return await reject(403, error_code="forbidden")
+                if is_career_route(path):
+                    session_key = morsel.value
+                    if not self.allow_rate(("career", session_key), 120):
+                        return await reject(429)
+                    if path == "/api/imports" and method == "POST":
+                        if not self.allow_rate(("import", session_key), 5) or not self.allow_rate(
+                            ("import", "global"), 10
+                        ):
+                            return await reject(429)
+                        if self.preparing:
+                            return await reject(429)
+                        self.preparing = preparing = True
+            limit = 1024
+            if is_career_route(path):
+                limit = (
+                    12 * 1024 * 1024 if path == "/api/imports" and method == "POST" else 256 * 1024
                 )
             body = bytearray()
             try:
@@ -119,22 +147,26 @@ class Boundary:
                 return await reject(422)
             if length < 0:
                 return await reject(422)
-            if length > 1024:
+            if length > limit:
                 return await reject(413)
             while True:
                 message = await receive()
                 if message["type"] == "http.disconnect":
                     return
                 body.extend(message.get("body", b""))
-                if len(body) > 1024:
+                if len(body) > limit:
                     return await reject(413)
                 if not message.get("more_body", False):
                     break
-            if method not in {"GET", "HEAD", "OPTIONS"} and (
-                headers.get(b"content-type", "").split(";", 1)[0].strip().lower()
-                != "application/json"
-            ):
-                return await reject(422)
+            if method not in {"GET", "HEAD", "OPTIONS"}:
+                media_type = headers.get(b"content-type", "").split(";", 1)[0].strip().lower()
+                expected = (
+                    "multipart/form-data"
+                    if path == "/api/imports" and method == "POST"
+                    else "application/json"
+                )
+                if media_type != expected:
+                    return await reject(415 if is_career_route(path) else 422)
             consumed = False
 
             async def buffered_receive():
@@ -152,6 +184,8 @@ class Boundary:
             if not started:
                 await reject(500)
         finally:
+            if preparing:
+                self.preparing = False
             structlog.get_logger().info(
                 "request_completed",
                 request_id=request_id,
@@ -159,6 +193,64 @@ class Boundary:
                 path=path,
                 status_code=status,
             )
+
+    def allow_rate(self, key, maximum):
+        now = time.monotonic()
+        # Bound stale session entries as well as each per-minute queue.
+        for stale_key, events in list(self.rates.items()):
+            while events and events[0] <= now - 60:
+                events.popleft()
+            if not events:
+                del self.rates[stale_key]
+        events = self.rates.setdefault(key, deque())
+        if len(events) >= maximum:
+            return False
+        events.append(now)
+        return True
+
+
+def is_career_route(path):
+    return any(
+        path == prefix or path.startswith(prefix + "/")
+        for prefix in ("/api/career", "/api/imports", "/api/sources")
+    )
+
+
+def route_capability(path, method):
+    if path == "/api/imports" and method == "POST":
+        return "import:write"
+    if path.startswith("/api/imports/"):
+        return "import:read" if method in {"GET", "HEAD"} else "career:review"
+    if path.startswith("/api/sources"):
+        return "source:read" if method in {"GET", "HEAD"} else "career:write"
+    if path.startswith("/api/career"):
+        if method in {"GET", "HEAD"}:
+            return "career:read"
+        if any(
+            part in path.split("/")
+            for part in ("approve", "reject", "confirmations", "undo", "decisions")
+        ):
+            return "career:review"
+        return "career:write"
+    return None
+
+
+def local_owner():
+    return Principal(
+        "local-user",
+        frozenset(
+            {
+                "diagnostic:read",
+                "diagnostic:write",
+                "career:read",
+                "career:write",
+                "career:review",
+                "import:read",
+                "import:write",
+                "source:read",
+            }
+        ),
+    )
 
 
 def create_app(
@@ -169,6 +261,7 @@ def create_app(
     origin="http://127.0.0.1:8000",
     reconciler=None,
     web_root=None,
+    principal_factory=local_owner,
 ):
     if (
         not re.fullmatch(r"http://127\.0\.0\.1:[1-9][0-9]{0,4}", origin)
@@ -207,7 +300,9 @@ def create_app(
     )
     app.state.sessions, app.state.service = sessions, service
     app.state.reconciler = reconciler
-    app.add_middleware(Boundary, sessions=sessions, origin=origin)
+    app.add_middleware(
+        Boundary, sessions=sessions, origin=origin, principal_factory=principal_factory
+    )
 
     @app.exception_handler(StarletteHTTPException)
     async def http_error(request, error):

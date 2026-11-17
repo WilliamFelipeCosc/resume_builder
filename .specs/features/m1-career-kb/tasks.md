@@ -268,7 +268,7 @@ baseline para o sensor independente.
 
 #### T8: Aplicar política de entrada e escopos por rota
 
-**Status**: Pending
+**Status**: Complete
 **What**: Autorizar sessão/capability antes de ler bytes; aplicar budgets JSON/multipart, concorrência de preparo e rate limits conforme design.
 **Where**: `backend/api/src/resume_api/app.py`
 **Supporting**: serviço/repositório focal, registro do router, DTO/exports necessários, OpenAPI/SDK regenerados e testes da operação.
@@ -277,8 +277,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-06, MONE-07, MONE-14, MONE-15, MONE-34
 **Tools**: PY
 **Done when**:
-- [ ] Sessão ausente e capability negada leem zero bytes/parser; chunked acima do limite falha; 1KiB M0 preservado; 429 explícito.
-- [ ] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Sessão ausente e capability negada leem zero bytes/parser; chunked acima do limite falha; 1KiB M0 preservado; 429 explícito.
+- [x] Gate HTTP passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t8.py e/ou tests/integration/test_m1_t8.py; mínimo de 4 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: HTTP
 **Commit**: `feat(api): authorize bounded m1 requests`
