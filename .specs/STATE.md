@@ -24,11 +24,11 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 ## Handoff
 
 - **Feature**: m1-career-kb — execução do Career KB Core.
-- **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; fases 1–3 concluídas, T1–T19 (19/64); estado canônico in_progress.
+- **Phase / Task**: execução autorizada em 2026-11-16 às 20:17 (-03), retomada em 2026-11-17; fases 1–3 concluídas, T1–T20 (20/64); estado canônico in_progress.
 - **Completed**: CI/dependências/UI básica, fronteiras e integridade, armazenamento/PDF limitado, fonte manual privada e consultas/download autorizados. Contrato manual aprovado em 2026-11-17 às 08:56 (-03). Commits até `68fcbd0`.
 - **Gates**: último BUILD completo T17: 509 Python (2 avisos de depreciação existentes), 19 Vitest, 4 Playwright e typecheck/build/contrato/lint PASS. Evidência em `.specs/features/m1-career-kb/execution.md`.
-- **In-progress**: nenhum; T19 concluída.
-- **Next step**: executar T20–T23 e encerrar fase 4 com BUILD; sem push.
+- **In-progress**: nenhum; T20 concluída.
+- **Next step**: executar T21–T23 e encerrar fase 4 com BUILD; sem push.
 - **Blockers**: nenhuma decisão de T18 pendente; aceite privado continua humano após piloto independente; CI remoto não autorizado.
 - **Branch**: feature/m1-career-kb, base d2a609d.
 
