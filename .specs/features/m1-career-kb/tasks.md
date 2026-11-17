@@ -1624,4 +1624,3 @@ Correções exigem novos gates e re-verificação (limite de três iterações d
 O estado accepted depende do aceite humano final; tarefas concluídas não bastam.
 Ativar CI remoto e escrever projeção Obsidian dependem das autorizações
 respectivas; resultados ausentes permanecem NOT_RUN, sem inventar evidência.
-
