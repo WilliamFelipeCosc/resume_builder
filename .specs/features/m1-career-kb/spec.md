@@ -240,9 +240,9 @@ independente, demonstração local privada e revisão do registro de esforço.
 | MONE-27 | S5: auditoria; AC-M1-003 | T12 e tarefas restantes | In Progress (fundação de histórico) |
 | MONE-28 | S6: reversão auditável; AC-M1-003 | Tasks | In Tasks |
 | MONE-29 | S6: bloqueio de undo; AC-M1-003 | T7 e tarefas restantes | In Progress (contrato de erros) |
-| MONE-30 | S6: PDF imutável; AC-M1-003 | T12 e tarefas restantes | In Progress (fundação de histórico) |
-| MONE-31 | S6: falha sem parcial; AC-M1-001/003 | T11 e tarefas restantes | In Progress (transação explícita) |
-| MONE-32 | S6: durabilidade; REQ-KB-002/004 | T12 e tarefas restantes | In Progress (fundação de histórico) |
+| MONE-30 | S6: PDF imutável; AC-M1-003 | T12, T14 e tarefas restantes | In Progress (armazenamento privado por hash) |
+| MONE-31 | S6: falha sem parcial; AC-M1-001/003 | T11, T14 e tarefas restantes | In Progress (transação explícita e instalação atômica) |
+| MONE-32 | S6: durabilidade; REQ-KB-002/004 | T12, T14 e tarefas restantes | In Progress (histórico e arquivo durável) |
 | MONE-33 | S7: fixtures privadas proibidas; REQ-SEC-001 | T2 e tarefas restantes | In Progress (CI remoto NOT_RUN) |
 | MONE-34 | S7: logs sem conteúdo privado; REQ-SEC-001 | T13 e tarefas restantes | In Progress (projeção autorizada) |
 | MONE-35 | S7: verificação do piloto; REQ-QA-001 | T4 e tarefas restantes | In Progress (descoberta preparada) |

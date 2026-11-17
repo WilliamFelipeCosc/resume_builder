@@ -372,7 +372,7 @@ baseline para o sensor independente.
 
 #### T14: Implementar armazenamento imutável de fontes
 
-**Status**: Pending
+**Status**: Complete
 **What**: Instalar bytes por hash em XDG privado com temporário/fsync/rename seguro e manifesto; nunca usar filename recebido como path.
 **Where**: `backend/core/src/resume_core/sources/storage.py`
 **Supporting**: mapping ORM/migration correspondente, fixtures sintéticas e testes de integridade/rollback.
@@ -381,8 +381,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-14, MONE-30, MONE-31, MONE-32
 **Tools**: PY
 **Done when**:
-- [ ] Hash igual reutiliza; hash/arquivo divergente bloqueia; traversal/symlink negados; original preservado; crash antes/depois do rename.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Hash igual reutiliza; hash/arquivo divergente bloqueia; traversal/symlink negados; original preservado; crash antes/depois do rename.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t14.py e/ou tests/integration/test_m1_t14.py; mínimo de 5 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(sources): store immutable private documents`
