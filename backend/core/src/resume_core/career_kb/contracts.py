@@ -158,6 +158,15 @@ class CreateCommand(Contract, Generic[T]):
         return self
 
 
+class ProvenanceReference(Contract):
+    source_document_id: UUID
+    source_sha256: StrictStr
+    field_key: StrictStr | None = None
+    page: Annotated[int, Field(strict=True, ge=1)] | None = None
+    excerpt: Text | None = None
+    privacy: Privacy
+
+
 class ReadEnvelope(Contract, Generic[T]):
     id: UUID
     revision_id: UUID
@@ -165,6 +174,7 @@ class ReadEnvelope(Contract, Generic[T]):
     restricted_fields: list[StrictStr] = Field(default_factory=list)
     privacy: Privacy
     confirmation: Confirmation
+    provenance: list[ProvenanceReference] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def valid_fields(self):
@@ -185,6 +195,7 @@ class ProfileReadEnvelope(Contract, Generic[T]):
     restricted_fields: list[StrictStr] = Field(default_factory=list)
     privacy: Privacy
     field_confirmations: dict[StrictStr, Confirmation]
+    provenance: list[ProvenanceReference] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def valid_fields(self):

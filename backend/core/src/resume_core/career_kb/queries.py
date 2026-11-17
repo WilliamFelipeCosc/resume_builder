@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from resume_core.career_kb.contracts import CONTENT_TYPES, READ_TYPES, Page
 from resume_core.career_kb.entity_models import ENTITY_MODELS
 from resume_core.career_kb.metadata_reader import SqlMetadataReader
-from resume_core.career_kb.models import Entity, FieldMetadata, Revision, SourceDocument
+from resume_core.career_kb.models import Entity, FieldMetadata, Provenance, Revision, SourceDocument
 from resume_core.career_kb.policy import authorize_projection
 from resume_core.contracts import Contract
 from resume_core.service import Clearance, require
@@ -107,11 +107,36 @@ class CareerQueries:
             )
             values.update(row)
         aliases = {name: field.alias for name, field in fields.items()}
+        source_ids = {reference_id for reference_id, _ in projection.source_references}
+        provenance = []
+        if source_ids:
+            rows = session.execute(
+                select(
+                    Provenance.source_document_id,
+                    Provenance.source_sha256,
+                    Provenance.field_key,
+                    Provenance.page,
+                    Provenance.excerpt,
+                    Provenance.privacy,
+                ).where(Provenance.entity_id == entity_id, Provenance.id.in_(source_ids))
+            ).all()
+            provenance = [
+                dict(
+                    sourceDocumentId=row.source_document_id,
+                    sourceSha256=row.source_sha256,
+                    fieldKey=aliases.get(row.field_key, row.field_key),
+                    page=row.page,
+                    excerpt=row.excerpt,
+                    privacy=row.privacy,
+                )
+                for row in rows
+            ]
         payload = {
             "id": meta.id,
             "revisionId": meta.head_revision_id,
             "content": values,
             "privacy": meta.privacy,
+            "provenance": provenance,
             "restrictedFields": [aliases[name] for name in fields if name not in allowed],
         }
         if kind == "profile":

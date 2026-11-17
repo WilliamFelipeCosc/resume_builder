@@ -104,17 +104,26 @@ def test_m1_evidence_source_fields_follow_current_source_privacy_and_capability(
         and item.content.excerpt is None
     )
     assert set(item.restricted_fields) == {"sourceDocumentId", "page", "excerpt"}
+    assert item.provenance == []
     values_sql = [sql for sql in captured if "from kb_evidence" in sql and "description" in sql]
     assert values_sql and all(
         "source_document_id" not in sql and "excerpt" not in sql for sql in values_sql
     )
+    assert all("kb_provenance.excerpt" not in sql for sql in captured)
     no_source = Principal("reader", frozenset({"career:read"}), Clearance.SECRET)
     assert set(queries.detail(no_source, "evidence", evidence).restricted_fields) == {
         "sourceDocumentId",
         "page",
         "excerpt",
     }
-    assert queries.detail(owner, "evidence", evidence).content.excerpt == "PRIVATE"
+    authorized = queries.detail(owner, "evidence", evidence)
+    assert authorized.content.excerpt == "PRIVATE"
+    assert any(
+        str(ref.source_document_id) == source
+        and ref.excerpt == "PRIVATE"
+        and ref.field_key == "excerpt"
+        for ref in authorized.provenance
+    )
 
 
 def test_m1_list_pagination_visible_total_order_and_incomplete_exclusion(setup):
