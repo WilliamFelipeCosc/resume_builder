@@ -1,6 +1,6 @@
 # Job Intelligence
 
-**Marco de prioridade:** M3. **Fonte:** `PROJECT_SOURCE.md` §4.3.
+**Marco de prioridade:** M3. **Fontes:** [requisitos](../product/requirements.md) REQ-JOB-001…003 e [aceites M3](../roadmap/acceptance-criteria.md).
 
 ## Entradas obrigatórias
 

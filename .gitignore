@@ -1,4 +1,7 @@
 # Dependencies and generated output
+# Full reference documents are archived outside this repository.
+/PROJECT_SOURCE.md
+/ARQUIVOS_E_PROVENIENCIA.md
 node_modules/
 .pnpm-store/
 .turbo/

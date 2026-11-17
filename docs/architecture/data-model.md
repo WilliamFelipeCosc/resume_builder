@@ -1,6 +1,6 @@
 # Modelo de dados — proposta conceitual para SQLite/SQLAlchemy 2
 
-**Status:** proposta de entidades e relacionamentos, não DDL definitivo. Referência: `PROJECT_SOURCE.md` §4 e §10.
+**Status:** proposta de entidades e relacionamentos, não DDL definitivo. Referências: [Career KB](../modules/career-kb.md), [contratos](../contracts/README.md) e spec/design aprovados da feature; schemas persistidos efetivos ficam nas migrations.
 
 ## Fatos profissionais
 

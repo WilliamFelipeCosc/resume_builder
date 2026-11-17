@@ -1,6 +1,6 @@
 # Decisões de implementação em aberto — OPEN (não DECIDED)
 
-Fonte: `PROJECT_SOURCE.md` §12. **Não alterar ADRs 001–015** sem aprovação explícita.
+Fontes: requisitos e decisões aprovados na documentação modular, conforme [ADR-013](../architecture/adr/ADR-013.md). **Não alterar ADRs aprovados** sem aprovação explícita.
 
 | ID provisório | Tema | Perguntas / validação para decisão | Quando |
 |---|---|---|---|

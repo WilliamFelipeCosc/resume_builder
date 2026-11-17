@@ -1,6 +1,6 @@
 # Arquitetura — Visão geral
 
-**Status:** DECIDED conforme ADR-001…015; detalhes de implementação sujeitos a contrato e teste. Prioridade: primeira experiência utilizável em M3.
+**Status:** DECIDED conforme ADR-001…016; detalhes de implementação sujeitos a contrato e teste. Prioridade: primeira experiência utilizável em M3.
 
 ```text
 [React/Vite/TypeScript] -- REST/OpenAPI --> [FastAPI / Services] -- SQLAlchemy --> [SQLite WAL]
@@ -25,7 +25,7 @@
 - **Renderer:** `ResumeDocument` estruturado + tokens de template; Playwright Python/Chromium **somente** para exportar PDF do HTML local; DOCX/HTML em M6.
 - **IA:** providers explicitamente selecionados, Hermes padrão quando disponível, OpenAI manual, sem fallback automático pago. Prompt injection de vagas/documentos é tratado como entrada não confiável.
 
-## Composição de pacotes proposta (não executável ainda)
+## Composição de pacotes (implementação incremental)
 
 ```text
 apps/web/                       # React/Vite
@@ -39,11 +39,11 @@ packages/api-client/           # TS gerado de OpenAPI
 assets/resume-templates/       # spec/CSS/templates
 private/                       # dados pessoais locais (não versionados)
 docs/                          # contratos, módulos, ADRs
-PROJECT_SOURCE.md, AGENTS.md
-pyproject.toml, uv.lock, pnpm-workspace.yaml, justfile # futuros artefatos da implementação
+PROJECT_OVERVIEW.md, AGENTS.md
+pyproject.toml, uv.lock, pnpm-workspace.yaml, justfile # manifests e comandos do monorepo
 ```
 
-Não afirmar que os arquivos de configuração futuros ou comandos de desenvolvimento já existem. O pacote entregue contém a documentação, não um monorepo executável.
+O monorepo e seus comandos já existem; a árvore também inclui componentes planejados, como `apps/desktop/`. Consulte [estado dos marcos](../process/milestone-status.json) e `.specs/` para distinguir implementação e planejamento. Fontes documentais e precedência: [índice](../README.md).
 
 ## Fluxos críticos
 

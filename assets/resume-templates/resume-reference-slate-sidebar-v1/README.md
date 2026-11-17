@@ -1,6 +1,6 @@
 # resume-reference-slate-sidebar-v1 — padrão visual
 
-**Decisão:** ADR-015 / `PROJECT_SOURCE.md` §4.2. Reproduzir estilo visual de `Curriculo.pdf`: tamanho personalizado 595,92×924 pt, branco na principal, sidebar direita `#99A2B3`, linha do tempo, títulos em caixa alta, corpo Roboto e nome serifado com fallback. É aproximação visual, não cópia pixel-perfect.
+**Decisão:** ADR-015 / `docs/modules/resume-studio.md`. Reproduzir estilo visual de `Curriculo.pdf`: tamanho personalizado 595,92×924 pt, branco na principal, sidebar direita `#99A2B3`, linha do tempo, títulos em caixa alta, corpo Roboto e nome serifado com fallback. É aproximação visual, não cópia pixel-perfect.
 
 ## Arquivos
 

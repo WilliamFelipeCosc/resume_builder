@@ -1,6 +1,6 @@
 # Career Knowledge Base (KB)
 
-**Marcos:** M1 Core, M6 importadores completos. **Fonte:** `PROJECT_SOURCE.md` §4.1; ADR-003/007/014.
+**Marcos:** M1 Core, M6 importadores completos. **Fontes:** [requisitos](../product/requirements.md), ADR-003/007/014 e [spec M1 aprovada](../../.specs/features/m1-career-kb/spec.md).
 
 ## Domínio
 

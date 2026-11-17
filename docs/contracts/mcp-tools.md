@@ -63,7 +63,7 @@ Persistir `reportingSource=external_agent`, `confirmationState=reported_by_agent
 ## Critérios e implementação Python
 
 - Registrar schema/capability version na resposta `get_server_capabilities`; o catálogo exato será congelado após o spike M0.5 e testes com duas CLIs.
-- `report_application_result.status` deve obedecer a `ApplicationReport.status` em `PROJECT_SOURCE.md` (`in_progress|blocked|reported_submitted|reported_failed|unknown`), sem extrapolar confirmação.
+- `report_application_result.status` deve obedecer a `ApplicationReport.status` em [application-context.md](application-context.md) (`in_progress|blocked|reported_submitted|reported_failed|unknown`), sem extrapolar confirmação.
 - Distinção entre evento operacional (`report_application_progress`) e resultado (`report_application_result`) deve ser preservada em auditoria.
 - `suggest_answer` usa adaptador de provider configurado explicitamente; erros seguros e opção de cliente usar modelo próprio.
 - Evitar expor URL/file path de documento sem autorização para finalidade e escopo corretos.

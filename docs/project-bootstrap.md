@@ -1,6 +1,8 @@
 # Estado do bootstrap — 2026-11-11
 
-O repositório foi inicializado documentalmente em 04/11 e sincronizado com o pacote aprovado de 11/11 por solicitação do proprietário. A fonte atual é [PROJECT_SOURCE.md](../PROJECT_SOURCE.md); detalhes da importação, decisões e exclusões estão em [specification-sync-2026-11-11.md](specification-sync-2026-11-11.md).
+> Snapshot histórico. Afirmações de planejamento/ausência de implementação abaixo descrevem a sincronização inicial, não o estado atual. Consulte [estado canônico](process/milestone-status.json) e `.specs/` para progresso/evidências.
+
+O repositório foi inicializado documentalmente em 04/11 e sincronizado com o pacote aprovado de 11/11 por solicitação do proprietário. Naquele snapshot, a fonte era a especificação consolidada; as fontes atuais estão em [docs/README.md](README.md) e a [migração documental](process/documentation-migration-2026-11-17.md) registra seu arquivamento; detalhes da importação, decisões e exclusões estão em [specification-sync-2026-11-11.md](specification-sync-2026-11-11.md).
 
 M0 está em planejamento. Não há aplicação implementada, dependências instaladas, testes de produto executados ou compatibilidade MCP validada por esta sincronização. A entrevista define uma operação fictícia completa com dados fixos e recuperação controlada; implementação não iniciada.
 

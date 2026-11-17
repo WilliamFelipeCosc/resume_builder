@@ -1,6 +1,6 @@
 # Contratos do Resume Builder
 
-**Status:** especificações **conceituais**, NÃO um OpenAPI ou Pydantic package já instalado. Implementar em Python com Pydantic 2 na API, SQLAlchemy 2 no DB e gerar cliente TS via OpenAPI; validar por Pytest/Vitest. Os nomes de exemplo são candidatos e não afirmam endpoints em execução.
+**Status:** este diretório contém contratos conceituais e propostas identificadas, não a lista completa de endpoints implementados. A API já possui schemas executáveis Pydantic/OpenAPI e cliente TS gerado em `packages/api-client/`; consulte as specs/evidências da feature para o recorte entregue. Exemplos candidatos não comprovam implementação. Mudanças de contrato passam por Python, geração do SDK e testes de compatibilidade.
 
 | Contrato | Arquivo | Uso principal |
 |---|---|---|

@@ -1,30 +1,25 @@
-# Resume Builder — foundation local M0
+# Resume Builder
 
-**Estado:** foundation M0 concluída e validada localmente para AC-M0-001/002: 254 testes Python, 17 Vitest e 3 Chromium aprovados; 8 mutações detectadas pelo [Verifier independente](.specs/features/m0-foundation/validation.md). Abertura autorizada no navegador desktop e diagnóstico concluído com sucesso confirmados pelo proprietário em 2026-11-11 às 16:53 (America/Sao_Paulo). `PROJECT_SOURCE.md` continua a autoridade das decisões aprovadas.
-
-Para executar e verificar o diagnóstico sintético, siga [operação local do M0](docs/engineering/m0-local-operation.md): `just setup`, `just build`, Redis manual, migração explícita, API/Worker e abertura autorizada. Os comandos e testes não usam currículos ou seeds privados.
+Aplicação local-first para Career Knowledge Base, currículos fundamentados em evidências e contexto autorizado para agentes CLI externos. A primeira entrega utilizável prioritária é M3; o escopo completo de V1 permanece no roadmap.
 
 ## Onde começar
 
-1. [PROJECT_SOURCE.md](PROJECT_SOURCE.md) — escopo V1/V2, ADRs, roadmap consolidado.
-2. [AGENTS.md](AGENTS.md) — regras para agentes de programação.
-3. [docs/roadmap/milestones.md](docs/roadmap/milestones.md) e [acceptance-criteria.md](docs/roadmap/acceptance-criteria.md).
-4. [docs/architecture/overview.md](docs/architecture/overview.md) e [ADRs](docs/architecture/adr/).
-5. [docs/modules](docs/modules/) e [docs/contracts](docs/contracts/).
-6. [docs/decisions/open-decisions.md](docs/decisions/open-decisions.md) e [docs/references.md](docs/references.md).
+1. [Visão geral e proveniência](PROJECT_OVERVIEW.md).
+2. [Instruções para agentes](AGENTS.md) e guias locais aplicáveis.
+3. [Índice e autoridade documental](docs/README.md), [requisitos](docs/product/requirements.md), [roadmap](docs/roadmap/milestones.md) e [aceite](docs/roadmap/acceptance-criteria.md).
+4. [Arquitetura](docs/architecture/overview.md), [ADRs](docs/architecture/adr/), [módulos](docs/modules/) e [contratos](docs/contracts/).
+5. [Estado canônico dos marcos](docs/process/milestone-status.json) e [ponte para execução/evidências](.specs/STATE.md).
 
-## Privacidade — leia antes de copiar o pacote
+Requisitos planejados não significam implementação ou aceite. As notas do Obsidian são resumos sincronizados com as fontes do repositório.
 
-No pacote de origem, `private/` contém PDF original, JSONs com contato e amostras de currículo. Esse diretório não foi importado para este repositório. **Não envie esse diretório ao Git, CI, issues ou provedores externos por padrão**. O `.gitignore` incluído exclui `private/`. Se desejar compartilhar a documentação, distribua apenas os arquivos públicos após inspecionar metadados e nomes. O ZIP completo é destinado a uso pessoal.
+## Executar e verificar
 
-`assets/resume-templates/` contém CSS e especificações de estilo, sem os dados do currículo. O arquivo `generate_resume.py` é uma **ferramenta de referência**, não o renderer de produção; sua execução depende de JSON privado. Os artefatos em `private/` são amostras de um documento específico e **não representam dados confirmados no banco**.
+Siga [operação local](docs/engineering/m0-local-operation.md) e `just --list`. Dependências e serviços externos têm instalação/inicialização explícita. O gate integral é `just check`; os comandos por área estão em [AGENTS.md](AGENTS.md).
 
-## Escopo da entrega
+`MANIFEST.sha256` registra hashes da árvore pública versionada no momento de sua atualização, excluindo o próprio manifesto; confira com `sha256sum --check MANIFEST.sha256`. Não comprova testes nem ausência de alterações posteriores. Manifestos históricos permanecem em [docs/history/](docs/history/).
 
-Documentação da stack aprovada (FastAPI + SQLAlchemy 2 + Alembic, Dramatiq/Redis, React/Vite, pnpm/uv/justfile), Career KB, templates, vagas, IA, Answer Engine, MCP, tracking, retrieval, segurança, distribuição, contratos e ADR-001…015.
+## Privacidade e referências
 
-## Estado deste repositório
+Currículos pessoais e seeds não entram no Git, CI, logs ou vault por padrão. `private/` é ignorado; importações permanecem sujeitas à revisão humana. Os templates em [assets/resume-templates/](assets/resume-templates/) preservam estilo sem publicar os dados pessoais. O gerador de referência não é o renderer definitivo.
 
-Sincronizado com o pacote de 11/11 por decisão do proprietário. A execução de M0 está registrada em [.specs](.specs/features/m0-foundation/tasks.md); prioridade: chegar rapidamente à construção e exportação do currículo em M3. Veja [decisões e proveniência da sincronização](docs/specification-sync-2026-11-11.md) e [contexto de M0](.specs/features/m0-foundation/context.md). O manifesto público atual é verificável com `sha256sum --check MANIFEST.sha256`; o manifesto de origem de 04/11 está preservado em `docs/history/`.
-
-Os arquivos de documentação modular não disponíveis no contexto anterior foram **redigidos a partir do PROJECT_SOURCE.md**, não recuperados de um repositório implementado. As assinaturas de contratos são conceituais e demandam versionamento e testes antes de implementação.
+Os documentos completos de referência foram arquivados externamente, conforme a [migração documental](docs/process/documentation-migration-2026-11-17.md). O projeto pode ser compreendido e desenvolvido com a documentação modular versionada.

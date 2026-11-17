@@ -31,6 +31,6 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 - **Next step**: conferir git e retomar próximo lote Terra T24–T28 (cliente TS, sessão/cache, Router, ProfileEditor e lista/detalhe), em sequência. Não refazer T1–T23. Preservar dados fictícios e preferência GPT Terra.
 - **Blockers**: sem decisão de negócio pendente; worker anterior atingiu quota, verificar capacidade ao retomar delegação. Piloto independente, revisão privada e aceite final ainda futuros. Push autorizado neste pedido; resultado do CI remoto não verificado.
 - **Uncommitted files**: nenhum após o commit de fechamento T23; conferir git antes de retomar.
-- **Branch**: feature/m1-career-kb, base d2a609d; conferir git antes de retomar. Ambiente atual full access/approval never: não enviar sandbox_permissions; isso não autoriza operações remotas ou dados reais.
+- **Branch**: feature/m1-career-kb, base d2a609d; conferir git antes de retomar. A descrição de permissões daquele snapshot é histórica; use as políticas e ferramentas efetivas da sessão atual. Registros antigos não autorizam operações remotas ou dados reais.
 
 Operação e comandos: handoff.md e docs/engineering/m0-local-operation.md; PATH Node 24 e PLAYWRIGHT_BROWSERS_PATH explícitos. Dados fictícios; não carregar fontes pessoais antes do piloto independente e revisão humana.

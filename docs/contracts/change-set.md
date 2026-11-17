@@ -12,7 +12,7 @@
 }
 ```
 
-`operations` é lista tipada a definir (mínimo candidato: `include_fact|remove_fact|reorder|replace_text|rephrase`). O schema conceitual do `PROJECT_SOURCE.md` define `state=proposed|approved|rejected|applied`; o estado por operação precisa suportar aprovação seletiva, sem aceitar automaticamente o conjunto inteiro.
+`operations` é lista tipada a definir (mínimo candidato: `include_fact|remove_fact|reorder|replace_text|rephrase`). O contrato conceitual aprovado preservado neste documento define `state=proposed|approved|rejected|applied`; o estado por operação precisa suportar aprovação seletiva, sem aceitar automaticamente o conjunto inteiro.
 
 ## Invariantes
 

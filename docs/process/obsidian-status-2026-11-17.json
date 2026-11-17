@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-11-17T14:08:50.949Z",
+  "index": {
+    "M0": "accepted",
+    "M0.5": "accepted_with_exception",
+    "M1": "in_progress",
+    "M2": "planned",
+    "M3": "planned",
+    "M4": "planned",
+    "M5": "planned",
+    "M6": "planned",
+    "M7": "planned"
+  },
+  "milestones": {
+    "M0": "accepted",
+    "M0.5": "accepted_with_exception",
+    "M1": "in_progress",
+    "M2": "planned",
+    "M3": "planned",
+    "M4": "planned",
+    "M5": "planned",
+    "M6": "planned",
+    "M7": "planned"
+  }
+}

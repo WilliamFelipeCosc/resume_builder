@@ -3,7 +3,7 @@
 **Status:** contrato e abordagem de recuperação aprovados em 2026-11-11; desenho e execução aprovados em 2026-11-11; T1–T22 implementadas e verificadas localmente; fluxo integrado real passou; Verifier independente PASS em [validation.md](validation.md).
 **Gathered:** 2026-11-11.
 **Context:** [context.md](context.md).
-**Fontes:** [PROJECT_SOURCE.md](../../../PROJECT_SOURCE.md), [roadmap](../../../docs/roadmap/milestones.md), [ACs](../../../docs/roadmap/acceptance-criteria.md).
+**Fontes:** especificação consolidada de origem (hoje arquivada; [mapa de preservação](../../../docs/process/documentation-migration-2026-11-17.md)), [roadmap](../../../docs/roadmap/milestones.md), [ACs](../../../docs/roadmap/acceptance-criteria.md).
 
 ## Problem Statement
 

@@ -1,6 +1,6 @@
 # ApplicationContext e ApplicationReport
 
-Referência definitiva para campos mínimos: `PROJECT_SOURCE.md` §10. Estes JSONs são exemplos sintéticos.
+Este documento preserva os campos mínimos conceituais aprovados de ApplicationContext/ApplicationReport. Os JSONs são exemplos sintéticos; não substituem os schemas executáveis versionados do transporte, incluindo o recorte próprio do spike M0.5.
 
 ```json
 {

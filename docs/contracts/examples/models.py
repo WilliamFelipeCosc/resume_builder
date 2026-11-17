@@ -1,6 +1,6 @@
 """Contracts draft, NOT executable backend API or persisted schema.
 
-Pydantic 2 illustrative models corresponding to PROJECT_SOURCE.md §10.
+Pydantic 2 illustrative models for the conceptual contracts in docs/contracts/.
 Run basic import/check only after Pydantic is installed separately.
 """
 from typing import Any, Literal

@@ -229,7 +229,7 @@ externas de navegador não autoriza introduzir controle de navegador na aplicaç
 
 ## Documentation Impact
 
-Na consolidação do desenho, sincronizar a escolha FastMCP com `PROJECT_SOURCE.md`,
+Na consolidação do desenho, sincronizar a escolha FastMCP com a documentação modular (ADR-013),
 `docs/modules/mcp-server.md`, contratos relevantes e uma nota de decisão adicional,
 preservando as responsabilidades dos ADRs 004/005. A proposta presente registra a
 escolha já autorizada sem declarar a stack instalada ou compatível.

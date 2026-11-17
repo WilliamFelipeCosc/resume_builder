@@ -26,7 +26,7 @@ Formulário para seleção/ordem de Profile, Experience, Statement, Skill, Educa
 
 ## M6 — recursos restantes da V1
 
-Editor híbrido de painéis/inline, drag-and-drop de seções/bullets, preview/zoom/paginação, CSS override controlado, undo/redo/rollback, templates adicionais (decisão aberta), DOCX via lib Python validada e HTML estático, chat contextual e sugestões em eventos.
+Editor híbrido de painéis/inline, drag-and-drop de seções/bullets, preview/zoom/paginação, CSS override controlado, sem JavaScript arbitrário em templates na V1, undo/redo/rollback, templates adicionais (decisão aberta), DOCX via lib Python validada e HTML estático, chat contextual e sugestões em eventos.
 
 ## Ferramenta de referência vs implementação definitiva
 
