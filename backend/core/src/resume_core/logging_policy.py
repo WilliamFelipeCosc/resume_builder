@@ -25,13 +25,49 @@ EVENTS = frozenset(
         "mcp_server_started",
         "mcp_request_completed",
         "mcp_request_failed",
+        "career_read",
+        "career_changed",
+        "career_reviewed",
+        "import_prepared",
+        "source_read",
     }
 )
 CODES = frozenset(
-    {"queue_unavailable", "deadline_exceeded", "attempts_exhausted", "internal_error"}
+    {
+        "queue_unavailable",
+        "deadline_exceeded",
+        "attempts_exhausted",
+        "internal_error",
+        "not_found",
+        "stale_revision",
+        "idempotency_conflict",
+        "dependent_changes",
+        "missing_candidate_dependency",
+        "body_too_large",
+        "unsupported_media_type",
+        "invalid_request",
+        "rate_limited",
+        "storage_unavailable",
+        "database_busy",
+        "forbidden",
+    }
 )
 PATHS = frozenset(
-    {"/api/health", "/api/diagnostics", "/api/diagnostics/latest", "/api/session/bootstrap"}
+    {
+        "/api/health",
+        "/api/diagnostics",
+        "/api/diagnostics/latest",
+        "/api/session/bootstrap",
+        "/api/career/{kind}",
+        "/api/career/{kind}/{id}",
+        "/api/career/{kind}/{id}/revisions",
+        "/api/career/proposals/{id}/decisions",
+        "/api/career/links",
+        "/api/imports",
+        "/api/imports/{id}",
+        "/api/sources/{id}",
+        "/api/sources/{id}/content",
+    }
 )
 
 

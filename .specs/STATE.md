@@ -24,11 +24,11 @@ ADRs 001–015 existentes continuam vigentes; escolhas do diagnóstico M0 são l
 ## Handoff
 
 - **Feature**: m1-career-kb — planejamento do Career KB Core completo.
-- **Phase / Task**: execução autorizada pelo proprietário em 2026-11-16 às 20:17 (-03); Fase 2 em andamento, 8/64 concluídas; estado canônico in_progress.
+- **Phase / Task**: execução autorizada pelo proprietário em 2026-11-16 às 20:17 (-03); Fase 2 em andamento, 9/64 concluídas; estado canônico in_progress.
 - **Completed**: planejamento, spec, design, ferramentas e lotes sequenciais aprovados; branch local criada sem descartar alterações.
 - **Gates**: validadores estritos de spec/tasks aprovados; BUILD de baseline passou. Evidência em `.specs/features/m1-career-kb/execution.md`.
-- **In-progress**: nenhum; T8 concluída.
-- **Next step**: iniciar T9 no lote sequencial; seguir plano aprovado sem push.
+- **In-progress**: nenhum; T9 concluída.
+- **Next step**: iniciar T10 no lote sequencial; seguir plano aprovado sem push.
 - **Blockers**: aceite privado requer intervenção humana após piloto independente; CI remoto não autorizado.
 - **Branch**: feature/m1-career-kb, base d2a609d.
 

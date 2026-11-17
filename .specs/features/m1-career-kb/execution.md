@@ -64,3 +64,9 @@
 - Início observado: 2026-11-16 21:40:11 -03. Boundary resolve principal por composição confiável e capabilities por rota antes de ler bytes; budgets 1 KiB M0, 256 KiB JSON KB e 12 MiB multipart, rate limits por sessão/global e um preparo por processo. Limites individuais PDF/seed e budget de respostas pertencem aos endpoints futuros.
 - Gate HTTP observado 21:41:38–21:42:51 -03: `just generate` PASS; pytest M1 15 passed, 435 deselected; contrato determinístico PASS; typecheck PASS com Node 24 nos scripts; lint PASS. Testes adicionais após gate: execução focal inicial falhou 7/8 devido a parâmetro ausente em fixture; corrigido e repetido 8 passed. Aprovação/gate separados do trabalho ativo; duração líquida unknown.
 - Adequação: `tests/integration/test_m1_t8.py:69` prova zero bytes sem sessão/capability; `:77` testa chunked e orçamento M0; `:87` testa 120/min e 429; `:103` testa media e 12 MiB; `:116` testa decisão de revisão; `:122` verifica 5/sessão, 10/global e expiração; `:154` e `:194` verificam liberação e concorrência real. MONE-06/07/14/15/34 parcialmente atendidos; endpoints e parsing permanecem pendentes.
+
+## T9 — logs operacionais
+
+- Início observado: 2026-11-16 21:43:31 -03. Allowlist ampliada para eventos/códigos e identificadores estáticos M1; caminhos arbitrários, query e conteúdo continuam omitidos.
+- Gate PY observado 21:43:53–21:44:05 -03: pytest M1 19 passed, 435 deselected; `just lint` PASS. Aprovação e gates separados do trabalho ativo; duração líquida unknown.
+- `tests/integration/test_m1_t9.py:11` captura aplicação e dependência, valida preservação de evento/path/código permitidos e ausência de sentinelas de contato, trecho, filename, exceção e query. MONE-34 parcialmente atendido; integrações futuras precisam usar a allowlist.

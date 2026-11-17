@@ -285,7 +285,7 @@ baseline para o sensor independente.
 
 #### T9: Estender allowlists de logs M1
 
-**Status**: Pending
+**Status**: Complete
 **What**: Permitir eventos/códigos e identificadores estáticos de rota necessários, sem query, nome de arquivo, trecho ou payload privado.
 **Where**: `backend/core/src/resume_core/logging_policy.py`
 **Supporting**: testes/evidências e wiring mínimo estritamente necessários ao deliverable.
@@ -294,8 +294,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-34
 **Tools**: PY
 **Done when**:
-- [ ] Sentinelas de contato, trecho, filename e exceção ausentes em logs da aplicação e dependências.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Sentinelas de contato, trecho, filename e exceção ausentes em logs da aplicação e dependências.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t9.py e/ou tests/integration/test_m1_t9.py; mínimo de 1 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(core): redact career operation logs`
