@@ -336,7 +336,7 @@ baseline para o sensor independente.
 
 #### T12: Migrar identidade, fontes e histórico comum
 
-**Status**: Pending
+**Status**: Complete
 **What**: Criar envelope KB, fontes, metadados de campo, revisões/fields/proveniência, links, auditoria e recibos básicos com constraints e imutabilidade.
 **Where**: `backend/migrations/versions/0002_kb_foundation.py`
 **Supporting**: mapping ORM/migration correspondente, fixtures sintéticas e testes de integridade/rollback.
@@ -345,8 +345,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-04, MONE-05, MONE-08, MONE-13, MONE-27, MONE-30, MONE-32
 **Tools**: PY
 **Done when**:
-- [ ] Upgrade/downgrade/upgrade em banco fictício; preservar M0 e tabela alheia; UPDATE/DELETE histórico negados; FKs válidas.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Upgrade/downgrade/upgrade em banco fictício; preservar M0 e tabela alheia; UPDATE/DELETE histórico negados; FKs válidas.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t12.py e/ou tests/integration/test_m1_t12.py; mínimo de 4 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(data): migrate career history foundation`
