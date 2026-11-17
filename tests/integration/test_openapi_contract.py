@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 from resume_api.app import ERRORS, create_app
+from resume_api.errors import MESSAGES
 
 
 class NoData:
@@ -81,9 +82,23 @@ def test_schema_describes_aliases_errors_and_cookie_auth():
         "name": "resume_session",
     }
     assert "HTTPValidationError" not in components
-    assert set(components["HttpError"]["properties"]["code"]["enum"]) == {
-        item[0] for item in ERRORS.values()
-    }
+    assert set(components["HttpError"]["properties"]["code"]["enum"]) == set(MESSAGES)
+    assert {item[0] for item in ERRORS.values()} <= set(MESSAGES)
+    assert {
+        "not_found",
+        "forbidden",
+        "stale_revision",
+        "idempotency_conflict",
+        "dependent_changes",
+        "missing_candidate_dependency",
+        "body_too_large",
+        "unsupported_media_type",
+        "invalid_request",
+        "rate_limited",
+        "storage_unavailable",
+        "database_busy",
+        "internal_error",
+    } <= set(components["HttpError"]["properties"]["code"]["enum"])
 
 
 def test_offline_export_is_deterministic_without_runtime(tmp_path):

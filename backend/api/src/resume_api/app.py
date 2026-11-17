@@ -18,7 +18,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from resume_core.contracts import DiagnosticCreate, DiagnosticResponse
 from resume_core.repository import ActiveDiagnosticConflict
-from resume_core.service import Principal
+from resume_core.service import Clearance, Principal
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from resume_api.errors import ERRORS, HttpErrorResponse, error_response
@@ -250,6 +250,7 @@ def local_owner():
                 "source:read",
             }
         ),
+        clearance=Clearance.SECRET,
     )
 
 

@@ -1,16 +1,29 @@
 """Authorized application boundary, shared by HTTP and future adapters."""
 
 from dataclasses import dataclass
+from enum import IntEnum
 from uuid import UUID, uuid4
 
 from resume_core.contracts import DiagnosticResponse
 from resume_core.repository import CreateOutcome, DiagnosticRepository
 
 
+class Clearance(IntEnum):
+    PUBLIC = 0
+    PROFESSIONAL = 1
+    CONFIDENTIAL = 2
+    SECRET = 3
+
+    @classmethod
+    def parse(cls, value: str) -> "Clearance":
+        return cls[value.upper()]
+
+
 @dataclass(frozen=True)
 class Principal:
     subject: str
     capabilities: frozenset[str]
+    clearance: Clearance = Clearance.PUBLIC
 
 
 class PermissionDenied(Exception):

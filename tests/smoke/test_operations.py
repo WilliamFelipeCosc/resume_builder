@@ -36,7 +36,7 @@ def test_migrate_creates_only_isolated_schema_and_is_repeatable(tmp_path):
     with sqlite3.connect(database) as connection:
         assert connection.execute("SELECT count(*) FROM diagnostic_runs").fetchone() == (0,)
         assert connection.execute("SELECT version_num FROM alembic_version").fetchone() == (
-            "0001_diagnostics",
+            "0002_kb_foundation",
         )
     assert {path.name for path in root.iterdir()} == {"data", "config", "cache", "state"}
     assert not (tmp_path / "resume-builder").exists()

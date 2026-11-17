@@ -353,7 +353,7 @@ baseline para o sensor independente.
 
 #### T13: Implementar política e projeções autorizadas
 
-**Status**: Pending
+**Status**: Complete
 **What**: Resolver capability e classificação por entidade/campo/link/fonte antes dos valores; construir especificação de projeção sem ORM lazy.
 **Where**: `backend/core/src/resume_core/career_kb/policy.py`
 **Supporting**: testes/evidências e wiring mínimo estritamente necessários ao deliverable.
@@ -362,8 +362,8 @@ baseline para o sensor independente.
 **Requirement**: MONE-06, MONE-07, MONE-13, MONE-34
 **Tools**: PY
 **Done when**:
-- [ ] Spy não lê repositório sem capability; public/professional/confidential/secret; campo e fonte mais restritivos; oculto e ausente indistinguíveis.
-- [ ] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
+- [x] Spy não lê repositório sem capability; public/professional/confidential/secret; campo e fonte mais restritivos; oculto e ausente indistinguíveis.
+- [x] Gate PY passa, evidência real registrada; `tasks.md` e rastreabilidade atualizados no mesmo commit.
 **Tests**: unit + integration — tests/unit/test_m1_t13.py e/ou tests/integration/test_m1_t13.py; mínimo de 4 cenários semânticos descritos acima, contagem real registrada na execução.
 **Gate**: PY
 **Commit**: `feat(kb): authorize field and history projections`
