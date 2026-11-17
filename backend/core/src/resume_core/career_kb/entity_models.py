@@ -1,6 +1,6 @@
 """Typed current-content tables mapped to ORM classes."""
 
-from sqlalchemy import JSON, Boolean, Column, ForeignKey, Integer, String, Table
+from sqlalchemy import JSON, Boolean, CheckConstraint, Column, ForeignKey, Integer, String, Table
 
 from resume_core.career_kb.models import Base
 
@@ -90,6 +90,42 @@ def column(name, kind, required):
     return Column(name, types[kind], *args, nullable=not required)
 
 
+def checks(kind, fields):
+    constraints = []
+    for name, field_type, _required in fields:
+        if field_type in {"name", "text"}:
+            limit = 256 if field_type == "name" else 8000
+            constraints.append(
+                CheckConstraint(
+                    f"{name} IS NULL OR length({name}) BETWEEN 1 AND {limit}",
+                    name=f"ck_{kind}_{name}_length",
+                )
+            )
+        elif field_type == "bool":
+            constraints.append(
+                CheckConstraint(
+                    f"{name} IS NULL OR {name} IN (0,1)", name=f"ck_{kind}_{name}_boolean"
+                )
+            )
+    if kind == "statement":
+        constraints.append(
+            CheckConstraint(
+                "statement_type IS NULL OR statement_type IN ('responsibility','activity','result','editorial','unspecified')",
+                name="ck_statement_type",
+            )
+        )
+    if kind == "evidence":
+        constraints.extend(
+            [
+                CheckConstraint(
+                    "evidence_kind IN ('documentary','manual_note')", name="ck_evidence_kind"
+                ),
+                CheckConstraint("page IS NULL OR page >= 1", name="ck_evidence_page"),
+            ]
+        )
+    return constraints
+
+
 ENTITY_MODELS = {}
 TABLE_NAMES = {"education": "kb_education", "evidence": "kb_evidence"}
 for kind, fields in SCHEMA.items():
@@ -98,6 +134,7 @@ for kind, fields in SCHEMA.items():
         Base.metadata,
         Column("entity_id", String, ForeignKey("kb_entities.id"), primary_key=True),
         *(column(*field) for field in fields),
+        *checks(kind, fields),
     )
     model = type(f"{kind.title()}Row", (), {})
     Base.registry.map_imperatively(model, table)

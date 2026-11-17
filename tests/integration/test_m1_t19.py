@@ -111,3 +111,57 @@ def test_m1_populated_downgrade_preserves_foundation_and_m0(database):
             c.exec_driver_sql("SELECT head_revision_id FROM kb_entities WHERE id='p'").scalar_one()
             == "r"
         )
+
+
+def test_m1_typed_content_database_constraints_reject_invalid_values(database):
+    engine, _ = database
+    with engine.begin() as c:
+        c.exec_driver_sql(
+            "INSERT INTO source_documents (id,kind,sha256,privacy) VALUES ('source','file','hash','public')"
+        )
+        c.exec_driver_sql(
+            "INSERT INTO kb_entities (id,kind,privacy,created_at,updated_at) VALUES ('p','profile','public','now','now')"
+        )
+        for entity, kind in (("s", "statement"), ("e", "evidence"), ("k", "skill")):
+            c.exec_driver_sql(
+                "INSERT INTO kb_entities (id,kind,profile_id,privacy,created_at,updated_at) VALUES (?,?,'p','public','now','now')",
+                (entity, kind),
+            )
+        cases = [
+            ("INSERT INTO kb_profiles (entity_id,full_name) VALUES ('p',?)", ("x" * 257,)),
+            ("INSERT INTO kb_profiles (entity_id,full_name) VALUES ('p',?)", ("",)),
+            (
+                "INSERT INTO kb_statements (entity_id,text_original,statement_type) VALUES ('s',?,'invalid')",
+                ("synthetic",),
+            ),
+            ("INSERT INTO kb_statements (entity_id,text_original) VALUES ('s',?)", ("x" * 8001,)),
+            (
+                "INSERT INTO kb_skills (entity_id,name,original_labels,explicitly_listed_in_skills_section) VALUES ('k','synthetic','[]',2)",
+                (),
+            ),
+            (
+                "INSERT INTO kb_evidence (entity_id,description,evidence_kind,source_document_id) VALUES ('e','synthetic','invalid','source')",
+                (),
+            ),
+            (
+                "INSERT INTO kb_evidence (entity_id,description,evidence_kind,source_document_id,page) VALUES ('e','synthetic','documentary','source',0)",
+                (),
+            ),
+        ]
+        for sql, params in cases:
+            with pytest.raises(IntegrityError):
+                c.exec_driver_sql(sql, params)
+        assert c.exec_driver_sql("SELECT count(*) FROM kb_evidence").scalar_one() == 0
+        assert c.exec_driver_sql("SELECT count(*) FROM kb_statements").scalar_one() == 0
+    inspector = inspect(engine)
+    for model in ENTITY_MODELS.values():
+        expected = {
+            constraint.name
+            for constraint in model.__table__.constraints
+            if constraint.name and constraint.name.startswith("ck_")
+        }
+        actual = {
+            constraint["name"]
+            for constraint in inspector.get_check_constraints(model.__table__.name)
+        }
+        assert actual == expected

@@ -99,6 +99,36 @@ def upgrade():
         for name, field_type, required in fields:
             args = [sa.ForeignKey("source_documents.id")] if field_type == "source" else []
             columns.append(sa.Column(name, types[field_type], *args, nullable=not required))
+            if field_type in {"name", "text"}:
+                limit = 256 if field_type == "name" else 8000
+                columns.append(
+                    sa.CheckConstraint(
+                        f"{name} IS NULL OR length({name}) BETWEEN 1 AND {limit}",
+                        name=f"ck_{kind}_{name}_length",
+                    )
+                )
+            elif field_type == "bool":
+                columns.append(
+                    sa.CheckConstraint(
+                        f"{name} IS NULL OR {name} IN (0,1)", name=f"ck_{kind}_{name}_boolean"
+                    )
+                )
+        if kind == "statement":
+            columns.append(
+                sa.CheckConstraint(
+                    "statement_type IS NULL OR statement_type IN ('responsibility','activity','result','editorial','unspecified')",
+                    name="ck_statement_type",
+                )
+            )
+        if kind == "evidence":
+            columns.extend(
+                [
+                    sa.CheckConstraint(
+                        "evidence_kind IN ('documentary','manual_note')", name="ck_evidence_kind"
+                    ),
+                    sa.CheckConstraint("page IS NULL OR page >= 1", name="ck_evidence_page"),
+                ]
+            )
         op.create_table(table, *columns)
         op.execute(f"""CREATE TRIGGER {table}_kind_insert BEFORE INSERT ON {table}
             WHEN NOT EXISTS (SELECT 1 FROM kb_entities WHERE id=NEW.entity_id AND kind='{kind}')
